@@ -1,52 +1,180 @@
 # Deterministic Mastery Rubric
 
-在章节 Q&A、补考、切章或任何 `mastered` 判定时读取。本文件是掌握判定的唯一事实源；`shared/qa-rubric.md` 只说明反馈维度，不得定义另一套阈值。
+在章节 Q&A、补考、切章或任何 `mastered` 判定时读取。本文件是完整 mastery predicate 的唯一 authoritative source；章节契约只定义 acceptance contract 的结构与有效性，`shared/qa-rubric.md` 只说明反馈维度。
 
-## 评分维度
+所有判定均使用当前重新读取且有效的章节验收契约，以及与其 `chapter_id` 对应的 committed evidence。该 ID 在 evidence 中记为 `contract_chapter_id`。
 
-总分 100：
+## Stable evidence contract
 
-| 维度 | 满分 |
-|---|---:|
-| 概念理解 | 25 |
-| 因果与数据流解释 | 20 |
-| 应用与框架映射 | 20 |
-| 调试与故障排查 | 20 |
-| 迁移、边界与 Trade-off | 15 |
+### Question attempt
 
-每个维度必须达到其满分的 60%。章节可以提高阈值，不能降低全局底线。
-
-## Mastery predicate
-
-`mastery.mastered=true` 当且仅当全部满足：
-
-1. 总分 `>= 80`；
-2. 章节声明的所有 `critical_questions` 最近一次有效作答均通过；
-3. 五个维度均达到 floor；
-4. 所有 `required_exercises` 满足其 acceptance criteria；
-5. `unresolved_critical_misconceptions == 0`；
-6. `integrity.status == healthy`；
-7. 本章存在合法验收契约，且引用的问题和练习 ID 都存在。
-
-```text
-0–59   → needs_review
-60–79  → qa（允许继续局部学习，但本章未 mastered）
-80–100 → 重新执行全部硬门槛；通过后才 mastered
+```yaml
+kind: question_attempt
+evidence_id: <stable-evidence-id>
+contract_chapter_id: <current-contract-chapter-id>
+question_id: <declared-question-id>
+attempt: <positive-integer>
+answer_ref: <answer-or-note-reference>
+acceptance_snapshot:
+  - <acceptance-criterion>
+acceptance_results:
+  - <criterion-result>
+passed: <boolean>
 ```
 
-“可继续当前教学”与“本章已掌握”是两个判断，75 分不等于 mastered。
+`passed` 的定义是：
 
-## 关键题
+```text
+passed :=
+  all acceptance criteria satisfied
+  AND no conflict with the question core model
+```
 
-关键题必须由章节以稳定 ID 显式声明，不能由当前窗口临时决定。关键题通过至少要求：回答命中该题的 acceptance 要点，且没有与核心模型冲突的陈述。评分证据记录 question ID、attempt、维度得分、结论与 evidence ID。
+### Exercise attempt
 
-## 补考
+```yaml
+kind: exercise_attempt
+evidence_id: <stable-evidence-id>
+contract_chapter_id: <current-contract-chapter-id>
+exercise_id: <declared-exercise-id>
+attempt: <positive-integer>
+artifact_ref: <artifact-reference>
+acceptance_snapshot:
+  - <acceptance-criterion>
+acceptance_results:
+  - <criterion-result>
+accepted: <boolean>
+```
 
-- 每次作答追加独立 attempt，不覆盖历史证据。
-- 每道题只采用最近一次有效 attempt；无效或中断 attempt 不参与计算。
-- 基于各题最近有效答案重新计算五维得分和所有门槛；不把新旧总分取平均。
-- 补考通过后仍需重新执行完整 mastery predicate。
+`accepted` 的定义是：
 
-## 可重算性
+```text
+accepted := all acceptance criteria satisfied
+```
 
-状态中的 `score`、各布尔门槛和 `mastered` 都是派生值。若无法从当前笔记和 Q&A evidence 重算，设置 `integrity.status=needs_reconstruction`，而不是沿用旧结论。
+### Mastery assessment
+
+```yaml
+kind: mastery_assessment
+evidence_id: <stable-evidence-id>
+contract_chapter_id: <current-contract-chapter-id>
+source_evidence_ids:
+  - <question-attempt-evidence-id>
+dimension_scores:
+  conceptual_understanding: <0..25>
+  causal_and_dataflow: <0..20>
+  application_and_framework_mapping: <0..20>
+  debugging_and_troubleshooting: <0..20>
+  migration_boundaries_and_tradeoffs: <0..15>
+```
+
+五个维度的满分是：
+
+| Dimension | Maximum |
+|---|---:|
+| `conceptual_understanding` | 25 |
+| `causal_and_dataflow` | 20 |
+| `application_and_framework_mapping` | 20 |
+| `debugging_and_troubleshooting` | 20 |
+| `migration_boundaries_and_tradeoffs` | 15 |
+
+完整 mastery assessment 的 `source_evidence_ids` 必须恰好引用每道 declared question 当前选中的 latest valid attempt，且 `dimension_scores` 必须包含全部五个维度。`score` 是五个维度原始分数的直接和；缺少任一道 declared question 的 latest valid attempt、引用不完整或缺少任一维度时，`score=null`。
+
+### Misconception evidence
+
+参与本章 mastery 判定的 misconception 使用以下字段：
+
+```yaml
+misconception_id: <stable-misconception-id>
+contract_chapter_id: <current-contract-chapter-id>
+question_id: <declared-question-id>
+critical: <boolean>
+status: <open|improving|resolved>
+source_evidence_id: <source-evidence-id>
+resolution_evidence_id: <resolution-evidence-id-or-null>
+```
+
+## Valid attempt
+
+`valid attempt` 是派生判断，不得把 `valid: true` 直接保存在 evidence 中。Question attempt 或 exercise attempt 必须同时满足以下条件才是 valid：
+
+- evidence 已通过 S03 domain verification。
+- evidence 已进入 committed state。
+- `evidence_id` 与 `(contract_chapter_id, item_id, attempt)` 唯一对应；question 的 `item_id` 是 `question_id`，exercise 的 `item_id` 是 `exercise_id`。
+- 对应 record 的 required fields 完整。
+- item ID 存在于当前章节验收契约。
+- `acceptance_snapshot` 与该 item 的当前 acceptance list 完全相等。
+
+Invalid、interrupted 或 stale attempt 不参与 mastery 计算。
+
+## Latest valid attempt
+
+对每个 item，latest valid attempt 是 attempt number 最高的 valid record。
+
+- 新的 valid failure 必须替换旧 pass；曾经通过不构成永久通过。
+- Invalid 或 interrupted attempt 不覆盖此前的 latest valid attempt。
+- Recovery 必须重用原 `evidence_id`，不得创建新 attempt。
+- 每次新的 valid evidence 提交后，重新选择全部 latest valid attempts 并重新计算完整 mastery，不平均新旧分数，也不继承旧 `mastered=true`。
+
+## Hard gates
+
+```text
+critical_questions_passed :=
+  for every question in the current critical set,
+  its latest valid attempt has passed == true
+
+required_exercises_passed :=
+  for every exercise in the current required exercise set,
+  its latest valid attempt has accepted == true
+
+dimension_floors_passed :=
+  for every dimension d,
+  dimension_score[d] >= dimension_max[d] * dimension_floor_ratio
+
+unresolved_critical_misconceptions :=
+  count distinct misconception_id for the current contract_chapter_id
+  where critical == true AND status in {open, improving}
+```
+
+Dimension floor 使用未取整的乘积比较，不得先对 floor 取整。
+
+## Required evidence
+
+```text
+required_evidence_exists :=
+  a latest valid attempt exists for every declared question
+  AND a latest valid attempt exists for every required exercise
+  AND a complete mastery assessment references exactly
+      the selected latest-valid question attempts
+```
+
+## Authoritative mastery predicate
+
+```text
+mastered :=
+  chapter_contract_valid
+  AND required_evidence_exists
+  AND score IS NOT null
+  AND score >= current threshold
+  AND dimension_floors_passed
+  AND critical_questions_passed
+  AND required_exercises_passed
+  AND unresolved_critical_misconceptions == 0
+  AND integrity.status == healthy
+  AND committed_state.pending_writeback == null
+```
+
+任何 hard gate 都不得由总分、历史 `mastered` 值、用户指令、对话记忆或旧 evidence 绕过。
+
+## Contract change
+
+每次判定都重新读取当前章节验收契约：
+
+- threshold 或 dimension floor 改变：使用当前值重新计算。
+- 新增 required item：缺少该 item 的 current evidence，因此不 mastered。
+- 删除 item：其旧 evidence 不再参与计算。
+- critical designation 改变：以当前 critical set 为准。
+- acceptance 改变：旧 `acceptance_snapshot` 不再匹配，attempt 变为 stale。
+- stable ID 改变：视为新 item。
+- contract 无效：不 mastered。
+- 旧 `mastered=true`：不构成任何豁免。
