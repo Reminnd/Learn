@@ -78,7 +78,9 @@ dimension_scores:
 | `debugging_and_troubleshooting` | 20 |
 | `migration_boundaries_and_tradeoffs` | 15 |
 
-完整 mastery assessment 的 `source_evidence_ids` 必须恰好引用每道 declared question 当前选中的 latest valid attempt，且 `dimension_scores` 必须包含全部五个维度。`score` 是五个维度原始分数的直接和；缺少任一道 declared question 的 latest valid attempt、引用不完整或缺少任一维度时，`score=null`。
+完整 mastery assessment 必须已经通过 domain verification 并进入 committed state；其 required fields 完整，`contract_chapter_id` 等于当前契约 ID，`source_evidence_ids` 无重复且作为集合恰好等于每道 declared question 当前选中的 latest valid attempt evidence ID 集合，并且 `dimension_scores` 恰好包含全部五个维度且各自在上表范围内。
+
+对当前选中的 latest-valid question source set，必须只有一个 committed complete mastery assessment；同一 source set 的幂等提交或 recovery 必须重用原 `evidence_id`，不得提交另一个 assessment。只有恰好一个匹配的 committed complete assessment 时，它才是 authoritative assessment。零个匹配项或多个匹配项均表示没有唯一确定的 authoritative assessment；尤其不得在两个 `dimension_scores` 冲突的 assessment 之间任选其一，此时 `score=null`。`score` 是所选 authoritative assessment 五个维度原始分数的直接和；缺少任一道 declared question 的 latest valid attempt 时同样为 `score=null`。
 
 ### Misconception evidence
 
@@ -109,11 +111,13 @@ Invalid、interrupted 或 stale attempt 不参与 mastery 计算。
 
 ## Latest valid attempt
 
+`attempt` 的编号范围是同一 `(contract_chapter_id, item_id)`。第一个 logical attempt 必须使用 `attempt: 1`；此后每个新的 logical attempt 的 attempt number 必须严格大于该 item 此前已分配的所有 attempt number，无论此前 attempt 最终 valid、invalid 或 interrupted。新 logical attempt 不得复用旧 attempt number 或旧 `evidence_id`。
+
 对每个 item，latest valid attempt 是 attempt number 最高的 valid record。
 
 - 新的 valid failure 必须替换旧 pass；曾经通过不构成永久通过。
 - Invalid 或 interrupted attempt 不覆盖此前的 latest valid attempt。
-- Recovery 必须重用原 `evidence_id`，不得创建新 attempt。
+- Recovery 是原 logical attempt 的继续，必须重用原 `evidence_id` 和 attempt number，不得创建新 attempt。
 - 每次新的 valid evidence 提交后，重新选择全部 latest valid attempts 并重新计算完整 mastery，不平均新旧分数，也不继承旧 `mastered=true`。
 
 ## Hard gates
