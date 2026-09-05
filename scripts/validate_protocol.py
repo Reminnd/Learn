@@ -10,7 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ERRORS: list[str] = []
-RUNTIME_DIRS = {".learn-agent", "learning"}
+RUNTIME_DIRS = {".learn-agent", "learning", "work", "workspace"}
 
 
 def fail(message: str) -> None:
@@ -58,7 +58,7 @@ for path in ROOT.rglob("*.md"):
     }:
         fail(f"legacy notes_status outside migration documentation: {relative}")
 
-seed = read(ROOT / "progress" / "current.md")
+seed = read(ROOT / "seed" / "state" / "current.md")
 for token in (
     "schema_version: 2",
     "lifecycle_status:",
@@ -70,7 +70,7 @@ for token in (
     if token not in seed:
         fail(f"state seed missing {token!r}")
 
-template = read(ROOT / "notes" / "template.md")
+template = read(ROOT / "seed" / "notes" / "template.md")
 for token in ("schema_version", "lifecycle_status", "learning_status"):
     if token not in template:
         fail(f"note template missing {token}")

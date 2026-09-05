@@ -47,6 +47,8 @@ sync_targets: []
 
 manifest 是物理路径的唯一事实源。正文、章节、状态文件与笔记不得把上面的示例值当成 fallback。运行时必须用逻辑 key 解析；缺 key、规范化后越出 `backend_root`、能力不满足或目标不可访问时立即停止对应操作。
 
+对于本地文件系统 backend，标准 manifest 位置是 `<backend_root>/.learn-agent/storage-manifest.yaml`。`Learn` Skill checkout 本身不得作为 `backend_root`；即使用户选择 `git_repository`，也必须使用与 Skill distribution 分离的 repository/workspace。
+
 ## 3. 后端选择
 
 按以下顺序选择：
@@ -59,14 +61,40 @@ manifest 是物理路径的唯一事实源。正文、章节、状态文件与�
 
 Codex、Claude Code 与 ChatGPT 若能访问同一个 backend，就共享同一学习状态；若不能，必须显式导出/同步，不能仅凭相同路径名假设数据已共享。
 
-## 4. 本地与 Obsidian Profile
+## 4. 本地、Obsidian 与 Seed Profile
 
 控制面与可视资产分离：
 
 - `.learn-agent/`：manifest、短状态、恢复指针；适合机器读取。
 - `learning/`：笔记、Q&A、Bug Book、能力进度、项目与 ADR；适合 Obsidian / VS Code 阅读。
+- `workspace/`：练习代码、事务 JSON 与其他可丢弃/可重建的工作区产物；不属于 Skill distribution。
+
+Skill distribution 中的只读初始化资源统一位于 `seed/`：
+
+```text
+seed/state/      -> .learn-agent/progress/
+seed/notes/      -> learning/notes/、learning/qa/、learning/bug-book/
+seed/progress/   -> learning/progress/
+seed/project/    -> learning/project/、learning/adr/
+```
 
 初始化时只复制缺失的种子资产，不覆盖已有文件。不要把课程正文或全部 shared 规则复制进 runtime。
+
+本地 fresh runtime 使用：
+
+```text
+python scripts/setup_runtime.py --runtime-root <Skill 仓库之外的目录>
+```
+
+从 S01 之前的仓库布局迁移既有状态时使用：
+
+```text
+python scripts/setup_runtime.py --runtime-root <Skill 仓库之外的目录> --migrate-legacy
+```
+
+迁移只做当前已确认的数据搬迁：旧 `.learn-agent/` 保留为 control state，旧 `learning/` 迁到 runtime `learning/`，旧 `work/` 迁到 runtime `workspace/`，随后只补齐缺失 seed。若工作树已经不再包含旧 tracked runtime，脚本从已知 legacy ref 读取这些文件，因此不会要求把 active personal state 重新提交回 Skill distribution。
+
+S01 前的 legacy 状态包含一次未完成的 Stage 01 Chapter 06 curriculum migration：它把后继路由指向从未创建的 `curriculum/stage-01/06-production-hardening.md`。迁移脚本只回滚这一个已确认的孤儿路由到 `curriculum/stage-02/01-state.md`，并把对应 runtime transaction 标为 `rolled_back`；不新增或重写课程。
 
 ## 5. 切换与同步
 
