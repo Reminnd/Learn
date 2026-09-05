@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -11,6 +12,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ERRORS: list[str] = []
 RUNTIME_DIRS = {".learn-agent", "learning", "work", "workspace"}
+TRACKED_RUNTIME_PREFIXES = (
+    ".learn-agent/",
+    "learning/",
+    "work/",
+    "workspace/",
+    "notes/",
+    "progress/",
+    "project/",
+)
+REQUIRED_RUNTIME_IGNORES = {".learn-agent/", "learning/", "work/", "workspace/"}
 
 
 def fail(message: str) -> None:
@@ -19,6 +30,99 @@ def fail(message: str) -> None:
 
 def read(path: Path) -> str:
     return path.read_text(encoding="utf-8")
+
+
+def markdown_section(text: str, heading: str) -> str | None:
+    match = re.search(rf"(?m)^{re.escape(heading)}\s*$", text)
+    if not match:
+        return None
+    rest = text[match.end():]
+    next_heading = re.search(r"(?m)^##\s+", rest)
+    return rest[:next_heading.start()] if next_heading else rest
+
+
+def top_level_block(text: str, key: str, next_key: str | None = None) -> str | None:
+    if next_key is None:
+        pattern = rf"(?ms)^{re.escape(key)}:\s*\n(?P<body>.*)\Z"
+    else:
+        pattern = (
+            rf"(?ms)^{re.escape(key)}:\s*\n"
+            rf"(?P<body>.*?)(?=^{re.escape(next_key)}:\s*$)"
+        )
+    match = re.search(pattern, text)
+    return match.group("body") if match else None
+
+
+def inline_list(text: str, key: str, *, indent: int = 0) -> list[str] | None:
+    prefix = " " * indent
+    match = re.search(
+        rf"(?m)^{re.escape(prefix + key)}:\s*\[(?P<body>[^\]]*)\]\s*$",
+        text,
+    )
+    if not match:
+        return None
+    body = match.group("body").strip()
+    if not body:
+        return []
+    return [
+        item.strip().strip("\"'")
+        for item in body.split(",")
+        if item.strip()
+    ]
+
+
+def scalar_value(text: str, key: str) -> str | None:
+    match = re.search(rf"(?m)^{re.escape(key)}:\s*(\S+)\s*$", text)
+    return match.group(1) if match else None
+
+
+def list_item_ids(block: str) -> list[str]:
+    return re.findall(r"(?m)^  - id:\s*(\S+)\s*$", block)
+
+
+def question_critical_ids(block: str, relative: Path) -> tuple[list[str], set[str]]:
+    matches = list(re.finditer(r"(?m)^  - id:\s*(\S+)\s*$", block))
+    ids = [match.group(1) for match in matches]
+    critical_ids: set[str] = set()
+    for index, match in enumerate(matches):
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(block)
+        item = block[match.end():end]
+        critical = re.search(r"(?m)^    critical:\s*(true|false)\s*$", item)
+        if not critical:
+            fail(f"question {match.group(1)} missing critical flag: {relative}")
+        elif critical.group(1) == "true":
+            critical_ids.add(match.group(1))
+    return ids, critical_ids
+
+
+def safe_pointer(base: Path, raw: str, label: str) -> Path | None:
+    relative = Path(raw)
+    if relative.is_absolute():
+        fail(f"{label} must be relative: {raw}")
+        return None
+    root = base.resolve()
+    target = (base / relative).resolve()
+    try:
+        target.relative_to(root)
+    except ValueError:
+        fail(f"{label} escapes {base.relative_to(ROOT)}: {raw}")
+        return None
+    return target
+
+
+def git_tracked_files() -> list[str]:
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(ROOT), "ls-files"],
+            check=True,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+    except (FileNotFoundError, subprocess.CalledProcessError) as exc:
+        fail(f"cannot read tracked distribution files with git ls-files: {exc}")
+        return []
+    return [line for line in result.stdout.splitlines() if line]
 
 
 skill = read(ROOT / "SKILL.md")
@@ -58,7 +162,8 @@ for path in ROOT.rglob("*.md"):
     }:
         fail(f"legacy notes_status outside migration documentation: {relative}")
 
-seed = read(ROOT / "seed" / "state" / "current.md")
+seed_path = ROOT / "seed" / "state" / "current.md"
+seed = read(seed_path)
 for token in (
     "schema_version: 2",
     "lifecycle_status:",
@@ -75,28 +180,72 @@ for token in ("schema_version", "lifecycle_status", "learning_status"):
     if token not in template:
         fail(f"note template missing {token}")
 
+curriculum = ROOT / "curriculum"
 chapters = sorted(
     path
-    for path in (ROOT / "curriculum").glob("stage-*/*.md")
+    for path in curriculum.glob("stage-*/*.md")
     if path.name != "README.md"
 )
 if not chapters:
     fail("no curriculum chapters found")
 
-chapter_ids: set[str] = set()
+canonical_chapters = {path.relative_to(ROOT).as_posix() for path in chapters}
+index_text = read(curriculum / "index.md")
+index_refs = re.findall(r"`(stage-\d{2}/[^`\n]+\.md)`", index_text)
+index_paths = [f"curriculum/{ref}" for ref in index_refs]
+if len(index_paths) != len(set(index_paths)):
+    fail("curriculum/index.md contains duplicate chapter references")
+index_set = set(index_paths)
+for missing in sorted(canonical_chapters - index_set):
+    fail(f"canonical chapter missing from curriculum/index.md: {missing}")
+for stale in sorted(index_set - canonical_chapters):
+    fail(f"curriculum/index.md references missing canonical chapter: {stale}")
+
+for stage in sorted(path for path in curriculum.glob("stage-*") if path.is_dir()):
+    actual = {
+        path.name
+        for path in stage.glob("*.md")
+        if path.name != "README.md"
+    }
+    readme = stage / "README.md"
+    if not readme.is_file():
+        fail(f"stage README missing: {readme.relative_to(ROOT)}")
+        continue
+    section = markdown_section(read(readme), "## 本阶段章节")
+    if section is None:
+        fail(f"stage README missing chapter section: {readme.relative_to(ROOT)}")
+        continue
+    refs = re.findall(r"`([^`/\n]+\.md)`", section)
+    if len(refs) != len(set(refs)):
+        fail(f"stage README contains duplicate chapter references: {readme.relative_to(ROOT)}")
+    referenced = set(refs)
+    for missing in sorted(actual - referenced):
+        fail(f"stage README missing chapter {missing}: {readme.relative_to(ROOT)}")
+    for stale in sorted(referenced - actual):
+        fail(f"stage README references missing chapter {stale}: {readme.relative_to(ROOT)}")
+
+chapter_ids: dict[str, Path] = {}
+chapter_records: list[tuple[Path, list[str]]] = []
 for path in chapters:
     text = read(path)
     relative = path.relative_to(ROOT)
     if "## 验收契约" not in text:
         fail(f"missing acceptance contract: {relative}")
         continue
-    match = re.search(r"(?m)^chapter_id:\s*(\S+)\s*$", text)
+    contract = text.split("## 验收契约", 1)[1]
+    match = re.search(r"(?m)^chapter_id:\s*(\S+)\s*$", contract)
     if not match:
         fail(f"missing chapter_id: {relative}")
-    elif match.group(1) in chapter_ids:
-        fail(f"duplicate chapter_id {match.group(1)}: {relative}")
+        continue
+    chapter_id = match.group(1)
+    if chapter_id in chapter_ids:
+        fail(
+            f"duplicate chapter_id {chapter_id}: "
+            f"{chapter_ids[chapter_id].relative_to(ROOT)} and {relative}"
+        )
     else:
-        chapter_ids.add(match.group(1))
+        chapter_ids[chapter_id] = path
+
     for token in (
         "required_exercises:",
         "questions:",
@@ -107,8 +256,127 @@ for path in chapters:
         "critical_questions: [Q1, Q2]",
         "required_exercises: [EX1]",
     ):
-        if token not in text:
+        if token not in contract:
             fail(f"chapter contract missing {token!r}: {relative}")
+
+    prerequisites = inline_list(contract, "prerequisites")
+    if prerequisites is None:
+        fail(f"chapter contract prerequisites must use inline list: {relative}")
+        prerequisites = []
+    chapter_records.append((path, prerequisites))
+
+    exercise_block = top_level_block(contract, "required_exercises", "questions")
+    if exercise_block is None:
+        fail(f"cannot parse required_exercises: {relative}")
+        exercise_ids: list[str] = []
+    else:
+        exercise_ids = list_item_ids(exercise_block)
+        if len(exercise_ids) != len(set(exercise_ids)):
+            fail(f"duplicate required exercise id: {relative}")
+
+    questions_block = top_level_block(contract, "questions", "mastery")
+    if questions_block is None:
+        fail(f"cannot parse questions: {relative}")
+        question_ids: list[str] = []
+        critical_ids: set[str] = set()
+    else:
+        question_ids, critical_ids = question_critical_ids(questions_block, relative)
+        if len(question_ids) != len(set(question_ids)):
+            fail(f"duplicate question id: {relative}")
+
+    mastery_critical = inline_list(contract, "critical_questions", indent=2)
+    if mastery_critical is None:
+        fail(f"cannot parse mastery.critical_questions: {relative}")
+        mastery_critical = []
+    mastery_required = inline_list(contract, "required_exercises", indent=2)
+    if mastery_required is None:
+        fail(f"cannot parse mastery.required_exercises: {relative}")
+        mastery_required = []
+
+    unknown_critical = set(mastery_critical) - set(question_ids)
+    if unknown_critical:
+        fail(
+            f"mastery critical_questions reference undeclared questions "
+            f"{sorted(unknown_critical)}: {relative}"
+        )
+    if set(mastery_critical) != critical_ids:
+        fail(
+            f"mastery critical_questions do not match critical questions: {relative}"
+        )
+
+    unknown_required = set(mastery_required) - set(exercise_ids)
+    if unknown_required:
+        fail(
+            f"mastery required_exercises reference undeclared exercises "
+            f"{sorted(unknown_required)}: {relative}"
+        )
+    if set(mastery_required) != set(exercise_ids):
+        fail(
+            f"mastery required_exercises do not match declared required exercises: {relative}"
+        )
+
+known_chapter_ids = set(chapter_ids)
+for path, prerequisites in chapter_records:
+    missing = set(prerequisites) - known_chapter_ids
+    if missing:
+        fail(
+            f"prerequisites reference missing chapter_id {sorted(missing)}: "
+            f"{path.relative_to(ROOT)}"
+        )
+
+for key in ("chapter_file", "next_chapter"):
+    value = scalar_value(seed, key)
+    if value is None:
+        fail(f"state seed missing {key}")
+        continue
+    if value not in canonical_chapters:
+        fail(f"state seed {key} is not a canonical chapter: {value}")
+    elif value not in index_set:
+        fail(f"state seed {key} is missing from curriculum/index.md: {value}")
+
+chapter_file = scalar_value(seed, "chapter_file")
+note_pointer = scalar_value(seed, "note_pointer")
+if note_pointer is None:
+    fail("state seed missing note_pointer")
+else:
+    note_path = safe_pointer(ROOT / "seed" / "notes", note_pointer, "note_pointer")
+    if note_path is not None:
+        if not note_path.is_file():
+            fail(f"note_pointer target missing: {note_pointer}")
+        elif chapter_file is not None:
+            note_text = read(note_path)
+            note_chapter = re.search(
+                r"(?m)^- chapter_file:\s*`([^`]+)`\s*$",
+                note_text,
+            )
+            if not note_chapter:
+                fail(f"seed note missing chapter_file metadata: {note_path.relative_to(ROOT)}")
+            elif note_chapter.group(1) != chapter_file:
+                fail(
+                    f"seed note chapter_file does not match state chapter_file: "
+                    f"{note_path.relative_to(ROOT)}"
+                )
+
+qa_pointer = scalar_value(seed, "qa_pointer")
+if qa_pointer is None:
+    fail("state seed missing qa_pointer")
+else:
+    qa_path = safe_pointer(ROOT / "seed" / "notes" / "qa", qa_pointer, "qa_pointer")
+    if qa_path is not None and not qa_path.is_file():
+        fail(f"qa_pointer target missing: {qa_pointer}")
+
+tracked = git_tracked_files()
+for path in tracked:
+    if path.startswith(TRACKED_RUNTIME_PREFIXES):
+        fail(f"runtime or legacy state path must not be tracked in Skill distribution: {path}")
+
+ignore_lines = {
+    line.strip()
+    for line in read(ROOT / ".gitignore").splitlines()
+    if line.strip() and not line.lstrip().startswith("#")
+}
+for required in sorted(REQUIRED_RUNTIME_IGNORES - ignore_lines):
+    fail(f".gitignore missing runtime boundary entry: {required}")
 
 if ERRORS:
     for error in ERRORS:
