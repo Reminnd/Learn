@@ -5,8 +5,11 @@
 ## 1. 单一真相源与解析器
 
 - storage manifest 决定唯一 primary backend 和逻辑资产映射；Skill 包副本只用于首次初始化。
-- 所有运行资产访问都调用概念操作 `resolve(asset_key, optional_relative_pointer)`。
+- 所有运行资产访问都遵循概念操作 `resolve(asset_key, optional_relative_pointer)` 的解析语义。
 - `resolve` 必须：确认 key 存在；把目标规范化；确认目标仍在 backend root 内；检查所需读写能力。任一失败即停止，不使用默认目录或 Skill 种子回退。
+- 每个 transaction 在 write boundary 前、完整 `targets[]` 冻结后，对本 transaction 所需资产及全部目标执行一次完整 resolution 与 boundary validation。验证必须覆盖每个目标的 `asset_key`、`relative_pointer`、规范化后的 backend-root containment，以及 transaction 所需的持久化读写能力。
+- boundary validation 成功后，同一 transaction 的后续访问直接复用这些已验证的解析结果；不得因 writing、verifying 或 final commit phase 重新 resolve 同一目标。这些结果只属于当前 transaction context，不是 cache layer，也不是第二 source of truth。
+- 新 transaction 或新的 recovery turn 必须重新读取权威 manifest 与 state，并重新执行 boundary validation；不得跨 turn 复用 resolved target。
 - `state.current` 是唯一 Learning State 与最新 checkpoint；领域资产保存各自证据，聊天历史不参与冲突仲裁。
 
 初始化或后端切换才读取 `shared/storage-adapters.md`。种子只复制缺失资产，不覆盖已有内容，也不自动多后端双写。
@@ -63,12 +66,13 @@ pending_writeback:
 本节仅适用于轮次开始时 `pending_writeback=null` 且聚合得到 `N >= 1` 个领域目标的教学轮次。成功路径严格为：
 
 1. 聚合全部持久化事件与领域目标，冻结完整 `targets[]`。
-2. 执行一次 prepared WAL write：以 `phase=prepared` 和稳定的 `transaction_id`、`evidence_id` 把完整 `pending_writeback` 写入 `state.current`；此前不得产生任何领域写入。
-3. 回读一次 `state.current`，逐字段验证 prepared WAL；验证通过前不得产生任何领域写入。
-4. 对 `N` 个领域目标各执行一次基于原 `evidence_id` 的幂等 upsert，共 `N` 次领域写入。
-5. 对每个目标在写入后执行一次 domain verification read，共 `N` 次领域读取；按内容验证 `evidence_id`、预期变化、关联状态与指针。文件存在、修改时间变化、工具成功消息或修改行数均不构成内容验证。
-6. 全部目标验证通过后，在一次原子的 final-state+clear write 中同时推进最终 Learning State 并设置 `pending_writeback=null`。
-7. 回读一次 `state.current`，同时验证最终 Learning State 与 WAL 已清空。正常成功路径在 final-state+clear write 后不再读取领域证据。
+2. validate transaction boundary once：对本 transaction 所需资产及全部冻结目标执行一次完整 resolution 与 boundary validation，逐一验证 `asset_key`、`relative_pointer`、规范化后的 backend-root containment 和所需持久化读写能力。任一验证失败即在 WAL 或领域 mutation 前停止，不得开始 persistence transaction write sequence。
+3. 执行一次 prepared WAL write：以 `phase=prepared` 和稳定的 `transaction_id`、`evidence_id` 把完整 `pending_writeback` 写入 `state.current`；此前不得产生任何领域写入。
+4. 回读一次 `state.current`，逐字段验证 prepared WAL；验证通过前不得产生任何领域写入。
+5. 复用第 2 步已验证的解析结果，对 `N` 个领域目标各执行一次基于原 `evidence_id` 的幂等 upsert，共 `N` 次领域写入。
+6. 复用第 2 步已验证的解析结果，对每个目标在写入后执行一次 domain verification read，共 `N` 次领域读取；按内容验证 `evidence_id`、预期变化、关联状态与指针。文件存在、修改时间变化、工具成功消息或修改行数均不构成内容验证。
+7. 全部目标验证通过后，在一次原子的 final-state+clear write 中同时推进最终 Learning State 并设置 `pending_writeback=null`。
+8. 回读一次 `state.current`，同时验证最终 Learning State 与 WAL 已清空。正常成功路径在 final-state+clear write 后不再读取领域证据。
 
 准确计数为：
 
@@ -80,7 +84,7 @@ domain_writes=N
 domain_reads=N
 ```
 
-只有第 7 步通过后才能称为 committed state，并向用户声称已保存或已提交。
+只有第 8 步通过后才能称为 committed state，并向用户声称已保存或已提交。
 
 ## 5. 崩溃恢复与仅恢复轮次
 
