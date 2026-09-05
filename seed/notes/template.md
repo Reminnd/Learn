@@ -32,9 +32,57 @@
 
 ## 11. 代码与调试记录
 
-## 12. Q&A 掌握记录
+## 12. Evidence 记录
 
-- 只保留影响掌握度的结果；可用 `Q-<date>-<topic>` 链接到当前 Stage 的 Q&A Ledger。
+以下 YAML 块是未提交的 record template，不是当前 evidence。只有实际作答或练习经过验证并进入 committed state 后，才填写对应记录；字段定义以 `shared/mastery-rubric.md` 为唯一权威来源。
+
+### 12.1 Question attempt
+
+```yaml
+kind: question_attempt
+evidence_id: <stable-evidence-id>
+contract_chapter_id: <current-contract-chapter-id>
+question_id: <declared-question-id>
+attempt: <positive-integer>
+answer_ref: <answer-or-note-reference>
+acceptance_snapshot:
+  - <acceptance-criterion>
+acceptance_results:
+  - <criterion-result>
+passed: <boolean-after-evaluation>
+```
+
+### 12.2 Exercise attempt
+
+```yaml
+kind: exercise_attempt
+evidence_id: <stable-evidence-id>
+contract_chapter_id: <current-contract-chapter-id>
+exercise_id: <declared-exercise-id>
+attempt: <positive-integer>
+artifact_ref: <artifact-reference>
+acceptance_snapshot:
+  - <acceptance-criterion>
+acceptance_results:
+  - <criterion-result>
+accepted: <boolean-after-evaluation>
+```
+
+### 12.3 Mastery assessment
+
+```yaml
+kind: mastery_assessment
+evidence_id: <stable-evidence-id>
+contract_chapter_id: <current-contract-chapter-id>
+source_evidence_ids:
+  - <question-attempt-evidence-id>
+dimension_scores:
+  conceptual_understanding: <0..25>
+  causal_and_dataflow: <0..20>
+  application_and_framework_mapping: <0..20>
+  debugging_and_troubleshooting: <0..20>
+  migration_boundaries_and_tradeoffs: <0..15>
+```
 
 ## 13. 易错点 / 薄弱点
 

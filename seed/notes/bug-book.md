@@ -8,16 +8,24 @@
 - `improving`：已纠正，但还需要再次验证
 - `resolved`：已通过后续练习 / Q&A 验证
 
+`status` 只能取以上三个值。仅当误解与 critical question acceptance 或核心模型直接冲突时，才设置 `critical: true`。
+
 ## 条目模板
 
 ```markdown
 ### BUG-YYYYMMDD-NN — 简短标题
 
+- misconception_id:
+- contract_chapter_id:
+- question_id:
+- critical: <boolean>
+- status: open | improving | resolved
+- source_evidence_id:
+- resolution_evidence_id: <resolution-evidence-id-or-null>
 - 日期：
 - Stage / Chapter：
 - 类型：Q&A | Code | Debug | Architecture | Trade-off
 - 关联知识点：
-- 状态：open | improving | resolved
 - 复现/触发：
 
 **错误 / 症状**
