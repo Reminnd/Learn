@@ -73,12 +73,15 @@ manifest 中缺少所需 key、目标越出 backend root、或目标不可读写
 
 ## 学习事件与提交屏障
 
-核心概念、框架映射、工程结论、重要 Q&A、误解、练习、Bug、能力证据、ADR 或学习位置变化都属于持久化事件，而不是事务。一个教学回合（一次用户输入到教学回复的边界）先聚合全部事件与全部领域目标；领域目标是一个包含 `asset_key`、`pointer`、`evidence_id`、`operation` 和预期变化的 `targets[]` 记录。零个事件不得创建事务；一个或多个事件至多创建一个包含完整目标集的新教学事务。目标集与稳定 `transaction_id` / `evidence_id` 必须在 prepared WAL 写入前冻结。
+核心概念、框架映射、工程结论、重要 Q&A、误解、练习、Bug、能力证据、ADR 或学习位置变化都属于持久化事件，而不是事务。一个教学回合（一次用户输入到教学回复的边界）先聚合全部事件与全部领域目标；领域目标是一个包含 `asset_key`、`relative_pointer`、`evidence_id`、`operation` 和预期变化的 `targets[]` 记录。零个事件不得创建事务；一个或多个事件至多创建一个包含完整目标集的新教学事务。目标集与稳定 `transaction_id` / `evidence_id` 必须在 prepared WAL 写入前冻结。
 
 对 `N >= 1` 个目标，成功路径严格为：
 
 ```text
-一次 prepared WAL 写入 state.current（完整 pending_writeback）
+聚合本回合增量
+→ 冻结完整 targets[]
+→ 一次 transaction boundary validation
+→ 一次 prepared WAL 写入 state.current（完整 pending_writeback）
 → 一次 state.current 回读确认 WAL
 → N 次幂等领域 upsert
 → N 次领域内容回读验证
@@ -86,7 +89,13 @@ manifest 中缺少所需 key、目标越出 backend root、或目标不可读写
 → 一次 state.current 回读同时确认最终状态与 WAL 已清空
 ```
 
+transaction boundary validation 必须在完整 `targets[]` 冻结后、prepared WAL 写入前，对所有冻结目标一次完成：确认所需 manifest key 存在；确认 `relative_pointer` 在对应 logical root 内解析；确认规范化后的目标仍在 backend root 内；确认本事务所需的持久化读写能力满足。任一检查失败都不得写入 prepared WAL 或领域资产。
+
+同一事务的后续 teaching、writing、verifying 与 final commit phase 必须直接复用本回合 transaction context 中已验证的 resolved targets，不得因内部 phase 再次解析或校验相同目标。该 context 仅属于当前 turn transaction，不是 cache layer，也不是第二 source of truth；新的 assistant turn 或 recovery start 必须重新读取权威 manifest 与 `state.current`，重新执行 boundary validation，不得跨回合复用 resolved target。
+
 成功计数为 `transaction_count=1`、`state_writes=2`、`state_verification_reads=2`、`domain_writes=N`、`domain_reads=N`。prepared WAL 必须先于任何领域写入；正常成功不得持久化 `phase=writing`、`phase=verifying`、`phase=committing` 或每目标 `verified=true`，这些既有 schema 字段仅用于失败、恢复或迁移语义。final-state+clear 后不得在正常成功路径重读领域证据。
+
+transaction boundary validation 只验证 manifest 映射、路径边界与能力，不得实现为额外的 `state.current` 或领域内容回读；因此正常成功 I/O 保持 `state_writes=2`、`state_verification_reads=2`、`domain_writes=N`、`domain_reads=N`。
 
 回合开始时 `pending_writeback` 非空即为 recovery-only 回合：只能恢复既有 `transaction_id`、目标和 `evidence_id`，即使恢复成功也不得创建新教学事务。`evidence_id` 跨重试/恢复保持稳定；恢复目标已有证据时只验证，缺失时使用原操作作幂等 upsert，禁止盲目追加。详细 schema、幂等规则、恢复与迁移见 [shared/session-persistence.md](shared/session-persistence.md)。
 
