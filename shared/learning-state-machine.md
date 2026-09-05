@@ -34,7 +34,7 @@ pending_writeback: null
 - `lifecycle_status`：笔记资产生命周期。初始化种子为 `initialized`；出现有效知识事件后为 `active`；章节掌握且笔记已压缩为稳定总结后为 `consolidated`。
 - `learning_status`：学习进程。只允许状态机中的值。
 - `integrity`：持久化证据是否完整可信。`needs_reconstruction` 只能出现在 `integrity.status`。
-- `mastery`：由证据重算的派生结果，不能手工凭印象设置。
+- `mastery`：由当前章节验收契约与 committed evidence 重算的 derived projection（派生投影），不是事实源。`score`、`critical_questions_passed`、`dimension_floors_passed`、`required_exercises_passed`、`unresolved_critical_misconceptions` 和 `mastered` 都是派生字段；不得依据 memory、旧 boolean、用户指令或 chat history 直接设置。
 
 当前笔记 Metadata 必须至少包含 `schema_version`、`stage_id`、`chapter_id`、`lifecycle_status`、`learning_status` 和 `last_updated`。状态文件与笔记只比较同名维度，不比较生命周期和学习进程是否“相等”。
 
@@ -46,7 +46,33 @@ not_started → learning → practice → qa → mastered
                     └── needs_review
 ```
 
-`mastered` 仅由 mastery predicate 得出。`lifecycle_status=consolidated` 只允许在 `learning_status=mastered` 且笔记已完成压缩后设置；其他学习状态通常对应 `active`。
+`learning_status=mastered` 与 `learning_status=needs_review` 也必须从当前章节验收契约和 committed evidence 重算。完整 mastery predicate 只在 [mastery-rubric.md](mastery-rubric.md) 定义，本文件不复制该 predicate。
+
+完整评估成功提交时，按以下顺序确定最终学习状态：
+
+```text
+if mastered:
+    learning_status = mastered
+elif score is not null and (
+    score < 60
+    or unresolved_critical_misconceptions > 0
+):
+    learning_status = needs_review
+elif score is not null:
+    learning_status = qa
+```
+
+Incomplete evidence、invalid contract、`integrity.status=needs_reconstruction` 或 `pending_writeback != null` 本身都是 transition blocker，不得自动映射为 `needs_review`。`lifecycle_status=consolidated` 只允许在已提交的 `learning_status=mastered` 且笔记已完成压缩后设置；其他学习状态通常对应 `active`。
+
+## Mastery 与 WAL
+
+Mastery-sensitive turn 开始时，`pending_writeback` 必须为 `null`；非空时按 [session-persistence.md](session-persistence.md) 进入 recovery-only turn，不能开始新的 mastery-sensitive transaction。
+
+Prepared WAL 非空期间，只能基于当前契约与已经通过 domain verification 的证据计算 candidate mastery projection。此时的 `mastery` 与 `learning_status` 不是 authoritative committed transition，尤其不能把 `learning_status=mastered` 视为已提交事实。
+
+全部领域证据验证通过后，沿用 S03 final-state+clear：在同一次 `state.current` final write 中写入重新计算的 `mastery` projection、最终 `learning_status` 与 `pending_writeback=null`，然后执行 S03 final readback。只有该回读同时验证最终状态与 WAL 已清空后，mastery projection 和学习状态才成为 committed state。本规则不改变 S03 的 `state_writes=2`、`state_verification_reads=2`、领域读写计数或 recovery model。
+
+每次新的 valid question evidence、exercise evidence 或 misconception resolution evidence 提交后，必须重新选择全部 latest valid evidence，并依照当前契约和 [mastery-rubric.md](mastery-rubric.md) 重算完整 projection。不得平均新旧 score、继承旧 `mastered=true`，也不得只增量翻转某个 boolean。Recovery 仍复用原 `evidence_id`，恢复完成后的重算遵循同一规则。
 
 ## 完整性恢复
 

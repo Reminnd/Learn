@@ -115,6 +115,21 @@ transaction boundary validation 只验证 manifest 映射、路径边界与能�
 
 完整 schema、迁移和状态转换见 [shared/learning-state-machine.md](shared/learning-state-machine.md)。
 
+### Mastery 调用链
+
+每个 mastery-sensitive action 都必须重新读取当前章节验收契约，并执行：
+
+```text
+current chapter contract
+→ committed evidence
+→ shared/mastery-rubric.md
+→ candidate mastery
+→ S03 final-state+clear
+→ committed mastery/status
+```
+
+`shared/mastery-rubric.md` 是完整 mastery predicate 的唯一来源。Contract mismatch 或 stale evidence 必须按当前契约重新判定，不能由旧 `mastered` 值绕过；事务中的 candidate 只有在 final-state+clear 及最终回读成功后才成为 committed mastery/status。
+
 ## 领域资产规则
 
 - 当前笔记保存知识结果，不保存聊天流水；重复结论合并。首次有效学习后，生命周期改为 `active`，学习状态离开 `not_started`。
