@@ -1,0 +1,58 @@
+{
+  "transaction_id": "20260821T175925+0800-stage01-ch03-ex1-attempt1",
+  "reason": "exercise_complete",
+  "targets": [
+    {
+      "asset_key": "notes.root",
+      "relative_pointer": "stage-01/03-tool-basics.md",
+      "evidence_id": "stage-01-ch03-EX1-attempt1-runtime-pass-map-followup",
+      "operation": "upsert_block",
+      "expected_change": "记录 EX1 运行通过但 @tool 名称映射待复检",
+      "content": "## EX1 attempt 1：运行分支通过，框架映射待复检\n\n还原聊天转义后实际运行成功：call_001 对 city 执行 strip 后返回 success；call_002 因 city 类型错误在额外字段检查前返回 retry_model；call_003 捕获 TimeoutError 并返回 retry_tool。代码实现了 Tool 四要素、调用信封/参数校验、确定性修复、handler 异常分类和机器动作。\n\n`retry_count` 不应由单次 `execute_tool` 自己增加，因为该函数只负责校验和执行一次 Tool Call；外层 Agent/Harness 重试循环在收到 `action=retry_model` 后增加计数、携带校验反馈重新调用 LLM，再把新的 Tool Call 传回执行器。若 `max_retries=2`，retry_count 可表示已经执行的重试次数：0 初次、1 第一次重试后、2 第二次重试后；无效参数且 count>=2 时 fail_fast/retry_exhausted。\n\n框架映射待修正：\n\n```python\n@tool\ndef get_weather_tool(city: str) -> str:\n    \"\"\"查询指定城市的当前天气。\"\"\"\n    return get_weather(city)\n```\n\n默认 Tool name 来自被装饰函数名 `get_weather_tool`，不是函数体内部调用的 `get_weather`。输入标注 `city: str` 生成 parameters Schema；`-> str` 是 handler/Tool 的返回类型说明，不属于输入参数 Schema。若希望 Tool name 是 `get_weather`，可显式配置装饰器名称或直接装饰同名函数。\n\nEX1 状态：参数错误与异常处理 acceptance 通过；普通函数到 @tool 的名称映射待针对性复检。"
+    },
+    {
+      "asset_key": "qa.stage",
+      "evidence_id": "stage-01-ch03-EX1-attempt-1",
+      "operation": "upsert_block",
+      "expected_change": "记录 Chapter 03 EX1 第一次提交部分通过",
+      "content": "## stage-01-ch03-EX1-attempt-1\n\n- chapter_id: `03-tool-basics`\n- exercise_id: `EX1`\n- attempt: `1`\n- runtime: `passed — success/retry_model/retry_tool`\n- acceptance_1: `passed — name/description/parameters/handler 均存在并被使用`\n- acceptance_2: `passed — 类型、额外字段、空值和 handler 异常有具体分析与代码`\n- acceptance_3: `needs_followup — 默认 Tool name 错认成内部 get_weather，而非被装饰函数 get_weather_tool`\n- status: `needs_followup`"
+    },
+    {
+      "asset_key": "bugs.book",
+      "evidence_id": "bug-tool-decorated-function-name-vs-inner-handler",
+      "operation": "upsert_block",
+      "expected_change": "记录 @tool 默认名称来源误解",
+      "content": "## @tool 默认名称与内部调用函数混淆\n\n- 症状：`@tool def get_weather_tool(...)` 的 name 被写成 `get_weather`。\n- 错误模型：认为 Tool name 来自函数体内部调用的 handler 名称。\n- 根因：没有区分被装饰函数与其内部委托函数。\n- 修复：默认 name 来自被 `@tool` 装饰的函数名，即 `get_weather_tool`；需要其他名称时显式配置。\n- 避免：检查装饰器紧接着定义的函数，而不是函数体调用了谁。\n- 状态：待复检。"
+    },
+    {
+      "asset_key": "progress.code_ability",
+      "evidence_id": "stage-01-ch03-EX1-attempt1-ability",
+      "operation": "upsert_block",
+      "expected_change": "记录 Chapter 03 EX1 代码与异常处理能力证据",
+      "content": "### 2026-08-21 — Chapter 03 EX1 attempt 1\n\n- Tool / Tool Calling 看懂代码：保持 2。\n- 补全/修改：保持 2；在完整脚手架下完成参数与异常分支，实际运行通过。\n- 独立实现：保持 0；核心结构由老师提供。\n- 调试排错：1 → 2；能实现类型、额外字段、空值、TimeoutError 与 ValueError 分类。\n- 工程设计：保持 2；区分 retry_model、retry_tool、fail_fast 和 success。\n- 框架映射仍需复检默认 Tool name 来源。"
+    }
+  ],
+  "state_updates": {
+    "lifecycle_status": "active",
+    "learning_status": "practice",
+    "mastery.required_exercises_passed": false,
+    "mastery.mastered": false,
+    "last_note_update": "2026-08-21：EX1 运行分支通过；@tool 默认 name 与输入/返回标注边界待复检",
+    "last_section": "3.5 EX1 attempt 1 / @tool 映射复检",
+    "current_activity": "practice",
+    "return_to": {
+      "activity": "practice",
+      "topic": "@tool 默认名称与 Schema 来源",
+      "next_action": "评阅 EX1 映射复检；通过后执行 Chapter 03 mastery 判定"
+    },
+    "last_checkpoint_at": "2026-08-21T17:59:25+08:00",
+    "last_checkpoint_reason": "exercise_complete",
+    "weak_points": [
+      "EX1 待复检：默认 Tool name 来自被装饰函数 get_weather_tool，而非内部 get_weather。",
+      "需要区分输入标注 city: str 生成 parameters Schema，-> str 描述返回类型。",
+      "retry_count 由外层 Harness 重试循环增加，执行器只读取当前计数。",
+      "extra_fields 单独出现时当前返回 fail_fast；后续可按策略选择 retry_model 或受控修复。"
+    ],
+    "next_action": "回答 EX1 复检：当前 @tool 代码的默认 Tool name 是什么？city: str 与 -> str 分别描述什么？"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "transaction_id": "20260822T002757+0800-stage01-ch04-q3-pass-ex1-start",
+  "reason": "qa_complete",
+  "targets": [
+    {
+      "asset_key": "notes.root",
+      "relative_pointer": "stage-01/04-tool-registry-engineering.md",
+      "evidence_id": "stage-01-ch04-Q3-pass-and-EX1-start",
+      "operation": "upsert_block",
+      "expected_change": "记录 Q3 复检通过并进入 Chapter 04 必做练习",
+      "content": "## Q3 复检通过：分层排查与版本化位置\n\n复检给出可执行顺序：打印原始 Tool 列表；按 name 定位重名来源并比较 Tool 其他字段；在原始 Tool 定义中显式修改 name；重新注册后打印 Registry 和模型暴露结果验证。结合 attempt 1 已说明的 tools 列表冗长、新旧版本共存代价，以及教学补充的 token、误选与维护成本，Q3 的排查顺序和 Trade-off 均满足。\n\n重要边界：版本号应在 Tool 定义或注册配置进入 Registry 之前确定；注册后直接修改 Registry 内部 Tool 的 name，会造成字典键仍是旧 name、Tool 自身却是新 name 的索引不一致。参数 Schema 只校验 city、unit 等 args，不负责修改 Tool name。\n\n## 4.4 EX1：最小 Tool Registry\n\n必做练习需要产出可运行 Python：实现统一注册、拒绝同名、按 name 查找、列出模型可见 specs；注册两个正常 Tool；复现同名冲突；最后用注释或可执行伪代码说明 `ALL_TOOLS dict → Registry`、`bind_tools`、`AIMessage.tool_calls` 与 `ToolNode/Executor` 的对应关系。"
+    },
+    {
+      "asset_key": "qa.stage",
+      "evidence_id": "stage-01-ch04-Q3-attempt-2",
+      "operation": "upsert_block",
+      "expected_change": "记录 Chapter 04 Q3 第二次作答通过",
+      "content": "## stage-01-ch04-Q3-attempt-2\n\n- chapter_id: `04-tool-registry-engineering`\n- question_id: `Q3`\n- attempt: `2`\n- conclusion: `按原始列表 → 重名来源和字段差异 → 定义层改名 → 重新注册和模型暴露验证进行排查。`\n- implementation_boundary: `版本号在进入 Registry 前写入 Tool name；不修改已注册内部对象以免 key/name 不一致。`\n- tradeoff_evidence: `结合 attempt 1，版本化会使工具列表冗长并让新旧版本长期共存。`\n- acceptance_debug_order: `passed`\n- acceptance_tradeoff: `passed`\n- result: `passed`\n- status: `verified`"
+    },
+    {
+      "asset_key": "bugs.book",
+      "evidence_id": "bug-tool-name-conflict-vs-args-schema-resolved",
+      "operation": "upsert_block",
+      "expected_change": "把 Tool name 与 args Schema 层级混淆标记为解决",
+      "content": "## Tool name 冲突与 args Schema 层级复检解决\n\n- 症状：此前把版本号修复放入参数 Schema 或运行时确定性修复。\n- 错误模型：混淆 Tool 定义/注册元数据与 Tool Call 参数。\n- 根因：未先定位错误所在生命周期层。\n- 修复：复检将版本化 name 放回原始 Tool 定义，并在重新注册和模型暴露后验证。\n- 避免：进入 Registry 前冻结 Tool name；注册后不得让字典 key 与对象 name 分离。\n- 状态：已于 Chapter 04 Q3 attempt 2 解决。"
+    }
+  ],
+  "state_updates": {
+    "learning_status": "practice",
+    "mastery.critical_questions_passed": true,
+    "mastery.required_exercises_passed": false,
+    "last_note_update": "2026-08-22：Chapter 04 Q3 通过；进入必做练习 EX1",
+    "last_section": "4.4 EX1：最小 Tool Registry",
+    "current_activity": "practice",
+    "return_to": {
+      "activity": "practice",
+      "topic": "Chapter 04 EX1",
+      "next_action": "提交可运行的最小 ToolRegistry、冲突复现和框架映射"
+    },
+    "last_checkpoint_at": "2026-08-22T00:27:57+08:00",
+    "last_checkpoint_reason": "qa_complete",
+    "completed": [
+      "Chapter 01 mastered，82/100。",
+      "Chapter 02 mastered，88/100。",
+      "Chapter 03 mastered，87/100。",
+      "Chapter 04 Q1、Q2、Q3 均通过。",
+      "Chapter 04 必做练习 EX1 尚未完成。"
+    ],
+    "weak_points": [
+      "尚未通过代码验证 ToolRegistry 的统一注册、重名拒绝、查找与公开 specs。",
+      "需要在可运行练习中复现 duplicate_tool 冲突并检查结果。",
+      "需要用代码注释验证 ALL_TOOLS dict → Registry 与 LangGraph ToolNode 的映射。",
+      "异常处理后续继续强化：超时、重试、副作用、权限与结果限长。"
+    ],
+    "next_action": "完成 Chapter 04 EX1：实现最小 ToolRegistry 并运行冲突测试与框架映射。"
+  }
+}

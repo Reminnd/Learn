@@ -1,0 +1,19 @@
+{
+  "transaction_id": "20260822T145050+0800-stage01-ch06-curriculum-migration",
+  "reason": "manual",
+  "targets": [
+    {
+      "asset_key": "notes.index",
+      "evidence_id": "stage-01-ch06-production-hardening-added",
+      "operation": "upsert_block",
+      "expected_change": "记录 Stage 01 新增 Chapter 06 生产级强化及 Chapter 01～05 来源矩阵",
+      "content": "## Stage 01 / Chapter 06 课程迁移\n\n- chapter: `stage-01/06-production-hardening.md`\n- title: `生产级强化：从最小 Agent 到可治理 Harness`\n- prerequisites: `Chapter 01～05`\n- Chapter 01: `调用记录、Message/metadata/usage、Prompt/Schema 版本、脱敏与可重放边界`\n- Chapter 02: `JSON/Schema 分层校验、版本兼容、机器动作与有界重试`\n- Chapter 03: `Tool 契约与 args 校验、异常分类、tool_call_id、ToolMessage 限长`\n- Chapter 04: `定义冻结、Registry 元数据、权限/风险、timeout/retry、审计、受控 override`\n- Chapter 05: `turn/tool/token/time/cost 预算、重复调用、stop reason、幂等与副作用`\n- route: `Chapter 05 mastered → Chapter 06 → Stage 02`\n- model_profile: `TEACH_DEEP`\n- status: `not_started`"
+    }
+  ],
+  "state_updates": {
+    "last_note_update": "2026-08-22：新增 Stage 01 Chapter 06 生产级强化；当前 Chapter 05 后继路由已更新",
+    "last_checkpoint_at": "2026-08-22T14:50:50+08:00",
+    "last_checkpoint_reason": "curriculum_update",
+    "next_chapter": "curriculum/stage-01/06-production-hardening.md"
+  }
+}

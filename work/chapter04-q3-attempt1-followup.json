@@ -1,0 +1,40 @@
+{
+  "transaction_id": "20260822T001815+0800-stage01-ch04-q3-attempt1-followup",
+  "reason": "qa_followup",
+  "targets": [
+    {
+      "asset_key": "qa.stage",
+      "evidence_id": "stage-01-ch04-Q3-attempt-1",
+      "operation": "upsert_block",
+      "expected_change": "记录 Chapter 04 Q3 首次作答的正确部分和层级混淆",
+      "content": "## stage-01-ch04-Q3-attempt-1\n\n- chapter_id: `04-tool-registry-engineering`\n- question_id: `Q3`\n- attempt: `1`\n- correct: `先检查 raw_tools 的 name 并定位重名；选择版本化名称；指出新旧版本共存会使 tools 列表冗长。`\n- missing_evidence: `排查顺序只有一步，尚未比较重名 Tool 的来源、Schema、handler、版本和最终暴露结果，也未说明修复后的验证。`\n- correction: `Tool name 冲突属于定义/注册层配置问题；版本号应显式写入 Tool name 或 Registry 元数据，不属于 args Schema 校验，也不应靠运行时确定性修复。`\n- acceptance_debug_order: `needs_followup`\n- acceptance_tradeoff: `partially_passed`\n- result: `incomplete`\n- status: `followup_required`"
+    },
+    {
+      "asset_key": "bugs.book",
+      "evidence_id": "bug-tool-name-conflict-vs-args-schema",
+      "operation": "upsert_block",
+      "expected_change": "记录 Tool name 注册冲突与参数 Schema 校验层级混淆",
+      "content": "## Tool name 冲突与 args Schema 校验层级混淆\n\n- 症状：发现两个 Tool 同名后，提出通过 Schema 校验和确定性修复加入版本号。\n- 错误模型：把 Tool 定义/注册阶段的 name 冲突当成调用阶段的 args 数据问题。\n- 根因：未区分 Registry 校验 Tool 元数据与 Executor 校验 tool_call args。\n- 修复：在 Tool 声明或注册配置中显式使用 `get_weather_v1` / `get_weather_v2`，或由 Registry 按既定策略拒绝/覆盖；参数 Schema 只校验 city、unit 等调用参数。\n- 避免：先判断错误属于定义、注册、选择、参数还是执行层，再选择修复位置。\n- 状态：待 Chapter 04 Q3 复检。"
+    }
+  ],
+  "state_updates": {
+    "learning_status": "qa",
+    "last_note_update": "2026-08-22：Chapter 04 Q3 attempt 1 定位重名与版本化方向正确，排查顺序和修复层级待补充",
+    "last_section": "4.3 Q3 工具冲突复检",
+    "current_activity": "qa",
+    "return_to": {
+      "activity": "qa",
+      "topic": "Chapter 04 Q3 follow-up",
+      "next_action": "补全 name 冲突的分层排查、显式版本化位置和验证步骤"
+    },
+    "last_checkpoint_at": "2026-08-22T00:18:15+08:00",
+    "last_checkpoint_reason": "qa_followup",
+    "weak_points": [
+      "Q3 排查顺序尚未覆盖重复来源、Schema/handler 差异、模型可见 specs 与修复后验证。",
+      "把注册层 Tool name 冲突误放到调用层 args Schema 与确定性修复中。",
+      "版本化代价还需补充模型候选增多、提示 token 和误选概率。",
+      "异常处理继续强化：超时、重试、副作用、权限与结果限长。"
+    ],
+    "next_action": "复检 Chapter 04 Q3：按层排查重名并说明版本化的实现位置与 Trade-off。"
+  }
+}

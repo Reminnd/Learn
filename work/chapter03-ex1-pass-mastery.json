@@ -1,0 +1,80 @@
+{
+  "transaction_id": "20260821T214653+0800-stage01-ch03-ex1-pass-mastery",
+  "reason": "exercise_complete",
+  "targets": [
+    {
+      "asset_key": "notes.root",
+      "relative_pointer": "stage-01/03-tool-basics.md",
+      "evidence_id": "stage-01-ch03-EX1-pass-and-mastery",
+      "operation": "upsert_block",
+      "expected_change": "记录 EX1 复检通过及 Chapter 03 确定性掌握判定",
+      "content": "## EX1 复检通过与 Chapter 03 掌握判定\n\nEX1 复检正确指出：默认 Tool name 为被装饰函数 `get_weather_tool`；输入标注 `city: str` 生成 parameters Schema；`-> str` 描述 Tool 返回类型。结合 attempt 1 的实际运行证据，EX1 三项 acceptance 全部通过：四要素契约完整；参数与 handler 异常得到复现和机器动作分类；普通函数到 @tool 的映射得到验证。\n\n### 掌握评分（87/100）\n\n- 概念理解：23/25。能解释 name、description、parameters、handler 的职责和失败边界。\n- 因果与数据流解释：17/20。最终能完整描述用户输入、AIMessage.tool_calls、Harness 执行、ToolMessage 关联；首次遗漏经复检修正。\n- 应用与框架映射：17/20。能映射普通函数到 @tool，并区分被装饰函数名、参数 Schema 和返回标注；名称来源曾需提示复检。\n- 调试与故障排查：18/20。实际修复 if/elif 语法错误，运行 success/fail_fast/retry_model/retry_tool 分支，并按层定位参数错误。\n- 迁移、边界与 Trade-off：12/15。能区分 retry_model、retry_tool、repair_then_validate、fail_fast，并说明 token 成本和重试边界。\n\n五个维度均达到 60% 下限；Q1、Q2 两道关键题最近有效作答通过；Q3 通过；EX1 通过；未解决关键误解为 0；完整性为 healthy；章节验收契约合法。因此 `mastered=true`。\n\n后续强化：从完整脚手架过渡到无提示 Tool 实现；让所有 retry_model 分支共享最大重试策略；继续练 Tool Registry、超时、副作用与 ToolMessage 大小控制。",
+      "line_updates": {
+        "lifecycle_status": "consolidated",
+        "learning_status": "mastered"
+      }
+    },
+    {
+      "asset_key": "qa.stage",
+      "evidence_id": "stage-01-ch03-EX1-attempt-2",
+      "operation": "upsert_block",
+      "expected_change": "记录 Chapter 03 EX1 映射复检通过",
+      "content": "## stage-01-ch03-EX1-attempt-2\n\n- chapter_id: `03-tool-basics`\n- exercise_id: `EX1`\n- attempt: `2`\n- conclusion: `默认 Tool name=get_weather_tool；city: str 生成参数 Schema；-> str 描述返回类型。`\n- acceptance_1: `passed — 四要素在运行代码中存在并使用`\n- acceptance_2: `passed — 参数错误和 handler 异常有运行证据`\n- acceptance_3: `passed — 普通函数到 @tool 映射复检正确`\n- result: `passed`\n- status: `verified`"
+    },
+    {
+      "asset_key": "bugs.book",
+      "evidence_id": "bug-tool-decorated-function-name-vs-inner-handler",
+      "operation": "upsert_block",
+      "expected_change": "将 @tool 默认名称误解标记为解决",
+      "content": "## @tool 默认名称与内部调用函数混淆\n\n- 症状：`@tool def get_weather_tool(...)` 的 name 曾被写成 `get_weather`。\n- 错误模型：认为 Tool name 来自函数体内部调用的 handler 名称。\n- 根因：没有区分被装饰函数与其内部委托函数。\n- 修复：默认 name 来自被 `@tool` 装饰的函数名，即 `get_weather_tool`；输入 `city: str` 生成参数 Schema，`-> str` 描述返回类型。\n- 避免：检查装饰器紧接着定义的函数，而不是函数体调用了谁。\n- 状态：已于 EX1 attempt 2 复检解决。"
+    },
+    {
+      "asset_key": "progress.code_ability",
+      "evidence_id": "stage-01-ch03-mastery-ability-summary",
+      "operation": "upsert_block",
+      "expected_change": "记录 Chapter 03 代码能力小结",
+      "content": "### 2026-08-21 — Chapter 03 能力小结\n\n- Tool / Tool Calling 看懂代码：2。\n- 补全/修改：2。\n- 独立实现：0 → 1；已能在完整脚手架下完成综合 Tool，但尚无无提示实现证据。\n- 调试排错：2；能修复控制流语法并分类参数与 handler 异常。\n- 工程设计：2；能设计机器动作和重试边界。\n\n章节知识达到 mastered，不等同于已经能无提示设计生产级 Tool Registry；下一章继续积累独立实现、超时、副作用与安全证据。"
+    },
+    {
+      "asset_key": "notes.index",
+      "evidence_id": "stage-01-ch03-index-active",
+      "operation": "upsert_block",
+      "expected_change": "把 Chapter 03 索引状态更新为 mastered",
+      "content": "## stage-01 / Chapter 03 最新状态\n\n- note: `stage-01/03-tool-basics.md`\n- learning_status: `mastered`\n- lifecycle_status: `consolidated`\n- score: `87/100`\n- completed_at: `2026-08-21`"
+    }
+  ],
+  "state_updates": {
+    "lifecycle_status": "consolidated",
+    "learning_status": "mastered",
+    "mastery.score": 87,
+    "mastery.critical_questions_passed": true,
+    "mastery.dimension_floors_passed": true,
+    "mastery.required_exercises_passed": true,
+    "mastery.unresolved_critical_misconceptions": 0,
+    "mastery.mastered": true,
+    "last_note_update": "2026-08-21：EX1 复检通过；Chapter 03 mastered，87/100",
+    "last_section": "3.6 Mastery 记录",
+    "current_activity": "chapter_complete",
+    "return_to": {
+      "activity": "teaching",
+      "topic": "Chapter 04 Tool Registry Engineering",
+      "next_action": "用户继续后进入 Tool Registry、校验、超时、重试与副作用"
+    },
+    "last_checkpoint_at": "2026-08-21T21:46:53+08:00",
+    "last_checkpoint_reason": "completion",
+    "completed": [
+      "Chapter 01 mastered，82/100。",
+      "Chapter 02 mastered，88/100。",
+      "Chapter 03 Q1、Q2、Q3 均通过。",
+      "Chapter 03 EX1 通过：Tool 契约、参数错误、异常动作与 @tool 映射。",
+      "Chapter 03 mastered，87/100。"
+    ],
+    "weak_points": [
+      "Tool 独立实现仍需从完整脚手架过渡到无提示编码。",
+      "所有 retry_model 分支尚未抽象为共享最大重试策略。",
+      "extra_fields 的 retry_model、fail_fast 或受控修复策略需结合业务风险选择。",
+      "下一章强化 Tool Registry、超时、副作用、权限与 ToolMessage 大小控制。"
+    ],
+    "next_action": "继续时进入 Chapter 04：Tool Registry Engineering。"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "transaction_id": "20260821T170254+0800-stage01-ch03-executor-attempt1-debug",
+  "reason": "debug_resolved",
+  "targets": [
+    {
+      "asset_key": "notes.root",
+      "relative_pointer": "stage-01/03-tool-basics.md",
+      "evidence_id": "stage-01-ch03-executor-attempt1-elif-syntax",
+      "operation": "upsert_block",
+      "expected_change": "记录 execute_tool attempt 1 的正确业务逻辑与 elif 语法问题",
+      "content": "## execute_tool attempt 1：业务分支正确，控制流语法待修复\n\n提交已正确实现三种动作语义：未知 name → `fail_fast/unknown_tool`；city 缺失或类型错误 → `retry_model/invalid_arguments`；校验通过 → handler 执行并返回 `success`。\n\n还原聊天转义后执行 `python -m py_compile`，在 `elif \"city\" not in args ...` 处得到 `SyntaxError: invalid syntax`。原因是 `if` 与 `elif` 之间插入了 `args = ...` 赋值语句；Python 的同一条 `if/elif/else` 链必须连续。\n\n这里适合使用 guard clause（守卫式提前返回）：每个失败条件使用独立 `if` 并立即 return；所有失败检查通过后自然落到成功路径，不需要再写 `elif tool_call[\"name\"] == tool[\"name\"]`。\n\n```python\nif tool_call.get(\"name\") != tool[\"name\"]:\n    return fail_fast_result\n\nargs = tool_call.get(\"args\", {})\n\nif \"city\" not in args or not isinstance(args[\"city\"], str):\n    return retry_model_result\n\nresult = tool[\"handler\"](**args)\nreturn success_result\n```\n\n补充边界：使用 `tool_call.get(\"name\")` 可把 name 缺失统一归入未知 Tool，而不是意外抛出 KeyError；额外参数和 handler 异常将在后续参数校验课程处理。练习状态：待修改后复检。"
+    },
+    {
+      "asset_key": "bugs.book",
+      "evidence_id": "bug-python-elif-chain-interrupted-by-assignment",
+      "operation": "upsert_block",
+      "expected_change": "记录 if/elif 链被赋值语句打断的语法错误",
+      "content": "## if/elif 链被普通语句打断\n\n- 症状：`elif` 行触发 `SyntaxError: invalid syntax`。\n- 错误模型：认为只要前一个 if 分支 return，就可以在赋值语句之后继续写 elif。\n- 根因：Python 语法要求同一 if/elif/else 链连续；是否 return 不改变语法结构。\n- 修复：失败检查改成多个独立 if + 提前 return；成功路径放在所有守卫之后。\n- 避免：需要在条件之间计算新变量时，优先使用 guard clause，而不是强行保持 elif 链。\n- 状态：待练习复检。"
+    },
+    {
+      "asset_key": "progress.code_ability",
+      "evidence_id": "stage-01-ch03-executor-attempt1-ability",
+      "operation": "upsert_block",
+      "expected_change": "记录 Tool 执行器首次代码尝试证据",
+      "content": "### 2026-08-21 — 最小 Tool 执行器 attempt 1\n\n- Tool / Tool Calling 看懂代码：1。能理解 Tool、Tool Call 和 handler 的关系。\n- 补全/修改：1。三种机器动作的业务逻辑正确，但控制流存在 if/elif 语法错误。\n- 独立实现与调试暂不升级；等待修改后通过编译和三分支运行测试。"
+    }
+  ],
+  "state_updates": {
+    "lifecycle_status": "active",
+    "learning_status": "practice",
+    "last_note_update": "2026-08-21：execute_tool attempt 1 业务逻辑正确；if/elif 控制流语法待修复",
+    "last_section": "3.2 最小手写 Tool 执行器 / attempt 1 调试",
+    "current_activity": "practice",
+    "return_to": {
+      "activity": "practice",
+      "topic": "execute_tool guard clause 修复",
+      "next_action": "评阅 attempt 2；通过编译和三分支测试后映射到 @tool"
+    },
+    "last_checkpoint_at": "2026-08-21T17:02:54+08:00",
+    "last_checkpoint_reason": "debug_resolved",
+    "weak_points": [
+      "需要复检 Python if/elif 必须连续，以及 guard clause 提前返回写法。",
+      "等待 execute_tool attempt 2 通过编译和 success/fail_fast/retry_model 三分支测试。",
+      "后续强化额外参数、handler 异常与可重试性分类。",
+      "Tool 的 LangChain @tool 映射尚未通过 Q2。"
+    ],
+    "next_action": "把参数错误分支改为独立 if，删除成功分支的 elif 条件，再提交 execute_tool。"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "transaction_id": "20260822T155151+0800-stage01-ch05-section02-regenerated",
+  "reason": "manual",
+  "targets": [
+    {
+      "asset_key": "notes.root",
+      "relative_pointer": "stage-01/05-agent-loop.md",
+      "evidence_id": "stage-01-ch05-Q1-pass-and-section02",
+      "operation": "upsert_block",
+      "expected_change": "按更新后的框架范式规则重新生成 5.2 手写循环与 LangChain/LangGraph 映射",
+      "content": "## Q1 通过：observation 回传与循环失败边界\n\n作答准确说明只有模型能够解释工具结果、判断是否继续调用其他 Tool、综合多个结果并判断任务完成。失败案例指出：ToolMessage `content=上海: sunny` 只是 observation，若不回传模型就缺少最终解释与综合；模型持续重复 Tool Call 则会造成死循环、token/费用失控和重复副作用。Q1 的因果关系与失败边界均满足。补充：Tool result 即使表面上像用户答案，也不能被 Harness 普遍假定为最终答案。\n\n## 5.2 手写循环 → LangChain Agent → LangGraph execution\n\n### 真实问题与最小手写实现\n\n一次 `model.invoke()` 不能完成工具型任务：模型先请求 Tool，Harness 执行后还要把 observation 写回消息，再让模型继续决策。最小原理就是一个保存 messages、分支和终止条件的循环。\n\n```python\nfrom dataclasses import dataclass, field\n\n@dataclass\nclass AIMessage:\n    content: str = \"\"\n    tool_calls: list[dict] = field(default_factory=list)\n\n@dataclass\nclass ToolMessage:\n    content: str\n    tool_call_id: str\n\nclass FakeModelWithTools:\n    def invoke(self, messages):\n        tool_results = [m for m in messages if isinstance(m, ToolMessage)]\n        if not tool_results:\n            return AIMessage(tool_calls=[{\n                \"name\": \"get_weather\",\n                \"args\": {\"city\": \"上海\"},\n                \"id\": \"call_001\",\n            }])\n        return AIMessage(content=f\"最终回答：{tool_results[-1].content}\")\n\ndef run_agent(model_with_tools, registry, user_text, max_turns=3):\n    messages = [{\"role\": \"user\", \"content\": user_text}]\n    for turn in range(max_turns):\n        ai_message = model_with_tools.invoke(messages)\n        messages.append(ai_message)\n        if not ai_message.tool_calls:\n            return {\"output\": ai_message.content, \"messages\": messages}\n        for call in ai_message.tool_calls:\n            handler = registry[call[\"name\"]]\n            observation = handler(**call[\"args\"])\n            messages.append(ToolMessage(\n                content=str(observation),\n                tool_call_id=call[\"id\"],\n            ))\n    raise RuntimeError(\"max_turns_exceeded\")\n\nregistry = {\"get_weather\": lambda city: f\"{city}: sunny\"}\nresult = run_agent(FakeModelWithTools(), registry, \"上海天气怎么样？\")\nprint(result[\"output\"])\n```\n\n### 构造阶段\n\n- `registry`：长期存在的 Tool name → handler/Tool 映射；在 run 前完成注册。\n- `model_with_tools`：已经知道可用 Tool Schema 的模型对象；在 run 间可以复用。\n- `run_agent(...)`：Harness 的循环函数；定义控制策略，但此时尚未产生 AIMessage 或 ToolMessage。\n- LangChain `create_agent(model, tools)`：把模型、Tools、消息状态和路由构造成可调用的图式 Agent；构造时不执行用户请求。\n\n### 运行阶段与每条箭头\n\n1. 输入 `user_text/messages`，创建本次 run 的消息状态。\n2. model node 接收完整 messages，输出 AIMessage，并把它追加到状态。\n3. conditional edge 读取最新 AIMessage 的 `tool_calls`：为空则 END；非空则进入 tools node。\n4. tools node 接收 ToolCall `{name,args,id}`，按 name 查找 Tool，用 args 执行，输出 `ToolMessage{content,tool_call_id}`。\n5. ToolMessage 写回 messages；固定回边把状态送回 model node。\n6. 最终没有 tool_calls 的 AIMessage 进入 END，Agent 返回更新后的状态；最终文本通常取最后一条 AIMessage.content。\n\n### 对象、类型与生命周期映射\n\n| 手写对象 | LangChain/LangGraph 对象 | 生命周期与责任 |\n|---|---|---|\n| `messages: list` | `MessagesState[\"messages\"]` / Agent state | 单次 run 内持续增长，可由持久化扩展到跨 run |\n| `model_with_tools.invoke(messages)` | model node | 每轮读取状态并产生 AIMessage |\n| `AIMessage.tool_calls` 检查 | conditional edge / routing function | 每轮决定 tools 或 END |\n| Registry + Executor | tools node / `ToolNode` | 按 name 查找、传 args、产生 ToolMessage |\n| `messages.append(ToolMessage)` | node 返回消息状态更新 | observation 进入下一轮模型上下文 |\n| `continue` | tools → model 回边 | 调度下一轮 |\n| `return` | `END` | 终止本次 run |\n| 整个 while/for | `create_agent` 的图式运行时 | 反复调度模型和工具节点 |\n\n### 最小 LangChain 框架代码\n\n```python\nfrom langchain.agents import create_agent\nfrom langchain.tools import tool\n\n@tool\ndef get_weather(city: str) -> str:\n    \"\"\"查询指定城市的天气。\"\"\"\n    return f\"{city}: sunny\"\n\n# 构造阶段：model 是已经初始化的 ChatModel。\nagent = create_agent(model=model, tools=[get_weather])\n\n# 运行阶段：输入 Agent state，框架内部循环，输出更新后的 state。\nstate = agent.invoke({\n    \"messages\": [\n        {\"role\": \"user\", \"content\": \"上海天气怎么样？\"}\n    ]\n})\nprint(state[\"messages\"][-1].content)\n```\n\n内部行为不是 `create_agent` 自动替模型执行一次函数，而是：调用 model node → 发现 Tool Call → tools node 执行 → ToolMessage 写回 → 再调用 model node → 满足终止条件后返回。\n\n### LangGraph 显式结构\n\n```text\nSTART → model_node\n          ├─ latest_ai.tool_calls 非空 → ToolNode → model_node\n          └─ latest_ai.tool_calls 为空 → END\n```\n\n手写 `if` 变成 conditional edge，手写 `continue` 变成回边，手写 `messages.append` 变成节点状态更新，手写 `return` 变成 END。\n\n### 框架封装与 Harness 责任\n\n框架封装：消息状态传递、模型/工具节点调度、Tool Call 与 ToolMessage 关联、条件路由以及基础循环。Harness 仍负责：允许暴露哪些 Tool、权限与审批、args 和业务校验、max model/tool calls、总超时、token/费用、幂等与副作用、重复调用检测、审计、stop_reason 和最终输出验证。\n\n失败边界与 Trade-off：手写循环透明且容易定制，但容易漏掉消息顺序、id 关联、终止和并行调用；`create_agent` 开发快且采用预构建运行时，但精细控制需 middleware 或自定义 LangGraph。`max_turns` 通常按模型轮次计数；LangGraph `recursion_limit` 按 super-step 计数，二者不能机械等同。"
+    }
+  ],
+  "state_updates": {
+    "last_note_update": "2026-08-22：按更新后的 LangChain/LangGraph 范式规则重新生成 5.2，补齐构造/运行阶段、类型、代码和 Harness 边界",
+    "last_section": "5.2 手写循环 → LangChain Agent → LangGraph execution（详细版）",
+    "current_activity": "qa",
+    "return_to": {
+      "activity": "qa",
+      "topic": "Chapter 05 Q2",
+      "next_action": "基于详细版 5.2 说明框架对象、构造/运行阶段、输入输出和关键数据流"
+    },
+    "last_checkpoint_at": "2026-08-22T15:51:51+08:00",
+    "last_checkpoint_reason": "manual",
+    "weak_points": [
+      "需要在构造阶段区分 model、Tool、agent graph，在运行阶段区分 state、AIMessage、ToolCall 与 ToolMessage。",
+      "需要完整说明 model node、conditional edge、ToolNode、回边和 END 的输入输出与状态变化。",
+      "需要区分框架已封装的循环调度与 Harness 仍负责的预算、权限、副作用和审计。",
+      "需要区分手写 max_turns 与 LangGraph recursion_limit 的计数口径。"
+    ],
+    "next_action": "完成 Chapter 05 Q2：按详细范式解释 while loop → LangChain Agent/LangGraph 映射。"
+  }
+}

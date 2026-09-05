@@ -1,0 +1,57 @@
+{
+  "transaction_id": "20260821T172242+0800-stage01-ch03-q2-pass-section04",
+  "reason": "qa_complete",
+  "targets": [
+    {
+      "asset_key": "notes.root",
+      "relative_pointer": "stage-01/03-tool-basics.md",
+      "evidence_id": "stage-01-ch03-Q2-pass-and-parameter-errors",
+      "operation": "upsert_block",
+      "expected_change": "记录 Q2 通过、LLM 生成 Tool Call 边界及参数错误排查",
+      "content": "## Q2 attempt 2 通过\n\n复检完整写出：用户输入 → AIMessage.tool_calls{name,args,id} → Harness 按 name 路由并根据 parameters 校验 args → handler(**args) → ToolMessage{content,tool_call_id}，且明确 `tool_call_id = tool_call[\"id\"]`。对象映射与关键数据流均通过。\n\n### 用户输入如何变成 AIMessage.tool_calls\n\n`model.bind_tools(tools)` 把 Tool Schema 转换为供应商支持的工具定义并随模型请求提供。LLM 同时读取对话消息与可用 Tool 定义，可能直接回答，也可能生成结构化 Tool Call。LangChain 将供应商返回规范化为 `AIMessage.tool_calls`，常见字段是 name、args、id。name 和 args 是模型根据上下文与 Schema 选择/生成的；id 通常由供应商响应提供，用于请求—结果关联，不是 handler 的业务参数。到这一步仍没有执行 Tool。\n\n```text\n用户消息 + Tool Schemas\n→ 调用 LLM\n→ LLM 决定直接回答或请求 Tool\n→ LangChain 规范化为 AIMessage.tool_calls\n→ Harness 才开始校验与执行\n```\n\n## 3.4 参数错误的分层排查\n\n1. 调用信封：name、args、id 是否存在，args 是否为对象。\n2. Schema：必填字段、类型、枚举、范围、额外字段是否符合 parameters。\n3. 业务规则：类型正确但内容是否合理，例如 city 为空字符串或不在服务范围。\n4. handler/外部依赖：业务异常、超时、限流、权限错误；这不是模型参数 Schema 错误。\n\n处理动作应区分来源：模型生成的可修正参数错误可返回 `retry_model` 并提供精简校验反馈；无歧义规范化可 `repair_then_validate`，修复后必须重新校验；未知/未授权工具通常 `fail_fast`；handler 的瞬时外部错误更适合 `retry_tool`，不要无意义地重新调用模型。\n\nTrade-off：retry_model 提高恢复率但增加 token、延迟和费用；自动修复减少调用成本但可能掩盖模型或上游质量问题；严格失败保护正确性但降低可用性。\n\nQ3 待回答：遇到 Tool 参数错误时，给出可执行排查顺序，并说明至少一个策略 Trade-off。"
+    },
+    {
+      "asset_key": "qa.stage",
+      "evidence_id": "stage-01-ch03-Q2-attempt-2",
+      "operation": "upsert_block",
+      "expected_change": "记录 Chapter 03 Q2 复检通过",
+      "content": "## stage-01-ch03-Q2-attempt-2\n\n- chapter_id: `03-tool-basics`\n- question_id: `Q2`\n- attempt: `2`\n- conclusion: `完整写出 Tool Call 到 Harness 校验/handler 执行再到 ToolMessage，并正确关联 tool_call_id。`\n- dimensions: `对象映射通过；输入输出通过；关键数据流通过`\n- acceptance: `完全满足`\n- mastery_effect: `critical_question_passed`\n- status: `verified`"
+    },
+    {
+      "asset_key": "bugs.book",
+      "evidence_id": "bug-tool-call-request-to-tool-message-gap",
+      "operation": "upsert_block",
+      "expected_change": "将 Tool Call 到 ToolMessage 数据流缺口标记为解决",
+      "content": "## 从 AIMessage.tool_calls 直接跳到 ToolMessage\n\n- 症状：首次数据流遗漏 Harness 执行阶段。\n- 错误模型：把模型提出调用请求与 Tool 执行结果视为自动连续步骤。\n- 根因：遗漏 Tool Routing、args 校验、handler 执行和结果封装。\n- 修复：显式写出 Harness 按 name 路由、校验 args、执行 handler，并用原 id 创建 ToolMessage。\n- 避免：每次看到 tool_calls 都问“谁执行、在哪里校验、结果如何关联”。\n- 状态：已于 Q2 attempt 2 复检解决。"
+    }
+  ],
+  "state_updates": {
+    "lifecycle_status": "active",
+    "learning_status": "qa",
+    "mastery.critical_questions_passed": true,
+    "last_note_update": "2026-08-21：Q2 复检通过；进入 Tool 参数错误分层排查与策略权衡",
+    "last_section": "3.4 Tool 参数错误排查与异常动作",
+    "current_activity": "qa",
+    "return_to": {
+      "activity": "qa",
+      "topic": "Tool 参数错误的定位与 Trade-off",
+      "next_action": "评阅 Q3；随后完成 Chapter 03 EX1"
+    },
+    "last_checkpoint_at": "2026-08-21T17:22:42+08:00",
+    "last_checkpoint_reason": "qa_complete",
+    "completed": [
+      "Chapter 01 mastered，82/100。",
+      "Chapter 02 mastered，88/100。",
+      "Chapter 03 Q1 通过。",
+      "Chapter 03 Q2 通过：能映射普通函数到 @tool，并说明 Tool Calling 完整数据流。",
+      "最小 execute_tool 三分支测试通过。"
+    ],
+    "weak_points": [
+      "等待 Q3 验证：参数错误的可执行排查顺序与 Trade-off。",
+      "需要区分 retry_model 与 handler 外部瞬时错误的 retry_tool。",
+      "tool_call name 完全缺失时，错误消息仍可能因下标访问触发 KeyError。",
+      "Chapter 03 必做练习 EX1 尚未完成。"
+    ],
+    "next_action": "回答 Q3：给出 Tool 参数错误的分层排查顺序，并说明 retry_model、repair_then_validate 或 fail_fast 的一个 Trade-off。"
+  }
+}

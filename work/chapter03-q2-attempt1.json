@@ -1,0 +1,49 @@
+{
+  "transaction_id": "20260821T171609+0800-stage01-ch03-q2-attempt1",
+  "reason": "knowledge_event",
+  "targets": [
+    {
+      "asset_key": "notes.root",
+      "relative_pointer": "stage-01/03-tool-basics.md",
+      "evidence_id": "stage-01-ch03-Q2-attempt1-dataflow-gap",
+      "operation": "upsert_block",
+      "expected_change": "记录 Q2 映射正确但 Tool 执行数据流不完整",
+      "content": "## Q2 attempt 1：对象映射通过，执行数据流待补全\n\n四要素映射正确：函数名 → name；docstring → description；参数类型标注 → parameters Schema；函数体 → handler。\n\n作答的数据流写成“用户输入 → AIMessage.tool_calls → ToolMessage”，遗漏了 Harness 的实际执行阶段。`AIMessage.tool_calls` 只是模型提出的结构化请求，不会自动变成执行结果。完整链路至少是：\n\n```text\n用户输入\n→ 绑定 Tool Schema 的模型生成 AIMessage.tool_calls{name, args, id}\n→ Harness 根据 name 路由 Tool\n→ 根据 parameters 校验 args\n→ handler(**args) 执行\n→ Harness 将结果包装为 ToolMessage(content=result, tool_call_id=id)\n```\n\n`tool_call_id` 必须对应原 Tool Call 的 id，使模型能把结果与请求关联。Q2 状态：对象映射通过；输入、执行、输出关键数据流待针对性复检。"
+    },
+    {
+      "asset_key": "qa.stage",
+      "evidence_id": "stage-01-ch03-Q2-attempt-1",
+      "operation": "upsert_block",
+      "expected_change": "记录 Chapter 03 Q2 首次作答不完整",
+      "content": "## stage-01-ch03-Q2-attempt-1\n\n- chapter_id: `03-tool-basics`\n- question_id: `Q2`\n- attempt: `1`\n- conclusion: `四要素映射正确；数据流遗漏 Harness 参数校验、handler 执行和 tool_call_id 关联。`\n- dimensions: `对象映射通过；输入输出与关键数据流待复检`\n- acceptance: `未完全满足`\n- mastery_effect: `none`\n- status: `needs_followup`"
+    },
+    {
+      "asset_key": "bugs.book",
+      "evidence_id": "bug-tool-call-request-to-tool-message-gap",
+      "operation": "upsert_block",
+      "expected_change": "记录把 Tool Call 请求直接跳到 ToolMessage 的心智模型缺口",
+      "content": "## 从 AIMessage.tool_calls 直接跳到 ToolMessage\n\n- 症状：数据流写成用户输入 → AIMessage.tool_calls → ToolMessage。\n- 错误模型：把模型提出调用请求与 Harness 执行结果视为自动连续步骤。\n- 根因：遗漏 Tool Routing、args 校验、handler 执行和结果封装。\n- 修复：显式写出 Harness 按 name 路由、校验 args、执行 handler，并用原 id 创建 ToolMessage。\n- 避免：每次看到 tool_calls 都问“谁执行、在哪里校验、结果如何关联”。\n- 状态：待复检。"
+    }
+  ],
+  "state_updates": {
+    "lifecycle_status": "active",
+    "learning_status": "qa",
+    "last_note_update": "2026-08-21：Q2 attempt 1 映射正确；Tool Call 到 ToolMessage 的执行阶段待复检",
+    "last_section": "3.3 普通函数到 @tool / Q2 数据流复检",
+    "current_activity": "qa",
+    "return_to": {
+      "activity": "qa",
+      "topic": "Tool Call 请求、Harness 执行与 ToolMessage 关联",
+      "next_action": "评阅 Q2 attempt 2；通过后进入参数错误排查"
+    },
+    "last_checkpoint_at": "2026-08-21T17:16:09+08:00",
+    "last_checkpoint_reason": "knowledge_event",
+    "weak_points": [
+      "Q2 待复检：AIMessage.tool_calls 与 ToolMessage 之间必须经过 Harness 路由、参数校验和 handler 执行。",
+      "需要明确 ToolMessage.tool_call_id 与原 Tool Call id 对应。",
+      "tool_call name 完全缺失时，错误消息仍可能因下标访问触发 KeyError。",
+      "后续强化额外参数、handler 异常与可重试性分类。"
+    ],
+    "next_action": "补全 Q2 数据流：用户输入 → AIMessage.tool_calls → Harness 校验/执行 handler → ToolMessage，并说明 id 关联。"
+  }
+}

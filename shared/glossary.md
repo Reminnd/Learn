@@ -1,0 +1,43 @@
+# 高频英文术语表
+
+> 仅在需要时读取，不应默认整份加载。
+
+- Agent：智能体
+- Agent Loop：智能体运行循环
+- Harness：智能体外围运行与控制体系
+- Context：上下文
+- Context Window：上下文窗口
+- State：状态
+- Memory：记忆
+- Tool：工具
+- Tool Registry：工具注册表
+- Tool Calling：工具调用
+- Structured Output：结构化输出
+- Schema：数据结构约束
+- Node：节点
+- Edge：边 / 节点连接
+- Router：路由器
+- Reducer：状态合并规则
+- Checkpoint：检查点 / 状态快照
+- Persistence：持久化
+- Resume：恢复执行
+- Interrupt：中断
+- Human-in-the-loop / HITL：人在回路 / 人工介入
+- Retrieval：检索
+- Embedding：向量嵌入
+- Vector Store：向量存储
+- Reranker：重排序器
+- Planning：规划
+- Retry：重试
+- Backoff：退避
+- Circuit Breaker：熔断机制
+- Fallback：降级 / 备用方案
+- Supervisor：主管 / 调度智能体
+- Subagent：子智能体
+- Handoff：任务移交
+- Result Synthesis：结果合成
+- Observability：可观测性
+- Trace：调用链追踪
+- Evaluation / Eval：评测
+- Sandbox：沙箱隔离环境
+- Idempotency：幂等性

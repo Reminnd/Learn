@@ -1,0 +1,23 @@
+{
+  "transaction_id": "20260821T215500+0800-ch03-handler-semantics",
+  "reason": "knowledge_event",
+  "targets": [
+    {
+      "asset_key": "notes.root",
+      "relative_pointer": "stage-01/03-tool-basics.md",
+      "evidence_id": "stage-01-ch03-handler-object-and-call-boundary",
+      "operation": "upsert_block",
+      "expected_change": "补充 handler 函数对象语义并收束 Tool Call 与执行消息链边界",
+      "content": "## 3.7 handler 函数对象与调用边界\n\n在前面四要素的基础上，需要进一步区分“保存可执行能力”和“立即执行函数”：\n\n```python\ntool = {\n    \"name\": \"get_weather\",\n    \"description\": \"查询指定城市的当前天气\",\n    \"parameters\": {\n        \"city\": {\"type\": \"string\"},\n    },\n    \"handler\": get_weather,\n}\n```\n\n`\"handler\": get_weather` 保存的是函数对象本身，供 Harness 稍后调用；如果写成 `\"handler\": get_weather()`，会在创建 Tool 时立刻执行函数，并把返回值保存进去，既缺少当次 Tool Call 的参数，也失去了后续可调用能力。真正执行发生在 Harness 收到请求以后：\n\n```python\nhandler = tool[\"handler\"]\nresult = handler(**tool_call[\"args\"])\n```\n\n职责可分成两个边界：模型主要读取由 `name`、`description`、`parameters` 构成的 Tool Schema，用它选择工具并生成 `name`、`args`、`id`；`handler` 属于程序执行侧，由 Harness 按 `name` 找到 Tool、根据 Schema 校验 `args`，再执行 `handler(**args)`。因此，Tool Call 表达“模型请求调用什么”，handler 定义“程序具体怎么做”。\n\n完整消息对应关系是：模型返回的 `AIMessage.tool_calls` 可以包含一个或多个 `{name, args, id}` 请求；Harness 对每个请求执行并产生一个 `ToolMessage(content=result, tool_call_id=id)`。`tool_call_id` 必须等于原 Tool Call 的 `id`，用于把执行结果准确关联回对应请求。\n\n`model.bind_tools(tools)` 只把 Tool 定义绑定到模型调用，使模型具备生成 Tool Call 的条件；独立调用这个绑定后的模型时，它不会因此自动执行 handler。自动执行必须由外层 Harness / Agent Loop（或具备相应执行节点的 Agent 框架）完成。",
+      "line_updates": {
+        "lifecycle_status": "consolidated",
+        "learning_status": "mastered"
+      }
+    }
+  ],
+  "state_updates": {
+    "last_note_update": "2026-08-21：补充 Chapter 03 handler 函数对象语义与 Tool Call 执行边界",
+    "last_checkpoint_at": "2026-08-21T21:55:00+08:00",
+    "last_checkpoint_reason": "knowledge_event"
+  }
+}
