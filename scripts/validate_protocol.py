@@ -71,6 +71,19 @@ def inline_list(text: str, key: str, *, indent: int = 0) -> list[str] | None:
     ]
 
 
+def prerequisites_list(text: str) -> list[str] | None:
+    inline = inline_list(text, "prerequisites")
+    if inline is not None:
+        return inline
+    block = top_level_block(text, "prerequisites", "required_exercises")
+    if block is None:
+        return None
+    return [
+        item.strip().strip("\"'")
+        for item in re.findall(r"(?m)^  -\s*(\S+)\s*$", block)
+    ]
+
+
 def scalar_value(text: str, key: str) -> str | None:
     match = re.search(rf"(?m)^{re.escape(key)}:\s*(\S+)\s*$", text)
     return match.group(1) if match else None
@@ -259,9 +272,9 @@ for path in chapters:
         if token not in contract:
             fail(f"chapter contract missing {token!r}: {relative}")
 
-    prerequisites = inline_list(contract, "prerequisites")
+    prerequisites = prerequisites_list(contract)
     if prerequisites is None:
-        fail(f"chapter contract prerequisites must use inline list: {relative}")
+        fail(f"cannot parse prerequisites: {relative}")
         prerequisites = []
     chapter_records.append((path, prerequisites))
 
