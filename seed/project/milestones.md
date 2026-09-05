@@ -2,7 +2,7 @@
 
 当前长期项目尚未由用户确定，因此**不生成固定项目里程碑**。
 
-状态见：`project/project-track.md`。
+状态见：manifest 的 `project.root` 下 `project-track.md`。
 
 用户选定真正的长期项目并将 `project_track_status` 切换为 `active` 后，再依据：
 
