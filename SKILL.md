@@ -73,20 +73,24 @@ manifest 中缺少所需 key、目标越出 backend root、或目标不可读写
 
 ## 学习事件与提交屏障
 
-核心概念、框架映射、工程结论、重要 Q&A、误解、练习、Bug、能力证据、ADR 或学习位置变化都属于持久化事件。任何此类事件发生时，在回复结束或进入下一教学单元前执行事务：
+核心概念、框架映射、工程结论、重要 Q&A、误解、练习、Bug、能力证据、ADR 或学习位置变化都属于持久化事件，而不是事务。一个教学回合（一次用户输入到教学回复的边界）先聚合全部事件与全部领域目标；领域目标是一个包含 `asset_key`、`pointer`、`evidence_id`、`operation` 和预期变化的 `targets[]` 记录。零个事件不得创建事务；一个或多个事件至多创建一个包含完整目标集的新教学事务。目标集与稳定 `transaction_id` / `evidence_id` 必须在 prepared WAL 写入前冻结。
+
+对 `N >= 1` 个目标，成功路径严格为：
 
 ```text
-计算增量与稳定 evidence_id
-→ 在 state.current 登记 pending_writeback（prepared）并回读确认
-→ 幂等写入领域资产
-→ 局部回读验证 evidence_id、内容与状态
-→ 提交 state.current（位置、状态、checkpoint）并回读验证
-→ 清空 pending_writeback 并再次回读
+一次 prepared WAL 写入 state.current（完整 pending_writeback）
+→ 一次 state.current 回读确认 WAL
+→ N 次幂等领域 upsert
+→ N 次领域内容回读验证
+→ 一次 final-state+clear 写入 state.current（推进最终 Learning State 且 pending_writeback=null）
+→ 一次 state.current 回读同时确认最终状态与 WAL 已清空
 ```
 
-`pending_writeback` 必须先于领域资产写入，不能在最后才登记。非空 WAL（预写日志）出现时，先恢复事务，不得开始新的教学事件。详细 schema、幂等规则、恢复与迁移见 [shared/session-persistence.md](shared/session-persistence.md)。
+成功计数为 `transaction_count=1`、`state_writes=2`、`state_verification_reads=2`、`domain_writes=N`、`domain_reads=N`。prepared WAL 必须先于任何领域写入；正常成功不得持久化 `phase=writing`、`phase=verifying`、`phase=committing` 或每目标 `verified=true`，这些既有 schema 字段仅用于失败、恢复或迁移语义。final-state+clear 后不得在正常成功路径重读领域证据。
 
-没有持久化写能力或验证失败时，可以完成当前解释，但停止推进持久化学习状态；保留 WAL 或输出最小待保存增量，且不得声称已记录、已同步或已 checkpoint。
+回合开始时 `pending_writeback` 非空即为 recovery-only 回合：只能恢复既有 `transaction_id`、目标和 `evidence_id`，即使恢复成功也不得创建新教学事务。`evidence_id` 跨重试/恢复保持稳定；恢复目标已有证据时只验证，缺失时使用原操作作幂等 upsert，禁止盲目追加。详细 schema、幂等规则、恢复与迁移见 [shared/session-persistence.md](shared/session-persistence.md)。
+
+任一 WAL、领域或最终验证失败时，不得声称已保存或已提交。领域验证失败时最终状态不得推进、WAL 保持非空且不得创建第二事务；最终回读失败时不得补偿或创建第二事务，下一回合读取实际 `state.current` 后进入恢复或确认语义。没有持久化写能力时，可以完成当前解释，但停止推进持久化学习状态；保留 WAL 或输出最小待保存增量，且不得声称已记录、已同步或已 checkpoint。
 
 ## 状态与一致性
 
