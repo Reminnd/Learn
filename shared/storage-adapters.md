@@ -92,7 +92,7 @@ python scripts/setup_runtime.py --runtime-root <Skill 仓库之外的目录>
 python scripts/setup_runtime.py --runtime-root <Skill 仓库之外的目录> --migrate-legacy
 ```
 
-迁移只做当前已确认的数据搬迁：旧 `.learn-agent/` 保留为 control state，旧 `learning/` 迁到 runtime `learning/`，旧 `work/` 迁到 runtime `workspace/`，随后只补齐缺失 seed。若工作树已经不再包含旧 tracked runtime，脚本从已知 legacy ref 读取这些文件，因此不会要求把 active personal state 重新提交回 Skill distribution。
+迁移只做当前已确认的数据搬迁：先保留 checkout 中仍存在的旧 `.learn-agent/`、`learning/` 与 `work/` 本地文件，再从已知 legacy ref 补齐缺失的 tracked `learning/` / `work/` 文件；目标已存在的文件不会被覆盖。`learning/` 迁到 runtime `learning/`，`work/` 迁到 runtime `workspace/`，随后只补齐缺失 seed。因此即使切换到 S01 分支后 tracked runtime 已从工作树删除，也不需要把 active personal state 重新提交回 Skill distribution。
 
 S01 前的 legacy 状态包含一次未完成的 Stage 01 Chapter 06 curriculum migration：它把后继路由指向从未创建的 `curriculum/stage-01/06-production-hardening.md`。迁移脚本只回滚这一个已确认的孤儿路由到 `curriculum/stage-02/01-state.md`，并把对应 runtime transaction 标为 `rolled_back`；不新增或重写课程。
 

@@ -142,14 +142,12 @@ def migrate_legacy(runtime_root: Path, legacy_ref: str) -> int:
     local_learning = REPO_ROOT / "learning"
     if local_learning.exists():
         copied += copy_missing(local_learning, runtime_root / "learning")
-    else:
-        copied += extract_legacy_tree(legacy_ref, "learning", runtime_root / "learning")
+    copied += extract_legacy_tree(legacy_ref, "learning", runtime_root / "learning")
 
     local_work = REPO_ROOT / "work"
     if local_work.exists():
         copied += copy_missing(local_work, runtime_root / "workspace")
-    else:
-        copied += extract_legacy_tree(legacy_ref, "work", runtime_root / "workspace")
+    copied += extract_legacy_tree(legacy_ref, "work", runtime_root / "workspace")
 
     return copied
 
@@ -252,8 +250,10 @@ def rollback_orphan_transaction(runtime_root: Path) -> bool:
     return True
 
 
-def write_manifest(runtime_root: Path) -> None:
+def write_manifest(runtime_root: Path, *, replace: bool) -> None:
     manifest = runtime_root / ".learn-agent" / "storage-manifest.yaml"
+    if manifest.exists() and not replace:
+        return
     manifest.parent.mkdir(parents=True, exist_ok=True)
     backend_root = json.dumps(str(runtime_root), ensure_ascii=False)
     manifest.write_text(
@@ -297,7 +297,7 @@ def main() -> None:
             rollback_orphan_transaction(runtime_root),
         )
     )
-    write_manifest(runtime_root)
+    write_manifest(runtime_root, replace=args.migrate_legacy)
 
     print(f"runtime_root={runtime_root}")
     print(f"legacy_files_copied={migrated}")
