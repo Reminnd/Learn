@@ -284,6 +284,7 @@ sync_targets: []
 def main() -> None:
     args = parse_args()
     runtime_root = validate_runtime_root(args.runtime_root)
+    manifest_existed = (runtime_root / ".learn-agent" / "storage-manifest.yaml").exists()
 
     migrated = 0
     if args.migrate_legacy:
@@ -297,7 +298,10 @@ def main() -> None:
             rollback_orphan_transaction(runtime_root),
         )
     )
-    write_manifest(runtime_root, replace=args.migrate_legacy)
+    write_manifest(
+        runtime_root,
+        replace=args.migrate_legacy and not manifest_existed,
+    )
 
     print(f"runtime_root={runtime_root}")
     print(f"legacy_files_copied={migrated}")
