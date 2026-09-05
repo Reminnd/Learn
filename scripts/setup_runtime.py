@@ -64,9 +64,11 @@ def scalar(raw: str) -> str:
         if not isinstance(parsed, str):
             raise SystemExit("unsupported storage manifest scalar")
         return parsed
-    if value.startswith("'") and value.endswith("'"):
+    if value.startswith("'"):
+        if not value.endswith("'"):
+            raise SystemExit("unsupported storage manifest scalar")
         return value[1:-1]
-    if not value or value.startswith("[") or value.startswith("{"):
+    if not value or "#" in value or value.startswith("[") or value.startswith("{"):
         raise SystemExit("unsupported storage manifest scalar")
     return value
 
@@ -78,10 +80,13 @@ def manifest_value(text: str, key: str) -> str:
     return scalar(match.group(1))
 
 
-def manifest_paths(text: str) -> dict[str, str]:
-    match = re.search(r"(?m)^paths:\s*\n(?P<body>(?:^  [^\n]+\n?)+)", text)
+def manifest_map(text: str, section: str) -> dict[str, str]:
+    match = re.search(
+        rf"(?m)^{re.escape(section)}:\s*\n(?P<body>(?:^  [^\n]+\n?)+)",
+        text,
+    )
     if not match:
-        raise SystemExit("unsupported storage manifest: missing paths")
+        raise SystemExit(f"unsupported storage manifest: missing {section}")
     result: dict[str, str] = {}
     for line in match.group("body").splitlines():
         key, sep, value = line.strip().partition(":")
@@ -116,7 +121,12 @@ def load_layout(root: Path) -> tuple[dict[str, Path], bool]:
     if Path(manifest_value(text, "backend_root")).expanduser().resolve() != root:
         raise SystemExit("unsupported storage manifest: backend_root mismatch")
 
-    raw_paths = manifest_paths(text)
+    capabilities = manifest_map(text, "capabilities")
+    for key in ("persistent_read", "persistent_write", "local_path_exposed"):
+        if capabilities.get(key) != "true":
+            raise SystemExit(f"unsupported storage manifest capability: {key} must be true")
+
+    raw_paths = manifest_map(text, "paths")
     missing = [key for key in DEFAULT_PATHS if key not in raw_paths]
     if missing:
         raise SystemExit("unsupported storage manifest: missing paths: " + ", ".join(missing))
@@ -205,7 +215,7 @@ def validate_legacy_shape(ref: str) -> None:
         unknown = {p.name for p in local_learning.iterdir()} - LEGACY_LEARNING_ROOTS
         if unknown:
             raise SystemExit("unsupported local legacy learning assets: " + ", ".join(sorted(unknown)))
-    tracked = git_lines("ls-tree", "-d", "--name-only", f"{ref}:learning")
+    tracked = git_lines("ls-tree", "--name-only", f"{ref}:learning")
     unknown = {Path(path).name for path in tracked} - LEGACY_LEARNING_ROOTS
     if unknown:
         raise SystemExit("unsupported tracked legacy learning assets: " + ", ".join(sorted(unknown)))
