@@ -27,6 +27,8 @@ DEFAULT_PATHS = {
     "adr.root": "learning/adr",
 }
 LEGACY_LEARNING_ROOTS = {"adr", "bug-book", "notes", "progress", "project", "qa"}
+QA_STAGE_TOKEN = "stage-XX.md"
+QA_STAGE_SOURCE_RE = re.compile(r"^stage-\d+\.md$")
 
 
 def parse_args() -> argparse.Namespace:
@@ -130,8 +132,11 @@ def load_layout(root: Path) -> tuple[dict[str, Path], bool]:
     missing = [key for key in DEFAULT_PATHS if key not in raw_paths]
     if missing:
         raise SystemExit("unsupported storage manifest: missing paths: " + ", ".join(missing))
-    if "stage-XX.md" not in raw_paths["qa.stage"]:
-        raise SystemExit("unsupported storage manifest: qa.stage must contain stage-XX.md")
+    qa_stage = raw_paths["qa.stage"]
+    if qa_stage.count(QA_STAGE_TOKEN) != 1 or QA_STAGE_TOKEN not in Path(qa_stage).name:
+        raise SystemExit(
+            f"unsupported storage manifest: qa.stage must contain one {QA_STAGE_TOKEN} filename token"
+        )
     return {key: runtime_path(root, key, raw_paths[key]) for key in DEFAULT_PATHS}, True
 
 
@@ -142,8 +147,42 @@ def child(root: Path, parent: Path, relative: Path) -> Path:
     return target
 
 
-def qa_root(layout: dict[str, Path]) -> Path:
-    return layout["qa.stage"].parent
+def qa_stage_target(root: Path, layout: dict[str, Path], source_name: str) -> Path:
+    if not QA_STAGE_SOURCE_RE.fullmatch(source_name):
+        raise SystemExit(f"unsupported Q&A stage filename: {source_name}")
+    template = layout["qa.stage"]
+    target = template.with_name(template.name.replace(QA_STAGE_TOKEN, source_name)).resolve()
+    if not is_within(target, root):
+        raise SystemExit(f"runtime target escapes backend_root: {target}")
+    return target
+
+
+def copy_qa_missing(root: Path, source: Path, layout: dict[str, Path]) -> int:
+    if not source.exists():
+        return 0
+    copied = 0
+    for file in sorted(source.iterdir()):
+        if file.is_file():
+            copied += copy_missing(file, qa_stage_target(root, layout, file.name))
+    return copied
+
+
+def git_copy_qa_missing(root: Path, ref: str, layout: dict[str, Path]) -> int:
+    copied = 0
+    prefix = "learning/qa/"
+    for path in git_lines("ls-tree", "-r", "--name-only", ref, "--", "learning/qa"):
+        if not path.startswith(prefix):
+            continue
+        source_name = path[len(prefix):]
+        if "/" in source_name:
+            raise SystemExit(f"unsupported tracked Q&A stage path: {path}")
+        target = qa_stage_target(root, layout, source_name)
+        if target.exists():
+            continue
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(git_blob(ref, path))
+        copied += 1
+    return copied
 
 
 def copy_missing(source: Path, target: Path, *, skip: set[str] | None = None) -> int:
@@ -229,7 +268,7 @@ def migrate_legacy(root: Path, layout: dict[str, Path], ref: str) -> int:
     local = REPO_ROOT / "learning"
     copied += copy_missing(local / "notes/index.md", layout["notes.index"])
     copied += copy_missing(local / "notes", layout["notes.root"], skip={"index.md"})
-    copied += copy_missing(local / "qa", qa_root(layout))
+    copied += copy_qa_missing(root, local / "qa", layout)
     copied += copy_missing(local / "bug-book/bug-book.md", layout["bugs.book"])
     copied += copy_missing(local / "progress/code-ability.md", layout["progress.code_ability"])
     copied += copy_missing(local / "progress/history.md", layout["progress.code_ability"].parent / "history.md")
@@ -249,7 +288,7 @@ def migrate_legacy(root: Path, layout: dict[str, Path], ref: str) -> int:
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_bytes(git_blob(ref, source))
                 copied += 1
-    copied += git_copy_missing(ref, "learning/qa", qa_root(layout))
+    copied += git_copy_qa_missing(root, ref, layout)
     copied += git_copy_missing(ref, "learning/project", layout["project.root"])
     copied += git_copy_missing(ref, "learning/adr", layout["adr.root"])
 
@@ -265,7 +304,7 @@ def seed_missing(root: Path, layout: dict[str, Path]) -> int:
     copied += copy_missing(REPO_ROOT / "seed/notes/index.md", layout["notes.index"])
     copied += copy_missing(REPO_ROOT / "seed/notes/template.md", layout["notes.root"] / "template.md")
     copied += copy_missing(REPO_ROOT / "seed/notes/stage-01", layout["notes.root"] / "stage-01")
-    copied += copy_missing(REPO_ROOT / "seed/notes/qa", qa_root(layout))
+    copied += copy_qa_missing(root, REPO_ROOT / "seed/notes/qa", layout)
     copied += copy_missing(REPO_ROOT / "seed/notes/bug-book.md", layout["bugs.book"])
     copied += copy_missing(REPO_ROOT / "seed/progress/code-ability.md", layout["progress.code_ability"])
     copied += copy_missing(REPO_ROOT / "seed/progress/history.md", layout["progress.code_ability"].parent / "history.md")
