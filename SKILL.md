@@ -142,9 +142,24 @@ current chapter contract
 
 ## 课程路由
 
-- “继续”：从已提交的 `last_section` 与 `next_action` 恢复。
+`SKILL.md` 只定义运行时路由算法；[curriculum/index.md](curriculum/index.md) 是章节顺序与 Core Path / Advanced Track 成员关系的唯一权威；runtime manifest 及其解析出的 `state.current` 是学习者真实位置、状态、证据和继续动作的唯一权威。不得在这里复制完整 route map，也不得从聊天历史或 Skill seed 推断真实进度。`state.current.next_chapter` 只能保存已解析出的继续提示，不能决定 canonical successor；切章时必须从课程索引重新解析并校验 current / successor。
+
+按以下顺序执行，命中后返回该 routing result，不再评估后续普通路由：
+
+1. **Manifest 缺失**：停止 state resume，不读取 seed 猜测学习者进度；指向 [README.md](README.md) 与 [scripts/setup_runtime.py](scripts/setup_runtime.py) 完成 runtime initialization。
+2. **`pending_writeback != null`**：保持 S03 recovery-only turn；只恢复既有 transaction、targets 与 evidence，即使恢复成功也不得在本轮开始普通教学 transaction 或推进课程。
+3. **当前章未 mastered**：当前章是否 mastered 只按既有 S04 authoritative mastery predicate 与 committed evidence 判定。未通过时保持 manifest-resolved `state.current.chapter_file`，结合已提交的 `last_section`、`return_to` 和 `next_action` 恢复当前章，不搜索后继。
+4. **“下一章”**：仅当当前章通过既有 S04 predicate，且当前章不是课程索引中所属 Track 的最后一章时，才从 `curriculum/index.md` 的 canonical active-track order 解析直接后继；不得跳过 prerequisite，也不得使用 `state.current.next_chapter` 充当排序依据。Track 最后一章交由第 7 或第 8 条返回边界结果。
+5. **明确选择 “Core Path”**：按课程索引中的 Core canonical order 查找最早未完成章。若其全部 declared prerequisites 都已有 committed mastery evidence，路由到该章；否则沿 canonical order 路由到其最早未满足的 Core prerequisite，禁止跳到更晚的 eligible chapter。若没有未完成章，只返回 Core milestone reached，并等待学习者选择。
+6. **明确选择 “Advanced Track”**：先验证 Core Path complete。Core 未完成时，按第 5 条路由回最早未满足的 Core prerequisite；Core 完成后，才按 Advanced canonical order 路由到最早未完成且 prerequisites 已满足的章，首次进入即为 Stage 10 的第一章。Advanced 已全部完成时交由第 8 条。
+7. **Stage 09 最后一章 mastered**：返回 `Core milestone reached`，等待学习者明确选择 Advanced Track；“继续”或“下一章”都不得静默进入 Stage 10。
+8. **Stage 14 最后一章 mastered**：返回 `full curriculum complete`；不得虚构 next stage，也不得创建 S07。
+
+Core / Advanced 的完成与 prerequisite 判定只能使用 runtime 中已经提交、且由现有 S04 predicate 产生或验证的状态与 evidence；不得新增 route map、Track progress database、parallel prerequisite graph 或 persistence fields。`chapter_model_profile` 继续只保存 semantic profile ID；provider availability 或 provider binding 变化只触发 provider re-resolution，不得改变 curriculum route、prerequisite 或 mastery。
+
+其他学习意图保持以下规则：
+
 - `/checkpoint`、暂停或完成：读持久化协议，完成同一事务后再改变会话状态。
-- “下一章”：当前章满足确定性 mastery predicate 后再切换。
 - “复习”：优先当前笔记的薄弱点、Q&A 与复习卡片；需要时按主题检索 Bug Book。
 - 用户贴代码报错：先解决问题，再在同一事务中保存 Bug 与能力证据。
 - 用户要求项目但 Project Track 未激活：可做局部练习，不偷偷绑定长期项目。
