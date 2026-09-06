@@ -48,8 +48,13 @@ answer_ref: <answer-or-note-reference>
 acceptance_snapshot:
   - <acceptance-criterion>
 acceptance_results:
-  - <criterion-result>
-passed: <boolean-after-evaluation>
+  - criterion: <exact-acceptance-criterion>
+    satisfied: <boolean>
+    evidence: <specific-verifiable-answer-evidence>
+core_model_conflict:
+  detected: <boolean>
+  evidence: <specific-check-observation>
+passed: <derived-boolean>
 ```
 
 ### 12.2 Exercise attempt
@@ -64,8 +69,10 @@ artifact_ref: <artifact-reference>
 acceptance_snapshot:
   - <acceptance-criterion>
 acceptance_results:
-  - <criterion-result>
-accepted: <boolean-after-evaluation>
+  - criterion: <exact-acceptance-criterion>
+    satisfied: <boolean>
+    evidence: <specific-verifiable-artifact-observation>
+accepted: <derived-boolean>
 ```
 
 ### 12.3 Mastery assessment
