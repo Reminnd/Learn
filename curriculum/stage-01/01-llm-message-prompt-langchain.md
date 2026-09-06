@@ -74,11 +74,10 @@ chapter_id: stage-01-01-llm-message-prompt-langchain
 prerequisites: []
 required_exercises:
   - id: EX1
-    task: "围绕LLM、Message、Prompt 与 LangChain，实现最小原理版并用框架表达同一能力"
+    task: "运行 `examples/stage-01/ex1_message_prompt_langchain.py`，以可执行 artifact 展示 LLM、Message、Prompt 与 LangChain 的最小原理及框架映射"
     acceptance:
-      - "产出可运行代码或可执行伪代码，展示：理解 LLM 应用最基本的数据流"
-      - "能复现或具体分析工程问题：Message 历史增长"
-      - "能解释并验证框架映射：原生模型调用 → LangChain ChatModel"
+      - "实际运行 `examples/stage-01/ex1_message_prompt_langchain.py`，并观察到所有输出行：`principle_roles=user,assistant`、`history_lengths=2,4,6`、`framework_roles=HumanMessage,AIMessage`、`responses_equal=true`、`external_api=not_used`、`EX1=PASS`"
+      - "上述精确输出必须可观察且可机械验证；canonical curriculum 仍是 learning acceptance authority，example 不是 mastery authority"
 questions:
   - id: Q1
     prompt: "为什么需要这项能力：理解 LLM 应用最基本的数据流"
