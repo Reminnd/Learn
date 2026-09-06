@@ -46,8 +46,8 @@ last_checkpoint_reason: initialization
 pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
-deepseek_route_prompted_for: []
-last_deepseek_route_decision: not_evaluated
+provider_route_prompted_for: []
+last_provider_route_decision: not_evaluated
 code_ability_focus: LangChain 基础
 project_track_status: deferred
 project_selection_prompted: false

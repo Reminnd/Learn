@@ -16,7 +16,7 @@
 - 当前主题相关的 Bug Book、代码能力证据、ADR、框架映射。
 - 当前 Stage 的 Q&A Ledger 中经主题检索命中的少量条目。
 - `curriculum/index.md` 中与定位或切章有关的部分。
-- `shared/model-router.md`：只在进入新章节、档位缺失、用户询问模型，或可能切换 Claude Code + DeepSeek 时读取。
+- `shared/model-router.md`：只在进入新章节、档位缺失、用户询问模型，或需要评估 provider/harness route 时读取。
 - `shared/session-persistence.md`：只在恢复异常、手动 checkpoint、暂停/完成、写入失败或状态冲突时读取。
 - `shared/storage-adapters.md`：只在 manifest 缺失、首次选择/切换后端或配置同步时读取。
 - `shared/learning-state-machine.md`：只在 schema 迁移、状态冲突、恢复或掌握判定时读取。
