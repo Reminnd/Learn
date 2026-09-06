@@ -284,12 +284,16 @@ if len(chapters) != 40:
     fail(f"curriculum must contain 40 canonical chapters, found {len(chapters)}")
 
 for stage in stages:
-    actual_order = [
+    actual = {
         path.name
-        for path in sorted(stage.glob("*.md"))
+        for path in stage.glob("*.md")
         if path.name != "README.md"
+    }
+    expected_order = [
+        Path(path).name
+        for path in index_paths
+        if Path(path).parent.name == stage.name
     ]
-    actual = set(actual_order)
     readme = stage / "README.md"
     if not readme.is_file():
         fail(f"stage README missing: {readme.relative_to(ROOT)}")
@@ -316,7 +320,7 @@ for stage in stages:
         fail(f"stage README missing chapter {missing}: {readme.relative_to(ROOT)}")
     for stale in sorted(referenced - actual):
         fail(f"stage README references missing chapter {stale}: {readme.relative_to(ROOT)}")
-    if refs != actual_order:
+    if refs != expected_order:
         fail(f"stage README chapter links are not in canonical order: {readme.relative_to(ROOT)}")
 
 learner_routing_paths = [
