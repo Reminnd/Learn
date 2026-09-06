@@ -22,6 +22,15 @@ TRACKED_RUNTIME_PREFIXES = (
     "project/",
 )
 REQUIRED_RUNTIME_IGNORES = {".learn-agent/", "learning/", "work/", "workspace/"}
+README_TARGETS = (
+    "environment/framework-baseline.md",
+    "environment/requirements-stage-01.txt",
+    "scripts/preflight.py",
+    "examples/stage-01/ex1_message_prompt_langchain.py",
+    "curriculum/stage-01/01-llm-message-prompt-langchain.md",
+    "curriculum/index.md",
+    "scripts/setup_runtime.py",
+)
 
 
 def fail(message: str) -> None:
@@ -142,9 +151,23 @@ skill = read(ROOT / "SKILL.md")
 if len(skill.splitlines()) > 220:
     fail("SKILL.md exceeds 220 lines; move conditional detail to shared references")
 
-for stale in (ROOT / "README.md", ROOT / "FILE_TREE.txt"):
-    if stale.exists():
-        fail(f"duplicated path catalog must not exist: {stale.name}")
+stale = ROOT / "FILE_TREE.txt"
+if stale.exists():
+    fail(f"duplicated path catalog must not exist: {stale.name}")
+
+readme_path = ROOT / "README.md"
+if not readme_path.is_file():
+    fail("root README.md is missing")
+    readme_text = ""
+else:
+    readme_text = read(readme_path)
+
+readme_links = set(re.findall(r"\[[^\]\n]+\]\(([^)\n]+)\)", readme_text))
+for target in README_TARGETS:
+    if target not in readme_links:
+        fail(f"README.md missing canonical link: {target}")
+    if not (ROOT / target).is_file():
+        fail(f"README.md canonical link target missing: {target}")
 
 banned_paths = (
     "notes/bug-book.md",
@@ -184,9 +207,14 @@ for token in (
     "integrity:",
     "mastery:",
     "pending_writeback: null",
+    "provider_route_prompted_for:",
+    "last_provider_route_decision:",
 ):
     if token not in seed:
         fail(f"state seed missing {token!r}")
+for legacy in ("deepseek_route_prompted_for", "last_deepseek_route_decision"):
+    if legacy in seed:
+        fail(f"state seed contains legacy provider route metadata: {legacy}")
 
 template = read(ROOT / "seed" / "notes" / "template.md")
 for token in ("schema_version", "lifecycle_status", "learning_status"):
@@ -194,6 +222,7 @@ for token in ("schema_version", "lifecycle_status", "learning_status"):
         fail(f"note template missing {token}")
 
 curriculum = ROOT / "curriculum"
+stages = sorted(path for path in curriculum.glob("stage-*") if path.is_dir())
 chapters = sorted(
     path
     for path in curriculum.glob("stage-*/*.md")
@@ -214,21 +243,72 @@ for missing in sorted(canonical_chapters - index_set):
 for stale in sorted(index_set - canonical_chapters):
     fail(f"curriculum/index.md references missing canonical chapter: {stale}")
 
-for stage in sorted(path for path in curriculum.glob("stage-*") if path.is_dir()):
-    actual = {
+expected_tracks = {
+    "Core Path": [f"stage-{number:02d}" for number in range(1, 10)],
+    "Advanced Track": [f"stage-{number:02d}" for number in range(10, 15)],
+}
+track_stages: dict[str, list[str]] = {}
+for track, expected in expected_tracks.items():
+    section = markdown_section(index_text, f"## {track}")
+    if section is None:
+        fail(f"curriculum/index.md missing {track} section")
+        refs: list[str] = []
+    else:
+        refs = re.findall(
+            r"(?m)^###\s+\[Stage\s+\d{2}[^\]]*\]\((stage-\d{2})/README\.md\)\s*$",
+            section,
+        )
+    track_stages[track] = refs
+    if len(refs) != len(set(refs)):
+        fail(f"curriculum/index.md contains duplicate {track} stages")
+    if refs != expected:
+        fail(f"curriculum/index.md {track} stages must be ordered {expected}")
+
+core_stages = track_stages["Core Path"]
+advanced_stages = track_stages["Advanced Track"]
+if set(core_stages) & set(advanced_stages):
+    fail("curriculum/index.md Core Path and Advanced Track overlap")
+
+canonical_stages = [stage.name for stage in stages]
+track_stage_set = set(core_stages + advanced_stages)
+if track_stage_set != set(canonical_stages):
+    fail("curriculum/index.md track membership is not complete for canonical stages")
+
+core_count = sum(path.parent.name in set(core_stages) for path in chapters)
+advanced_count = sum(path.parent.name in set(advanced_stages) for path in chapters)
+if core_count != 29:
+    fail(f"Core Path must contain 29 canonical chapters, found {core_count}")
+if advanced_count != 11:
+    fail(f"Advanced Track must contain 11 canonical chapters, found {advanced_count}")
+if len(chapters) != 40:
+    fail(f"curriculum must contain 40 canonical chapters, found {len(chapters)}")
+
+for stage in stages:
+    actual_order = [
         path.name
-        for path in stage.glob("*.md")
+        for path in sorted(stage.glob("*.md"))
         if path.name != "README.md"
-    }
+    ]
+    actual = set(actual_order)
     readme = stage / "README.md"
     if not readme.is_file():
         fail(f"stage README missing: {readme.relative_to(ROOT)}")
         continue
-    section = markdown_section(read(readme), "## 本阶段章节")
+    readme_content = read(readme)
+    expected_track = "Core Path" if stage.name in expected_tracks["Core Path"] else "Advanced Track"
+    if not re.search(
+        rf"(?m)^\*\*Track:\*\*\s+{re.escape(expected_track)}\s*$",
+        readme_content,
+    ):
+        fail(f"stage README has incorrect track label: {readme.relative_to(ROOT)}")
+    if not re.search(r"\[[^\]\n]+\]\(\.\./index\.md\)", readme_content):
+        fail(f"stage README missing curriculum index backlink: {readme.relative_to(ROOT)}")
+
+    section = markdown_section(readme_content, "## 本阶段章节")
     if section is None:
         fail(f"stage README missing chapter section: {readme.relative_to(ROOT)}")
         continue
-    refs = re.findall(r"`([^`/\n]+\.md)`", section)
+    refs = re.findall(r"\[[^\]\n]+\]\(([^)\n]+\.md)\)", section)
     if len(refs) != len(set(refs)):
         fail(f"stage README contains duplicate chapter references: {readme.relative_to(ROOT)}")
     referenced = set(refs)
@@ -236,6 +316,28 @@ for stage in sorted(path for path in curriculum.glob("stage-*") if path.is_dir()
         fail(f"stage README missing chapter {missing}: {readme.relative_to(ROOT)}")
     for stale in sorted(referenced - actual):
         fail(f"stage README references missing chapter {stale}: {readme.relative_to(ROOT)}")
+    if refs != actual_order:
+        fail(f"stage README chapter links are not in canonical order: {readme.relative_to(ROOT)}")
+
+learner_routing_paths = [
+    ROOT / "SKILL.md",
+    readme_path,
+    curriculum / "index.md",
+    *(stage / "README.md" for stage in stages),
+]
+for path in learner_routing_paths:
+    if not path.is_file():
+        continue
+    text = read(path)
+    for legacy in ("deepseek_route_prompted_for", "last_deepseek_route_decision"):
+        if legacy in text:
+            fail(f"learner routing uses legacy provider route metadata {legacy}: {path.relative_to(ROOT)}")
+
+context_budget = read(ROOT / "shared" / "context-budget.md")
+if "Claude Code + DeepSeek" in context_budget:
+    fail("context budget contains a provider-specific Claude Code + DeepSeek route condition")
+if "provider/harness route" not in context_budget:
+    fail("context budget missing generic provider/harness route evaluation semantics")
 
 chapter_ids: dict[str, Path] = {}
 chapter_records: list[tuple[Path, list[str]]] = []
