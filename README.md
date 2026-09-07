@@ -63,4 +63,6 @@ python scripts/setup_runtime.py --runtime-root ../Learn-runtime
 
 Runtime 初始化后，对 Learn Agent 输入“继续学习”。[SKILL router](SKILL.md) 会通过 manifest 读取真实 `state.current`，并恢复已提交的学习位置与 continuation 信息。
 
+跨聊天或从 GitHub clone 后恢复时，按 [Learn Agent 新聊天续学 Contract](LEARNING_CONTINUATION_CONTRACT.md) 初始化并继续。
+
 Continuation 路径为：README → checkout 外 runtime initialization → manifest / `state.current` → “继续学习” → SKILL router。
