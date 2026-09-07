@@ -34,3 +34,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-5-attempt-1-ledger:start -->
 - L1-CHECK-5 / attempt 1: passed — 正确指出应用侧 `history` 保存第一轮对话，第二轮必须继续传入更新后的 `history`；模型本身不会跨独立调用自动保存该历史。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-5-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-6-attempt-1-ledger:start -->
+- L1-CHECK-6 / attempt 1: passed — 正确判断第二轮传入空 `history` 会切断此前对话，模型本次输入中不再包含第一轮名字信息。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-6-attempt-1-ledger:end -->
