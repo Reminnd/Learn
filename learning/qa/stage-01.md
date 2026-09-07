@@ -30,3 +30,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-4-attempt-1-ledger:start -->
 - L1-CHECK-4 / attempt 1: passed — 正确预测两次运行时变量替换后的 user message 内容。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-4-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-5-attempt-1-ledger:start -->
+- L1-CHECK-5 / attempt 1: passed — 正确指出应用侧 `history` 保存第一轮对话，第二轮必须继续传入更新后的 `history`；模型本身不会跨独立调用自动保存该历史。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-5-attempt-1-ledger:end -->
