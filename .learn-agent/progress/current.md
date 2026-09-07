@@ -23,7 +23,7 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-09-07：L1-CHECK-10 attempt 1 通过；确认 ChatPromptTemplate.invoke 的 Message 类型与变量替换结果，并进入 Runnable 组合。
+last_note_update: 2026-09-07：L1-CHECK-11 attempt 1 通过；已区分 Prompt 单独 invoke 与 Runnable 链 invoke 的职责和模型调用边界。
 last_section: 1.7 Runnable：把 Prompt 与 Chat Model 串起来
 teaching_mode: teacher
 mode_prompted_for: []
@@ -33,35 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: learning_check
-  topic: L1-CHECK-11 attempt 1
-  next_action: Distinguish the output responsibility of prompt.invoke from (prompt | model).invoke.
+  topic: L1-CHECK-12 attempt 1
+  next_action: Determine whether prompt | model automatically preserves conversation history across separate invocations.
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 72
+checkpoint_version: 73
 last_checkpoint_at: '2026-09-07T21:23:38+08:00'
 last_checkpoint_reason: knowledge_event
-pending_writeback:
-  transaction_id: 20260907T212338+0800-ch01-l1-check-11
-  reason: knowledge_event
-  phase: prepared
-  started_at: '2026-09-07T21:23:38+08:00'
-  targets:
-    - asset_key: notes.root
-      relative_pointer: stage-01/01-llm-message-prompt-langchain.md
-      evidence_id: stage-01-ch01-L1-CHECK-11-attempt-1
-      operation: upsert
-      expected_change: 记录 prompt.invoke 与 prompt | model invoke 的输出职责和真正模型调用边界
-      verified: false
-      error: null
-    - asset_key: qa.stage
-      relative_pointer: null
-      evidence_id: stage-01-ch01-L1-CHECK-11-attempt-1-ledger
-      operation: upsert
-      expected_change: 在 Stage 01 Q&A Ledger 记录 L1-CHECK-11 attempt 1 passed
-      verified: false
-      error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
 deepseek_route_prompted_for:
@@ -74,8 +55,8 @@ project_track_status: deferred
 project_selection_prompted: true
 completed: []
 weak_points:
-- 需要区分 Prompt 单独 invoke 只构造模型输入，与 Runnable 链 invoke 会继续调用 Chat Model。
-next_action: 完成 L1-CHECK-11 attempt 1：说明 prompt.invoke(...) 与 (prompt | model).invoke(...) 分别返回什么，以及哪个步骤真正调用 model。
+- 需要确认 Runnable 组合本身不会自动提供跨调用对话记忆，历史仍需由应用或显式状态机制提供。
+next_action: 完成 L1-CHECK-12 attempt 1：判断连续两次 chain.invoke(...) 在没有显式 history/state 时是否会自动记住第一轮，并解释原因。
 next_chapter: curriculum/stage-01/02-structured-output.md
 migration_evidence_id: migration-20260819T215842
 ```
