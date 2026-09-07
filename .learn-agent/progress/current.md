@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-09-07：L1-CHECK-6 attempt 1 通过；确认空 history 会切断模型可见的此前对话。
-last_section: 1.4 对话历史由应用传入
+last_note_update: 2026-09-07：L1-CHECK-7 attempt 1 通过；已说明 run_turn 中三类消息变量的职责与完整数据流。
+last_section: 1.5 LangChain Messages 映射
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,36 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: learning_check
-  topic: L1-CHECK-7 attempt 1
-  next_action: Explain the roles and data flow of request_messages, assistant_message,
-    and new_history inside run_turn.
+  topic: L1-CHECK-8 attempt 1
+  next_action: Map handwritten user/assistant Message roles to LangChain HumanMessage and AIMessage.
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 67
-last_checkpoint_at: '2026-09-07T21:36:40+09:00'
+checkpoint_version: 68
+last_checkpoint_at: '2026-09-07T21:53:54+09:00'
 last_checkpoint_reason: knowledge_event
-pending_writeback:
-  transaction_id: 20260907T215354+0900-ch01-l1-check-7
-  reason: knowledge_event
-  phase: prepared
-  started_at: '2026-09-07T21:53:54+09:00'
-  targets:
-    - asset_key: notes.root
-      relative_pointer: stage-01/01-llm-message-prompt-langchain.md
-      evidence_id: stage-01-ch01-L1-CHECK-7-attempt-1
-      operation: upsert
-      expected_change: 记录 request_messages、assistant_message 与 new_history 的职责及完整数据流
-      verified: false
-      error: null
-    - asset_key: qa.stage
-      relative_pointer: null
-      evidence_id: stage-01-ch01-L1-CHECK-7-attempt-1-ledger
-      operation: upsert
-      expected_change: 在 Stage 01 Q&A Ledger 记录 L1-CHECK-7 attempt 1 passed
-      verified: false
-      error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
 deepseek_route_prompted_for:
@@ -75,8 +55,8 @@ project_track_status: deferred
 project_selection_prompted: true
 completed: []
 weak_points:
-- 需要沿 run_turn 说明 request_messages、assistant_message 与 new_history 的完整数据流。
-next_action: 完成 L1-CHECK-7 attempt 1：说明 request_messages、assistant_message 与 new_history 各自是什么，以及它们如何串成一轮对话数据流。
+- 需要建立手写 Message role 与 LangChain Message 类型的对应关系。
+next_action: 完成 L1-CHECK-8 attempt 1：说明手写 user/assistant Message 分别对应 LangChain 的 HumanMessage / AIMessage。
 next_chapter: curriculum/stage-01/02-structured-output.md
 migration_evidence_id: migration-20260819T215842
 ```
