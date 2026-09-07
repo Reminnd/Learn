@@ -58,3 +58,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-10-attempt-1-ledger:start -->
 - L1-CHECK-10 / attempt 1: passed — 正确预测 `ChatPromptTemplate.invoke(...)` 后得到 `SystemMessage(content="Answer in Chinese.")` 与 `HumanMessage(content="Explain Agent.")`；额外空格不影响结论。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-10-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-11-attempt-1-ledger:start -->
+- L1-CHECK-11 / attempt 1: passed — 正确区分 `prompt.invoke(...)` 只构造可供模型使用的 Prompt/Messages，而 `(prompt | model).invoke(...)` 会继续调用 model 并返回模型生成的消息。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-11-attempt-1-ledger:end -->
