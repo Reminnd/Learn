@@ -50,3 +50,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-9-attempt-1-ledger:start -->
 - L1-CHECK-9 / attempt 1: needs_review — 已识别 `SystemMessage` 类型，但构造未写完整，且未说明 `SystemMessage` 与 `HumanMessage` 的职责区别。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-9-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-9-attempt-2-ledger:start -->
+- L1-CHECK-9 / attempt 2: passed — 正确写出 `SystemMessage(content="Answer briefly.")`，并区分 `SystemMessage` 的系统级行为/上下文指令职责与 `HumanMessage` 的用户输入职责。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-9-attempt-2-ledger:end -->
