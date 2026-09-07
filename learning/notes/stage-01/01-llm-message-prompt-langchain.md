@@ -253,3 +253,24 @@ def run_turn(
 
 下一步：L1-CHECK-7 / attempt 1，沿 `run_turn` 说明 `request_messages`、`assistant_message`、`new_history` 三个变量分别是什么以及如何流动。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-6-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-7-attempt-1:start -->
+## L1-CHECK-7 / attempt 1
+
+状态：passed。用户正确说明：`request_messages` 把既有 `history` 与当前 `user_input` 组合成发送给 model 的本轮消息列表；`assistant_message` 是 model 根据 `request_messages` 返回的 assistant 消息；`new_history` 再把 `request_messages` 与 `assistant_message` 合并，作为下一轮应继续保存和传入的历史。
+
+数据流可写成：
+
+```text
+history + user_input
+→ request_messages
+→ model
+→ assistant_message
+→ new_history
+→ 下一轮再次作为 history 传入
+```
+
+本结果为局部检查通过，不等于 Chapter 01 mastered。
+
+下一步：进入 1.5 LangChain Messages 映射，理解手写 `Message(role=...)` 与 `HumanMessage` / `AIMessage` 的对应关系。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-7-attempt-1:end -->
