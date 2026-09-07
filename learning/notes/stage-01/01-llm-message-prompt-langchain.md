@@ -241,3 +241,15 @@ def run_turn(
 
 下一步：L1-CHECK-6 / attempt 1，检查当第二轮显式传入空列表 `[]` 时模型可见上下文发生什么变化。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-5-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-6-attempt-1:start -->
+## L1-CHECK-6 / attempt 1
+
+状态：passed。用户正确判断第二次调用传入空列表 `[]` 后，模型没有机会知道第一轮里的名字 `Lin`，因为旧的 `history` 没有被传入本次调用。
+
+教学精度补充：`run_turn` 会基于传入的 `history` 构造 `request_messages`。当 `history=[]` 时，本轮 `request_messages` 只包含新加入的 user message，因此此前的 user/assistant 消息都不在模型本次可见输入里。
+
+本结果为局部检查通过，不等于 Chapter 01 mastered。
+
+下一步：L1-CHECK-7 / attempt 1，沿 `run_turn` 说明 `request_messages`、`assistant_message`、`new_history` 三个变量分别是什么以及如何流动。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-6-attempt-1:end -->
