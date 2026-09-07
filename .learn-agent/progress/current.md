@@ -43,7 +43,26 @@ resume_contract:
 checkpoint_version: 66
 last_checkpoint_at: '2026-09-07T21:13:50+09:00'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20260907T213640+0900-ch01-l1-check-6
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-09-07T21:36:40+09:00'
+  targets:
+    - asset_key: notes.root
+      relative_pointer: stage-01/01-llm-message-prompt-langchain.md
+      evidence_id: stage-01-ch01-L1-CHECK-6-attempt-1
+      operation: upsert
+      expected_change: 记录第二轮传入空 history 会切断模型可见的此前对话
+      verified: false
+      error: null
+    - asset_key: qa.stage
+      relative_pointer: null
+      evidence_id: stage-01-ch01-L1-CHECK-6-attempt-1-ledger
+      operation: upsert
+      expected_change: 在 Stage 01 Q&A Ledger 记录 L1-CHECK-6 attempt 1 passed
+      verified: false
+      error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
 deepseek_route_prompted_for:
