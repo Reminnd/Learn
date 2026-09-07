@@ -38,3 +38,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-6-attempt-1-ledger:start -->
 - L1-CHECK-6 / attempt 1: passed — 正确判断第二轮传入空 `history` 会切断此前对话，模型本次输入中不再包含第一轮名字信息。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-6-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-7-attempt-1-ledger:start -->
+- L1-CHECK-7 / attempt 1: passed — 正确说明 `request_messages`、`assistant_message`、`new_history` 的职责，并给出 `history + user_input → request_messages → model → assistant_message → new_history` 的完整数据流。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-7-attempt-1-ledger:end -->
