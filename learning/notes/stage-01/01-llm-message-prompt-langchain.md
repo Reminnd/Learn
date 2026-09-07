@@ -310,3 +310,59 @@ Message(role="assistant") ↔ AIMessage
 
 下一步：L1-CHECK-9 / attempt 2，用完整构造和一句话职责区别完成复检。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-9-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-9-attempt-2:start -->
+## L1-CHECK-9 / attempt 2
+
+状态：passed。用户补全了正确构造：
+
+```python
+SystemMessage(content="Answer briefly.")
+```
+
+并正确区分职责：`SystemMessage` 用于给 model 提供系统级行为或上下文指令，`HumanMessage` 表示用户输入。
+
+本结果完成该局部复检，不等于 Chapter 01 mastered。
+
+## 1.6 ChatPromptTemplate 是 Prompt builder 的框架表达
+
+手写版 Prompt builder：
+
+```python
+def build_messages(topic: str, language: str) -> list[Message]:
+    return [
+        Message(role="system", content="Explain concepts accurately and briefly."),
+        Message(role="user", content=f"Explain {topic} in {language}."),
+    ]
+```
+
+LangChain 可以把同一规则写成：
+
+```python
+from langchain_core.prompts import ChatPromptTemplate
+
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "Explain concepts accurately and briefly."),
+    ("human", "Explain {topic} in {language}."),
+])
+
+prompt_value = prompt.invoke({
+    "topic": "Agent",
+    "language": "Chinese",
+})
+```
+
+当前 LangChain Python reference 中，`ChatPromptTemplate.from_messages(...)` 仍支持 `(message type, template)` 形式；`invoke(...)` 会把运行时变量填入模板，得到包含最终 Messages 的 `ChatPromptValue`。
+
+映射关系：
+
+```text
+手写 build_messages(topic, language)
+        ↕
+ChatPromptTemplate + invoke({topic, language})
+```
+
+固定的角色与文本骨架属于模板规则；`topic`、`language` 属于每次调用时提供的运行变量。
+
+下一步：L1-CHECK-10 / attempt 1，预测一次 `ChatPromptTemplate.invoke(...)` 后得到的两条 Message 类型与 content。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-9-attempt-2:end -->
