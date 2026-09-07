@@ -54,3 +54,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-9-attempt-2-ledger:start -->
 - L1-CHECK-9 / attempt 2: passed — 正确写出 `SystemMessage(content="Answer briefly.")`，并区分 `SystemMessage` 的系统级行为/上下文指令职责与 `HumanMessage` 的用户输入职责。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-9-attempt-2-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-10-attempt-1-ledger:start -->
+- L1-CHECK-10 / attempt 1: passed — 正确预测 `ChatPromptTemplate.invoke(...)` 后得到 `SystemMessage(content="Answer in Chinese.")` 与 `HumanMessage(content="Explain Agent.")`；额外空格不影响结论。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-10-attempt-1-ledger:end -->
