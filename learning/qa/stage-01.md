@@ -42,3 +42,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-7-attempt-1-ledger:start -->
 - L1-CHECK-7 / attempt 1: passed — 正确说明 `request_messages`、`assistant_message`、`new_history` 的职责，并给出 `history + user_input → request_messages → model → assistant_message → new_history` 的完整数据流。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-7-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-8-attempt-1-ledger:start -->
+- L1-CHECK-8 / attempt 1: passed — 正确将手写 `Message(role="user")` / `Message(role="assistant")` 映射为 LangChain `HumanMessage` / `AIMessage`。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-8-attempt-1-ledger:end -->
