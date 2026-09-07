@@ -75,31 +75,28 @@ manifest 中缺少所需 key、目标越出 backend root、或目标不可读写
 
 核心概念、框架映射、工程结论、重要 Q&A、误解、练习、Bug、能力证据、ADR 或学习位置变化都属于持久化事件，而不是事务。一个教学回合（一次用户输入到教学回复的边界）先聚合全部事件与全部领域目标；领域目标是一个包含 `asset_key`、`relative_pointer`、`evidence_id`、`operation` 和预期变化的 `targets[]` 记录。零个事件不得创建事务；一个或多个事件至多创建一个包含完整目标集的新教学事务。目标集与稳定 `transaction_id` / `evidence_id` 必须在 prepared WAL 写入前冻结。
 
-对 `N >= 1` 个目标，成功路径严格为：
+对 `N >= 1` 个目标，正常成功路径严格为：
 
 ```text
 聚合本回合增量
 → 冻结完整 targets[]
 → 一次 transaction boundary validation
 → 一次 prepared WAL 写入 state.current（完整 pending_writeback）
-→ 一次 state.current 回读确认 WAL
 → N 次幂等领域 upsert
-→ N 次领域内容回读验证
 → 一次 final-state+clear 写入 state.current（推进最终 Learning State 且 pending_writeback=null）
-→ 一次 state.current 回读同时确认最终状态与 WAL 已清空
 ```
 
 transaction boundary validation 必须在完整 `targets[]` 冻结后、prepared WAL 写入前，对所有冻结目标一次完成：确认所需 manifest key 存在；确认 `relative_pointer` 在对应 logical root 内解析；确认规范化后的目标仍在 backend root 内；确认本事务所需的持久化读写能力满足。任一检查失败都不得写入 prepared WAL 或领域资产。
 
-同一事务的后续 teaching、writing、verifying 与 final commit phase 必须直接复用本回合 transaction context 中已验证的 resolved targets，不得因内部 phase 再次解析或校验相同目标。该 context 仅属于当前 turn transaction，不是 cache layer，也不是第二 source of truth；新的 assistant turn 或 recovery start 必须重新读取权威 manifest 与 `state.current`，重新执行 boundary validation，不得跨回合复用 resolved target。
+同一事务的后续 teaching、writing 与 final commit phase 必须直接复用本回合 transaction context 中已验证的 resolved targets，不得因内部 phase 再次解析或校验相同目标。该 context 仅属于当前 turn transaction，不是 cache layer，也不是第二 source of truth；新的 assistant turn 或 recovery start 必须重新读取权威 manifest 与 `state.current`，重新执行 boundary validation，不得跨回合复用 resolved target。
 
-成功计数为 `transaction_count=1`、`state_writes=2`、`state_verification_reads=2`、`domain_writes=N`、`domain_reads=N`。prepared WAL 必须先于任何领域写入；正常成功不得持久化 `phase=writing`、`phase=verifying`、`phase=committing` 或每目标 `verified=true`，这些既有 schema 字段仅用于失败、恢复或迁移语义。final-state+clear 后不得在正常成功路径重读领域证据。
+正常成功计数为 `transaction_count=1`、`state_writes=2`、`state_verification_reads=0`、`domain_writes=N`、`domain_reads=0`。prepared WAL 必须先于任何领域写入；正常成功不得持久化 `phase=writing`、`phase=verifying`、`phase=committing` 或每目标 `verified=true`，这些既有 schema 字段仅用于失败、恢复或迁移语义。
 
-transaction boundary validation 只验证 manifest 映射、路径边界与能力，不得实现为额外的 `state.current` 或领域内容回读；因此正常成功 I/O 保持 `state_writes=2`、`state_verification_reads=2`、`domain_writes=N`、`domain_reads=N`。
+primary backend 对 mutation 返回明确成功时，正常路径直接信任该 write acknowledgement；版本化后端可使用 commit/blob SHA，其他后端使用其原子写成功语义。不得仅为了验证刚刚成功的同一次写入，再额外回读 `state.current` 或领域内容。只有写入结果不明确、发生并发冲突、进入 recovery、进行 integrity reconstruction、mastery-sensitive action 需要读取此前未加载的证据，或用户明确要求审计时，才执行必要读取。
 
 回合开始时 `pending_writeback` 非空即为 recovery-only 回合：只能恢复既有 `transaction_id`、目标和 `evidence_id`，即使恢复成功也不得创建新教学事务。`evidence_id` 跨重试/恢复保持稳定；恢复目标已有证据时只验证，缺失时使用原操作作幂等 upsert，禁止盲目追加。详细 schema、幂等规则、恢复与迁移见 [shared/session-persistence.md](shared/session-persistence.md)。
 
-任一 WAL、领域或最终验证失败时，不得声称已保存或已提交。领域验证失败时最终状态不得推进、WAL 保持非空且不得创建第二事务；最终回读失败时不得补偿或创建第二事务，下一回合读取实际 `state.current` 后进入恢复或确认语义。没有持久化写能力时，可以完成当前解释，但停止推进持久化学习状态；保留 WAL 或输出最小待保存增量，且不得声称已记录、已同步或已 checkpoint。
+任一 prepared WAL、领域或 final-state+clear 写入失败时，不得声称已保存或已提交。领域写入失败时最终状态不得推进、WAL 保持非空且不得创建第二事务；final-state+clear 写入失败或任一 mutation 结果不明确时不得补偿或创建第二事务，下一回合读取实际 `state.current` 后进入恢复或确认语义。没有持久化写能力时，可以完成当前解释，但停止推进持久化学习状态；保留 WAL 或输出最小待保存增量，且不得声称已记录、已同步或已 checkpoint。
 
 ## 状态与一致性
 
@@ -111,7 +108,7 @@ transaction boundary validation 只验证 manifest 映射、路径边界与能�
 
 不要使用旧字段 `notes_status` 或把 `needs_reconstruction` 写入学习状态。当前笔记 Metadata 使用同名 `lifecycle_status` 与 `learning_status`；它们分别与 `state.current` 比较。
 
-在恢复、下一道 Q&A、切换小节或标记掌握前检查：状态引用的知识与 evidence 必须真实存在于当前笔记；`pending_writeback` 必须为空；指针必须通过 manifest root 解析且可访问。无法从现存证据重建时设置 `integrity.status=needs_reconstruction`，记录 `missing` 与 `reason`，不得虚构历史或判定 mastered。
+在恢复、切换小节或标记掌握等需要一致性判断的边界，状态引用的知识与 evidence 必须来自已明确成功提交的写入或必要的内容读取；`pending_writeback` 必须为空；指针必须通过 manifest root 解析且可访问。正常成功写入后不得为了重复确认同一 evidence 立即回读。无法从现存证据重建时设置 `integrity.status=needs_reconstruction`，记录 `missing` 与 `reason`，不得虚构历史或判定 mastered。
 
 完整 schema、迁移和状态转换见 [shared/learning-state-machine.md](shared/learning-state-machine.md)。
 
@@ -128,7 +125,7 @@ current chapter contract
 → committed mastery/status
 ```
 
-`shared/mastery-rubric.md` 是完整 mastery predicate 的唯一来源。Contract mismatch 或 stale evidence 必须按当前契约重新判定，不能由旧 `mastered` 值绕过；事务中的 candidate 只有在 final-state+clear 及最终回读成功后才成为 committed mastery/status。
+`shared/mastery-rubric.md` 是完整 mastery predicate 的唯一来源。Contract mismatch 或 stale evidence 必须按当前契约重新判定，不能由旧 `mastered` 值绕过；事务中的 candidate 只有在 final-state+clear write 获得 primary backend 明确成功确认后才成为 committed mastery/status。
 
 ## 领域资产规则
 
