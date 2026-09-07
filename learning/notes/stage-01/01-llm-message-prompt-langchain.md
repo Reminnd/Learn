@@ -274,3 +274,27 @@ history + user_input
 
 下一步：进入 1.5 LangChain Messages 映射，理解手写 `Message(role=...)` 与 `HumanMessage` / `AIMessage` 的对应关系。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-7-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-8-attempt-1:start -->
+## L1-CHECK-8 / attempt 1
+
+状态：passed。用户正确完成手写 Message 到 LangChain Message 类型的映射：
+
+```python
+HumanMessage(content="Explain Agent")
+AIMessage(content="An Agent can...")
+```
+
+对应关系：
+
+```text
+Message(role="user")      ↔ HumanMessage
+Message(role="assistant") ↔ AIMessage
+```
+
+当前 LangChain Python reference 仍将 `HumanMessage` 定义为用户传给模型的消息，将 `AIMessage` 定义为 Chat Model 返回的 AI 消息；本次映射与当前框架语义一致。
+
+本结果为局部检查通过，不等于 Chapter 01 mastered。
+
+下一步：L1-CHECK-9 / attempt 1，补全 `system` role 与 LangChain `SystemMessage` 的映射并说明其位置作用。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-8-attempt-1:end -->
