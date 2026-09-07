@@ -1,0 +1,20 @@
+version: 2
+backend: git_repository
+backend_root: github://Reminnd/Learn@main
+capabilities:
+  persistent_read: true
+  persistent_write: true
+  local_path_exposed: false
+  user_browsable: true
+  versioned: true
+paths:
+  state.current: .learn-agent/progress/current.md
+  notes.root: learning/notes
+  notes.index: learning/notes/index.md
+  qa.stage: learning/qa/stage-01.md
+  bugs.book: learning/bug-book/bug-book.md
+  progress.code_ability: learning/progress/code-ability.md
+  project.root: learning/project
+  adr.root: learning/adr
+sync_targets: []
+backend_id: learn-agent-github-main
