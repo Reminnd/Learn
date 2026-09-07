@@ -3,7 +3,7 @@
 ```yaml
 schema_version: 2
 schema_migration_evidence_id: schema-v2-state
-storage_backend: local_workspace
+storage_backend: git_repository
 stage_id: stage-01
 stage_name: LangChain 与 Agent 基础
 chapter_id: 01-llm-message-prompt-langchain
@@ -43,7 +43,26 @@ resume_contract:
 checkpoint_version: 65
 last_checkpoint_at: '2026-09-07T19:51:12+08:00'
 last_checkpoint_reason: manual
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20260907T211350+0900-ch01-l1-check-5
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-09-07T21:13:50+09:00'
+  targets:
+    - asset_key: notes.root
+      relative_pointer: stage-01/01-llm-message-prompt-langchain.md
+      evidence_id: stage-01-ch01-L1-CHECK-5-attempt-1
+      operation: upsert
+      expected_change: 记录应用侧 history 保存首轮对话并在第二轮显式传入的学习检查结论
+      verified: false
+      error: null
+    - asset_key: qa.stage
+      relative_pointer: null
+      evidence_id: stage-01-ch01-L1-CHECK-5-attempt-1-ledger
+      operation: upsert
+      expected_change: 在 Stage 01 Q&A Ledger 记录 L1-CHECK-5 attempt 1 passed
+      verified: false
+      error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
 deepseek_route_prompted_for:
