@@ -7,7 +7,7 @@ stage_id: stage-01
 chapter_id: 01-llm-message-prompt-langchain
 lifecycle_status: active
 learning_status: learning
-last_updated: 2026-09-06
+last_updated: 2026-09-07
 ```
 
 ## 重学说明
@@ -229,3 +229,15 @@ def run_turn(
 - 下一活动：L1-CHECK-5 / attempt 1
 - 恢复依据：state.current 与本笔记中的 evidence；聊天历史不作为状态真相源。
 <!-- learn-agent:evidence:github-sync-checkpoint-20260907:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-5-attempt-1:start -->
+## L1-CHECK-5 / attempt 1
+
+状态：passed。用户正确指出：第一轮对话由应用侧的 `history` 保存；第二次调用 `run_turn` 时必须继续传入更新后的 `history`，模型才有机会看到第一轮内容。
+
+教学精度补充：`history` 是应用持有并在轮次之间更新的状态变量；Chat Model 本身不会因为前一次调用发生过，就自动拥有那次调用的消息。若应用不把旧消息重新放入下一次请求，模型看不到此前对话。
+
+本结果为局部检查通过，不等于 Chapter 01 mastered。
+
+下一步：L1-CHECK-6 / attempt 1，检查当第二轮显式传入空列表 `[]` 时模型可见上下文发生什么变化。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-5-attempt-1:end -->
