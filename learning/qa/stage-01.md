@@ -46,3 +46,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-8-attempt-1-ledger:start -->
 - L1-CHECK-8 / attempt 1: passed — 正确将手写 `Message(role="user")` / `Message(role="assistant")` 映射为 LangChain `HumanMessage` / `AIMessage`。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-8-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-9-attempt-1-ledger:start -->
+- L1-CHECK-9 / attempt 1: needs_review — 已识别 `SystemMessage` 类型，但构造未写完整，且未说明 `SystemMessage` 与 `HumanMessage` 的职责区别。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-9-attempt-1-ledger:end -->
