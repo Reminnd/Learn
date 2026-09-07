@@ -23,7 +23,7 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-09-06：L1-CHECK-4 attempt 1 通过；进入 1.4 应用管理对话历史。
+last_note_update: 2026-09-07：L1-CHECK-5 attempt 1 通过；确认 history 由应用保存并在下一轮显式传入。
 last_section: 1.4 对话历史由应用传入
 teaching_mode: teacher
 mode_prompted_for: []
@@ -33,36 +33,17 @@ session_status: active
 current_activity: learning
 return_to:
   activity: learning_check
-  topic: L1-CHECK-5 attempt 1
-  next_action: Identify which component preserves history and what must be passed
-    into the second model call.
+  topic: L1-CHECK-6 attempt 1
+  next_action: Explain why passing an empty history removes prior conversation from
+    the second model call.
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 65
-last_checkpoint_at: '2026-09-07T19:51:12+08:00'
-last_checkpoint_reason: manual
-pending_writeback:
-  transaction_id: 20260907T211350+0900-ch01-l1-check-5
-  reason: knowledge_event
-  phase: prepared
-  started_at: '2026-09-07T21:13:50+09:00'
-  targets:
-    - asset_key: notes.root
-      relative_pointer: stage-01/01-llm-message-prompt-langchain.md
-      evidence_id: stage-01-ch01-L1-CHECK-5-attempt-1
-      operation: upsert
-      expected_change: 记录应用侧 history 保存首轮对话并在第二轮显式传入的学习检查结论
-      verified: false
-      error: null
-    - asset_key: qa.stage
-      relative_pointer: null
-      evidence_id: stage-01-ch01-L1-CHECK-5-attempt-1-ledger
-      operation: upsert
-      expected_change: 在 Stage 01 Q&A Ledger 记录 L1-CHECK-5 attempt 1 passed
-      verified: false
-      error: null
+checkpoint_version: 66
+last_checkpoint_at: '2026-09-07T21:13:50+09:00'
+last_checkpoint_reason: knowledge_event
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
 deepseek_route_prompted_for:
@@ -75,9 +56,9 @@ project_track_status: deferred
 project_selection_prompted: true
 completed: []
 weak_points:
-- 需要区分模型单次推理与应用持久保存的对话历史。
-- 需要沿 run_turn 说明 request_messages、assistant_message 与 new_history 的数据流。
-next_action: 完成 L1-CHECK-5 attempt 1：说明谁保存首轮消息，以及第二轮必须传入哪个变量。
+- 需要沿 run_turn 说明 request_messages、assistant_message 与 new_history 的完整数据流。
+- 需要说明传入空 history 会切断模型可见的此前对话。
+next_action: 完成 L1-CHECK-6 attempt 1：解释第二轮传入空 history 时模型为什么看不到第一轮消息。
 next_chapter: curriculum/stage-01/02-structured-output.md
 migration_evidence_id: migration-20260819T215842
 ```
