@@ -176,7 +176,7 @@ second_messages = build_messages("RAG", "English")
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-3-attempt-1:start -->
 ## L1-CHECK-3 / attempt 1
 
-状态：passed。用户正确区分定义函数与调用函数，并指出返回值为 list[Message]。
+状态：passed。用户正确区分定义、调用与 list[Message] 返回类型。
 
 教学精度补充：执行 def 创建函数对象，不执行函数体；每次调用时才计算 f-string、创建 Message 和列表并执行 return。类型注解描述预期类型，不是返回值本身。本次为局部检查通过，不代表整章 mastered。
 
@@ -366,3 +366,37 @@ ChatPromptTemplate + invoke({topic, language})
 
 下一步：L1-CHECK-10 / attempt 1，预测一次 `ChatPromptTemplate.invoke(...)` 后得到的两条 Message 类型与 content。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-9-attempt-2:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-10-attempt-1:start -->
+## L1-CHECK-10 / attempt 1
+
+状态：passed。用户正确预测 `ChatPromptTemplate.invoke(...)` 变量替换后的两条消息：第一条为 `SystemMessage(content="Answer in Chinese.")`，第二条为 `HumanMessage(content="Explain Agent.")`。回答中额外空格不影响类型与数据流结论。
+
+本结果为局部检查通过，不等于 Chapter 01 mastered。
+
+## 1.7 Runnable：把 Prompt 与 Chat Model 串起来
+
+到目前为止，`prompt.invoke(...)` 只完成 Prompt 构造，不会调用模型。LangChain 的 `Runnable` 抽象允许把可执行步骤组合成数据流：
+
+```python
+chain = prompt | model
+response = chain.invoke({
+    "language": "Chinese",
+    "topic": "Agent",
+})
+```
+
+可把它理解为：
+
+```text
+{language, topic}
+→ ChatPromptTemplate
+→ ChatPromptValue / Messages
+→ Chat Model
+→ AIMessage
+```
+
+`|` 表示把前一个 Runnable 的输出交给下一个 Runnable。它改变的是组合方式，不改变最小原理：仍然先构造模型输入，再调用模型。
+
+下一步：L1-CHECK-11 / attempt 1，判断 `prompt.invoke(...)` 与 `(prompt | model).invoke(...)` 的输出职责差异。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-10-attempt-1:end -->
