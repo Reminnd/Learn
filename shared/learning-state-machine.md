@@ -68,9 +68,11 @@ Incomplete evidence、invalid contract、`integrity.status=needs_reconstruction`
 
 Mastery-sensitive turn 开始时，`pending_writeback` 必须为 `null`；非空时按 [session-persistence.md](session-persistence.md) 进入 recovery-only turn，不能开始新的 mastery-sensitive transaction。
 
-Prepared WAL 非空期间，只能基于当前契约与已经通过 domain verification 的证据计算 candidate mastery projection。此时的 `mastery` 与 `learning_status` 不是 authoritative committed transition，尤其不能把 `learning_status=mastered` 视为已提交事实。
+Prepared WAL 非空期间，只能基于当前契约、当前 turn 已明确成功写入的 evidence，以及此前已加载的 committed evidence 计算 candidate mastery projection。此时的 `mastery` 与 `learning_status` 不是 authoritative committed transition，尤其不能把 `learning_status=mastered` 视为已提交事实。
 
-全部领域证据验证通过后，沿用 S03 final-state+clear：在同一次 `state.current` final write 中写入重新计算的 `mastery` projection、最终 `learning_status` 与 `pending_writeback=null`，然后执行 S03 final readback。只有该回读同时验证最终状态与 WAL 已清空后，mastery projection 和学习状态才成为 committed state。本规则不改变 S03 的 `state_writes=2`、`state_verification_reads=2`、领域读写计数或 recovery model。
+当 mastery-sensitive action 需要此前尚未加载的 committed evidence 时，按 evidence ID 或契约要求局部读取；不得为了验证当前 turn 中刚刚获得明确成功确认的同一领域写入而重复回读。
+
+全部必要 evidence 可用后，沿用 S03 final-state+clear：在同一次 `state.current` final write 中写入重新计算的 `mastery` projection、最终 `learning_status` 与 `pending_writeback=null`。primary backend 对该 final write 返回明确成功后，mastery projection 和学习状态即成为 committed state；正常成功路径不再追加 final readback。若 final write 结果不明确，则本轮不得声称 committed，下一轮读取实际 `state.current` 后进入恢复或确认语义。
 
 每次新的 valid question evidence、exercise evidence 或 misconception resolution evidence 提交后，必须重新选择全部 latest valid evidence，并依照当前契约和 [mastery-rubric.md](mastery-rubric.md) 重算完整 projection。不得平均新旧 score、继承旧 `mastered=true`，也不得只增量翻转某个 boolean。Recovery 仍复用原 `evidence_id`，恢复完成后的重算遵循同一规则。
 
