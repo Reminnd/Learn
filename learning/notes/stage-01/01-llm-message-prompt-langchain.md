@@ -298,3 +298,15 @@ Message(role="assistant") ↔ AIMessage
 
 下一步：L1-CHECK-9 / attempt 1，补全 `system` role 与 LangChain `SystemMessage` 的映射并说明其位置作用。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-8-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-9-attempt-1:start -->
+## L1-CHECK-9 / attempt 1
+
+状态：needs_review，不计入正式 mastery。
+
+- 已正确：识别出手写 `role="system"` 对应 LangChain `SystemMessage`。
+- 待修正：构造形式未写完整；应为 `SystemMessage(content="Answer briefly.")`。
+- 待补充：没有说明 `SystemMessage` 与 `HumanMessage` 的职责区别。`SystemMessage` 用于给模型提供系统级行为或上下文指令，`HumanMessage` 表示用户输入。
+
+下一步：L1-CHECK-9 / attempt 2，用完整构造和一句话职责区别完成复检。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-9-attempt-1:end -->
