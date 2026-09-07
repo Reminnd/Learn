@@ -162,8 +162,7 @@ def build_messages(topic: str, language: str) -> list[Message]:
         ),
         Message(
             role="user",
-            content=f"Explain {topic} in {language}.",
-        ),
+            content=f"Explain {topic} in {language}."),
     ]
 
 first_messages = build_messages("Agent", "Chinese")
@@ -176,7 +175,7 @@ second_messages = build_messages("RAG", "English")
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-3-attempt-1:start -->
 ## L1-CHECK-3 / attempt 1
 
-状态：passed。用户正确区分定义、调用与 list[Message] 返回类型。
+状态：passed。用户正确区分定义函数与调用函数，并指出返回值为 list[Message]。
 
 教学精度补充：执行 def 创建函数对象，不执行函数体；每次调用时才计算 f-string、创建 Message 和列表并执行 return。类型注解描述预期类型，不是返回值本身。本次为局部检查通过，不代表整章 mastered。
 
@@ -400,3 +399,26 @@ response = chain.invoke({
 
 下一步：L1-CHECK-11 / attempt 1，判断 `prompt.invoke(...)` 与 `(prompt | model).invoke(...)` 的输出职责差异。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-10-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-11-attempt-1:start -->
+## L1-CHECK-11 / attempt 1
+
+状态：passed。用户正确区分了 Prompt 单独执行与 Runnable 链执行的职责：`prompt.invoke(...)` 主要完成运行时变量注入并构造可输入给 model 的 Prompt/Messages；`(prompt | model).invoke(...)` 会把 Prompt 的输出继续交给 model，返回模型生成的消息，因此真正调用 model 的是后者。
+
+数据流：
+
+```text
+prompt.invoke(...)
+  -> ChatPromptValue / Messages
+
+(prompt | model).invoke(...)
+  -> Prompt
+  -> Messages
+  -> Model
+  -> AIMessage
+```
+
+本结果为局部检查通过，不等于 Chapter 01 mastered。
+
+下一步：L1-CHECK-12 / attempt 1，检查 Runnable 组合是否自动提供跨调用对话记忆。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-11-attempt-1:end -->
