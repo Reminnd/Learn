@@ -174,7 +174,7 @@ second_messages = build_messages("RAG", "English")
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-3-attempt-1:start -->
 ## L1-CHECK-3 / attempt 1
 
-状态：passed。用户正确区分定义、调用与 list[Message] 返回类型。
+状态：passed。用户正确区分定义函数与调用函数，并指出返回值为 list[Message]。
 
 教学精度补充：执行 def 创建函数对象，不执行函数体；每次调用时才计算 f-string、创建 Message 和列表并执行 return。类型注解描述预期类型，不是返回值本身。本次为局部检查通过，不代表整章 mastered。
 
@@ -505,3 +505,18 @@ prompt.invoke(...)
 
 下一步：Q1 / attempt 2，只补“为什么理解分层数据流能帮助定位故障”这一因果关系；attempt 1 已给出的失败条件可继续作为本题边界证据。
 <!-- learn-agent:evidence:stage-01-ch01-Q1-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-Q1-attempt-2:start -->
+## Canonical Mastery Q1 / attempt 2
+
+状态：passed。该结果属于正式 mastery Q&A。
+
+用户补充指出：理解分层数据流后，可以沿数据传递路径判断“数据传到哪个位置开始出错”，通过断点式检查定位故障层。结合 attempt 1 已给出的失败条件，Q1 的两项 acceptance 均已满足：
+
+- 核心因果关系：Prompt、Messages、Model、Tool/Application 各层输入输出职责明确，因此可以逐层检查并定位第一个异常位置，而不是把所有失败都归因于模型。
+- 边界/失败条件：即使主数据流成立，未校验的输入、Tool 参数不符合 schema、以及模型输出本身错误，仍可能让业务结果失败。
+
+因此 canonical Q1 = passed。Chapter 01 仍未 mastered；还需完成 critical Q2 与 required exercise EX1，并满足整体 mastery rubric。
+
+下一步：Canonical Q2 / attempt 1，说明原生模型调用与 LangChain ChatModel 的原理—框架映射，包括对应对象、输入、输出与关键数据流。
+<!-- learn-agent:evidence:stage-01-ch01-Q1-attempt-2:end -->
