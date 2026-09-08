@@ -82,3 +82,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-15-attempt-1-ledger:start -->
 - L1-CHECK-15 / attempt 1: passed — 正确选择 `Summary + recent history` 以提高早期重要偏好的长期保留概率，并指出当旧信息与当前任务关联性弱时，持续携带 summary 会造成额外输入与处理开销；补充 Trade-off 为摘要还存在生成/维护成本与细节失真风险。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-15-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-Q1-attempt-1-ledger:start -->
+- Canonical Q1 / attempt 1: needs_review — 已给出有效边界/失败条件（schema 未校验、Tool 参数不符合要求、model 输出可能错误），但“理解数据流为何能帮助开发和排障”的核心因果关系表达不足；需补充分层输入/输出职责使故障可定位。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-Q1-attempt-1-ledger:end -->
