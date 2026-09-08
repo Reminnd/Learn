@@ -22,6 +22,10 @@ persistence:
     max_checkpoints: 3
     volatile_until_flush: true
     checkpoint_version_mode: advance_by_buffered_count
+    session_access_mode: cache_until_flush
+    normal_buffered_turn_remote_reads: 0
+    normal_buffered_turn_remote_writes: 0
+    refresh_before_each_turn: false
     flush_on:
       - needs_review
       - section_boundary
@@ -31,5 +35,11 @@ persistence:
       - completion
       - conversation_handoff
       - explicit_checkpoint
+    refresh_on:
+      - flush_conflict
+      - unknown_write_outcome
+      - recovery
+      - integrity_reconstruction
+      - mastery_requires_unloaded_evidence
 sync_targets: []
 backend_id: learn-agent-github-main
