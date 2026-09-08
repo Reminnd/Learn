@@ -23,7 +23,7 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-09-08：Canonical Q2 attempt 4 通过；结合前序 attempts 的对象、输入、输出与原理侧证据，Q2 acceptance 全部满足，Q1/Q2 两个 critical question 均已通过。
+last_note_update: 2026-09-08：Canonical Q3 attempt 1 通过；已给出 Message history 增长的可执行排查顺序，并说明 summary + recent history 的细节失真 Trade-off；继续补充学习 sliding window。
 last_section: Canonical Mastery Q&A
 teaching_mode: teacher
 mode_prompted_for: []
@@ -32,36 +32,17 @@ session_mode: learning
 session_status: active
 current_activity: learning
 return_to:
-  activity: learning_check
-  topic: Q3 attempt 1 (canonical mastery)
-  next_action: Give an executable diagnosis order for Message history growth and explain at least one solution trade-off.
+  activity: required_exercise
+  topic: EX1
+  next_action: Run examples/stage-01/ex1_message_prompt_langchain.py and verify the six exact acceptance output lines.
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 84
-last_checkpoint_at: '2026-09-08T15:27:33+08:00'
-last_checkpoint_reason: knowledge_event
-pending_writeback:
-  transaction_id: 20260908T155220+0800-ch01-q3
-  reason: qa_complete
-  phase: prepared
-  started_at: '2026-09-08T15:52:20+08:00'
-  targets:
-    - asset_key: notes.root
-      relative_pointer: stage-01/01-llm-message-prompt-langchain.md
-      evidence_id: stage-01-ch01-Q3-attempt-1
-      operation: upsert
-      expected_change: Record canonical Q3 pass, diagnosis order, summary trade-off, and sliding-window follow-up teaching.
-      verified: false
-      error: null
-    - asset_key: qa.stage
-      relative_pointer: stage-01.md
-      evidence_id: stage-01-ch01-Q3-attempt-1-ledger
-      operation: upsert
-      expected_change: Record canonical Q3 attempt 1 as passed.
-      verified: false
-      error: null
+checkpoint_version: 85
+last_checkpoint_at: '2026-09-08T15:52:20+08:00'
+last_checkpoint_reason: qa_complete
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
 deepseek_route_prompted_for:
@@ -75,7 +56,7 @@ project_selection_prompted: true
 completed: []
 weak_points:
 - Sliding window：需要继续巩固“只控制本轮送入模型的最近上下文，不等于删除持久化聊天记录”的边界。
-next_action: 完成 canonical mastery Q3 attempt 1：针对 Message 历史增长给出可执行排查顺序，并说明至少一个 sliding window 或 summary + recent history 的 Trade-off。
+next_action: 完成 required exercise EX1：运行 examples/stage-01/ex1_message_prompt_langchain.py，并验证 canonical acceptance 要求的六条精确输出。
 next_chapter: curriculum/stage-01/02-structured-output.md
 migration_evidence_id: migration-20260819T215842
 ```
