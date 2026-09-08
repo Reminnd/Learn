@@ -607,3 +607,17 @@ user input / variables
 
 下一步：Canonical Q3 / attempt 1，针对 Message 历史增长给出可执行排查顺序，并说明至少一个控制策略的 Trade-off。
 <!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-4:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-Q3-attempt-1:start -->
+## Canonical Mastery Q3 / attempt 1
+
+状态：passed。该结果属于正式 mastery Q&A。
+
+用户给出了可执行的排查顺序：先检查 history 的增量机制，确认是否有 summary 逻辑、是否存在重复写入；再检查本轮 Messages/history 的累积是否异常；若增长本身符合预期，再进入上下文控制策略优化。该顺序已经满足“先确认异常增长来源，再决定优化”的工程排查要求。
+
+Trade-off 也已满足：用户选择 `summary + recent history` 时明确指出长对话的旧内容被摘要后可能失真，说明压缩历史虽然节省上下文，却可能牺牲细节保真度。
+
+教学跟进：用户表示尚未理解 `sliding window`。需要继续说明：sliding window 只让最近若干轮/若干 token 的原始 Messages 进入本轮模型上下文；窗口随着新消息到来向前移动，最旧消息被移出“本轮模型输入”，但不必从数据库或聊天日志中物理删除。它的优点是成本、延迟和上下文规模更可预测，并保留最近消息原文；主要代价是较早但仍重要的信息会在越过窗口后直接不可见。
+
+因此 canonical Q3 = passed。Chapter 01 仍未 mastered；下一步完成 required exercise EX1，并按 mastery rubric 做最终掌握判定。
+<!-- learn-agent:evidence:stage-01-ch01-Q3-attempt-1:end -->
