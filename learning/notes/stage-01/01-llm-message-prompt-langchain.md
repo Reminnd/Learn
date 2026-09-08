@@ -538,3 +538,21 @@ LangChain：user input / variables → ChatPromptTemplate → ChatPromptValue / 
 
 下一步：Canonical Q2 / attempt 2，只需重新写出原理侧与 LangChain 侧两条正确的数据流；attempt 1 已正确的对象、输入、输出映射继续保留。
 <!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-2:start -->
+## Canonical Mastery Q2 / attempt 2
+
+状态：needs_review。该结果属于正式 mastery Q&A，当前不计为 Q2 passed。
+
+- 已正确：两条数据流都把终点写到了本次模型输出，原理侧为 `assistant_message`，LangChain 侧为 `AIMessage`，没有再把 AIMessage 继续传回 model。
+- 待修正抽象层级：`system_message → prompt_message` 与 `Human_message → prompt_message` 不是本题要求的原理—框架数据流。`SystemMessage` / `HumanMessage` 是最终 Messages 中的具体消息类型，不是“运行时变量先经过的连续处理层”；而 `prompt_message` 也不是这里的标准抽象。
+
+应保持与本章原理一致：运行时输入先经过 Prompt 构造，再得到一组 Messages，最后交给模型。
+
+```text
+原理侧：user input / variables → prompt construction → list[Message] → model(messages) → assistant_message
+LangChain：user input / variables → ChatPromptTemplate → ChatPromptValue / Messages → chat_model.invoke(messages) → AIMessage
+```
+
+下一步：Canonical Q2 / attempt 3，只需按上述抽象层级重写两条数据流，不需要再解释对象、输入和输出。
+<!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-2:end -->
