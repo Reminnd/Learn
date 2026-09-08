@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 80
 last_checkpoint_at: '2026-09-08T14:41:10+08:00'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20260908T144110+0800-ch01-q2-attempt-1
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-09-08T14:41:10+08:00'
+  targets:
+    - asset_key: notes.root
+      relative_pointer: stage-01/01-llm-message-prompt-langchain.md
+      evidence_id: stage-01-ch01-Q2-attempt-1
+      operation: upsert
+      expected_change: 记录 canonical Q2 attempt 1 needs_review；对象与输入输出基本正确，但关键数据流错误
+      verified: false
+      error: null
+    - asset_key: qa.stage
+      relative_pointer: null
+      evidence_id: stage-01-ch01-Q2-attempt-1-ledger
+      operation: upsert
+      expected_change: 在 Stage 01 Q&A Ledger 记录 canonical Q2 attempt 1 needs_review
+      verified: false
+      error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
 deepseek_route_prompted_for:
@@ -55,8 +74,8 @@ project_track_status: deferred
 project_selection_prompted: true
 completed: []
 weak_points:
-- Canonical Q2：需要把原生 model(messages) 与 LangChain ChatModel.invoke(messages) 的对应对象、输入、输出和关键数据流完整说清。
-next_action: 完成 canonical mastery Q2 attempt 1：说明原理侧与 LangChain 框架侧的对应对象，并说清输入、输出与关键数据流。
+- Canonical Q2：需要把原生 model(messages) 与 LangChain ChatModel.invoke(messages) 的关键数据流方向完整说清；AIMessage 是模型输出，不是运行时变量，也不会自动再传回 model 生成用户消息。
+next_action: 完成 canonical mastery Q2 attempt 2：只重写正确数据流，保持原理侧与 LangChain 侧对象/输入/输出映射不变。
 next_chapter: curriculum/stage-01/02-structured-output.md
 migration_evidence_id: migration-20260819T215842
 ```
