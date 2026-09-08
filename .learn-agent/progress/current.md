@@ -23,7 +23,7 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-09-08：L1-CHECK-14 attempt 1 通过；理解完整 history 持续增长对 token、成本、延迟和 context window 的影响，并进入 history 控制策略。
+last_note_update: 2026-09-08：L1-CHECK-15 attempt 1 通过；掌握 sliding window 与 summary + recent history 的长期信息保留、成本与失真 Trade-off，本地概念检查完成并进入 canonical mastery Q1。
 last_section: 1.9 History 控制策略与 Trade-off
 teaching_mode: teacher
 mode_prompted_for: []
@@ -33,35 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: learning_check
-  topic: L1-CHECK-15 attempt 1
-  next_action: Compare sliding-window history with summary-plus-recent-history and explain the trade-off between cost and long-term information retention.
+  topic: Q1 attempt 1 (canonical mastery)
+  next_action: Answer why understanding the basic LLM application data flow is necessary, including the core causal relationship and at least one boundary or failure condition.
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 77
-last_checkpoint_at: '2026-09-08T14:21:36+08:00'
+checkpoint_version: 78
+last_checkpoint_at: '2026-09-08T14:27:44+08:00'
 last_checkpoint_reason: knowledge_event
-pending_writeback:
-  transaction_id: 20260908T142744+0800-ch01-l1-check-15-attempt-1
-  reason: knowledge_event
-  phase: prepared
-  started_at: '2026-09-08T14:27:44+08:00'
-  targets:
-    - asset_key: notes.root
-      relative_pointer: stage-01/01-llm-message-prompt-langchain.md
-      evidence_id: stage-01-ch01-L1-CHECK-15-attempt-1
-      operation: upsert
-      expected_change: 记录 summary + recent history 与 sliding window 的 Trade-off，并进入正式 Q1
-      verified: false
-      error: null
-    - asset_key: qa.stage
-      relative_pointer: null
-      evidence_id: stage-01-ch01-L1-CHECK-15-attempt-1-ledger
-      operation: upsert
-      expected_change: 在 Stage 01 Q&A Ledger 记录 L1-CHECK-15 attempt 1 passed
-      verified: false
-      error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
 deepseek_route_prompted_for:
@@ -73,9 +54,8 @@ code_ability_focus: LLM / Message / Prompt
 project_track_status: deferred
 project_selection_prompted: true
 completed: []
-weak_points:
-- 需要区分 sliding window 与 summary + recent history 的优缺点和适用边界。
-next_action: 完成 L1-CHECK-15 attempt 1：比较只保留最近若干条 Message 与摘要旧历史+保留最近历史两种策略的 Trade-off。
+weak_points: []
+next_action: 完成 canonical mastery Q1 attempt 1：解释为什么需要理解 LLM 应用最基本的数据流，给出核心因果关系，并说明至少一个适用边界或失败条件。
 next_chapter: curriculum/stage-01/02-structured-output.md
 migration_evidence_id: migration-20260819T215842
 ```
