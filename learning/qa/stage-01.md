@@ -102,3 +102,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-3-ledger:start -->
 - Canonical Q2 / attempt 3: needs_review — 原理侧已基本正确；LangChain 侧仍把 `chain.invoke(...)` 描述成接收已构造的 messages。若使用 `chain = prompt | model`，`chain.invoke(...)` 接收的是原始运行时变量，Prompt→Messages→Model 由链内部完成。下一次只复检 LangChain 数据流。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-3-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-4-ledger:start -->
+- Canonical Q2 / attempt 4: passed — 正确写出 LangChain 数据流 `user input / variables → ChatPromptTemplate → Messages → chat_model.invoke(messages) → AIMessage`。结合前序 attempts 已正确保留的对象、输入、输出与原理侧映射，正式 Q2 acceptance 全部满足；Q1/Q2 两个 critical question 均已通过。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-4-ledger:end -->
