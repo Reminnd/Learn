@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 75
 last_checkpoint_at: '2026-09-08T14:00:53+08:00'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20260908T140100+0800-ch01-l1-check-13-attempt-2
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-09-08T14:01:00+08:00'
+  targets:
+    - asset_key: notes.root
+      relative_pointer: stage-01/01-llm-message-prompt-langchain.md
+      evidence_id: stage-01-ch01-L1-CHECK-13-attempt-2
+      operation: upsert
+      expected_change: 记录第1、2、3轮 history 长度 2、4、6 的复检通过结果
+      verified: false
+      error: null
+    - asset_key: qa.stage
+      relative_pointer: null
+      evidence_id: stage-01-ch01-L1-CHECK-13-attempt-2-ledger
+      operation: upsert
+      expected_change: 在 Stage 01 Q&A Ledger 记录 L1-CHECK-13 attempt 2 passed
+      verified: false
+      error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
 deepseek_route_prompted_for:
