@@ -585,3 +585,25 @@ runtime variables → (prompt | model).invoke(...) → AIMessage
 
 下一步：Canonical Q2 / attempt 4，只需重写 LangChain 这一条数据流；原理侧与 attempt 1 已正确的对象、输入、输出映射均保留。
 <!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-3:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-4:start -->
+## Canonical Mastery Q2 / attempt 4
+
+状态：passed。该结果属于正式 mastery Q&A。
+
+用户正确写出 LangChain 数据流：
+
+```text
+user input / variables
+→ ChatPromptTemplate
+→ Messages
+→ chat_model.invoke(messages)
+→ AIMessage
+```
+
+其中 `Messages` 可更精确表示为 `ChatPromptValue / Messages`。结合前序 attempts 已正确保留的证据，Q2 的全部 acceptance 已满足：原理侧 `model` 对应 LangChain `chat_model` / ChatModel；两边模型调用都接收消息序列，分别输出 `assistant_message` 与 `AIMessage`；关键数据流分别为 `runtime input → prompt construction → Messages → model → assistant_message` 与 `runtime input → ChatPromptTemplate → ChatPromptValue / Messages → chat_model → AIMessage`。
+
+因此 canonical Q2 = passed。至此 Q1、Q2 两个 critical question 均已通过；Chapter 01 仍未 mastered，还需完成 Q3 / EX1 并满足整体 mastery rubric。
+
+下一步：Canonical Q3 / attempt 1，针对 Message 历史增长给出可执行排查顺序，并说明至少一个控制策略的 Trade-off。
+<!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-4:end -->
