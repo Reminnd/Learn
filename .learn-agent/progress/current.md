@@ -42,7 +42,12 @@ resume_contract:
 checkpoint_version: 83
 last_checkpoint_at: '2026-09-08T15:27:33+08:00'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage-01-ch01-Q2-attempt-4
+  status: prepared
+  targets:
+  - learning/notes/stage-01/01-llm-message-prompt-langchain.md
+  - learning/qa/stage-01.md
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
 deepseek_route_prompted_for:
