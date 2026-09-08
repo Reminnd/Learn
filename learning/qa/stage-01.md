@@ -98,3 +98,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-2-ledger:start -->
 - Canonical Q2 / attempt 2: needs_review — 已把两条数据流终点写到 `assistant_message` / `AIMessage`，但仍把具体 Message 类型误当成连续处理层；需按“输入变量 → Prompt 构造 → Messages → 模型 → 输出消息”的抽象层级再复检。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-2-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-3-ledger:start -->
+- Canonical Q2 / attempt 3: needs_review — 原理侧已基本正确；LangChain 侧仍把 `chain.invoke(...)` 描述成接收已构造的 messages。若使用 `chain = prompt | model`，`chain.invoke(...)` 接收的是原始运行时变量，Prompt→Messages→Model 由链内部完成。下一次只复检 LangChain 数据流。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-3-ledger:end -->
