@@ -556,3 +556,32 @@ LangChain：user input / variables → ChatPromptTemplate → ChatPromptValue / 
 
 下一步：Canonical Q2 / attempt 3，只需按上述抽象层级重写两条数据流，不需要再解释对象、输入和输出。
 <!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-2:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-3:start -->
+## Canonical Mastery Q2 / attempt 3
+
+状态：needs_review。该结果属于正式 mastery Q&A，当前不计为 Q2 passed。
+
+- 原理侧已基本正确：`user input / variables → prompt 构造 → message 输入 → model(messages) → 输出` 已表达出运行时输入先构造模型输入，再调用 model，最后得到模型输出；精确类型可写成 `list[Message] → assistant_message`。
+- LangChain 侧仍有一个关键错误：写成了 `chain = prompt | model → user input 转化为 message → chain.invoke(messages) → 输出`。如果使用 `chain = prompt | model`，`chain.invoke(...)` 的输入仍然是原始运行时变量；链内部先由 `ChatPromptTemplate` 将变量转换为 `ChatPromptValue / Messages`，再自动交给 `chat_model`。不能把已经构造好的 messages 再作为 `chain.invoke(...)` 的输入来描述这条映射。
+
+正确 LangChain 抽象：
+
+```text
+user input / variables
+→ ChatPromptTemplate
+→ ChatPromptValue / Messages
+→ chat_model.invoke(messages)
+→ AIMessage
+```
+
+等价的组合写法是：
+
+```text
+runtime variables → (prompt | model).invoke(...) → AIMessage
+```
+
+其中 Prompt→Messages→Model 的中间步骤由 Runnable 链封装执行。
+
+下一步：Canonical Q2 / attempt 4，只需重写 LangChain 这一条数据流；原理侧与 attempt 1 已正确的对象、输入、输出映射均保留。
+<!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-3:end -->
