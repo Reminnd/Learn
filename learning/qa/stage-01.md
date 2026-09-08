@@ -94,3 +94,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-1-ledger:start -->
 - Canonical Q2 / attempt 1: needs_review — 已正确映射原理侧 `model` ↔ LangChain `chat_model`，并正确说明两边输入 Message 序列、输出 assistant message / `AIMessage`；但关键数据流错误地把 `AIMessage` 当成运行时变量并再次传回 model。需仅复检正确数据流方向。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-2-ledger:start -->
+- Canonical Q2 / attempt 2: needs_review — 已把两条数据流终点写到 `assistant_message` / `AIMessage`，但仍把具体 Message 类型误当成连续处理层；需按“输入变量 → Prompt 构造 → Messages → 模型 → 输出消息”的抽象层级再复检。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-2-ledger:end -->
