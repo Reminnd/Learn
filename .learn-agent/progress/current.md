@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 76
 last_checkpoint_at: '2026-09-08T14:01:00+08:00'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20260908T142136+0800-ch01-l1-check-14-attempt-1
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-09-08T14:21:36+08:00'
+  targets:
+    - asset_key: notes.root
+      relative_pointer: stage-01/01-llm-message-prompt-langchain.md
+      evidence_id: stage-01-ch01-L1-CHECK-14-attempt-1
+      operation: upsert
+      expected_change: 记录完整 history 持续增长对 token、成本、延迟与 context window 的工程影响，并进入 history 控制策略
+      verified: false
+      error: null
+    - asset_key: qa.stage
+      relative_pointer: null
+      evidence_id: stage-01-ch01-L1-CHECK-14-attempt-1-ledger
+      operation: upsert
+      expected_change: 在 Stage 01 Q&A Ledger 记录 L1-CHECK-14 attempt 1 passed
+      verified: false
+      error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
 deepseek_route_prompted_for:
