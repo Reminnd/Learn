@@ -11,20 +11,20 @@ chapter_file: curriculum/stage-01/01-llm-message-prompt-langchain.md
 note_pointer: stage-01/01-llm-message-prompt-langchain.md
 qa_pointer: stage-01.md
 lifecycle_status: active
-learning_status: learning
+learning_status: mastered
 integrity:
   status: healthy
   missing: []
   reason: null
 mastery:
-  score: null
+  score: 82
   critical_questions_passed: true
-  dimension_floors_passed: false
-  required_exercises_passed: false
+  dimension_floors_passed: true
+  required_exercises_passed: true
   unresolved_critical_misconceptions: 0
-  mastered: false
-last_note_update: 2026-09-08：Canonical Q3 attempt 1 通过；已给出 Message history 增长的可执行排查顺序，并说明 summary + recent history 的细节失真 Trade-off；继续补充学习 sliding window。
-last_section: Canonical Mastery Q&A
+  mastered: true
+last_note_update: 2026-09-08：EX1 在 GitHub Codespaces 实际运行并输出六条 canonical acceptance 结果；Q1/Q2/Q3/EX1 结构化 evidence 与 mastery assessment 已提交，Chapter 01 以 82/100 正式 mastered。
+last_section: Chapter 01 Mastery Complete
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -32,29 +32,17 @@ session_mode: learning
 session_status: active
 current_activity: learning
 return_to:
-  activity: required_exercise
-  topic: EX1
-  next_action: Run examples/stage-01/ex1_message_prompt_langchain.py and verify the six exact acceptance output lines.
+  activity: chapter_transition
+  topic: 02-structured-output
+  next_action: Resolve the canonical successor from curriculum/index.md and begin Stage 01 Chapter 02 Structured Output with minimal context loading.
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 85
-last_checkpoint_at: '2026-09-08T15:52:20+08:00'
-last_checkpoint_reason: qa_complete
-pending_writeback:
-  transaction_id: 20260908T162300+0800-ch01-ex1-mastery
-  reason: exercise_complete
-  phase: prepared
-  started_at: 2026-09-08T16:23:00+08:00
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/01-llm-message-prompt-langchain.evidence.yaml
-    evidence_id: stage-01-ch01-mastery-evidence-bundle-q1a2-q2a4-q3a1-ex1a1
-    operation: upsert
-    expected_change: Persist structured latest-valid Q1/Q2/Q3 evidence, EX1 acceptance evidence, and the Chapter 01 mastery assessment.
-    verified: false
-    error: null
+checkpoint_version: 86
+last_checkpoint_at: '2026-09-08T16:29:31+08:00'
+last_checkpoint_reason: completion
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
 deepseek_route_prompted_for:
@@ -65,10 +53,10 @@ last_deepseek_route_decision: stay
 code_ability_focus: LLM / Message / Prompt
 project_track_status: deferred
 project_selection_prompted: true
-completed: []
-weak_points:
-- Sliding window：需要继续巩固“只控制本轮送入模型的最近上下文，不等于删除持久化聊天记录”的边界。
-next_action: 完成 required exercise EX1：运行 examples/stage-01/ex1_message_prompt_langchain.py，并验证 canonical acceptance 要求的六条精确输出。
+completed:
+- 01-llm-message-prompt-langchain
+weak_points: []
+next_action: 进入 Stage 01 Chapter 02 Structured Output；切章时从 curriculum/index.md 解析 canonical successor 并加载新章最小上下文。
 next_chapter: curriculum/stage-01/02-structured-output.md
 migration_evidence_id: migration-20260819T215842
 ```
