@@ -78,3 +78,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-14-attempt-1-ledger:start -->
 - L1-CHECK-14 / attempt 1: passed — 正确说明完整 history 持续增长会提高输入 token、成本和延迟，并持续占用 context window；补充纠正为 prompt cache 命中率不会仅因 history 变长就必然下降。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-14-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-15-attempt-1-ledger:start -->
+- L1-CHECK-15 / attempt 1: passed — 正确选择 `Summary + recent history` 以提高早期重要偏好的长期保留概率，并指出当旧信息与当前任务关联性弱时，持续携带 summary 会造成额外输入与处理开销；补充 Trade-off 为摘要还存在生成/维护成本与细节失真风险。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-15-attempt-1-ledger:end -->
