@@ -482,3 +482,15 @@ prompt.invoke(...)
 
 下一步：L1-CHECK-15 / attempt 1，比较 sliding window 与 summary + recent history 的保留能力和代价。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-14-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-15-attempt-1:start -->
+## L1-CHECK-15 / attempt 1
+
+状态：passed。用户正确选择 `Summary + recent history`，因为它比纯 sliding window 更有机会保留很早以前但仍重要的长期偏好。
+
+用户给出的 Trade-off 也成立：如果旧历史与当前任务关联性很弱，仍在每轮携带 summary 会占用输入 token 并增加处理开销。精度补充：不能永远默认选择该策略，还因为摘要本身需要生成和维护成本，并可能遗漏、扭曲或过度压缩原始细节；因此策略应根据任务是否需要长期信息、上下文预算和事实保真要求选择。
+
+本结果为局部检查通过，不等于 Chapter 01 mastered。
+
+本章局部概念检查已覆盖最小数据流、Messages、Prompt、Runnable、对话 history 与历史增长 Trade-off。下一步进入 canonical curriculum 定义的正式 mastery Q&A，从 critical question `Q1` 开始。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-15-attempt-1:end -->
