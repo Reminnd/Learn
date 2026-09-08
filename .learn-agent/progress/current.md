@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 84
 last_checkpoint_at: '2026-09-08T15:27:33+08:00'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20260908T155220+0800-ch01-q3
+  reason: qa_complete
+  phase: prepared
+  started_at: '2026-09-08T15:52:20+08:00'
+  targets:
+    - asset_key: notes.root
+      relative_pointer: stage-01/01-llm-message-prompt-langchain.md
+      evidence_id: stage-01-ch01-Q3-attempt-1
+      operation: upsert
+      expected_change: Record canonical Q3 pass, diagnosis order, summary trade-off, and sliding-window follow-up teaching.
+      verified: false
+      error: null
+    - asset_key: qa.stage
+      relative_pointer: stage-01.md
+      evidence_id: stage-01-ch01-Q3-attempt-1-ledger
+      operation: upsert
+      expected_change: Record canonical Q3 attempt 1 as passed.
+      verified: false
+      error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
 deepseek_route_prompted_for:
@@ -55,7 +74,7 @@ project_track_status: deferred
 project_selection_prompted: true
 completed: []
 weak_points:
-- Canonical Q3：需要针对 Message 历史增长给出可执行的排查顺序，并说明至少一个控制方案的 Trade-off。
+- Sliding window：需要继续巩固“只控制本轮送入模型的最近上下文，不等于删除持久化聊天记录”的边界。
 next_action: 完成 canonical mastery Q3 attempt 1：针对 Message 历史增长给出可执行排查顺序，并说明至少一个 sliding window 或 summary + recent history 的 Trade-off。
 next_chapter: curriculum/stage-01/02-structured-output.md
 migration_evidence_id: migration-20260819T215842
