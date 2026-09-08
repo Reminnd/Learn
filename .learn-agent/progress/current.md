@@ -23,7 +23,7 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-09-08：L1-CHECK-13 attempt 1 needs_review；只给出第 3 轮长度 6，需补全第 1、2、3 轮长度。
+last_note_update: 2026-09-08：L1-CHECK-13 attempt 2 通过；正确给出 history 长度 2、4、6，并掌握每轮新增两条 Message 的线性增长规律。
 last_section: 1.8 Message 历史增长
 teaching_mode: teacher
 mode_prompted_for: []
@@ -33,35 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: learning_check
-  topic: L1-CHECK-13 attempt 2
-  next_action: Provide the history lengths after turns 1, 2, and 3 in order.
+  topic: L1-CHECK-14 attempt 1
+  next_action: Explain the direct engineering problems caused by sending an ever-growing full message history on every model call.
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 75
-last_checkpoint_at: '2026-09-08T14:00:53+08:00'
+checkpoint_version: 76
+last_checkpoint_at: '2026-09-08T14:01:00+08:00'
 last_checkpoint_reason: knowledge_event
-pending_writeback:
-  transaction_id: 20260908T140100+0800-ch01-l1-check-13-attempt-2
-  reason: knowledge_event
-  phase: prepared
-  started_at: '2026-09-08T14:01:00+08:00'
-  targets:
-    - asset_key: notes.root
-      relative_pointer: stage-01/01-llm-message-prompt-langchain.md
-      evidence_id: stage-01-ch01-L1-CHECK-13-attempt-2
-      operation: upsert
-      expected_change: 记录第1、2、3轮 history 长度 2、4、6 的复检通过结果
-      verified: false
-      error: null
-    - asset_key: qa.stage
-      relative_pointer: null
-      evidence_id: stage-01-ch01-L1-CHECK-13-attempt-2-ledger
-      operation: upsert
-      expected_change: 在 Stage 01 Q&A Ledger 记录 L1-CHECK-13 attempt 2 passed
-      verified: false
-      error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
 deepseek_route_prompted_for:
@@ -74,9 +55,8 @@ project_track_status: deferred
 project_selection_prompted: true
 completed: []
 weak_points:
-- 需要准确计算每轮追加两条 Message 时 history 的线性增长。
 - 需要进一步理解 history 持续增长对 token、成本、延迟和 context window 的影响。
-next_action: 完成 L1-CHECK-13 attempt 2：按顺序给出第 1、2、3 轮结束后的 len(history)。
+next_action: 完成 L1-CHECK-14 attempt 1：说明每次都发送完整且不断增长的 history 会带来哪些直接工程问题。
 next_chapter: curriculum/stage-01/02-structured-output.md
 migration_evidence_id: migration-20260819T215842
 ```
