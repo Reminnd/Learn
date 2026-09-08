@@ -7,7 +7,7 @@ stage_id: stage-01
 chapter_id: 01-llm-message-prompt-langchain
 lifecycle_status: active
 learning_status: learning
-last_updated: 2026-09-07
+last_updated: 2026-09-08
 ```
 
 ## 重学说明
@@ -422,3 +422,21 @@ prompt.invoke(...)
 
 下一步：L1-CHECK-12 / attempt 1，检查 Runnable 组合是否自动提供跨调用对话记忆。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-11-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-12-attempt-1:start -->
+## L1-CHECK-12 / attempt 1
+
+状态：passed。用户正确判断：复用同一个 `chain = prompt | model` 对象，不会自动让第二次 `invoke(...)` 记住第一次调用。若没有显式传入 `history`、state 或接入其他持久化/记忆机制，两次调用在对话状态上仍是独立的。
+
+教学精度补充：`chain` 表示一套可复用的执行组合与数据流，不等于对话状态存储。对象被复用，只说明同一套 Prompt→Model 逻辑被再次执行；是否有记忆取决于调用时是否把历史状态显式带入，或是否额外接入状态管理机制。
+
+本结果为局部检查通过，不等于 Chapter 01 mastered。
+
+## 1.8 Message 历史增长
+
+当应用每轮都把旧 `history` 重新传入，并把本轮 `HumanMessage` 与 `AIMessage` 再加入历史时，消息列表会持续增长。若每轮新增一条用户消息和一条模型消息，那么完成 `n` 轮后，单纯按消息条数计算，历史会新增 `2n` 条消息。
+
+历史增长会带来三个直接工程影响：输入 token 增加、调用成本/延迟上升、最终可能触及模型 context window。后续工程实现不能只问“有没有 history”，还要考虑“保留多少 history、如何裁剪或摘要、哪些信息必须长期保存”。
+
+下一步：L1-CHECK-13 / attempt 1，用最小例子检查 history 长度增长。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-12-attempt-1:end -->
