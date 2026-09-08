@@ -106,3 +106,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-4-ledger:start -->
 - Canonical Q2 / attempt 4: passed — 正确写出 LangChain 数据流 `user input / variables → ChatPromptTemplate → Messages → chat_model.invoke(messages) → AIMessage`。结合前序 attempts 已正确保留的对象、输入、输出与原理侧映射，正式 Q2 acceptance 全部满足；Q1/Q2 两个 critical question 均已通过。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-4-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-Q3-attempt-1-ledger:start -->
+- Canonical Q3 / attempt 1: passed — 给出可执行排查顺序：先检查 history 增量机制、summary 与重复写入，再检查本轮 Messages/history 累积是否异常，确认增长正常后再选择上下文控制策略；并指出 `summary + recent history` 的 Trade-off 是长对话旧内容摘要后可能失真。用户同时请求继续学习 sliding window。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-Q3-attempt-1-ledger:end -->
