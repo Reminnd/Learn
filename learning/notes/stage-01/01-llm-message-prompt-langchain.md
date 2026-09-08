@@ -158,8 +158,7 @@ def build_messages(topic: str, language: str) -> list[Message]:
     return [
         Message(
             role="system",
-            content="Explain concepts accurately and briefly.",
-        ),
+            content="Explain concepts accurately and briefly."),
         Message(
             role="user",
             content=f"Explain {topic} in {language}."),
@@ -440,3 +439,11 @@ prompt.invoke(...)
 
 下一步：L1-CHECK-13 / attempt 1，用最小例子检查 history 长度增长。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-12-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-13-attempt-1:start -->
+## L1-CHECK-13 / attempt 1
+
+状态：needs_review。用户回答 `6`，该值对应第 3 轮结束后的 history 长度，但题目要求同时给出第 1、2、3 轮结束后的三个长度，因此回答不完整。
+
+下一步：L1-CHECK-13 / attempt 2，只需按顺序给出第 1、2、3 轮结束后的 `len(history)`。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-13-attempt-1:end -->
