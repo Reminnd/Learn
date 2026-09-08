@@ -62,3 +62,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-11-attempt-1-ledger:start -->
 - L1-CHECK-11 / attempt 1: passed — 正确区分 `prompt.invoke(...)` 只构造可供模型使用的 Prompt/Messages，而 `(prompt | model).invoke(...)` 会继续调用 model 并返回模型生成的消息。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-11-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-12-attempt-1-ledger:start -->
+- L1-CHECK-12 / attempt 1: passed — 正确判断复用同一个 Runnable `chain` 不会自动提供跨调用记忆；若未显式传入 `history`/state 或接入状态管理机制，两次 invoke 在对话状态上仍独立。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-12-attempt-1-ledger:end -->
