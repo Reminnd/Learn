@@ -66,3 +66,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-12-attempt-1-ledger:start -->
 - L1-CHECK-12 / attempt 1: passed — 正确判断复用同一个 Runnable `chain` 不会自动提供跨调用记忆；若未显式传入 `history`/state 或接入状态管理机制，两次 invoke 在对话状态上仍独立。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-12-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-13-attempt-1-ledger:start -->
+- L1-CHECK-13 / attempt 1: needs_review — 回答 `6` 只覆盖第 3 轮结束后的 history 长度，未按要求给出第 1、2、3 轮三个长度。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-13-attempt-1-ledger:end -->
