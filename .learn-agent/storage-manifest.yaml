@@ -16,5 +16,20 @@ paths:
   progress.code_ability: learning/progress/code-ability.md
   project.root: learning/project
   adr.root: learning/adr
+persistence:
+  checkpoint_batching:
+    enabled: true
+    max_checkpoints: 3
+    volatile_until_flush: true
+    checkpoint_version_mode: advance_by_buffered_count
+    flush_on:
+      - needs_review
+      - section_boundary
+      - chapter_boundary
+      - mastery_sensitive
+      - pause_or_stop
+      - completion
+      - conversation_handoff
+      - explicit_checkpoint
 sync_targets: []
 backend_id: learn-agent-github-main
