@@ -520,3 +520,21 @@ prompt.invoke(...)
 
 下一步：Canonical Q2 / attempt 1，说明原生模型调用与 LangChain ChatModel 的原理—框架映射，包括对应对象、输入、输出与关键数据流。
 <!-- learn-agent:evidence:stage-01-ch01-Q1-attempt-2:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-1:start -->
+## Canonical Mastery Q2 / attempt 1
+
+状态：needs_review。该结果属于正式 mastery Q&A，当前不计为 Q2 passed。
+
+- 已正确：原理侧的 `model` 对应 LangChain 的 `chat_model` / ChatModel；两边都接收 Message 序列作为模型输入。原理侧返回 `assistant_message`，LangChain 侧返回结构化的 `AIMessage`。
+- 待修正关键数据流：回答把 `AIMessage` 误写成“输出的运行时变量”，并继续传回 model 再生成“用户消息”。`AIMessage` 是本次模型调用的输出，不是运行时变量；在当前最小映射里，数据流到 `AIMessage` 即完成。只有应用显式保存并在下一轮把历史重新组合进新的 Messages 时，旧的 AIMessage 才可能作为下一轮上下文的一部分再次进入模型。
+
+正确方向应表达为：
+
+```text
+原理侧：user input / variables → prompt construction → list[Message] → model(messages) → assistant_message
+LangChain：user input / variables → ChatPromptTemplate → ChatPromptValue / Messages → chat_model.invoke(messages) → AIMessage
+```
+
+下一步：Canonical Q2 / attempt 2，只需重新写出原理侧与 LangChain 侧两条正确的数据流；attempt 1 已正确的对象、输入、输出映射继续保留。
+<!-- learn-agent:evidence:stage-01-ch01-Q2-attempt-1:end -->
