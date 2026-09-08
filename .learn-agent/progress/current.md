@@ -42,7 +42,19 @@ resume_contract:
 checkpoint_version: 85
 last_checkpoint_at: '2026-09-08T15:52:20+08:00'
 last_checkpoint_reason: qa_complete
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20260908T162300+0800-ch01-ex1-mastery
+  reason: exercise_complete
+  phase: prepared
+  started_at: 2026-09-08T16:23:00+08:00
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/01-llm-message-prompt-langchain.evidence.yaml
+    evidence_id: stage-01-ch01-mastery-evidence-bundle-q1a2-q2a4-q3a1-ex1a1
+    operation: upsert
+    expected_change: Persist structured latest-valid Q1/Q2/Q3 evidence, EX1 acceptance evidence, and the Chapter 01 mastery assessment.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
 deepseek_route_prompted_for:
