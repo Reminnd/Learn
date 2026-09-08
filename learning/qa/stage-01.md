@@ -70,3 +70,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-13-attempt-1-ledger:start -->
 - L1-CHECK-13 / attempt 1: needs_review — 回答 `6` 只覆盖第 3 轮结束后的 history 长度，未按要求给出第 1、2、3 轮三个长度。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-13-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-13-attempt-2-ledger:start -->
+- L1-CHECK-13 / attempt 2: passed — 正确给出第 1、2、3 轮结束后的 history 长度为 `2, 4, 6`，并掌握每轮新增两条 Message 时的线性增长规律。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-13-attempt-2-ledger:end -->
