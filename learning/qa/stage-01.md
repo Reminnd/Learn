@@ -86,3 +86,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-Q1-attempt-1-ledger:start -->
 - Canonical Q1 / attempt 1: needs_review — 已给出有效边界/失败条件（schema 未校验、Tool 参数不符合要求、model 输出可能错误），但“理解数据流为何能帮助开发和排障”的核心因果关系表达不足；需补充分层输入/输出职责使故障可定位。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-Q1-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-Q1-attempt-2-ledger:start -->
+- Canonical Q1 / attempt 2: passed — 能沿 Prompt、Messages、Model、Tool/Application 的数据传递路径用断点式检查定位第一个异常位置；结合 attempt 1 已给出的失败条件，正式 Q1 两项 acceptance 均满足。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-Q1-attempt-2-ledger:end -->
