@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 82
 last_checkpoint_at: '2026-09-08T15:21:00+08:00'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20260908T152733+0800-ch01-q2-attempt-3
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-09-08T15:27:33+08:00'
+  targets:
+    - asset_key: notes.root
+      relative_pointer: stage-01/01-llm-message-prompt-langchain.md
+      evidence_id: stage-01-ch01-Q2-attempt-3
+      operation: upsert
+      expected_change: 记录 Q2 attempt 3 needs_review；原理侧抽象基本正确，LangChain 侧误把 chain.invoke 的输入写成 messages
+      verified: false
+      error: null
+    - asset_key: qa.stage
+      relative_pointer: null
+      evidence_id: stage-01-ch01-Q2-attempt-3-ledger
+      operation: upsert
+      expected_change: 在 Stage 01 Q&A Ledger 记录 Q2 attempt 3 needs_review
+      verified: false
+      error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
 deepseek_route_prompted_for:
@@ -55,7 +74,7 @@ project_track_status: deferred
 project_selection_prompted: true
 completed: []
 weak_points:
-- Canonical Q2：仍需把具体 Message 类型与处理层区分开；正确抽象是输入变量 → Prompt 构造 → Messages → 模型调用 → 模型输出。
+- Canonical Q2：原理侧抽象层级已基本正确；LangChain 侧需要明确 `ChatPromptTemplate` 先把运行时变量转为 `ChatPromptValue / Messages`，再交给 `chat_model`。若使用 `chain = prompt | model`，`chain.invoke(...)` 接收的是运行时变量，而不是已构造的 messages。
 next_action: 完成 canonical mastery Q2 attempt 3：只写两条数据流。原理侧 user input/variables → prompt construction → list[Message] → model(messages) → assistant_message；LangChain 侧 user input/variables → ChatPromptTemplate → ChatPromptValue/Messages → chat_model.invoke(messages) → AIMessage。
 next_chapter: curriculum/stage-01/02-structured-output.md
 migration_evidence_id: migration-20260819T215842
