@@ -1,0 +1,96 @@
+# bundle_evidence_id: stage-01-ch01-mastery-evidence-bundle-q1a2-q2a4-q3a1-ex1a1
+---
+kind: question_attempt
+evidence_id: stage-01-ch01-Q1-attempt-2
+contract_chapter_id: stage-01-01-llm-message-prompt-langchain
+question_id: Q1
+attempt: 2
+answer_ref: learning/notes/stage-01/01-llm-message-prompt-langchain.md / Canonical Mastery Q1 attempts 1-2
+acceptance_snapshot:
+  - 给出核心因果关系，而不是只复述定义
+  - 说明至少一个适用边界或失败条件
+acceptance_results:
+  - criterion: 给出核心因果关系，而不是只复述定义
+    satisfied: true
+    evidence: 用户说明理解分层数据流可以判断数据传到哪个位置开始出错，并通过断点式检查定位 Prompt、Messages、Model、Tool/Application 中的故障层。
+  - criterion: 说明至少一个适用边界或失败条件
+    satisfied: true
+    evidence: 用户指出未经过 schema 校验的输入、model 调用 Tool 时参数不符合 Tool 要求，以及 model 输出错误，都可能导致业务失败。
+core_model_conflict:
+  detected: false
+  evidence: 最终答案与本章核心模型一致：数据流分层用于定位故障，同时承认结构正确不保证模型或 Tool 的业务结果正确。
+passed: true
+---
+kind: question_attempt
+evidence_id: stage-01-ch01-Q2-attempt-4
+contract_chapter_id: stage-01-01-llm-message-prompt-langchain
+question_id: Q2
+attempt: 4
+answer_ref: learning/notes/stage-01/01-llm-message-prompt-langchain.md / Canonical Mastery Q2 attempts 1-4
+acceptance_snapshot:
+  - 明确原理侧与框架侧的对应对象
+  - 说清输入、输出与关键数据流
+acceptance_results:
+  - criterion: 明确原理侧与框架侧的对应对象
+    satisfied: true
+    evidence: 用户在 staged retest 中正确给出原理侧 model 对应 LangChain chat_model / ChatModel；该已满足子项在后续只复检缺失数据流时被明确保留。
+  - criterion: 说清输入、输出与关键数据流
+    satisfied: true
+    evidence: 用户最终写出 LangChain 数据流 user input / variables → ChatPromptTemplate → Messages → chat_model.invoke(messages) → AIMessage；原理侧已写出 runtime input → prompt 构造 → Messages → model(messages) → assistant_message。
+core_model_conflict:
+  detected: false
+  evidence: 最终数据流不再把 AIMessage 当作运行时变量或再次自动传回 model，并正确区分 Prompt 构造层、Messages 和模型调用层。
+passed: true
+---
+kind: question_attempt
+evidence_id: stage-01-ch01-Q3-attempt-1
+contract_chapter_id: stage-01-01-llm-message-prompt-langchain
+question_id: Q3
+attempt: 1
+answer_ref: learning/notes/stage-01/01-llm-message-prompt-langchain.md / Canonical Mastery Q3 attempt 1
+acceptance_snapshot:
+  - 给出可执行的排查顺序
+  - 说明至少一个方案 Trade-off
+acceptance_results:
+  - criterion: 给出可执行的排查顺序
+    satisfied: true
+    evidence: 用户按顺序检查 history 增量机制、summary 与重复写入，再检查 Messages/history 累积是否异常，确认增长正常后才进入上下文控制策略优化。
+  - criterion: 说明至少一个方案 Trade-off
+    satisfied: true
+    evidence: 用户选择 summary + recent history，并指出长对话旧内容被摘要后可能失真，体现上下文压缩与细节保真之间的 Trade-off。
+core_model_conflict:
+  detected: false
+  evidence: 排查顺序与本章 Message history 增长模型一致，且没有把历史控制误解为模型自动记忆。
+passed: true
+---
+kind: exercise_attempt
+evidence_id: stage-01-ch01-EX1-attempt-1
+contract_chapter_id: stage-01-01-llm-message-prompt-langchain
+exercise_id: EX1
+attempt: 1
+artifact_ref: GitHub Codespaces /workspaces/Learn@main — python examples/stage-01/ex1_message_prompt_langchain.py
+acceptance_snapshot:
+  - 实际运行 `examples/stage-01/ex1_message_prompt_langchain.py`，并观察到所有输出行：`principle_roles=user,assistant`、`history_lengths=2,4,6`、`framework_roles=HumanMessage,AIMessage`、`responses_equal=true`、`external_api=not_used`、`EX1=PASS`
+  - 上述精确输出必须可观察且可机械验证；canonical curriculum 仍是 learning acceptance authority，example 不是 mastery authority
+acceptance_results:
+  - criterion: 实际运行 `examples/stage-01/ex1_message_prompt_langchain.py`，并观察到所有输出行：`principle_roles=user,assistant`、`history_lengths=2,4,6`、`framework_roles=HumanMessage,AIMessage`、`responses_equal=true`、`external_api=not_used`、`EX1=PASS`
+    satisfied: true
+    evidence: GitHub Codespaces 终端实际输出六行：principle_roles=user,assistant；history_lengths=2,4,6；framework_roles=HumanMessage,AIMessage；responses_equal=true；external_api=not_used；EX1=PASS。
+  - criterion: 上述精确输出必须可观察且可机械验证；canonical curriculum 仍是 learning acceptance authority，example 不是 mastery authority
+    satisfied: true
+    evidence: 用户提供了 Codespaces 的完整 stdout，六行与当前 canonical curriculum 的 acceptance 文本逐项一致；判定依据使用 curriculum contract，而不是仅依赖示例脚本自身的 PASS 字符串。
+accepted: true
+---
+kind: mastery_assessment
+evidence_id: stage-01-ch01-mastery-q1a2-q2a4-q3a1
+contract_chapter_id: stage-01-01-llm-message-prompt-langchain
+source_evidence_ids:
+  - stage-01-ch01-Q1-attempt-2
+  - stage-01-ch01-Q2-attempt-4
+  - stage-01-ch01-Q3-attempt-1
+dimension_scores:
+  conceptual_understanding: 22
+  causal_and_dataflow: 17
+  application_and_framework_mapping: 15
+  debugging_and_troubleshooting: 16
+  migration_boundaries_and_tradeoffs: 12
