@@ -174,7 +174,7 @@ second_messages = build_messages("RAG", "English")
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-3-attempt-1:start -->
 ## L1-CHECK-3 / attempt 1
 
-状态：passed。用户正确区分定义函数与调用函数，并指出返回值为 list[Message]。
+状态：passed。用户正确区分定义、调用与 list[Message] 返回类型。
 
 教学精度补充：执行 def 创建函数对象，不执行函数体；每次调用时才计算 f-string、创建 Message 和列表并执行 return。类型注解描述预期类型，不是返回值本身。本次为局部检查通过，不代表整章 mastered。
 
@@ -494,3 +494,14 @@ prompt.invoke(...)
 
 本章局部概念检查已覆盖最小数据流、Messages、Prompt、Runnable、对话 history 与历史增长 Trade-off。下一步进入 canonical curriculum 定义的正式 mastery Q&A，从 critical question `Q1` 开始。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-15-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-Q1-attempt-1:start -->
+## Canonical Mastery Q1 / attempt 1
+
+状态：needs_review。该结果属于正式 mastery Q&A，当前不计为 Q1 passed。
+
+- 已满足边界/失败条件：用户指出未经 schema 校验的输入可能进入后续流程，model 调用 Tool 时若参数不符合 Tool schema 会失败；同时 model 输出本身也可能错误。这些例子说明即使主数据流结构成立，业务结果仍不保证正确。
+- 待补核心因果关系：回答目前主要说明“理解详细流程”，但还没有明确说明为什么这会直接帮助开发与排障。需要补充：因为 Prompt、Messages、Model、Tool/应用处理各层都有明确输入输出职责，理解数据如何逐层流动，才能在结果异常时定位是 Prompt 构造、消息组织、模型输出、Tool 参数还是应用处理的问题，而不是把所有错误都归因于 model。
+
+下一步：Q1 / attempt 2，只补“为什么理解分层数据流能帮助定位故障”这一因果关系；attempt 1 已给出的失败条件可继续作为本题边界证据。
+<!-- learn-agent:evidence:stage-01-ch01-Q1-attempt-1:end -->
