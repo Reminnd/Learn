@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 79
 last_checkpoint_at: '2026-09-08T14:36:13+08:00'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20260908T144110+0800-ch01-q1-attempt-2
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-09-08T14:41:10+08:00'
+  targets:
+    - asset_key: notes.root
+      relative_pointer: stage-01/01-llm-message-prompt-langchain.md
+      evidence_id: stage-01-ch01-Q1-attempt-2
+      operation: upsert
+      expected_change: 记录 canonical Q1 attempt 2 passed，并确认 attempt 1 的失败条件与本次核心因果关系合并满足 Q1 acceptance
+      verified: false
+      error: null
+    - asset_key: qa.stage
+      relative_pointer: null
+      evidence_id: stage-01-ch01-Q1-attempt-2-ledger
+      operation: upsert
+      expected_change: 在 Stage 01 Q&A Ledger 记录 canonical Q1 attempt 2 passed
+      verified: false
+      error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
 deepseek_route_prompted_for:
