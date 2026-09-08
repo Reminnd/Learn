@@ -447,3 +447,15 @@ prompt.invoke(...)
 
 下一步：L1-CHECK-13 / attempt 2，只需按顺序给出第 1、2、3 轮结束后的 `len(history)`。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-13-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-13-attempt-2:start -->
+## L1-CHECK-13 / attempt 2
+
+状态：passed。用户正确给出第 1、2、3 轮结束后的 `len(history)`：`2, 4, 6`。
+
+规律：若每轮固定追加一条 `HumanMessage` 和一条 `AIMessage`，且初始 history 为空，则完成 `n` 轮后 `len(history) = 2n`。
+
+本结果为局部检查通过，不等于 Chapter 01 mastered。
+
+下一步：L1-CHECK-14 / attempt 1，说明完整 history 持续增长时会带来哪些直接工程问题。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-13-attempt-2:end -->
