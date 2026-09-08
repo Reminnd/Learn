@@ -74,3 +74,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-13-attempt-2-ledger:start -->
 - L1-CHECK-13 / attempt 2: passed — 正确给出第 1、2、3 轮结束后的 history 长度为 `2, 4, 6`，并掌握每轮新增两条 Message 时的线性增长规律。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-13-attempt-2-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-14-attempt-1-ledger:start -->
+- L1-CHECK-14 / attempt 1: passed — 正确说明完整 history 持续增长会提高输入 token、成本和延迟，并持续占用 context window；补充纠正为 prompt cache 命中率不会仅因 history 变长就必然下降。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-14-attempt-1-ledger:end -->
