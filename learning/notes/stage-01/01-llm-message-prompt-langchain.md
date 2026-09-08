@@ -459,3 +459,26 @@ prompt.invoke(...)
 
 下一步：L1-CHECK-14 / attempt 1，说明完整 history 持续增长时会带来哪些直接工程问题。
 <!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-13-attempt-2:end -->
+
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-14-attempt-1:start -->
+## L1-CHECK-14 / attempt 1
+
+状态：passed。用户正确说明完整且持续增长的 `history` 会让模型每轮接收更多输入 token，从而提高调用成本，并因为需要处理更长输入而增加延迟；同时会持续占用有限的 context window，最终可能触及窗口上限，导致请求失败、历史被裁剪或重要上下文无法完整放入本轮输入。
+
+精度补充：`prompt cache` 的命中率并不会仅因为 history 变长就必然下降。若请求前缀保持一致，已有前缀仍可能命中缓存；但每轮新增的 history 尾部仍会增加需要处理的输入量，因此缓存不能消除历史无限增长本身的问题。
+
+本结果为局部检查通过，不等于 Chapter 01 mastered。
+
+## 1.9 History 控制策略与 Trade-off
+
+面对持续增长的 history，最小可行策略不是“全部保留”或“全部删除”，而是控制进入本轮模型调用的上下文规模。
+
+常见两类思路：
+
+1. **Sliding window（滑动窗口）**：只保留最近若干条/若干轮 Message。优点是简单、稳定、成本可预测；缺点是较早的重要事实可能被直接丢弃。
+2. **Summary + recent history（摘要 + 最近历史）**：把较旧对话压缩成摘要，再保留最近若干轮原始 Message。优点是能用较少 token 保留部分长期信息；缺点是摘要本身有生成成本，而且可能遗漏、扭曲或过度压缩细节。
+
+工程上不能只看“token 越少越好”。真正要权衡的是：上下文成本、延迟、事实保真度、长期信息保留，以及摘要/裁剪策略自身的复杂度。
+
+下一步：L1-CHECK-15 / attempt 1，比较 sliding window 与 summary + recent history 的保留能力和代价。
+<!-- learn-agent:evidence:stage-01-ch01-L1-CHECK-14-attempt-1:end -->
