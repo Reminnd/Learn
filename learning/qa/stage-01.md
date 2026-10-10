@@ -215,9 +215,16 @@
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-3-guided-explanation-ledger:end -->
 
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-4-ledger:start -->
-- L2-CHECK-13 / attempt 4: needs_review。预测A恢复执行会自动重判if；已纠正：if判断为真进入分支后，即使变量变化也不会自动重判。下一题用简单if代码复检。
+- L2-CHECK-13 / attempt 4: passed（更正）— 用户实际回答“直接继续执行”，正确判断if分支不会自动重新检查。
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-4-ledger:end -->
 
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-14-attempt1-mysql-unique-ledger:start -->
 - L2-CHECK-14 / attempt 1: passed — 正确判断MySQL UNIQUE约束拒绝重复插入，不会自动返回已有订单。下一步SQLAlchemy IntegrityError后的session.rollback与查询；需保留L2-CHECK-13 attempt 5薄弱点。
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-14-attempt1-mysql-unique-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-15-attempts1-3-ledger:start -->
+- L2-CHECK-15 attempt 1: partial — 指出rollback恢复Session可用，事务回滚范围由教学补充。
+- L2-CHECK-15 attempt 2: partial — 判断未提交库存会被rollback撤销，但未给原因。
+- L2-CHECK-15 attempt 3: passed — 独立事务A已commit的库存修改不能被事务B rollback撤销，回答及原因完整。
+- L2-CHECK-13 attempt 4: evidence correction — 实际回答“直接继续执行”，先前标为错误是记录偏差，已纠正。
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-15-attempts1-3-ledger:end -->
