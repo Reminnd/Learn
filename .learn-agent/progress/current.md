@@ -23,7 +23,7 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-10：L2-CHECK-2 Pydantic strict 校验通过；L2-CHECK-3 attempt 2 正确预测 ACD，继续复检 raise 与 except 的跳转机制。
+last_note_update: 2026-10-10：L2-CHECK-3 attempt 3 部分正确，仍需掌握不匹配的 except 会让 ValueError 向外传播并阻断后续执行。
 last_section: 2.3 ValidationError 与异常处理
 teaching_mode: teacher
 mode_prompted_for: []
@@ -33,42 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: knowledge_check
-  topic: L2-CHECK-3 / attempt 3
-  next_action: 判断抛出 ValueError 但 except TypeError 时的输出及异常传播。
+  topic: L2-CHECK-3 / attempt 4
+  next_action: 对比两个 except 分支，解释匹配捕获后为何能执行后续 D。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 91
-last_checkpoint_at: '2026-10-10T04:24:08.395Z'
+checkpoint_version: 92
+last_checkpoint_at: '2026-10-10T04:29:12.342Z'
 last_checkpoint_reason: knowledge_event
-pending_writeback:
-  transaction_id: ch02-Q3-a3-20261010
-  reason: knowledge_event
-  phase: prepared
-  started_at: '2026-10-10T04:29:12.342Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/02-structured-output.md
-    evidence_id: stage-01-ch02-L2-CHECK-3-attempt-3
-    operation: upsert
-    expected_change: Store failed prediction for uncaught ValueError and targeted correction.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage-01-ch02-L2-CHECK-3-attempt-3-ledger
-    operation: upsert
-    expected_change: Record needs_review and next targeted retest.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: bug-stage-01-ch02-unhandled-valueerror
-    operation: upsert
-    expected_change: Record confusion about propagation of unmatched exceptions.
-    verified: false
-    error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
@@ -82,8 +56,8 @@ project_selection_prompted: true
 completed:
 - 01-llm-message-prompt-langchain
 weak_points:
-- 需巩固 TypeError / ValidationError 的异常抛出、except 捕获与后续代码执行流。
-next_action: L2-CHECK-3 attempt 3：区分匹配和不匹配的异常捕获并解释为什么跳过后续 try 语句。
+- 抛出 ValueError、except TypeError 不匹配时异常会传播并阻断后续正常执行；需复检。
+next_action: L2-CHECK-3 attempt 4：确认匹配捕获使流程恢复，随后继续 Pydantic e.errors()。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
