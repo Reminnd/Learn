@@ -114,3 +114,13 @@ class ProductWithDefault(BaseModel):
 
 与可空注解区分：`currency: str | None` 仍 required，只是值可以为 None；`currency: str | None = None` 才是可不传。下一步进行同一核心规则的 targeted retest，之后推进 errors() 与 FastAPI。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-4-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-4-attempt-2:start -->
+## L2-CHECK-4 / attempt 2
+状态：passed。用户正确回答 ProductA 因 currency 无默认值而必填，缺失字段产生 ValidationError；ProductB 有默认值 currency="CNY"，输入仅 price=199 也能校验成功。
+
+## 2.5 FastAPI 请求体验证
+Pydantic BaseModel 可声明 FastAPI 请求体 Schema。FastAPI 在运行 endpoint 主体前验证请求；字段不合格时默认返回 HTTP 422，并附带错误详情。
+示例：ProductIn 的 price 定义为 Field(gt=0)，currency 定义为默认 "CNY"。POST /products 请求 {"price": -20} 会在请求体校验阶段失败，不会执行 endpoint 函数体。
+下一步 L2-CHECK-5：判断 HTTP 返回码及函数是否执行。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-4-attempt-2:end -->
