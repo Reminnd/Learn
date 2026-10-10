@@ -154,3 +154,7 @@
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-6-attempt-1-ledger:start -->
 - L2-CHECK-6 / attempt 1: needs_review。回答将ProductIn与AIMessage合为单一对象；已澄清默认返回ProductIn实例、include_raw=True返回raw和parsed。待L2-CHECK-6 attempt 2复检。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-6-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-6-attempt-2-ledger:start -->
+- L2-CHECK-6 / attempt 2: passed — 正确判断product是ProductIn实例，.price可读、无content字段时.content报AttributeError；进入Structured Output解析错误处理。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-6-attempt-2-ledger:end -->
