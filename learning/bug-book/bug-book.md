@@ -41,3 +41,13 @@
 - 避免：沿代码逐行标出引发异常的位置、捕获入口与捕获块之后的下一条语句。
 - 状态：open；等待 L2-CHECK-3 attempt 2 复检。
 <!-- learn-agent:evidence:bug-stage-01-ch02-raise-vs-except:end -->
+
+<!-- learn-agent:evidence:bug-stage-01-ch02-unhandled-valueerror:start -->
+## 未捕获的 ValueError 不会继续正常执行
+- 症状：预测 raise ValueError、只有 except TypeError 时输出 AD。
+- 错误模型：异常不匹配只跳过 except 分支，后续正常代码仍会执行。
+- 根因：遗漏未捕获异常的向外传播及其对当前执行流程的中断作用。
+- 修复：只有匹配的 except 捕获并正常处理后，try/except 后的语句才在同一执行流程中继续执行；否则异常继续传播。
+- 避免：逐步标记异常类型、匹配的处理器、是否已捕获，再判断代码执行。
+- 状态：open，待 L2-CHECK-3 attempt 4 复检。
+<!-- learn-agent:evidence:bug-stage-01-ch02-unhandled-valueerror:end -->
