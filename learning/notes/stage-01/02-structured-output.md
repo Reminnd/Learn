@@ -180,3 +180,12 @@ Agent 对应：LangChain create_agent(response_format=Product) 可将结构化�
 
 本节核心边界：raw只是原始模型响应，不能凭raw非空判断抽取成功。应检查parsed是否非None，并在失败时使用parsing_error做错误分类；不得把未经验证的raw直接作为可信业务价格。下一步L2-CHECK-7 attempt 4检验无异常但发生数据污染的边界，随后继续可靠性工程与有限重试。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-3:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-4:start -->
+## L2-CHECK-7 / attempt 4
+状态：部分正确，needs_review。用户正确预测 `products.append({"price": "abc"})` 不会抛出异常，并指出 "abc" 不适合数值计算，但未解释不报错的直接原因是示例仅执行字典构造与列表 `append()`，没有类型验证或算术运算。
+
+正确的执行路径：`raw_price="abc"` → 创建保存原值的字典 → `products.append(...)` 接受字典并追加 → 输出“保存成功”。正常执行不能证明价格业务有效。错误原始价格可以在 Python 容器或接受字符串的存储中静默保留；进入数值运算时可能报错，也可能在某些操作下产生不符合业务含义的结果。
+
+下一步 L2-CHECK-7 / attempt 5：只复检为什么 append 阶段不报错、以及需要在哪个边界执行 Pydantic 校验。保持章节 learning，不提前宣布 mastered。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-4:end -->
