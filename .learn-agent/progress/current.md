@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 102
 last_checkpoint_at: '2026-10-10T07:05:58.096Z'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20261010-ch02-model-validate-teaching-gap
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-10-10T07:12:41.446Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage-01-ch02-L2-CHECK-7-attempt-6-teaching-gap
+    operation: upsert
+    expected_change: Record model_validate explicit explanation after learner reported missing method-focused teaching.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage-01-ch02-L2-CHECK-7-attempt-6-teaching-gap-ledger
+    operation: upsert
+    expected_change: Mark attempted method-name recall unassessed due to instruction gap and schedule fair check.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
