@@ -96,3 +96,21 @@ print("程序继续执行")
 ## 2.4 Pydantic ValidationError.errors()
 `e.errors()` 返回含每一项错误详情的列表。常见键：`loc`（错误字段位置）、`type`（机器可读错误码）、`msg`（给人看的描述）、`input`（导致错误的原始输入）、可选 `ctx`（约束上下文）。`Field(gt=0)` 遇到 -20 的错误码为 `greater_than`，字段位置为 `('price',)`。接下来练习从错误列表中提取字段和错误码，之后映射 FastAPI 请求校验及 LangChain Structured Output。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-4:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-4-attempt-1:start -->
+## L2-CHECK-4 / attempt 1
+状态：needs_review，部分正确。用户识别 price=-20 违反 Field(gt=0)，但误认为 currency 不写 required=True 即可省略，只预测一项错误。Pydantic v2 中没有提供默认值的字段就是 required，故此输入会产生两条错误：`('price',) greater_than` 与 `('currency',) missing`。
+
+补充规则：
+```python
+class Product(BaseModel):
+    price: int = Field(gt=0)
+    currency: str               # required
+
+class ProductWithDefault(BaseModel):
+    price: int = Field(gt=0)
+    currency: str = "CNY"       # not required, default CNY
+```
+
+与可空注解区分：`currency: str | None` 仍 required，只是值可以为 None；`currency: str | None = None` 才是可不传。下一步进行同一核心规则的 targeted retest，之后推进 errors() 与 FastAPI。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-4-attempt-1:end -->
