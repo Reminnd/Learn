@@ -150,3 +150,7 @@
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-5-attempt-1-ledger:start -->
 - L2-CHECK-5 / attempt 1: passed — 已正确判断 FastAPI 请求体不符合 Field(gt=0) 时不会进入 create_product 函数体，默认返回 HTTP 422。进入 LangChain Structured Output 的原理与框架映射。笔记：stage-01/02-structured-output.md。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-5-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-6-attempt-1-ledger:start -->
+- L2-CHECK-6 / attempt 1: needs_review。回答将ProductIn与AIMessage合为单一对象；已澄清默认返回ProductIn实例、include_raw=True返回raw和parsed。待L2-CHECK-6 attempt 2复检。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-6-attempt-1-ledger:end -->
