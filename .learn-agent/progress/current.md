@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 99
 last_checkpoint_at: '2026-10-10T06:57:44.154Z'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20261010-ch02-L2-CHECK-7-attempt-2-3
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-10-10T07:03:11.673Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage-01-ch02-L2-CHECK-7-attempts-2-3-batch
+    operation: upsert
+    expected_change: Record consecutive L2-CHECK-7 attempts 2 and 3 with partial correctness and ongoing silent-data-corruption misconception.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage-01-ch02-L2-CHECK-7-attempts-2-3-ledger-batch
+    operation: upsert
+    expected_change: Record two local retest outcomes and next L2-CHECK-7 attempt 4.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: bug-stage-01-ch02-raw-vs-parsed-validation-review-20261010
+    operation: upsert
+    expected_change: Update existing open misconception with risk of silently accepting invalid price strings.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
