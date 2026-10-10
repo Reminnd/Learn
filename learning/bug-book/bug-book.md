@@ -28,5 +28,5 @@
 - 根因：混淆“异常是否产生”与“异常是否被捕获”；同时未区分 JSON 语法解析与业务类型校验。
 - 修复：`str + int` 发生 `TypeError`；若未捕获则失败。还需识别 `str * int` 虽合法却不是数值计算。
 - 避免：先确定实际类型，定义 Schema；在系统边界使用 Pydantic 校验，并合理捕获/映射异常。
-- 状态：open；L2-CHECK-1 attempt 1，待复检。
+- 状态：resolved；L2-CHECK-1 attempt 2 已正确预测未捕获 TypeError 导致后续语句不执行。
 <!-- learn-agent:evidence:bug-stage-01-ch02-python-unhandled-typeerror:end -->
