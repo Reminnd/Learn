@@ -110,3 +110,7 @@
 <!-- learn-agent:evidence:stage-01-ch01-Q3-attempt-1-ledger:start -->
 - Canonical Q3 / attempt 1: passed — 给出可执行排查顺序：先检查 history 增量机制、summary 与重复写入，再检查本轮 Messages/history 累积是否异常，确认增长正常后再选择上下文控制策略；并指出 `summary + recent history` 的 Trade-off 是长对话旧内容摘要后可能失真。用户同时请求继续学习 sliding window。正式笔记：stage-01/01-llm-message-prompt-langchain.md。
 <!-- learn-agent:evidence:stage-01-ch01-Q3-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-1-attempt-1-ledger:start -->
+- L2-CHECK-1 / attempt 1: needs_review — 已识别 `"199"` 是 `str`，但误认为没有异常处理时不会因类型错误中断；已说明 `TypeError` 的传播、未捕获异常导致执行失败，以及 `str * int` 的字符串重复行为。正式笔记：stage-01/02-structured-output.md；待同概念复检。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-1-attempt-1-ledger:end -->
