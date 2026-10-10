@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-10：L2-CHECK-6 attempt 1 混淆AIMessage与解析后ProductIn实例，已解释include_raw默认和True的返回类型，待复检。
-last_section: 2.6 LangChain Structured Output
+last_note_update: 2026-10-10：L2-CHECK-6 attempt 2 通过；能够区分LangChain原始AIMessage与结构化后的ProductIn，进入解析失败处理。
+last_section: 2.7 Structured Output 解析失败与可靠性
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,42 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: knowledge_check
-  topic: L2-CHECK-6 / attempt 2
-  next_action: 判断with_structured_output(ProductIn)默认结果能否访问price与content，并说明原因。
+  topic: L2-CHECK-7 / attempt 1
+  next_action: 判断include_raw=True时Pydantic解析失败的raw/parsed/parsing_error字段。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 97
-last_checkpoint_at: '2026-10-10T06:49:01.017Z'
-last_checkpoint_reason: knowledge_event
-pending_writeback:
-  transaction_id: ch02-L2-CHECK-6-attempt-2-20261010
-  reason: qa_complete
-  phase: prepared
-  started_at: '2026-10-10T06:52:35.795Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/02-structured-output.md
-    evidence_id: stage-01-ch02-L2-CHECK-6-attempt-2
-    operation: upsert
-    expected_change: Record correct structured result type and teach output parsing failure handling.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage-01-ch02-L2-CHECK-6-attempt-2-ledger
-    operation: upsert
-    expected_change: Record L2-CHECK-6 second attempt as passed and next check.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: bug-stage-01-ch02-structured-result-type-resolved
-    operation: upsert
-    expected_change: Resolve the raw AIMessage versus parsed ProductIn confusion.
-    verified: false
-    error: null
+checkpoint_version: 98
+last_checkpoint_at: '2026-10-10T06:52:35.795Z'
+last_checkpoint_reason: qa_complete
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
@@ -81,9 +55,8 @@ project_track_status: deferred
 project_selection_prompted: true
 completed:
 - 01-llm-message-prompt-langchain
-weak_points:
-- LangChain Structured Output默认返回解析后的Pydantic对象而非AIMessage，待复检。
-next_action: L2-CHECK-6 attempt 2：比较result.price和result.content，巩固结构化返回类型。
+weak_points: []
+next_action: L2-CHECK-7 / attempt 1：include_raw=True 时解析失败的诊断字段，随后学习有限重试、校验及测试。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
