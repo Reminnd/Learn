@@ -183,3 +183,8 @@
 - L2-CHECK-7 / attempt 7: partial — 对price="abc"正确解释ValidationError及except打印校验失败，但未回答列表是否新增；继续补充正常分支。
 - L2-CHECK-7 / attempt 8: passed — 对price=199正确预测保存成功并给出包含price=199、默认currency=CNY的ProductIn数据，结合前序append不校验的结论，已证明先校验再保存的控制流。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempts-7-8-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-8-ledger:start -->
+- L2-CHECK-8 attempt 1: needs_review — 两次尝试与两条输出判断正确，误认为有两个列表元素。
+- L2-CHECK-8 attempt 2: passed — 正确判断三个候选响应在第二项通过后break，实际append仅一次，最终一个ProductIn对象。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-8-ledger:end -->
