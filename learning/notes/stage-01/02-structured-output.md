@@ -195,3 +195,22 @@ Agent 对应：LangChain create_agent(response_format=Product) 可将结构化�
 状态：not_assessed。用户指出没有专门学过 model_validate 方法名，之前只是在示例里出现；本题不按错误答案计算。已明确补教：ProductIn.model_validate(raw) 返回校验成功的实例，失败抛出 ValidationError。只有校验成功才把 product append 到 products。
 下一步复检 try/except/else 的执行结果。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-6-teaching-gap:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-7:start -->
+## L2-CHECK-7 / attempt 7
+状态：部分正确。用户确认 raw 中的 price="abc" 无法满足 ProductIn 的整数校验，model_validate 抛出 ValidationError 被 except 捕获，因此程序输出“校验失败”；未直接回答 products 是否新增，教学补充明确 products 仍为空，else 不执行。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-7:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-8:start -->
+## L2-CHECK-7 / attempt 8
+状态：passed。把 raw 改为 {"price": 199} 后，用户预测输出“保存成功”，并说明 products 包含 price=199、currency="CNY"，其中 currency 使用 Pydantic 默认值。结合前序用户指出 append 自身不进行校验的证据，已掌握“先 model_validate，成功后 append；失败时不保存原始数据”的边界。补充精确返回为 products=[ProductIn(price=199, currency="CNY")] 而不是装有 dict 的列表。
+
+## 2.8 Structured Output Retry 最小原理
+实际 Agent 的失败输出可能通过重新调用模型修复，但应该区分模型生成输出无效和固定用户输入非法。有限重试采用固定最多次数，每次新响应都需要独立执行 Schema 校验；验证通过才交给业务逻辑。
+- 瞬时网络故障与限流：可以按策略限次重试并退避；
+- 模型可修复的 JSON/Schema 错误：可以向模型反馈错误并请求修复；
+- 固定无效输入或业务规则冲突：不能无限重试，应返回明确错误/请求用户修正；
+- Schema 通过不证明事实正确。
+LangChain Runnable.with_retry 会在指定异常类型抛出时重试，有 stop_after_attempt 和 retry_if_exception_type 等参数。若 include_raw=True 仅在结果中返回 parsed=None 而没有抛出异常，普通 with_retry 不会因此自动重试，业务层需显式判断或转换为可恢复错误。
+下一步 L2-CHECK-8：读懂有限重试及 break 的分支流程。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-8:end -->
