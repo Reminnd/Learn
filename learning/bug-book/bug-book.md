@@ -91,5 +91,9 @@
 - 根因：混淆 parsed 缺失与 parsed=None，也没有区分原始响应与可用于业务的数据。
 - 修复：结果字典包含 parsed，解析失败时为 None；parsing_error 保存错误；raw 仅供诊断。只有检查 parsed 不为 None 后才能读取 parsed.price。
 - 避免：始终在业务使用前检查解析结果，明确错误路径并限制重试，避免原始数据绕过校验。
-- 状态：open；等待 L2-CHECK-7 attempt 2。
+- 状态：open；L2-CHECK-7 attempts 2–3仍需复检：用户能选择parsed判断，但对raw未经验证可能不报错而污染业务数据的风险理解不完整。
 <!-- learn-agent:evidence:bug-stage-01-ch02-raw-vs-parsed-on-validation-failure:end -->
+
+<!-- learn-agent:evidence:bug-stage-01-ch02-raw-vs-parsed-validation-review-20261010:start -->
+- 修正补充：raw可以绕过校验进入后续应用，错误不一定以异常呈现；可能被文本字段接受、发生字符串重复运算等静默错误。需通过新场景复检，而不能仅凭“会抛出异常”判断安全。
+<!-- learn-agent:evidence:bug-stage-01-ch02-raw-vs-parsed-validation-review-20261010:end -->
