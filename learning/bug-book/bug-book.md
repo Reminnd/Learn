@@ -105,3 +105,13 @@
 <!-- learn-agent:evidence:bug-stage-01-ch02-raw-vs-parsed-resolved-after-validation:start -->
 - 复检：无效价格raw={"price":"abc"}经Pydantic验证失败，不进入append；有效价格raw={"price":199}通过验证后才添加ProductIn实例，currency使用默认CNY。结合之前“append本身不校验”，完成raw与validated数据边界复检。
 <!-- learn-agent:evidence:bug-stage-01-ch02-raw-vs-parsed-resolved-after-validation:end -->
+
+<!-- learn-agent:evidence:bug-stage01-ch02-retry-save-count-resolved:start -->
+## 重试尝试次数与保存次数混淆
+- 症状：初次把2次尝试等同于2次append。
+- 错误模型：每次循环尝试均会保存一项。
+- 根因：忽略了except中的continue会跳过append。
+- 修复：逐轮判断ValidationError、continue、append、break实际路径。
+- 避免：分开计数尝试、通过校验与保存次数。
+- 状态：resolved，L2-CHECK-8 attempt 2正确说明第二次成功后break，最终只保存1项。
+<!-- learn-agent:evidence:bug-stage01-ch02-retry-save-count-resolved:end -->
