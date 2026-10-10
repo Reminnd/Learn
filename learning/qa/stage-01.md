@@ -201,3 +201,7 @@
 - L2-CHECK-11 / attempt 1: passed — 已识别订单实际成功但响应超时会触发重复调用，最大重试次数不等于无重复副作用。
 - L2-CHECK-12 / attempt 1: passed — req_001重复请求复用订单；req_002新请求创建另一笔；最终总计两笔。继续并发安全教学。
 <!-- learn-agent:evidence:stage01-ch02-idempotency-checks11-12-qa:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-1-ledger:start -->
+- L2-CHECK-13 / attempt 1: needs_review — 答案注意到两个并发操作可能没有固定全局先后，但将其称为消息列表，未给出两个请求都在写入前完成check的交错顺序；已解释A检查→B检查→A创建→B创建的check-then-act竞态，待复检。
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-1-ledger:end -->
