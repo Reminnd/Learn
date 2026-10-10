@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 96
 last_checkpoint_at: '2026-10-10T06:06:49.161Z'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: ch02-L2-CHECK-6-a1-20261010
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-10-10T06:49:01.017Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage-01-ch02-L2-CHECK-6-attempt-1
+    operation: upsert
+    expected_change: Record local check 6 partial response and raw versus parsed LangChain output distinction.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage-01-ch02-L2-CHECK-6-attempt-1-ledger
+    operation: upsert
+    expected_change: Record partial answer and same-concept retest.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: bug-stage-01-ch02-structured-result-type
+    operation: upsert
+    expected_change: Capture confusion between AIMessage and parsed Pydantic output.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
