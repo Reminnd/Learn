@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 88
 last_checkpoint_at: '2026-10-10T11:36:00+08:00'
 last_checkpoint_reason: qa_complete
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20261010-ch02-L2-CHECK-3-attempt-1
+  reason: knowledge_event
+  phase: prepared
+  started_at: 2026-10-10T11:40:00+08:00
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage-01-ch02-L2-CHECK-3-attempt-1
+    operation: upsert
+    expected_change: Record ValidationError lesson and L2-CHECK-3 attempt 1 partial answer with retest.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage-01-ch02-L2-CHECK-3-attempt-1-ledger
+    operation: upsert
+    expected_change: Record needs_review and corrected exception propagation behavior.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: bug-stage-01-ch02-raise-vs-except
+    operation: upsert
+    expected_change: Capture confusion between exception raised and exception caught.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
