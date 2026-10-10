@@ -42,7 +42,40 @@ resume_contract:
 checkpoint_version: 103
 last_checkpoint_at: '2026-10-10T07:12:41.446Z'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: ch02-validation-checks-a7-a8-to-retry-20261010
+  reason: qa_complete
+  phase: prepared
+  started_at: '2026-10-10T07:27:33.609Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage-01-ch02-L2-CHECK-7-attempt-7
+    operation: upsert
+    expected_change: Record correct invalid-input exception handling, without inventing missing list-state response.
+    verified: false
+    error: null
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage-01-ch02-L2-CHECK-7-attempt-8
+    operation: upsert
+    expected_change: Record successful normal-input retest and introduce bounded retries.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage-01-ch02-L2-CHECK-7-attempts-7-8-ledger
+    operation: upsert
+    expected_change: Record complementary attempts proving validation-first save behavior.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: bug-stage-01-ch02-raw-vs-parsed-resolved-after-validation
+    operation: upsert
+    expected_change: Resolve misuse-of-raw misconception using Pydantic validation and save-path evidence.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
