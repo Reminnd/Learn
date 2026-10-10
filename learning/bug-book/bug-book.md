@@ -91,7 +91,7 @@
 - 根因：混淆 parsed 缺失与 parsed=None，也没有区分原始响应与可用于业务的数据。
 - 修复：结果字典包含 parsed，解析失败时为 None；parsing_error 保存错误；raw 仅供诊断。只有检查 parsed 不为 None 后才能读取 parsed.price。
 - 避免：始终在业务使用前检查解析结果，明确错误路径并限制重试，避免原始数据绕过校验。
-- 状态：open；L2-CHECK-7 attempts 2–4仍需复检。已认识到 raw 不可靠，但对 append 不校验也不计算、因而可能无异常保存错误数据的直接因果尚需巩固。
+- 状态：resolved；L2-CHECK-7 attempts 7–8 已正确区分校验失败不保存与校验成功保存，并掌握 append 不自动校验的边界。
 <!-- learn-agent:evidence:bug-stage-01-ch02-raw-vs-parsed-on-validation-failure:end -->
 
 <!-- learn-agent:evidence:bug-stage-01-ch02-raw-vs-parsed-validation-review-20261010:start -->
@@ -101,3 +101,7 @@
 <!-- learn-agent:evidence:bug-stage-01-ch02-raw-vs-parsed-attempt4-review:start -->
 - 本轮补充：不能以错误字符串不会参与正确数学运算解释 append 为什么不报错；直接原因是该代码没有执行数值操作，也没有 Schema 校验。保存成功与业务价格有效是不同条件。
 <!-- learn-agent:evidence:bug-stage-01-ch02-raw-vs-parsed-attempt4-review:end -->
+
+<!-- learn-agent:evidence:bug-stage-01-ch02-raw-vs-parsed-resolved-after-validation:start -->
+- 复检：无效价格raw={"price":"abc"}经Pydantic验证失败，不进入append；有效价格raw={"price":199}通过验证后才添加ProductIn实例，currency使用默认CNY。结合之前“append本身不校验”，完成raw与validated数据边界复检。
+<!-- learn-agent:evidence:bug-stage-01-ch02-raw-vs-parsed-resolved-after-validation:end -->
