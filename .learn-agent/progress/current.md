@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 97
 last_checkpoint_at: '2026-10-10T06:49:01.017Z'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: ch02-L2-CHECK-6-attempt-2-20261010
+  reason: qa_complete
+  phase: prepared
+  started_at: '2026-10-10T06:52:35.795Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage-01-ch02-L2-CHECK-6-attempt-2
+    operation: upsert
+    expected_change: Record correct structured result type and teach output parsing failure handling.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage-01-ch02-L2-CHECK-6-attempt-2-ledger
+    operation: upsert
+    expected_change: Record L2-CHECK-6 second attempt as passed and next check.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: bug-stage-01-ch02-structured-result-type-resolved
+    operation: upsert
+    expected_change: Resolve the raw AIMessage versus parsed ProductIn confusion.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
