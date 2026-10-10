@@ -158,3 +158,7 @@
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-6-attempt-2-ledger:start -->
 - L2-CHECK-6 / attempt 2: passed — 正确判断product是ProductIn实例，.price可读、无content字段时.content报AttributeError；进入Structured Output解析错误处理。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-6-attempt-2-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-1-ledger:start -->
+- L2-CHECK-7 / attempt 1: needs_review — 已识别 Pydantic 拒绝 price="abc"，但误认为没有 parsed 键，建议检查 raw 的 price。已纠正 parsed=None、parsing_error 保留错误且 raw 未校验；需复检从 parsed 读取业务值的条件。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-1-ledger:end -->
