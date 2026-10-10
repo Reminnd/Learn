@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-10：L2-CHECK-4 attempt 1 未识别 currency 无默认值时是必填字段；已讲解 required / nullable / default 区别，等待复检。
-last_section: 2.4 Pydantic ValidationError.errors() 与必填字段
+last_note_update: 2026-10-10：L2-CHECK-4 attempt 2 通过；能够区分 Pydantic 无默认值必填字段及有默认值可省略字段。进入 FastAPI 请求体验证。
+last_section: 2.5 FastAPI HTTP 请求体与 Pydantic 校验
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,42 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: knowledge_check
-  topic: L2-CHECK-4 / attempt 2
-  next_action: 复检 Pydantic 字段有默认值和无默认值时的缺失错误数量，答对后映射 FastAPI。
+  topic: L2-CHECK-5 / attempt 1
+  next_action: 预测 FastAPI 在 Pydantic price=Field(gt=0) 校验失败时的 HTTP 响应码及 handler 是否执行。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 94
-last_checkpoint_at: '2026-10-10T12:42:00+08:00'
+checkpoint_version: 95
+last_checkpoint_at: '2026-10-10T14:00:00+08:00'
 last_checkpoint_reason: qa_complete
-pending_writeback:
-  transaction_id: 20261010-ch02-L2-CHECK-4-a2
-  reason: qa_complete
-  phase: prepared
-  started_at: '2026-10-10T14:00:00+08:00'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/02-structured-output.md
-    evidence_id: stage-01-ch02-L2-CHECK-4-attempt-2
-    operation: upsert
-    expected_change: Record L2-CHECK-4 retest passed and introduce FastAPI request validation.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage-01-ch02-L2-CHECK-4-attempt-2-ledger
-    operation: upsert
-    expected_change: Record L2-CHECK-4 attempt 2 passing evidence and next learning question.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: bug-stage-01-ch02-required-fields-resolved
-    operation: upsert
-    expected_change: Resolve Pydantic default/required-field misconception by successful targeted retest.
-    verified: false
-    error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
@@ -81,9 +55,8 @@ project_track_status: deferred
 project_selection_prompted: true
 completed:
 - 01-llm-message-prompt-langchain
-weak_points:
-- Pydantic v2 中 required 字段由是否存在默认值决定；需要复检 currency 缺失会产生 missing 错误。
-next_action: L2-CHECK-4 attempt 2：判断给 currency 设置默认值后的错误条数，并解释原因。
+weak_points: []
+next_action: L2-CHECK-5 / attempt 1：请求 price=-20，判断 HTTP 422 与 endpoint 执行流程。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
