@@ -168,3 +168,15 @@ Agent 对应：LangChain create_agent(response_format=Product) 可将结构化�
 
 下一步 L2-CHECK-7 / attempt 2：复检正确的成功判定字段及错误处理，不提前标记该知识点掌握。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-2:start -->
+## L2-CHECK-7 / attempt 2
+状态：部分正确，需复检。用户正确选择方案B检查parsed是否为None，以避免对None访问.price造成AttributeError，但仅以“关于None的错误抛出”解释安全性，尚未说明raw存在不代表通过Schema验证，因此继续追问为何未经验证的raw不可做业务价格数据。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-2:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-3:start -->
+## L2-CHECK-7 / attempt 3
+状态：needs_review，部分正确。用户指出price="abc"是字符串，不具备数值价格的业务类型，传入数值计算可能抛出异常；但错误地认为这种数据“无法进入后续应用，仍旧会抛出异常”。真实系统若绕过Schema校验，原始字符串也可能被函数、数据库、日志或其他处理流程接收，甚至不报错但产生错误结果，例如"199"*2=="199199"。
+
+本节核心边界：raw只是原始模型响应，不能凭raw非空判断抽取成功。应检查parsed是否非None，并在失败时使用parsing_error做错误分类；不得把未经验证的raw直接作为可信业务价格。下一步L2-CHECK-7 attempt 4检验无异常但发生数据污染的边界，随后继续可靠性工程与有限重试。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-3:end -->
