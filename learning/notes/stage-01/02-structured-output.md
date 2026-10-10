@@ -124,3 +124,18 @@ Pydantic BaseModel 可声明 FastAPI 请求体 Schema。FastAPI 在运行 endpoi
 示例：ProductIn 的 price 定义为 Field(gt=0)，currency 定义为默认 "CNY"。POST /products 请求 {"price": -20} 会在请求体校验阶段失败，不会执行 endpoint 函数体。
 下一步 L2-CHECK-5：判断 HTTP 返回码及函数是否执行。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-4-attempt-2:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-5-attempt-1:start -->
+## L2-CHECK-5 / attempt 1
+状态：passed（局部知识检查）。用户正确判断客户端 POST JSON {"price": -20} 不会执行 FastAPI create_product() 函数体；因为 price 的 Field(gt=0) 校验失败，FastAPI 默认返回 HTTP 422。currency 提供默认值，不属于缺失错误。理解了请求体验证在 endpoint 主体之前发生。
+
+## 2.6 LangChain Structured Output：原理与框架映射
+
+最小原理：模型原始输出文本 → json.loads 解析 JSON → Product.model_validate 校验 Schema → 业务侧使用 Product 实例。任一步都可能失败，错误应被捕获/分类，不能假定模型输出永远符合业务。
+
+框架对应：对支持该功能的已配置聊天模型使用 model.with_structured_output(Product)，再调用 structured_model.invoke(用户任务文本)。成功时结果是经过解析/校验的 Product 实例。具体机制取决于 provider 与方法，可能是原生 JSON Schema 约束或 tool calling。当前官方 LangChain Models 文档确认 Pydantic schema 的 with_structured_output 用法。
+
+Agent 对应：LangChain create_agent(response_format=Product) 可将结构化结果保存在 state["structured_response"]；provider-native 与 tool-calling 两种策略需结合模型能力选择。Schema 验证通过不代表抽取内容一定事实正确。
+
+下一步 L2-CHECK-6：检查 with_structured_output(Product) 在成功返回时结果对象类型，并比较手动 JSON 解析与框架封装的数据流。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-5-attempt-1:end -->
