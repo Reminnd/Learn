@@ -23,7 +23,7 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-10：L2-CHECK-13 attempt 2 正确识别A先前查无订单，但误以为同一函数自动具备原子性；已讲解并发交错的检查/创建并安排复检。
+last_note_update: 2026-10-10：用户请求补讲并发与函数原子性的区别；已解释独立执行、跨请求交错和if判断不会自动重新执行。
 last_section: 2.11.2 并发请求的检查与创建竞态
 teaching_mode: teacher
 mode_prompted_for: []
@@ -33,35 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: knowledge_check
-  topic: L2-CHECK-13 / attempt 3
-  next_action: 复检同一函数内的检查与创建是否会被其他并发请求插入执行，为什么A不会重新检查。
+  topic: L2-CHECK-13 / attempt 4
+  next_action: 单点复检：A完成if检查、B已创建订单后，A恢复是否自动重新检查？
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 113
-last_checkpoint_at: '2026-10-10T16:02:00+08:00'
+checkpoint_version: 114
+last_checkpoint_at: '2026-10-10T08:15:00.000Z'
 last_checkpoint_reason: knowledge_event
-pending_writeback:
-  transaction_id: stage01-ch02-L2-CHECK-13-a3-guidance-20261010
-  reason: knowledge_event
-  phase: prepared
-  started_at: '2026-10-10T08:16:48.727Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/02-structured-output.md
-    evidence_id: stage01-ch02-L2-CHECK-13-attempt-3-guided-explanation
-    operation: upsert
-    expected_change: Record learner's explicit uncertainty and focused explanation of concurrent function executions and atomicity.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch02-L2-CHECK-13-attempt-3-guided-explanation-ledger
-    operation: upsert
-    expected_change: Record targeted concurrency explanation and schedule smaller control-flow check.
-    verified: false
-    error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
@@ -76,7 +57,7 @@ completed:
 - 01-llm-message-prompt-langchain
 weak_points:
 - L2-CHECK-13：曾把消息列表混同并发请求；当前关键误解是认为同一函数中检查和创建自动成为原子操作。
-next_action: L2-CHECK-13 attempt 3：确认函数封装不能保证原子性，随后进入数据库唯一约束/事务方案。
+next_action: L2-CHECK-13 attempt 4：判断if在恢复执行时是否自动重新检查共享数据。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
