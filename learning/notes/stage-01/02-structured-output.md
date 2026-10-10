@@ -83,3 +83,8 @@ print("程序继续执行")
 ## L2-CHECK-3 / attempt 2
 状态：needs_review。用户正确预测 ACD，但问 raise ValueError("test") 和 except ValueError 含义，以及为什么不打印 B。已讲解 raise 抛出异常时跳过 try 剩余语句，找到匹配的 except 后打印 C，然后继续打印 D。待判断异常处理类型不匹配的情形。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-2:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-3:start -->
+## L2-CHECK-3 / attempt 3
+状态：needs_review（部分正确）。用户正确解释 raise ValueError 时 B 不执行，except TypeError 类型不匹配因此 C 不执行；但错误预测输出 AD，未认识到未捕获 ValueError 传播并阻止执行随后 print("D")。正确执行为输出 A，然后出现未捕获 ValueError traceback（顶层脚本条件）。已讲解匹配异常处理器决定能否继续执行后续语句。下一步 L2-CHECK-3 / attempt 4 对比多个 except 分支并解释为何 D 能输出。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-3:end -->
