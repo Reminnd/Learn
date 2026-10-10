@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 109
 last_checkpoint_at: '2026-10-10T07:59:08.488Z'
 last_checkpoint_reason: qa_complete
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch02-idempotency-checks11-12-20261010
+  reason: qa_complete
+  phase: prepared
+  started_at: '2026-10-10T16:02:00+08:00'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage01-ch02-idempotency-checks11-12-batch
+    operation: upsert
+    expected_change: Record idempotency check 11 and check 12 passed; begin concurrency lesson.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch02-idempotency-checks11-12-qa
+    operation: upsert
+    expected_change: Record check 11 and check 12 passing evidence.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
