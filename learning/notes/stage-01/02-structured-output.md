@@ -224,3 +224,12 @@ LangChain Runnable.with_retry 会在指定异常类型抛出时重试，有 stop
 控制最大尝试次数，成功后立即停止；每次只让已通过Schema校验的输出进入业务。可恢复的网络或模型格式错误可以按策略重试；固定输入违反业务要求应直接返回校验错误，不应盲目无限重试。LangChain Runnable.with_retry 只在对应Runnable抛出异常时重试，并支持retry_if_exception_type、stop_after_attempt。尽量只对模型/易失败步骤加重试，避免把保存等副作用操作重复执行。
 下一步 L2-CHECK-9：判断一次请求遇到HTTP 503和固定无效业务输入，哪些应该重试。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-8-attempts-1-2:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-9-attempt-2:start -->
+## L2-CHECK-9 / attempt 2
+状态：passed。用户正确区分HTTP 503可能由于临时服务不可用，有限重试后有可能恢复；固定不变的price=-20与Field(gt=0)业务约束冲突，重新校验相同输入不会改变失败结果，应向调用者返回校验错误并要求修正。精确边界：503不保证重试成功；price=-20仅在输入及约束均不变时属于确定性失败。
+
+## 2.10 Backoff（退避）
+在第1次请求失败后，下一次重试不应总是立即发生。Exponential Backoff（指数退避）使等待时间随重试次数增长，例如第1次失败等1秒、第2次失败等2秒、第3次失败等4秒；达到最大尝试次数就停止。可加入Jitter（随机抖动），避免很多客户端同一时刻一起重新请求。真实系统需要重试次数上限、时间上限与可重试错误分类；若响应给出合理的Retry-After，应考虑遵循服务端要求。
+最小理解检查 L2-CHECK-10：最多调用3次，每次均返回503，等待间隔按1秒、2秒计算。确认调用次数、等待次数和是否继续第4次。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-9-attempt-2:end -->
