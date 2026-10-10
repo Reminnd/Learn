@@ -125,3 +125,13 @@
 - 避免：并发问题用事件时间线写出每个参与者的读与写；明确状态共享边界，考虑数据库唯一约束与事务。
 - 状态：open；等待 L2-CHECK-13 attempt 2 复检。
 <!-- learn-agent:evidence:bug-stage01-ch02-concurrency-message-list-confusion:end -->
+
+<!-- learn-agent:evidence:bug-stage01-ch02-same-function-not-atomic:start -->
+## 同一函数不自动构成原子操作
+- 症状：认为if检查与后续创建在同一Python函数内，所以是一个不可分割的原子操作。
+- 错误模型：函数封装提供跨线程、跨进程和跨服务的并发互斥。
+- 根因：未区分代码结构与线程/服务执行的交错调度、数据库事务原子性。
+- 修复：A检查不存在之后、A创建之前B可以检查并创建；A不会自动重新检查，仍可能执行创建。单纯同函数不足以保证幂等。
+- 避免：用时间线分析多个请求对共享状态的读写，利用数据库唯一约束/事务或等价协调保证业务唯一性。
+- 状态：open；待L2-CHECK-13 attempt 3复检。
+<!-- learn-agent:evidence:bug-stage01-ch02-same-function-not-atomic:end -->
