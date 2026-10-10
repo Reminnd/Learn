@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-10：SQLAlchemy rollback三轮学习已完成。能说明事务B回滚不影响事务A已提交的数据；修正了先前if判断题的误记。
-last_section: 2.11.5 MySQL与SQLAlchemy事务边界
+last_note_update: 2026-10-10：L2-CHECK-13 attempt 5 正确预测if进入分支后仍执行，开始Structured Output必做EX1。
+last_section: Chapter 02 EX1 最小原理与框架映射
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -32,36 +32,17 @@ session_mode: learning
 session_status: active
 current_activity: learning
 return_to:
-  activity: knowledge_check
-  topic: L2-CHECK-13 / attempt 5
-  next_action: 用单线程if代码巩固if条件不会在分支执行中自动重新判断，随后继续MySQL幂等工程。
+  activity: required_exercise
+  topic: EX1 / Step 1
+  next_action: 以Pydantic Product BaseModel和model_validate完成最小原理校验，然后映射LangChain Structured Output。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 119
-last_checkpoint_at: '2026-10-10T08:52:06.535Z'
+checkpoint_version: 120
+last_checkpoint_at: '2026-10-10T08:57:28.877Z'
 last_checkpoint_reason: qa_complete
-pending_writeback:
-  transaction_id: stage01-ch02-if-controlflow-retest-20261010
-  reason: qa_complete
-  phase: prepared
-  started_at: '2026-10-10T08:57:28.877Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/02-structured-output.md
-    evidence_id: stage01-ch02-L2-CHECK-13-attempt-5
-    operation: upsert
-    expected_change: Record successful if-branch execution prediction and start Chapter 02 required exercise.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch02-L2-CHECK-13-attempt-5-ledger
-    operation: upsert
-    expected_change: Record if condition targeted check as passed based on latest and prior explicit answers.
-    verified: false
-    error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
@@ -75,8 +56,8 @@ project_selection_prompted: true
 completed:
 - 01-llm-message-prompt-langchain
 weak_points:
-- 并发原子性：用户已正确表示if不会自动重判；仍可用独立简单代码检查并关联Check-Then-Act。
-next_action: L2-CHECK-13 attempt 5：预测if内部变量变动后print是否执行，随后继续MySQL唯一约束与SQLAlchemy事务。
+- 并发幂等数据库生产实现尚需实践；if控制流基础复检已通过。
+next_action: Chapter 02 EX1 Step1：定义Pydantic商品模型，使用model_validate进行校验。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
