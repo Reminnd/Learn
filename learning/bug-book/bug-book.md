@@ -19,3 +19,14 @@
 - 避免：代码放入 fenced code block，并使用英文半角引号、逗号和括号。
 - 状态：resolved；证据为 L1-CHECK-2 attempt 2。
 <!-- learn-agent:evidence:bug-stage-01-ch01-python-delimiters:end -->
+
+<!-- learn-agent:evidence:bug-stage-01-ch02-python-unhandled-typeerror:start -->
+## 未捕获 TypeError 的执行行为误解
+
+- 症状：判断 `json.loads` 得到字符串价格后，认为不添加异常处理也不会报错中止。
+- 错误模型：把缺少 `try/except` 理解为不会有错误中断。
+- 根因：混淆“异常是否产生”与“异常是否被捕获”；同时未区分 JSON 语法解析与业务类型校验。
+- 修复：`str + int` 发生 `TypeError`；若未捕获则失败。还需识别 `str * int` 虽合法却不是数值计算。
+- 避免：先确定实际类型，定义 Schema；在系统边界使用 Pydantic 校验，并合理捕获/映射异常。
+- 状态：open；L2-CHECK-1 attempt 1，待复检。
+<!-- learn-agent:evidence:bug-stage-01-ch02-python-unhandled-typeerror:end -->
