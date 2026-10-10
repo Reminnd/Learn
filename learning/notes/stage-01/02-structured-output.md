@@ -189,3 +189,9 @@ Agent 对应：LangChain create_agent(response_format=Product) 可将结构化�
 
 下一步 L2-CHECK-7 / attempt 5：只复检为什么 append 阶段不报错、以及需要在哪个边界执行 Pydantic 校验。保持章节 learning，不提前宣布 mastered。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-4:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-6-teaching-gap:start -->
+## L2-CHECK-7 / attempt 6
+状态：not_assessed。用户指出没有专门学过 model_validate 方法名，之前只是在示例里出现；本题不按错误答案计算。已明确补教：ProductIn.model_validate(raw) 返回校验成功的实例，失败抛出 ValidationError。只有校验成功才把 product append 到 products。
+下一步复检 try/except/else 的执行结果。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-6-teaching-gap:end -->
