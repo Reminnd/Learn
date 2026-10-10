@@ -30,3 +30,14 @@
 - 避免：先确定实际类型，定义 Schema；在系统边界使用 Pydantic 校验，并合理捕获/映射异常。
 - 状态：resolved；L2-CHECK-1 attempt 2 已正确预测未捕获 TypeError 导致后续语句不执行。
 <!-- learn-agent:evidence:bug-stage-01-ch02-python-unhandled-typeerror:end -->
+
+<!-- learn-agent:evidence:bug-stage-01-ch02-raise-vs-except:start -->
+## 混淆抛出异常与捕获异常
+
+- 症状：预测 Field(gt=0) 校验失败后只输出 except 内两行，遗漏 except 后的输出；认为程序不会终止是“因为异常抛出了”。
+- 错误模型：误以为异常的抛出本身能让程序继续。
+- 根因：未区分 `raise` 引发控制流中断与 `except` 捕获匹配异常后继续执行。
+- 修复：Pydantic 抛 ValidationError 后跳入 except；当 except 正常结束，继续执行其后语句。 
+- 避免：沿代码逐行标出引发异常的位置、捕获入口与捕获块之后的下一条语句。
+- 状态：open；等待 L2-CHECK-3 attempt 2 复检。
+<!-- learn-agent:evidence:bug-stage-01-ch02-raise-vs-except:end -->
