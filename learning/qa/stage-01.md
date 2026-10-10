@@ -118,3 +118,7 @@
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-1-attempt-2-ledger:start -->
 - L2-CHECK-1 / attempt 2: passed — 正确预测 `str + int` 抛出 `TypeError`，无捕获时后续语句不执行；2.1 小节理解复检通过，下一步进入 2.2 Pydantic Schema 与类型校验。笔记：stage-01/02-structured-output.md。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-1-attempt-2-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-1-ledger:start -->
+- L2-CHECK-3 / attempt 1: needs_review — 已认识到 Field(gt=0) 拒绝 -20 并抛出 ValidationError；漏掉程序继续执行的输出，把继续运行错误地归因于抛出异常，需复检 try/except 执行流程。正式笔记：stage-01/02-structured-output.md。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-1-ledger:end -->
