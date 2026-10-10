@@ -88,3 +88,11 @@ print("程序继续执行")
 ## L2-CHECK-3 / attempt 3
 状态：needs_review（部分正确）。用户正确解释 raise ValueError 时 B 不执行，except TypeError 类型不匹配因此 C 不执行；但错误预测输出 AD，未认识到未捕获 ValueError 传播并阻止执行随后 print("D")。正确执行为输出 A，然后出现未捕获 ValueError traceback（顶层脚本条件）。已讲解匹配异常处理器决定能否继续执行后续语句。下一步 L2-CHECK-3 / attempt 4 对比多个 except 分支并解释为何 D 能输出。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-3:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-4:start -->
+## L2-CHECK-3 / attempt 4
+状态：passed。用户正确预测 raise ValueError、依次有 except TypeError/except ValueError 时输出 A、E、D，并说明根因是 ValueError 被成功捕获。相比上次误判未捕获异常后仍执行 D，已正确区分“匹配捕获后继续”与“未捕获异常传播”。异常控制流知识检查完成。
+
+## 2.4 Pydantic ValidationError.errors()
+`e.errors()` 返回含每一项错误详情的列表。常见键：`loc`（错误字段位置）、`type`（机器可读错误码）、`msg`（给人看的描述）、`input`（导致错误的原始输入）、可选 `ctx`（约束上下文）。`Field(gt=0)` 遇到 -20 的错误码为 `greater_than`，字段位置为 `('price',)`。接下来练习从错误列表中提取字段和错误码，之后映射 FastAPI 请求校验及 LangChain Structured Output。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-4:end -->
