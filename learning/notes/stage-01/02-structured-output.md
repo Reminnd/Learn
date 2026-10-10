@@ -139,3 +139,12 @@ Agent 对应：LangChain create_agent(response_format=Product) 可将结构化�
 
 下一步 L2-CHECK-6：检查 with_structured_output(Product) 在成功返回时结果对象类型，并比较手动 JSON 解析与框架封装的数据流。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-5-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-6-attempt-1:start -->
+## L2-CHECK-6 / attempt 1
+状态：needs_review。用户回答“有ProductIn实例的AIMessage”，混淆原始AIMessage和Structured Output解析后的返回结果。
+
+纠正：model.with_structured_output(ProductIn).invoke(...) 在调用成功、默认include_raw=False时直接返回ProductIn对象，可读取product.price。它不是外层AIMessage。只有显式设置include_raw=True时，结果才是包含raw、parsed、parsing_error的dict，其中raw是原始模型响应，parsed成功时是ProductIn实例。
+
+后续复检：L2-CHECK-6 / attempt 2，比较result.price与result.content的可用性。参考LangChain官方BaseChatModel.with_structured_output文档。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-6-attempt-1:end -->
