@@ -254,3 +254,12 @@ LangChain Runnable.with_retry 会在指定异常类型抛出时重试，有 stop
 只用 if request_id in orders 的检查再创建订单，无法保证多个工作线程、进程或服务实例同时执行时的原子性。两个请求可能同时读到键不存在，并各自创建新订单。企业常通过数据库唯一约束和事务处理冲突；同时将请求参数摘要关联同一幂等键，防止不同请求内容误共用键。检查和写入应由可靠存储协调。
 下一题 L2-CHECK-13：两个并发请求在检查幂等键时都观察到“不存在”，有什么风险？
 <!-- learn-agent:evidence:stage01-ch02-idempotency-checks11-12-batch:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-1:start -->
+## L2-CHECK-13 / attempt 1
+状态：needs_review，部分理解。学习者回答“因为消息列表中两个不处于先后关系？”，有意识到并发时不同请求可能没有固定串行顺序，但混淆了 Agent 的 Message List 与两个并发 HTTP/Tool 请求的执行调度。
+
+纠正：竞态条件与 Message List 无关。请求A内部“检查后创建”有自身顺序，请求B也一样；两个请求之间的步骤可能交错，发生 A检查 → B检查 → A创建 → B创建。两个请求在任何一个创建动作完成前都读取到幂等键不存在，因此均继续尝试创建，导致重复业务副作用。check-then-act不是单一原子操作；需要数据库唯一约束、事务或等价协调，而非只依靠Python字典的先检查再写。
+
+下一步：L2-CHECK-13 / attempt 2，针对“先A检查、再B检查、之后才创建”的时间顺序复检，解释为何两个请求可能都执行创建。此局部检查通过不等于章节mastered。
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-1:end -->
