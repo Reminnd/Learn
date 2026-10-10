@@ -142,3 +142,7 @@
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-4-attempt-1-ledger:start -->
 - L2-CHECK-4 / attempt 1: needs_review — 识别 price gt=0 的 greater_than 错误，但遗漏 currency 无默认值时 required 的 missing 错误。已讲解 Pydantic v2 required vs default vs nullable，待复检。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-4-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-4-attempt-2-ledger:start -->
+- L2-CHECK-4 / attempt 2: passed — 正确回答 ProductA 的 currency 必填、ProductB 因 currency="CNY" 默认值可省略；已完成针对性复检。下一步 FastAPI 请求体校验。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-4-attempt-2-ledger:end -->
