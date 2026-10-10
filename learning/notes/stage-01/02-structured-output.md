@@ -148,3 +148,14 @@ Agent 对应：LangChain create_agent(response_format=Product) 可将结构化�
 
 后续复检：L2-CHECK-6 / attempt 2，比较result.price与result.content的可用性。参考LangChain官方BaseChatModel.with_structured_output文档。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-6-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-6-attempt-2:start -->
+## L2-CHECK-6 / attempt 2
+状态：passed。用户正确判断Pydantic结构化输出默认返回ProductIn实例，`product.price`可读出价格，而`product.content`在未定义该字段时抛出AttributeError。已区分原始AIMessage与解析后Pydantic返回值。
+
+## 2.7 Structured Output失败模式
+成功：`with_structured_output(ProductIn)`默认返回ProductIn；解析或Schema校验失败：默认`include_raw=False`时抛出解析相关异常。若设置`include_raw=True`，解析失败且模型请求本身成功时，返回的dict保留`raw`、`parsed=None`及非空的`parsing_error`，便于诊断。
+边界：`include_raw=True`只捕获解析阶段错误；模型调用失败、网络超时等并不因此全部转成parsing_error。生产环境应限制重试次数，区分可恢复失败和不可恢复错误，避免日志记录敏感的原始响应。
+参考：https://reference.langchain.com/python/langchain-core/language_models/chat_models/BaseChatModel/with_structured_output
+下一步：L2-CHECK-7，预测解析失败时raw/parsed/parsing_error的表现。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-6-attempt-2:end -->
