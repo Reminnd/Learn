@@ -35,3 +35,13 @@ assert isinstance(data["price"], str)
 
 下一步：L2-CHECK-1 / attempt 2，同概念复检，待答对后继续 Pydantic。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-1-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-1-attempt-2:start -->
+## L2-CHECK-1 / attempt 2
+
+状态：passed。用户正确说明 `price = "199"` 是 `str`，表达式 `price + 10` 抛出 `TypeError`；由于没有异常捕获，后续 `print("程序执行完毕")` 不会执行。与 attempt 1 的误解相同的核心概念已完成复检。
+
+## 2.2 Pydantic v2：Schema 与校验
+
+下一步引入 `BaseModel`、字段类型声明、`model_validate` 和 `ValidationError`，解释 Pydantic 默认可转换的 lax validation 和 strict mode。围绕商品价格案例建立原理版与企业实现版的对应，不把“合法 JSON”混同于“业务类型已被保证”；后续再映射到 FastAPI 与 LangChain。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-1-attempt-2:end -->
