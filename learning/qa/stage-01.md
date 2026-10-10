@@ -178,3 +178,8 @@
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-6-teaching-gap-ledger:start -->
 - L2-CHECK-7 / attempt 6: not_assessed — 用户表示没有专门学过 model_validate；已补教用法，不作答错评价，后续练习。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-6-teaching-gap-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempts-7-8-ledger:start -->
+- L2-CHECK-7 / attempt 7: partial — 对price="abc"正确解释ValidationError及except打印校验失败，但未回答列表是否新增；继续补充正常分支。
+- L2-CHECK-7 / attempt 8: passed — 对price=199正确预测保存成功并给出包含price=199、默认currency=CNY的ProductIn数据，结合前序append不校验的结论，已证明先校验再保存的控制流。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempts-7-8-ledger:end -->
