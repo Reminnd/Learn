@@ -162,3 +162,11 @@
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-1-ledger:start -->
 - L2-CHECK-7 / attempt 1: needs_review — 已识别 Pydantic 拒绝 price="abc"，但误认为没有 parsed 键，建议检查 raw 的 price。已纠正 parsed=None、parsing_error 保留错误且 raw 未校验；需复检从 parsed 读取业务值的条件。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-2-ledger:start -->
+- L2-CHECK-7 / attempt 2: partial — 选择parsed不为None的方案B正确，但未充分说明raw非空与校验成功的区别，继续追问数据校验与业务后果。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-2-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-3-ledger:start -->
+- L2-CHECK-7 / attempt 3: needs_review — 已认识到"abc"类型不适合价格计算，仍误认为绕过校验必然抛异常；已指出未经校验数据可能静默进入业务并污染价格字段。下一步复检静默错误案例。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-3-ledger:end -->
