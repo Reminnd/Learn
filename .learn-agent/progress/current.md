@@ -23,7 +23,7 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-10：L2-CHECK-5 通过，FastAPI 422 请求体验证理解正确；进入 LangChain Structured Output 的原理与框架映射。
+last_note_update: 2026-10-10：L2-CHECK-6 attempt 1 混淆AIMessage与解析后ProductIn实例，已解释include_raw默认和True的返回类型，待复检。
 last_section: 2.6 LangChain Structured Output
 teaching_mode: teacher
 mode_prompted_for: []
@@ -33,42 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: knowledge_check
-  topic: L2-CHECK-6 / attempt 1
-  next_action: 预测 model.with_structured_output(Product).invoke(...) 成功后返回的对象类型及原理映射。
+  topic: L2-CHECK-6 / attempt 2
+  next_action: 判断with_structured_output(ProductIn)默认结果能否访问price与content，并说明原因。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 96
-last_checkpoint_at: '2026-10-10T06:06:49.161Z'
+checkpoint_version: 97
+last_checkpoint_at: '2026-10-10T06:49:01.017Z'
 last_checkpoint_reason: knowledge_event
-pending_writeback:
-  transaction_id: ch02-L2-CHECK-6-a1-20261010
-  reason: knowledge_event
-  phase: prepared
-  started_at: '2026-10-10T06:49:01.017Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/02-structured-output.md
-    evidence_id: stage-01-ch02-L2-CHECK-6-attempt-1
-    operation: upsert
-    expected_change: Record local check 6 partial response and raw versus parsed LangChain output distinction.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage-01-ch02-L2-CHECK-6-attempt-1-ledger
-    operation: upsert
-    expected_change: Record partial answer and same-concept retest.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: bug-stage-01-ch02-structured-result-type
-    operation: upsert
-    expected_change: Capture confusion between AIMessage and parsed Pydantic output.
-    verified: false
-    error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
@@ -81,8 +55,9 @@ project_track_status: deferred
 project_selection_prompted: true
 completed:
 - 01-llm-message-prompt-langchain
-weak_points: []
-next_action: L2-CHECK-6：对比手工 json.loads + Pydantic 与 LangChain with_structured_output 的返回对象及数据流。
+weak_points:
+- LangChain Structured Output默认返回解析后的Pydantic对象而非AIMessage，待复检。
+next_action: L2-CHECK-6 attempt 2：比较result.price和result.content，巩固结构化返回类型。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
