@@ -283,3 +283,14 @@ LangChain Runnable.with_retry 会在指定异常类型抛出时重试，有 stop
 
 下一步：L2-CHECK-13 / attempt 4，缩小为单一问题：A在if条件已判真、B插入后恢复执行时，A会自动重新判断还是直接继续执行insert？确认数据流后再讨论数据库唯一性约束。
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-3-guided-explanation:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-4:start -->
+## L2-CHECK-13 / attempt 4
+状态：needs_review。学习者回答“自动重新执行”，仍误认为并发时另一个请求改变共享状态，当前if条件会再次自动求值。
+
+纠正：Python的if条件只在控制流运行到该判断语句时求值；当条件为真进入if分支后，程序执行分支中下一条语句，中间状态即使变化也不会自动跳回if重新检查。在请求A检查订单不存在之后，B可能创建，A恢复时会按既有控制流继续尝试insert；若数据库设置唯一约束，重复insert可能失败，但这不是if自动重查。
+
+针对性简化：不用并发，先执行flag=False；if not flag: 将flag=True，随后print("entered")仍会执行。只有循环返回判断点或显式重新检查时才会重新评估条件。
+
+下一步L2-CHECK-13 attempt 5：仅考查if内部变量发生变化后，本轮分支是否继续执行，之后再映射回数据库唯一约束。
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-4:end -->
