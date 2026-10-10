@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-10：L2-CHECK-14 MySQL UNIQUE行为通过；已引入SQLAlchemy IntegrityError/Session.rollback/查询。L2-CHECK-13 attempt 5的Python if复检仍保留。
-last_section: 2.11.3 MySQL UNIQUE 与 SQLAlchemy IntegrityError
+last_note_update: 2026-10-10：SQLAlchemy rollback三轮学习已完成。能说明事务B回滚不影响事务A已提交的数据；修正了先前if判断题的误记。
+last_section: 2.11.5 MySQL与SQLAlchemy事务边界
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,42 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: knowledge_check
-  topic: L2-CHECK-15 / attempt 1
-  next_action: 判断SQLAlchemy INSERT触发IntegrityError后使用同一Session查询历史订单为何应先rollback；随后返回L2-CHECK-13 attempt 5复检。
+  topic: L2-CHECK-13 / attempt 5
+  next_action: 用单线程if代码巩固if条件不会在分支执行中自动重新判断，随后继续MySQL幂等工程。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 116
-last_checkpoint_at: '2026-10-10T08:43:07.305Z'
+checkpoint_version: 119
+last_checkpoint_at: '2026-10-10T08:52:06.535Z'
 last_checkpoint_reason: qa_complete
-pending_writeback:
-  transaction_id: stage01-ch02-check15-batch20261010
-  reason: qa_complete
-  phase: prepared
-  started_at: '2026-10-10T08:52:06.535Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/02-structured-output.md
-    evidence_id: stage01-ch02-L2-CHECK-15-attempts1-3
-    operation: upsert
-    expected_change: Commit three SQLAlchemy rollback checks and correct misrecorded if check.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch02-L2-CHECK-15-attempts1-3-ledger
-    operation: upsert
-    expected_change: Record rollback check outcomes and fix previous incorrect answer attribution.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: stage01-ch02-if-controlflow-evidence-correction
-    operation: upsert
-    expected_change: Mark if automatic recheck misunderstanding resolved based on actual answer.
-    verified: false
-    error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
@@ -82,8 +56,8 @@ project_selection_prompted: true
 completed:
 - 01-llm-message-prompt-langchain
 weak_points:
-- L2-CHECK-13：需要巩固if只在执行到条件时求值一次，之后状态变化不会自动重新执行。
-next_action: L2-CHECK-15：理解session.rollback后查询已有订单；后续复检L2-CHECK-13 attempt 5的if执行边界。
+- 并发原子性：用户已正确表示if不会自动重判；仍可用独立简单代码检查并关联Check-Then-Act。
+next_action: L2-CHECK-13 attempt 5：预测if内部变量变动后print是否执行，随后继续MySQL唯一约束与SQLAlchemy事务。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
