@@ -134,3 +134,7 @@
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-3-ledger:start -->
 - L2-CHECK-3 / attempt 3: needs_review — 能判断 raise 导致 B 跳过、except TypeError 不匹配，误认为异常未捕获仍执行 D；正确结果只有 A 和 ValueError traceback。待同概念复检。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-3-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-4-ledger:start -->
+- L2-CHECK-3 / attempt 4: passed — 正确回答 A、E、D，理由是 ValueError 被匹配 except 捕获，随后继续执行 D。进入 Pydantic e.errors() 结构化校验错误。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-4-ledger:end -->
