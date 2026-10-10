@@ -45,3 +45,31 @@ assert isinstance(data["price"], str)
 
 下一步引入 `BaseModel`、字段类型声明、`model_validate` 和 `ValidationError`，解释 Pydantic 默认可转换的 lax validation 和 strict mode。围绕商品价格案例建立原理版与企业实现版的对应，不把“合法 JSON”混同于“业务类型已被保证”；后续再映射到 FastAPI 与 LangChain。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-1-attempt-2:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-1:start -->
+## 2.3 ValidationError 与异常捕获
+
+商品数据业务边界通过 Pydantic BaseModel 与 Field(gt=0) 定义正数价格：
+
+```python
+from pydantic import BaseModel, Field, ValidationError
+class Product(BaseModel):
+    price: int = Field(gt=0)
+    currency: str
+try:
+    product = Product.model_validate({"price": -20, "currency": "CNY"})
+    print("校验成功")
+except ValidationError as e:
+    print("校验失败")
+    print(e.errors())
+print("程序继续执行")
+```
+
+这次校验会抛出 `ValidationError`，由匹配的 `except` 捕获。依次打印“校验失败”、包含价格字段 `greater_than` 约束不满足的结构化错误列表以及“程序继续执行”。
+
+### L2-CHECK-3 / attempt 1
+
+状态：needs_review。用户正确指出 `price=-20` 会导致 ValidationError，并进入 except；但漏掉 except 后的“程序继续执行”，并把“为什么不直接中止”的原因归结为“异常抛出了”，而不是异常已被 `except ValidationError` 捕获。
+
+下一步：同概念复检 L2-CHECK-3 / attempt 2，区分抛出和捕获后代码的执行位置，再推进 `e.errors()` 结构、FastAPI 422 的边界与 LangChain 结构化输出。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-1:end -->
