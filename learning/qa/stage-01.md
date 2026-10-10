@@ -174,3 +174,7 @@
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-4-ledger:start -->
 - L2-CHECK-7 / attempt 4: needs_review（部分正确）— 正确预测 append 保存 "abc" 不抛异常，解释仍把不报错与无法数学运算混在一起；已纠正 append 不进行校验或运算，接下来复检实际执行步骤。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-4-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-6-teaching-gap-ledger:start -->
+- L2-CHECK-7 / attempt 6: not_assessed — 用户表示没有专门学过 model_validate；已补教用法，不作答错评价，后续练习。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-6-teaching-gap-ledger:end -->
