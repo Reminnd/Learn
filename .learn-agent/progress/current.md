@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 101
 last_checkpoint_at: '2026-10-10T07:03:11.673Z'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch02-check7-a4-20261010
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-10-10T07:05:58.096Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage-01-ch02-L2-CHECK-7-attempt-4
+    operation: upsert
+    expected_change: Record L2-CHECK-7 attempt 4 partial answer and the list.append behavior correction.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage-01-ch02-L2-CHECK-7-attempt-4-ledger
+    operation: upsert
+    expected_change: Record local check remains partial and one final targeted follow-up.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: bug-stage-01-ch02-raw-vs-parsed-attempt4-review
+    operation: upsert
+    expected_change: Extend existing open bug with unvalidated append and silent data error distinction.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
