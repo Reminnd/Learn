@@ -192,3 +192,7 @@
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-9-attempt-2-ledger:start -->
 - L2-CHECK-9 / attempt 2: passed — HTTP 503可能由暂时服务器问题造成，有限重试可能恢复；相同price=-20在gt>0约束不变时校验持续失败，应直接返回错误。开始Backoff。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-9-attempt-2-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-10-attempt-1-ledger:start -->
+- L2-CHECK-10 / attempt 1: passed — 最多3次模型调用，第1次失败等待1秒，第2次失败等待2秒，累计等待3秒，第3次失败后停止；明确补充等待次数是2次。下一节幂等性。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-10-attempt-1-ledger:end -->
