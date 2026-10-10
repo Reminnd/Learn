@@ -263,3 +263,14 @@ LangChain Runnable.with_retry 会在指定异常类型抛出时重试，有 stop
 
 下一步：L2-CHECK-13 / attempt 2，针对“先A检查、再B检查、之后才创建”的时间顺序复检，解释为何两个请求可能都执行创建。此局部检查通过不等于章节mastered。
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-2:start -->
+## L2-CHECK-13 / attempt 2
+状态：needs_review，局部正确。用户知道A之前检查req_001不存在，但断言“检查和创建在同一函数里实现，属于同一原子操作”，这是新的核心误解。
+
+纠正：函数调用的代码可以包含多条独立操作；在并发线程、多个进程或服务实例环境中，一个请求执行完检查到开始创建之间，另一个请求可以检查并完成创建。可能的时间线为A检查不存在→B检查不存在→B创建→A基于原先结果创建；A并不会因为B创建而自动重新做检查。函数封装本身不提供原子性，简单dict最终只有一个key也不能证明外部订单创建/扣款等副作用没有执行两次。
+
+需要数据库唯一约束与事务等协调来实现适合场景的幂等保障，不能仅靠把检查和创建写进同一个Python函数。
+
+下一步：L2-CHECK-13 / attempt 3，明确复检A检查之后、A创建之前，B是否可以完成创建；判断原始检查是否自动刷新。
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-2:end -->
