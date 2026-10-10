@@ -73,3 +73,13 @@ print("程序继续执行")
 
 下一步：同概念复检 L2-CHECK-3 / attempt 2，区分抛出和捕获后代码的执行位置，再推进 `e.errors()` 结构、FastAPI 422 的边界与 LangChain 结构化输出。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-2-attempt-1:start -->
+## L2-CHECK-2 / attempt 1
+状态：passed。正确回答 Pydantic 默认模式把字符串 "199" 转为整数 199；strict=True 不允许隐式转换，校验失败。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-2-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-2:start -->
+## L2-CHECK-3 / attempt 2
+状态：needs_review。用户正确预测 ACD，但问 raise ValueError("test") 和 except ValueError 含义，以及为什么不打印 B。已讲解 raise 抛出异常时跳过 try 剩余语句，找到匹配的 except 后打印 C，然后继续打印 D。待判断异常处理类型不匹配的情形。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-2:end -->
