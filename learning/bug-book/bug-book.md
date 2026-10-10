@@ -139,5 +139,9 @@
 <!-- learn-agent:evidence:bug-stage01-ch02-atomicity-if-auto-recheck:start -->
 - 误区：以为if条件在共享数据变化后会自动重判。
 - 纠正：if仅在执行到条件时判定，进入分支后不会自行跳回。需显式再检查才能得到新值。
-- 状态：open，下一次进行单线程if控制流复检。
+- 状态：resolved（更正）；用户正确表示A会从if判断后的暂停位置继续执行，不自动重判。
 <!-- learn-agent:evidence:bug-stage01-ch02-atomicity-if-auto-recheck:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-if-controlflow-evidence-correction:start -->
+- 记录更正：用户在L2-CHECK-13 attempt 4实际回答“直接继续执行”，正确判断if不会自动重判；此前误记为错误。可继续用简单代码巩固并发检查与创建的边界。
+<!-- learn-agent:evidence:stage01-ch02-if-controlflow-evidence-correction:end -->
