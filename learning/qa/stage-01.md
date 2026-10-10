@@ -122,3 +122,11 @@
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-1-ledger:start -->
 - L2-CHECK-3 / attempt 1: needs_review — 已认识到 Field(gt=0) 拒绝 -20 并抛出 ValidationError；漏掉程序继续执行的输出，把继续运行错误地归因于抛出异常，需复检 try/except 执行流程。正式笔记：stage-01/02-structured-output.md。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-2-attempt-1-ledger:start -->
+- L2-CHECK-2 / attempt 1: passed — 区分 Pydantic 默认类型转换和 strict 模式拒绝字符串到整数转换。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-2-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-2-ledger:start -->
+- L2-CHECK-3 / attempt 2: needs_review — ACD 预测正确；raise/except 控制流理解待复检，已解释为什么跳过 B。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-2-ledger:end -->
