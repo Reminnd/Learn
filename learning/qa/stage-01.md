@@ -138,3 +138,7 @@
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-4-ledger:start -->
 - L2-CHECK-3 / attempt 4: passed — 正确回答 A、E、D，理由是 ValueError 被匹配 except 捕获，随后继续执行 D。进入 Pydantic e.errors() 结构化校验错误。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-3-attempt-4-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-4-attempt-1-ledger:start -->
+- L2-CHECK-4 / attempt 1: needs_review — 识别 price gt=0 的 greater_than 错误，但遗漏 currency 无默认值时 required 的 missing 错误。已讲解 Pydantic v2 required vs default vs nullable，待复检。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-4-attempt-1-ledger:end -->
