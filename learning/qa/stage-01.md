@@ -213,3 +213,7 @@
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-3-guided-explanation-ledger:start -->
 - L2-CHECK-13 / attempt 3: needs_review。用户表示不清楚同一函数为何不能保证原子性；已补教并发请求可交错执行，接下来检查if不会自动重新执行。
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-3-guided-explanation-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-4-ledger:start -->
+- L2-CHECK-13 / attempt 4: needs_review。预测A恢复执行会自动重判if；已纠正：if判断为真进入分支后，即使变量变化也不会自动重判。下一题用简单if代码复检。
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-4-ledger:end -->
