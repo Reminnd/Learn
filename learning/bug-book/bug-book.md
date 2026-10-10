@@ -77,5 +77,9 @@
 - 根因：没有区分ChatModel输出和Structured Output包装层的输出。
 - 修复：默认返回ProductIn；include_raw=True返回dict，分别提供raw、parsed和parsing_error。
 - 避免：检查Runnable的对外返回类型，理解解析阶段。
-- 状态：open，等待L2-CHECK-6 attempt 2复检。
+- 状态：resolved；L2-CHECK-6 attempt 2正确区分ProductIn对象与AIMessage。
 <!-- learn-agent:evidence:bug-stage-01-ch02-structured-result-type:end -->
+
+<!-- learn-agent:evidence:bug-stage-01-ch02-structured-result-type-resolved:start -->
+- 复检结论：L2-CHECK-6 attempt 2正确解释with_structured_output(ProductIn)默认返回ProductIn，不能当作AIMessage使用.content。
+<!-- learn-agent:evidence:bug-stage-01-ch02-structured-result-type-resolved:end -->
