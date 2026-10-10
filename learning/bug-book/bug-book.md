@@ -83,3 +83,13 @@
 <!-- learn-agent:evidence:bug-stage-01-ch02-structured-result-type-resolved:start -->
 - 复检结论：L2-CHECK-6 attempt 2正确解释with_structured_output(ProductIn)默认返回ProductIn，不能当作AIMessage使用.content。
 <!-- learn-agent:evidence:bug-stage-01-ch02-structured-result-type-resolved:end -->
+
+<!-- learn-agent:evidence:bug-stage-01-ch02-raw-vs-parsed-on-validation-failure:start -->
+## Structured Output 解析失败后直接使用 raw
+- 症状：认为 include_raw=True 解析失败没有 parsed 键，应直接读取 raw.price。
+- 错误模型：把模型原始响应 raw 当作已经通过 Schema 校验的数据。
+- 根因：混淆 parsed 缺失与 parsed=None，也没有区分原始响应与可用于业务的数据。
+- 修复：结果字典包含 parsed，解析失败时为 None；parsing_error 保存错误；raw 仅供诊断。只有检查 parsed 不为 None 后才能读取 parsed.price。
+- 避免：始终在业务使用前检查解析结果，明确错误路径并限制重试，避免原始数据绕过校验。
+- 状态：open；等待 L2-CHECK-7 attempt 2。
+<!-- learn-agent:evidence:bug-stage-01-ch02-raw-vs-parsed-on-validation-failure:end -->
