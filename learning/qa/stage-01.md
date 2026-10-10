@@ -228,3 +228,7 @@
 - L2-CHECK-15 attempt 3: passed — 独立事务A已commit的库存修改不能被事务B rollback撤销，回答及原因完整。
 - L2-CHECK-13 attempt 4: evidence correction — 实际回答“直接继续执行”，先前标为错误是记录偏差，已纠正。
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-15-attempts1-3-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-5-ledger:start -->
+- L2-CHECK-13 / attempt 5: passed（局部复检）— 对exists=False; if not exists: exists=True; print(...)判断会输出，结合之前“直接继续执行”的正确回答，验证了if进入分支后不会因为变量变化自动重查。后续返回Structured Output Chapter 02的EX1正式练习。
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-5-ledger:end -->
