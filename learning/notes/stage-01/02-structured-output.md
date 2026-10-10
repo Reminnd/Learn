@@ -315,3 +315,19 @@ LangChain Runnable.with_retry 会在指定异常类型抛出时重试，有 stop
 
 事务边界总结：未提交的库存修改和创建订单若在同一事务内，失败回滚可以撤销两者；事务A已提交的库存变更，不受事务B rollback影响。SQLAlchemy在失败后需rollback才能继续使用原Session。仓库旧的L2-CHECK-13 attempt 4实际回答是“直接继续执行”，已做记录更正；后续用单线程if简单复检。
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-15-attempts1-3:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-5:start -->
+## L2-CHECK-13 / attempt 5
+状态：passed（局部复检）。用户对以下Python程序正确预测输出“创建订单”：
+```python
+exists = False
+if not exists:
+    exists = True
+    print("创建订单")
+```
+此前在并发A/B执行问题中已正确回答“A直接继续执行”。结合两项证据，说明用户能够正确追踪if条件只在执行到时判断，进入分支之后变量变化不会自动重新判断。这仍不等于用户独立实现了数据库并发幂等，后续Stage 01 Tool工程章节可继续巩固。
+
+## Chapter 02正式验收准备：EX1
+按照curriculum/stage-01/02-structured-output.md，必做EX1要求：最小原理版解析并验证LLM结构化输出；使用LangChain框架表达同一能力；能复现Schema验证失败并解释处理方案。此前小节练习虽已掌握若干概念，但还不是独立完成EX1。接下来使用商品价格案例，以Pydantic BaseModel构建Schema，逐步实现原理版与框架版，随后正式Q1/Q2/Q3。
+下一步：EX1第1步，定义Product Schema，并验证 raw={"price":"199"} 或 raw={"price":"abc"}。
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-5:end -->
