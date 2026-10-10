@@ -274,3 +274,12 @@ LangChain Runnable.with_retry 会在指定异常类型抛出时重试，有 stop
 
 下一步：L2-CHECK-13 / attempt 3，明确复检A检查之后、A创建之前，B是否可以完成创建；判断原始检查是否自动刷新。
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-2:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-3-guided-explanation:start -->
+## L2-CHECK-13 / attempt 3：并发执行原理补教
+状态：needs_review / 引导讲解。用户直接询问“为什么？我不太清楚了”，说明目前未掌握函数内部的检查/创建并发原子性；不以用户提问本身推断其已通过复检。
+
+解释：相同函数的两次调用属于两次独立的执行。不同线程/进程或FastAPI worker可以在时间上交错处理；同一个函数只表示代码相同，不代表串行或原子性。共享数据库示例中，A读到req_001不存在之后可能被调度暂停；B也读到不存在并创建；A随后从if判断之后的位置继续，会依旧尝试执行insert，if不会自动重新检查。简单Python内存字典不等于跨进程可靠共享存储，演示应以共享数据库为背景。数据库唯一约束、合适的事务处理或等价机制才能对重复订单作有保障的协调。
+
+下一步：L2-CHECK-13 / attempt 4，缩小为单一问题：A在if条件已判真、B插入后恢复执行时，A会自动重新判断还是直接继续执行insert？确认数据流后再讨论数据库唯一性约束。
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-3-guided-explanation:end -->
