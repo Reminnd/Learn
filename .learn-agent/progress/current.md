@@ -42,7 +42,40 @@ resume_contract:
 checkpoint_version: 89
 last_checkpoint_at: '2026-10-10T11:40:00+08:00'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20261010-ch02-structured-q2-q3a2
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-10-10T04:23:13.913Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage-01-ch02-L2-CHECK-2-attempt-1
+    operation: upsert
+    expected_change: Persist validated Pydantic strict-mode understanding from L2-CHECK-2.
+    verified: false
+    error: null
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage-01-ch02-L2-CHECK-3-attempt-2
+    operation: upsert
+    expected_change: Record L2-CHECK-3 attempt 2 accurate output prediction and request for explanation of raise and except.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage-01-ch02-L2-CHECK-2-attempt-1-ledger
+    operation: upsert
+    expected_change: Record previously passed L2-CHECK-2 answer from this live teaching session.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage-01-ch02-L2-CHECK-3-attempt-2-ledger
+    operation: upsert
+    expected_change: Record L2-CHECK-3 attempt 2 partial mastery with causal understanding under review.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
