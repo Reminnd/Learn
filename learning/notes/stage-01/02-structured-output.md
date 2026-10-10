@@ -214,3 +214,13 @@ Agent 对应：LangChain create_agent(response_format=Product) 可将结构化�
 LangChain Runnable.with_retry 会在指定异常类型抛出时重试，有 stop_after_attempt 和 retry_if_exception_type 等参数。若 include_raw=True 仅在结果中返回 parsed=None 而没有抛出异常，普通 with_retry 不会因此自动重试，业务层需显式判断或转换为可恢复错误。
 下一步 L2-CHECK-8：读懂有限重试及 break 的分支流程。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-8:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-8-attempts-1-2:start -->
+## L2-CHECK-8 重试控制流
+- attempt 1: needs_review。正确推断两次尝试及先失败、再成功的输出，但将尝试次数误当保存元素数量，回答2个。
+- attempt 2: passed。给出三项候选raw（abc，199，299）时，用户正确判断最终列表只有1个ProductIn，原因是第二次校验成功后执行break，第三项不再被处理；第一项异常触发continue，未执行append。
+
+## 2.9 有界重试与失败分类
+控制最大尝试次数，成功后立即停止；每次只让已通过Schema校验的输出进入业务。可恢复的网络或模型格式错误可以按策略重试；固定输入违反业务要求应直接返回校验错误，不应盲目无限重试。LangChain Runnable.with_retry 只在对应Runnable抛出异常时重试，并支持retry_if_exception_type、stop_after_attempt。尽量只对模型/易失败步骤加重试，避免把保存等副作用操作重复执行。
+下一步 L2-CHECK-9：判断一次请求遇到HTTP 503和固定无效业务输入，哪些应该重试。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-8-attempts-1-2:end -->
