@@ -196,3 +196,8 @@
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-10-attempt-1-ledger:start -->
 - L2-CHECK-10 / attempt 1: passed — 最多3次模型调用，第1次失败等待1秒，第2次失败等待2秒，累计等待3秒，第3次失败后停止；明确补充等待次数是2次。下一节幂等性。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-10-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-idempotency-checks11-12-qa:start -->
+- L2-CHECK-11 / attempt 1: passed — 已识别订单实际成功但响应超时会触发重复调用，最大重试次数不等于无重复副作用。
+- L2-CHECK-12 / attempt 1: passed — req_001重复请求复用订单；req_002新请求创建另一笔；最终总计两笔。继续并发安全教学。
+<!-- learn-agent:evidence:stage01-ch02-idempotency-checks11-12-qa:end -->
