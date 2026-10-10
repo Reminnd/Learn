@@ -242,3 +242,15 @@ LangChain Runnable.with_retry 会在指定异常类型抛出时重试，有 stop
 对会产生副作用的操作（如创建订单、扣款、写入数据）重试，可能出现“操作已成功但响应在网络中丢失”的不确定结果。幂等性要求相同操作的重复请求不会重复产生预期之外的业务效果，例如相同idempotency key只创建一个订单。示例思路为在持久化层按业务唯一请求ID做唯一性约束，并用原子事务检查已处理操作；仅用Python内存dict判断只适合本地演示，不足以应对并发、多实例或进程重启。对外部收费Tool尤其不能机械重试整个Agent Loop。
 下一步：L2-CHECK-11 用订单Tool操作成功但响应超时的场景说明没有幂等保障时重复执行的风险。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-10-attempt-1:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-idempotency-checks11-12-batch:start -->
+## L2-CHECK-11 / attempt 1
+状态：passed。用户正确解释订单创建已成功但响应网络超时，Agent误以为失败而重试；若缺少幂等保护，最多3次尝试均实际成功可能生成3笔订单，即额外重复2笔。已区分请求超时和业务操作未执行的不同语义。
+
+## L2-CHECK-12 / attempt 1
+状态：passed。使用内存 orders 字典演示时，同一 request_id=req_001 重复调用返回已有订单，request_id=req_002 是新独立请求，因此三次调用只创建两笔订单。不同业务意图可创建相同商品的新订单，幂等键不能仅凭产品名推断。
+
+## 2.11.2 并发请求下的幂等性
+只用 if request_id in orders 的检查再创建订单，无法保证多个工作线程、进程或服务实例同时执行时的原子性。两个请求可能同时读到键不存在，并各自创建新订单。企业常通过数据库唯一约束和事务处理冲突；同时将请求参数摘要关联同一幂等键，防止不同请求内容误共用键。检查和写入应由可靠存储协调。
+下一题 L2-CHECK-13：两个并发请求在检查幂等键时都观察到“不存在”，有什么风险？
+<!-- learn-agent:evidence:stage01-ch02-idempotency-checks11-12-batch:end -->
