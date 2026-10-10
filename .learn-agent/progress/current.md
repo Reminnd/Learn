@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 116
 last_checkpoint_at: '2026-10-10T08:43:07.305Z'
 last_checkpoint_reason: qa_complete
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch02-check15-batch20261010
+  reason: qa_complete
+  phase: prepared
+  started_at: '2026-10-10T08:52:06.535Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage01-ch02-L2-CHECK-15-attempts1-3
+    operation: upsert
+    expected_change: Commit three SQLAlchemy rollback checks and correct misrecorded if check.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch02-L2-CHECK-15-attempts1-3-ledger
+    operation: upsert
+    expected_change: Record rollback check outcomes and fix previous incorrect answer attribution.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch02-if-controlflow-evidence-correction
+    operation: upsert
+    expected_change: Mark if automatic recheck misunderstanding resolved based on actual answer.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
