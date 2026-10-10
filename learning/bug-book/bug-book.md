@@ -63,5 +63,9 @@
 - 根因：没有区分字段类型注解、默认值与允许 None 三项独立维度。
 - 修复：Pydantic v2 未提供默认值的字段默认为 required；str = "CNY" 是非必填；str | None 无默认值时仍然必填但可空。
 - 避免：读 Schema 时先检查是否有显式默认值，再检查类型与约束。
-- 状态：open；等待 L2-CHECK-4 attempt 2 复检。
+- 状态：resolved；L2-CHECK-4 attempt 2 已正确解释字段默认值及必填规则。
 <!-- learn-agent:evidence:bug-stage-01-ch02-required-fields:end -->
+
+<!-- learn-agent:evidence:bug-stage-01-ch02-required-fields-resolved:start -->
+- 状态更新证据：L2-CHECK-4 attempt 2 已正确说明默认值允许省略字段，缺少默认值的 currency 必填。
+<!-- learn-agent:evidence:bug-stage-01-ch02-required-fields-resolved:end -->
