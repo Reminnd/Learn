@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 92
 last_checkpoint_at: '2026-10-10T04:29:12.342Z'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: ch02-L2-CHECK-3-a4-20261010
+  reason: qa_complete
+  phase: prepared
+  started_at: '2026-10-10T04:32:44.962Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage-01-ch02-L2-CHECK-3-attempt-4
+    operation: upsert
+    expected_change: Record passed exception control-flow retest and start error details topic.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage-01-ch02-L2-CHECK-3-attempt-4-ledger
+    operation: upsert
+    expected_change: Record L2-CHECK-3 attempt 4 passed and next topic.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage-01-ch02-exception-misconception-resolved
+    operation: upsert
+    expected_change: Resolve previous exception propagation misconceptions on demonstrated retest.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
