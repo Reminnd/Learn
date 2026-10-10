@@ -146,3 +146,7 @@
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-4-attempt-2-ledger:start -->
 - L2-CHECK-4 / attempt 2: passed — 正确回答 ProductA 的 currency 必填、ProductB 因 currency="CNY" 默认值可省略；已完成针对性复检。下一步 FastAPI 请求体校验。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-4-attempt-2-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-5-attempt-1-ledger:start -->
+- L2-CHECK-5 / attempt 1: passed — 已正确判断 FastAPI 请求体不符合 Field(gt=0) 时不会进入 create_product 函数体，默认返回 HTTP 422。进入 LangChain Structured Output 的原理与框架映射。笔记：stage-01/02-structured-output.md。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-5-attempt-1-ledger:end -->
