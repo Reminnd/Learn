@@ -294,3 +294,15 @@ LangChain Runnable.with_retry 会在指定异常类型抛出时重试，有 stop
 
 下一步L2-CHECK-13 attempt 5：仅考查if内部变量发生变化后，本轮分支是否继续执行，之后再映射回数据库唯一约束。
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-4:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-14-attempt1-mysql-unique:start -->
+## L2-CHECK-14 / attempt 1
+状态：passed。用户正确预测：MySQL InnoDB表中设置UNIQUE(request_id)后，如果已有已提交订单req_001，后续重复INSERT会被唯一约束阻止并返回错误；数据库不会自动将历史订单作为应用层结果返回。
+
+## 2.11.3 MySQL + SQLAlchemy错误处理（局部教学）
+在Python企业服务中，SQLAlchemy的IntegrityError负责表示底层DBAPI的完整性约束异常。session.add(order)将ORM对象加入Session；session.commit()期间可能执行INSERT，遇到重复键可能抛IntegrityError。捕获后需要session.rollback()以恢复Session状态，再使用select(Order).where(Order.request_id == ...)查询历史订单，并比对原请求商品参数。同request_id不同商品不应静默复用旧订单。若遇到其他完整性错误，不能未经分类便统一当作幂等命中。
+即使唯一约束防止数据库重复记录，也不等于外部扣款、发送消息等非数据库副作用自动幂等。生产方案还需合适事务、错误分类和外部副作用防护。
+下一题：L2-CHECK-15，SQLAlchemy Session提交时触发IntegrityError后，为什么在同一Session继续查询前需要rollback。
+提醒：仓库中L2-CHECK-13 attempt 5（if条件重判误区）仍未通过，本次MySQL学习不会自动消除该薄弱点，后续需要复检。
+参考：https://docs.sqlalchemy.org/en/20/orm/session_basics.html；https://docs.sqlalchemy.org/en/20/core/exceptions.html
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-14-attempt1-mysql-unique:end -->
