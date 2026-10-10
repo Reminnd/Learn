@@ -42,7 +42,40 @@ resume_contract:
 checkpoint_version: 86
 last_checkpoint_at: '2026-09-08T16:29:31+08:00'
 last_checkpoint_reason: completion
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20261010T113400-ch02-L2-CHECK-1-attempt-1
+  reason: knowledge_event
+  phase: prepared
+  started_at: 2026-10-10T11:34:00+08:00
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage-01-ch02-L2-CHECK-1-attempt-1
+    operation: upsert
+    expected_change: Create Chapter 02 Structured Output lesson note and L2-CHECK-1 attempt 1 diagnostic evidence.
+    verified: false
+    error: null
+  - asset_key: notes.index
+    relative_pointer: null
+    evidence_id: stage-01-ch02-index-entry
+    operation: upsert
+    expected_change: Refresh Chapter 01 mastered index and register current Chapter 02 note.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage-01-ch02-L2-CHECK-1-attempt-1-ledger
+    operation: upsert
+    expected_change: Record Chapter 02 initial question attempt as needs_review pending targeted retest.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: bug-stage-01-ch02-python-unhandled-typeerror
+    operation: upsert
+    expected_change: Record misunderstanding about unhandled Python TypeError, with correction and pending retest.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-01
 deepseek_route_prompted_for:
