@@ -170,3 +170,7 @@
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-3-ledger:start -->
 - L2-CHECK-7 / attempt 3: needs_review — 已认识到"abc"类型不适合价格计算，仍误认为绕过校验必然抛异常；已指出未经校验数据可能静默进入业务并污染价格字段。下一步复检静默错误案例。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-3-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-4-ledger:start -->
+- L2-CHECK-7 / attempt 4: needs_review（部分正确）— 正确预测 append 保存 "abc" 不抛异常，解释仍把不报错与无法数学运算混在一起；已纠正 append 不进行校验或运算，接下来复检实际执行步骤。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-4-ledger:end -->
