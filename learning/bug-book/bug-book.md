@@ -39,7 +39,7 @@
 - 根因：未区分 `raise` 引发控制流中断与 `except` 捕获匹配异常后继续执行。
 - 修复：Pydantic 抛 ValidationError 后跳入 except；当 except 正常结束，继续执行其后语句。 
 - 避免：沿代码逐行标出引发异常的位置、捕获入口与捕获块之后的下一条语句。
-- 状态：open；等待 L2-CHECK-3 attempt 2 复检。
+- 状态：resolved；L2-CHECK-3 attempt 4 已正确解释匹配 except 后继续执行。
 <!-- learn-agent:evidence:bug-stage-01-ch02-raise-vs-except:end -->
 
 <!-- learn-agent:evidence:bug-stage-01-ch02-unhandled-valueerror:start -->
@@ -49,5 +49,9 @@
 - 根因：遗漏未捕获异常的向外传播及其对当前执行流程的中断作用。
 - 修复：只有匹配的 except 捕获并正常处理后，try/except 后的语句才在同一执行流程中继续执行；否则异常继续传播。
 - 避免：逐步标记异常类型、匹配的处理器、是否已捕获，再判断代码执行。
-- 状态：open，待 L2-CHECK-3 attempt 4 复检。
+- 状态：resolved；L2-CHECK-3 attempt 4 正确将 D 的执行归因于异常被捕获。
 <!-- learn-agent:evidence:bug-stage-01-ch02-unhandled-valueerror:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-exception-misconception-resolved:start -->
+- 异常处理复检证据：L2-CHECK-3 attempt 4 已正确判断类型匹配的 except 捕获 ValueError 后输出 AED，随后执行正常代码。先前两类误解已完成针对性复检。
+<!-- learn-agent:evidence:stage-01-ch02-exception-misconception-resolved:end -->
