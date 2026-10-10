@@ -55,3 +55,13 @@
 <!-- learn-agent:evidence:stage-01-ch02-exception-misconception-resolved:start -->
 - 异常处理复检证据：L2-CHECK-3 attempt 4 已正确判断类型匹配的 except 捕获 ValueError 后输出 AED，随后执行正常代码。先前两类误解已完成针对性复检。
 <!-- learn-agent:evidence:stage-01-ch02-exception-misconception-resolved:end -->
+
+<!-- learn-agent:evidence:bug-stage-01-ch02-required-fields:start -->
+## Pydantic 默认必填字段的判断误区
+- 症状：认为 currency: str 未标注 required=True，缺失 currency 不产生校验错误。
+- 错误模型：只有显式写 required 才需要输入。
+- 根因：没有区分字段类型注解、默认值与允许 None 三项独立维度。
+- 修复：Pydantic v2 未提供默认值的字段默认为 required；str = "CNY" 是非必填；str | None 无默认值时仍然必填但可空。
+- 避免：读 Schema 时先检查是否有显式默认值，再检查类型与约束。
+- 状态：open；等待 L2-CHECK-4 attempt 2 复检。
+<!-- learn-agent:evidence:bug-stage-01-ch02-required-fields:end -->
