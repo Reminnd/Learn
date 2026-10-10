@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 114
 last_checkpoint_at: '2026-10-10T08:15:00.000Z'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch02-check13-a4-20261010
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-10-10T16:16:00+08:00'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage01-ch02-L2-CHECK-13-attempt-4
+    operation: upsert
+    expected_change: Record L2-CHECK-13 attempt 4 incorrect automatic if reevaluation and provide elementary branch-control explanation.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch02-L2-CHECK-13-attempt-4-ledger
+    operation: upsert
+    expected_change: Record needs_review and simple if reassessment.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: bug-stage01-ch02-atomicity-if-auto-recheck
+    operation: upsert
+    expected_change: Record misconception that if condition automatically reevaluates when shared state changes.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
