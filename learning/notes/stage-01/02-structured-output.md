@@ -286,7 +286,7 @@ LangChain Runnable.with_retry 会在指定异常类型抛出时重试，有 stop
 
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-4:start -->
 ## L2-CHECK-13 / attempt 4
-状态：needs_review。学习者回答“自动重新执行”，仍误认为并发时另一个请求改变共享状态，当前if条件会再次自动求值。
+状态：passed（记录更正）。用户实际回答“直接继续执行”，正确认识到if不会自动重判；旧记录将正确答案错记为“自动重新执行”。
 
 纠正：Python的if条件只在控制流运行到该判断语句时求值；当条件为真进入if分支后，程序执行分支中下一条语句，中间状态即使变化也不会自动跳回if重新检查。在请求A检查订单不存在之后，B可能创建，A恢复时会按既有控制流继续尝试insert；若数据库设置唯一约束，重复insert可能失败，但这不是if自动重查。
 
@@ -306,3 +306,12 @@ LangChain Runnable.with_retry 会在指定异常类型抛出时重试，有 stop
 提醒：仓库中L2-CHECK-13 attempt 5（if条件重判误区）仍未通过，本次MySQL学习不会自动消除该薄弱点，后续需要复检。
 参考：https://docs.sqlalchemy.org/en/20/orm/session_basics.html；https://docs.sqlalchemy.org/en/20/core/exceptions.html
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-14-attempt1-mysql-unique:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-15-attempts1-3:start -->
+## L2-CHECK-15 事务复检
+- attempt 1: partial。用户正确指出IntegrityError后rollback使Session恢复可用；需要补充事务内未提交修改撤销的概念。
+- attempt 2: partial。正确判断同一事务中尚未提交的库存减少会被rollback撤销，但未说明原因。
+- attempt 3: passed。正确回答事务B rollback不会撤销事务A已经commit的库存，并明确理由是不能回滚其他已提交事务。
+
+事务边界总结：未提交的库存修改和创建订单若在同一事务内，失败回滚可以撤销两者；事务A已提交的库存变更，不受事务B rollback影响。SQLAlchemy在失败后需rollback才能继续使用原Session。仓库旧的L2-CHECK-13 attempt 4实际回答是“直接继续执行”，已做记录更正；后续用单线程if简单复检。
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-15-attempts1-3:end -->
