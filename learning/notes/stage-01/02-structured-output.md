@@ -159,3 +159,12 @@ Agent 对应：LangChain create_agent(response_format=Product) 可将结构化�
 参考：https://reference.langchain.com/python/langchain-core/language_models/chat_models/BaseChatModel/with_structured_output
 下一步：L2-CHECK-7，预测解析失败时raw/parsed/parsing_error的表现。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-6-attempt-2:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-1:start -->
+## L2-CHECK-7 / attempt 1
+状态：needs_review（部分正确）。用户认识到 price="abc" 无法通过 Pydantic 校验，读取 price 仍会报错，但认为没有返回 parsed 键，并提议转而检查 raw 中的 price。正确情况：在 include_raw=True 且模型调用成功、解析失败时，返回字典仍含 parsed 键且值是 None，parsing_error 含错误信息，raw 保存原始（未校验）模型响应。
+
+执行 `result["parsed"].price` 因 `None` 无 `price` 属性而抛出 `AttributeError`。不能绕开校验直接用 raw 中的无效数值做业务运算。安全路径是 `if result["parsed"] is not None: ...`，否则检查 parsing_error 并返回可控错误或按策略有限重试。
+
+下一步 L2-CHECK-7 / attempt 2：复检正确的成功判定字段及错误处理，不提前标记该知识点掌握。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-7-attempt-1:end -->
