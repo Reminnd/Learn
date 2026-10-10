@@ -188,3 +188,7 @@
 - L2-CHECK-8 attempt 1: needs_review — 两次尝试与两条输出判断正确，误认为有两个列表元素。
 - L2-CHECK-8 attempt 2: passed — 正确判断三个候选响应在第二项通过后break，实际append仅一次，最终一个ProductIn对象。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-8-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-9-attempt-2-ledger:start -->
+- L2-CHECK-9 / attempt 2: passed — HTTP 503可能由暂时服务器问题造成，有限重试可能恢复；相同price=-20在gt>0约束不变时校验持续失败，应直接返回错误。开始Backoff。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-9-attempt-2-ledger:end -->
