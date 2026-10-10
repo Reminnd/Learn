@@ -69,3 +69,13 @@
 <!-- learn-agent:evidence:bug-stage-01-ch02-required-fields-resolved:start -->
 - 状态更新证据：L2-CHECK-4 attempt 2 已正确说明默认值允许省略字段，缺少默认值的 currency 必填。
 <!-- learn-agent:evidence:bug-stage-01-ch02-required-fields-resolved:end -->
+
+<!-- learn-agent:evidence:bug-stage-01-ch02-structured-result-type:start -->
+## Structured Output返回类型混淆
+- 症状：误认为with_structured_output(ProductIn)默认返回包含ProductIn的AIMessage。
+- 错误模型：把模型原始消息和经过解析验证的对象视为一个。
+- 根因：没有区分ChatModel输出和Structured Output包装层的输出。
+- 修复：默认返回ProductIn；include_raw=True返回dict，分别提供raw、parsed和parsing_error。
+- 避免：检查Runnable的对外返回类型，理解解析阶段。
+- 状态：open，等待L2-CHECK-6 attempt 2复检。
+<!-- learn-agent:evidence:bug-stage-01-ch02-structured-result-type:end -->
