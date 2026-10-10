@@ -114,3 +114,7 @@
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-1-attempt-1-ledger:start -->
 - L2-CHECK-1 / attempt 1: needs_review — 已识别 `"199"` 是 `str`，但误认为没有异常处理时不会因类型错误中断；已说明 `TypeError` 的传播、未捕获异常导致执行失败，以及 `str * int` 的字符串重复行为。正式笔记：stage-01/02-structured-output.md；待同概念复检。
 <!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-1-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-1-attempt-2-ledger:start -->
+- L2-CHECK-1 / attempt 2: passed — 正确预测 `str + int` 抛出 `TypeError`，无捕获时后续语句不执行；2.1 小节理解复检通过，下一步进入 2.2 Pydantic Schema 与类型校验。笔记：stage-01/02-structured-output.md。
+<!-- learn-agent:evidence:stage-01-ch02-L2-CHECK-1-attempt-2-ledger:end -->
