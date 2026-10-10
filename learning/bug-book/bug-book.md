@@ -115,3 +115,13 @@
 - 避免：分开计数尝试、通过校验与保存次数。
 - 状态：resolved，L2-CHECK-8 attempt 2正确说明第二次成功后break，最终只保存1项。
 <!-- learn-agent:evidence:bug-stage01-ch02-retry-save-count-resolved:end -->
+
+<!-- learn-agent:evidence:bug-stage01-ch02-concurrency-message-list-confusion:start -->
+## 并发请求与消息列表顺序混淆
+- 症状：将请求A、B的竞态问题解释成“消息列表不处于先后关系”。
+- 错误模型：认为没有消息顺序就是订单重复的直接原因。
+- 根因：没有跟踪两个独立请求各自的检查与创建步骤，以及跨请求执行的交错顺序。
+- 修复：A检查无记录→B检查无记录→A创建→B创建；检查与创建不具原子性，重复副作用就可能发生。
+- 避免：并发问题用事件时间线写出每个参与者的读与写；明确状态共享边界，考虑数据库唯一约束与事务。
+- 状态：open；等待 L2-CHECK-13 attempt 2 复检。
+<!-- learn-agent:evidence:bug-stage01-ch02-concurrency-message-list-confusion:end -->
