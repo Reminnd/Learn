@@ -205,3 +205,7 @@
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-1-ledger:start -->
 - L2-CHECK-13 / attempt 1: needs_review — 答案注意到两个并发操作可能没有固定全局先后，但将其称为消息列表，未给出两个请求都在写入前完成check的交错顺序；已解释A检查→B检查→A创建→B创建的check-then-act竞态，待复检。
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-1-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-2-ledger:start -->
+- L2-CHECK-13 / attempt 2: needs_review — 正确指出A先前检查到req_001不存在，但误以为检查和创建写在同一个函数便具有原子性。已说明并发交错执行仍可能产生重复副作用；需要进一步复检。
+<!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-2-ledger:end -->
