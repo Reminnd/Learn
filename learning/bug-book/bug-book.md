@@ -135,3 +135,9 @@
 - 避免：用时间线分析多个请求对共享状态的读写，利用数据库唯一约束/事务或等价协调保证业务唯一性。
 - 状态：open；待L2-CHECK-13 attempt 3复检。
 <!-- learn-agent:evidence:bug-stage01-ch02-same-function-not-atomic:end -->
+
+<!-- learn-agent:evidence:bug-stage01-ch02-atomicity-if-auto-recheck:start -->
+- 误区：以为if条件在共享数据变化后会自动重判。
+- 纠正：if仅在执行到条件时判定，进入分支后不会自行跳回。需显式再检查才能得到新值。
+- 状态：open，下一次进行单线程if控制流复检。
+<!-- learn-agent:evidence:bug-stage01-ch02-atomicity-if-auto-recheck:end -->
