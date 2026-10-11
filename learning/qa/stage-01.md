@@ -261,3 +261,7 @@
 <!-- learn-agent:evidence:stage01-ch02-Q1-attempt1-20261011-ledger:start -->
 - Chapter02 Q1 / attempt1: needs_review（方向正确，原因不全）— 用户认识到Schema校验与字段缺失、错误语义数据风险；尚未说明普通语言答案措辞/格式不固定令程序解析脆弱，且“确保”表述太绝对。目标复检自然语言格式变化为何使split或正则不可靠。
 <!-- learn-agent:evidence:stage01-ch02-Q1-attempt1-20261011-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q1-attempt2-20261011-ledger:start -->
+- Chapter02 Q1 / attempt2: needs_review — 用户回答“可能没有采用实际价格”属于语义准确性风险，但未命中固定split解析自由文本为什么会失败的格式原因。已给A/C无分隔符导致IndexError、B残留“元”的反例；下轮以分隔符不匹配的列表长度复检。
+<!-- learn-agent:evidence:stage01-ch02-Q1-attempt2-20261011-ledger:end -->
