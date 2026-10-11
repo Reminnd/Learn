@@ -11,64 +11,38 @@ chapter_file: curriculum/stage-01/02-structured-output.md
 note_pointer: stage-01/02-structured-output.md
 qa_pointer: stage-01.md
 lifecycle_status: active
-learning_status: learning
+learning_status: mastered
 integrity:
   status: healthy
   missing: []
   reason: null
 mastery:
-  score: null
-  critical_questions_passed: false
-  dimension_floors_passed: false
-  required_exercises_passed: false
+  score: 82
+  critical_questions_passed: true
+  dimension_floors_passed: true
+  required_exercises_passed: true
   unresolved_critical_misconceptions: 0
-  mastered: false
-last_note_update: 2026-10-11：Q3 attempt2能区分源信息缺失与模型偶发提取错误；attempt3能权衡有上限重试的收益、API费用和延迟。
-last_section: Chapter02 Q3 错误定位复检
+  mastered: true
+last_note_update: 2026-10-11：Chapter02 Q3、EX1、Q1、Q2完成正式验收；根据掌握rubric五维19+16+18+17+12=82/100，达成mastered。
+last_section: Chapter 02 Structured Output mastered（82/100）
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
 session_mode: learning
 session_status: active
-current_activity: learning
+current_activity: chapter_complete
 return_to:
   activity: knowledge_check
-  topic: Q3 / attempt 4
-  next_action: 查看e.errors的type/loc/input，定位Schema错误，然后完成Q3验收。
+  topic: Chapter 02 mastered
+  next_action: 继续学习时依据curriculum/index.md路由下一章节，无需重做已完成的EX1。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 141
+checkpoint_version: 143
 last_checkpoint_at: '2026-10-11T21:43:00+08:00'
-last_checkpoint_reason: needs_review
-pending_writeback:
-  transaction_id: stage01-ch02-completion-20261011-Q3a4
-  reason: completion
-  phase: prepared
-  started_at: '2026-10-11T14:06:31.840Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/02-structured-output.md
-    evidence_id: stage01-ch02-final-mastered-evidence-20261011
-    operation: upsert
-    expected_change: Formalize Q1, Q3, EX1 and mastery assessment based on earlier user-tested evidence.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch02-final-mastered-qa-20261011
-    operation: upsert
-    expected_change: Record Chapter02 Q3 pass, EX1 acceptance and mastery score82.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: stage01-ch02-final-mastered-bug-status-20261011
-    operation: upsert
-    expected_change: Close confirmed Structured Output misconceptions and retain actionable review flags.
-    verified: false
-    error: null
+last_checkpoint_reason: completion
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
@@ -81,9 +55,10 @@ project_track_status: deferred
 project_selection_prompted: true
 completed:
 - 01-llm-message-prompt-langchain
+- 02-structured-output
 weak_points:
-- Q3：重试场景及API成本权衡已理解，尚需独立使用e.errors定位Schema校验失败。
-next_action: Q3 attempt4：根据ValidationError.errors()中loc/type/input定位错误，再核对raw输出和商品原文。
+- 继续练习raw、parsed和model_dump的类型区别，重试会增加延迟；并发订单幂等的开放问题留待后续工程学习。
+next_action: Chapter02 mastered（82/100）。下次继续学习时先读取curriculum/index.md确认下一章，保留少量类型和重试边界复习。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
