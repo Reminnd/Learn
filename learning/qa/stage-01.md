@@ -289,3 +289,7 @@
 <!-- learn-agent:evidence:stage01-ch02-Q2-attempt4-20261011-ledger:start -->
 Q2 attempt4: 选择了正确的字典读取方式。Q2仍未完成整体验收。
 <!-- learn-agent:evidence:stage01-ch02-Q2-attempt4-20261011-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt5-local-validation-20261011-ledger:start -->
+Q2 attempt5：A、B输入与Product返回答对，B模型调用位置答对。A的Pydantic本地校验不是LLM调用。复检继续。
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt5-local-validation-20261011-ledger:end -->
