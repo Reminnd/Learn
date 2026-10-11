@@ -275,5 +275,9 @@ Tool description误区：用户最初把get_stock描述为“查询商品详情�
 ## ToolMessage call ID must match original request
 - Symptom: L3-CHECK-10 attempt1 used fixed 001 as ToolMessage.tool_call_id.
 - Correct behavior: Reuse call["id"] from the AIMessage tool_calls entry, never invent a new ID or use SKU.
-- State: improving; requires exact key lookup retest.
+- State: resolved; follow-up correctly used call["id"] and the live tool roundtrip returned the matched ToolMessage.
 <!-- learn-agent:evidence:stage01-ch03-toolmsg-a1-bug:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-tool-call-id-retest-closed:start -->
+- Tool call identifier misconception resolved by L3-CHECK-10 attempt3 and successful DeepSeek tool response loop. Future work: multiple calls and handling tool failures.
+<!-- learn-agent:evidence:stage01-ch03-tool-call-id-retest-closed:end -->
