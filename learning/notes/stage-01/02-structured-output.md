@@ -341,3 +341,9 @@ if not exists:
 ## Chapter 02 EX1 Step 2 / attempt 1
 状态：needs_review（局部语法错误，未完成该步骤）。用户正确调用`Product.model_validate(data)`，并在try中打印成功提示，except中计划打印失败提示与`e.errors()`。但把导入的`ValidationError`误写成`Validationerror`（小写e）。Python区分大小写；当model_validate因为price="abc"抛出ValidationError时，except类型表达式的错误名字将产生NameError，因此未按预期进入处理器。修复是`except ValidationError as e:`，后续只需针对性复检程序控制流与错误输出，不重复已经通过的Step 1。完整EX1仍需框架版实现、失败分析与验收。
 <!-- learn-agent:evidence:stage01-ch02-EX1-step2-attempt1:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-EX1-step2-attempt2:start -->
+## Chapter 02 EX1 Step 2 / attempt 2
+状态：needs_review（部分正确）。本轮在明确已将异常处理器类型修正为ValidationError的前提下，用户正确预测price="abc"不能通过Pydantic的int校验，将输出“校验失败”。但用户回答`print(e.errors())`返回字典；真实Pydantic v2中`ValidationError.errors()`返回`list[dict]`（列表，每项错误信息是字典），即使只有一条错误，也仍在列表中。校验失败时其典型元素包含type="int_parsing"、loc=("price",)、msg和input="abc"。需复检容器类型后再进入LangChain框架版，EX1目前尚未完整验收通过。
+下一题EX1 Step 2 / attempt 3：预测`type(e.errors()).__name__`与`type(e.errors()[0]).__name__`的输出，确认列表与内部字典的区别。
+<!-- learn-agent:evidence:stage01-ch02-EX1-step2-attempt2:end -->
