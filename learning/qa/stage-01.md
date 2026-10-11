@@ -281,3 +281,7 @@
 <!-- learn-agent:evidence:stage01-ch02-Q2-attempt2-20261011-ledger:start -->
 - Q2 / attempt2: needs_review — 学习者认为调用结果是Product实例（对），却预测type(...).__name__按数量变成dict/list（错）；已讲解实例类型和model_dump字典区别，下一题对照两个类型名。
 <!-- learn-agent:evidence:stage01-ch02-Q2-attempt2-20261011-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt3-model-dump-confusion-20261011-ledger:start -->
+- Q2 / attempt3: needs_review — Product实例类型答对，但对model_dump()返回值答为AIMessage，并表示不清楚；已解释Pydantic model_dump产生dict，不涉及LLM调用。下一题转向字典实际访问而非重复类型名，随后回到Q2映射。
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt3-model-dump-confusion-20261011-ledger:end -->
