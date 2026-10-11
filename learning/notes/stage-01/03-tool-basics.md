@@ -132,3 +132,18 @@ print(get_stock("KB-001"))  # 12
 <!-- learn-agent:evidence:stage01-ch03-toolmsg-a1-notes:start -->
 L3-CHECK-10 attempt1: partial. Learned that ToolMessage must reuse call["id"], not a chosen number. Next: ID matching retest.
 <!-- learn-agent:evidence:stage01-ch03-toolmsg-a1-notes:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK10a2a3-11-live-success:start -->
+## L3-CHECK-10 / attempt 2
+状态：needs_review。学生从call字典读取ID时写call[id]，未使用字符串键；Python id在该作用域对应内置函数，直接用该函数对象查字典会KeyError。应当写call["id"]。
+
+## L3-CHECK-10 / attempt 3
+状态：passed。学生独立正确写出print(call["id"])，能够取得模型生成的原始工具调用ID，随后在ToolMessage(content=str(result),tool_call_id=call["id"])复用。
+
+## L3-CHECK-11 / attempt1：实际DeepSeek工具执行闭环
+状态：passed（用户实际运行验证）。Python运行时执行模型选出的get_stock并在终端打印tool_result: 12（贴出的此行随后混入部分终端提示符）；ToolMessage以call["id"]关联工具结果；第二次DeepSeek模型调用成功生成最终回答：“SKU 为 **KB-001** 的键盘当前库存数量是 **12**。”
+证实AIMessage(tool_calls)→Python本地handler执行→ToolMessage→DeepSeek最终回答的完整单工具往返。尚未证明可处理任意多个Tool Call；本次代码显式要求len(response.tool_calls)==1，否则抛RuntimeError。
+
+## 3.10 下一练习：多个工具调用
+模型若同时选择get_stock和get_price产生2条tool_calls，当前硬编码单次调用示例会先触发len != 1的RuntimeError，没有执行任何handler。生产Runtime应安全遍历全部调用、按允许列表匹配工具名、验证参数并逐条生成与原ID匹配的ToolMessage，最后整体回传模型。
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK10a2a3-11-live-success:end -->
