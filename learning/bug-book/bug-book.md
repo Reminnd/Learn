@@ -189,3 +189,12 @@
 <!-- learn-agent:evidence:stage01-ch02-Q1-format-parse-retest-20261011:start -->
 - Q1格式不稳定与语义风险区分复检：学习者最初回答了语义错误，之后在具体代码中正确预测split的单元素结果和下标访问异常，教师补充精确异常IndexError。Q1在多轮引导下通过；"Schema只验证约束而不保证真实"仍应在后续Q3关注。
 <!-- learn-agent:evidence:stage01-ch02-Q1-format-parse-retest-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q2-default-vs-include-raw-20261011:start -->
+## LangChain structured output原始消息与解析结果混淆
+- 症状：Q2把`with_structured_output(Product)`默认的`invoke()`返回值答为AIMessage。
+- 正确：默认`include_raw=False`返回Product；`include_raw=True`返回含raw(AIMessage)、parsed(Product)、parsing_error字段的dict。
+- 可能原因：将此前真实DeepSeek API实验中`raw_type: AIMessage`误认为整个返回结果的类型。
+- 修复：分别查看`type(structured_model.invoke(...))`和`type(result["raw"])`、`type(result["parsed"])`。
+- 状态：open，待Q2 attempt2复检。
+<!-- learn-agent:evidence:stage01-ch02-Q2-default-vs-include-raw-20261011:end -->
