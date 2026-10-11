@@ -145,3 +145,13 @@
 <!-- learn-agent:evidence:stage01-ch02-if-controlflow-evidence-correction:start -->
 - 记录更正：用户在L2-CHECK-13 attempt 4实际回答“直接继续执行”，正确判断if不会自动重判；此前误记为错误。可继续用简单代码巩固并发检查与创建的边界。
 <!-- learn-agent:evidence:stage01-ch02-if-controlflow-evidence-correction:end -->
+
+<!-- learn-agent:evidence:bug-stage01-ch02-EX1-ValidationError-case:start -->
+## Pydantic ValidationError大小写误写
+- 症状：EX1中导入ValidationError，却在except中使用Validationerror。
+- 错误模型：异常类名大小写不影响Python查找。
+- 根因：标识符大小写不匹配，真正发生ValidationError时，except求值会触发NameError。
+- 修复：使用`except ValidationError as e:`，保留打印e.errors()。
+- 避免：核对导入名及捕获名一致，实际运行Schema错误用例验证处理分支。
+- 状态：open；等待EX1 Step 2 attempt 2复检。
+<!-- learn-agent:evidence:bug-stage01-ch02-EX1-ValidationError-case:end -->
