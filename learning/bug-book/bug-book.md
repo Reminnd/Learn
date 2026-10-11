@@ -155,3 +155,13 @@
 - 避免：核对导入名及捕获名一致，实际运行Schema错误用例验证处理分支。
 - 状态：open；等待EX1 Step 2 attempt 2复检。
 <!-- learn-agent:evidence:bug-stage01-ch02-EX1-ValidationError-case:end -->
+
+<!-- learn-agent:evidence:bug-stage01-ch02-validationerror-errors-list:start -->
+## Pydantic ValidationError.errors() 数据结构误解
+- 症状：认为`print(e.errors())`输出一个字典。
+- 错误模型：一个ValidationError对象对应单个字典，不会聚合多个字段错误。
+- 根因：混淆返回列表和列表中每个错误的字典。
+- 修复：`e.errors()`返回列表，常见为`[{"type": ..., "loc": ..., "msg": ..., "input": ...}]`；多字段失败可能有多个元素。
+- 避免：用`type(...)`和`len(...)`检查容器，再访问`errors()[0]["type"]`。
+- 状态：open，等待EX1 Step2 attempt3复检。
+<!-- learn-agent:evidence:bug-stage01-ch02-validationerror-errors-list:end -->
