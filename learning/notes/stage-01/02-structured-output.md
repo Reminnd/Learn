@@ -537,3 +537,37 @@ core_model_conflict:
 passed: false
 ```
 <!-- learn-agent:evidence:stage01-ch02-Q3-attempt1-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q3-attempt2-retry-boundary-20261011:start -->
+## Q3 attempt 2：重试适用场景
+状态：部分通过。对A“原文明确售价199元但模型输出price=abc”选有限重试；对B“原文没有价格但模型输出price=abc”选择直接报错。理由是A来源包含必要证据，B没有。正确识别源信息缺失与模型提取错误的区别。补充：B不是无效原文，而是当前价格提取任务缺少所需事实。API费用/延迟尚未独立权衡，错误定位尚待复检。
+<!-- learn-agent:evidence:stage01-ch02-Q3-attempt2-retry-boundary-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q3-attempt3-tradeoff-20261011:start -->
+## Q3 attempt 3：重试Trade-off
+状态：成本和延迟权衡局部通过；Q3整体暂未通过。
+用户明确指出：A原文有明确价格、模型提取失误，有限重试有可能修复且费用/延迟上限可控；B原文缺失价格，单纯重复调用不能可靠补全事实，因此API成本和延迟没有价值。教师指出重试会增加延迟、不是降低单次延迟，但上限控制最坏开销。用户尚未独立给出遇到int_parsing时使用e.errors()定位type、loc、input，核对模型raw、原始输入及Schema的排查顺序。下一步Q3 attempt4以具体e.errors记录考查定位顺序，再评估Q3是否通过。
+
+```yaml
+kind: question_attempt
+evidence_id: stage01-ch02-Q3-attempt3-tradeoff-20261011
+contract_chapter_id: stage-01-02-structured-output
+question_id: Q3
+attempt: 3
+answer_ref: learning/notes/stage-01/02-structured-output.md#q3-attempt-3重试trade-off
+acceptance_snapshot:
+  - 给出可执行的排查顺序
+  - 说明至少一个方案 Trade-off
+acceptance_results:
+  - criterion: 给出可执行的排查顺序
+    satisfied: false
+    evidence: 用户在前两轮只回答JSON格式→输入内容→代码，没有独立从int_parsing的Pydantic错误定位字段与类型，attempt3仅讨论重试。
+  - criterion: 说明至少一个方案 Trade-off
+    satisfied: true
+    evidence: 用户比较A有可靠价格证据而有限重试有机会修复且成本延迟受上限约束，B无价格源信息而重复调用只增加成本和延迟。
+core_model_conflict:
+  detected: false
+  evidence: 用户区分模型偶发提取错误与源信息缺失，不主张无限重试或猜测缺失事实；需补充说明重试本身增加延迟。
+passed: false
+```
+<!-- learn-agent:evidence:stage01-ch02-Q3-attempt3-tradeoff-20261011:end -->
