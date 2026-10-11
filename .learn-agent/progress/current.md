@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 127
 last_checkpoint_at: '2026-10-11T07:48:53.540Z'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch02-ex1-deepseek-success-20261011
+  reason: exercise_complete
+  phase: prepared
+  started_at: '2026-10-11T07:59:32.201Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage01-ch02-EX1-step5-deepseek-live-api-passed
+    operation: upsert
+    expected_change: Record actual DeepSeek API structured output success and begin conceptual EX1 acceptance Q&A.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch02-EX1-step5-deepseek-live-api-passed-ledger
+    operation: upsert
+    expected_change: Record real API EX1 Step 5 pass; Q1/Q2/Q3 and chapter mastery still pending.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
