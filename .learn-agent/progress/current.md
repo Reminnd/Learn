@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 143
 last_checkpoint_at: '2026-10-11T21:43:00+08:00'
 last_checkpoint_reason: completion
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch03-chapter-start-20261011
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-10-11T14:12:41.831Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-chapter-start-20261011
+    operation: create
+    expected_change: Create Chapter03 Tool Basics learning note and first minimal Python example.
+    verified: false
+    error: null
+  - asset_key: notes.index
+    relative_pointer: null
+    evidence_id: stage01-ch03-note-index-start-20261011
+    operation: upsert
+    expected_change: Update Chapter02 mastered and add Chapter03 learning link.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
