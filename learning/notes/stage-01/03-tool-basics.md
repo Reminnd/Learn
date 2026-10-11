@@ -56,3 +56,21 @@ print(get_stock("KB-001"))  # 12
 ## 3.3 下一节：LangChain @tool
 通过@tool将原生函数转换为可供模型注册的LangChain工具；docstring用作description，函数名作为name，签名注解可推断参数Schema；真正执行仍需要运行时调用tool.invoke({"sku":"KB-001"})，仅声明或bind_tools不执行。下一步L3-CHECK-3识别装饰器工具的name、description、parameters和handler。
 <!-- learn-agent:evidence:stage01-ch03-checks1-2-batch-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECKS3-5-batch-20261011:start -->
+## L3-CHECK-3 / attempt 1
+状态：passed。用户正确判断@tool声明和包装get_stock工具本身不会执行库存查询，真正查询发生在get_stock.invoke({"sku":"KB-001"})时；说明已理解工具定义与handler执行的分离。
+
+## L3-CHECK-4 / attempt 1
+状态：passed。针对get_stock.invoke({})缺少必填sku的情况，用户正确判断LangChain根据参数Schema在进入handler之前校验失败，handler不会执行；异常属于Pydantic参数ValidationError，不是库存业务错误。
+
+## L3-CHECK-5 / attempt 1
+状态：passed（错误类型名称由教师补充）。面对get_stock.invoke({"sku":"KB-999"})，用户回答“能，会进入handler。但是找不到”，准确识别sku字符串字段满足Schema、工具逻辑会执行、库存字典中该键不存在；教师指出库存通过inventory[sku]直接索引时最终抛KeyError（而不是ValidationError）。
+
+## 3.4 区分校验与业务错误
+- 参数缺失（{}）→ 工具Schema校验失败 → handler不执行 → ValidationError。
+- 参数格式正确但业务SKU不存在（{"sku":"KB-999"}）→ 校验通过→执行库存查询→Python KeyError。
+- 正确SKU（{"sku":"KB-001"}）→ 返回整数12。
+
+下一步L3-CHECK-6 / attempt1：为get_stock增加显式异常处理，捕获KeyError并返回有稳定字段的业务错误结果，而不是把Python traceback原样交给调用端。随后讨论LangChain ToolException、参数错误与可观测性，整章EX1和Q1/Q2/Q3尚未正式验收。
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECKS3-5-batch-20261011:end -->
