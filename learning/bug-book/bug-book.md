@@ -163,5 +163,9 @@
 - 根因：混淆返回列表和列表中每个错误的字典。
 - 修复：`e.errors()`返回列表，常见为`[{"type": ..., "loc": ..., "msg": ..., "input": ...}]`；多字段失败可能有多个元素。
 - 避免：用`type(...)`和`len(...)`检查容器，再访问`errors()[0]["type"]`。
-- 状态：open，等待EX1 Step2 attempt3复检。
+- 状态：resolved；EX1 Step2 attempt3 正确区分e.errors()整体为list、每个错误项为dict。
 <!-- learn-agent:evidence:bug-stage01-ch02-validationerror-errors-list:end -->
+
+<!-- learn-agent:evidence:bug-stage01-ch02-validationerror-errors-list-resolved:start -->
+- 复检证据：EX1 Step2 attempt3用户正确答出列表、字典，表示已理解Pydantic错误列表与内部字典的区别。
+<!-- learn-agent:evidence:bug-stage01-ch02-validationerror-errors-list-resolved:end -->
