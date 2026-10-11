@@ -198,3 +198,10 @@
 - 修复：分别查看`type(structured_model.invoke(...))`和`type(result["raw"])`、`type(result["parsed"])`。
 - 状态：open，待Q2 attempt2复检。
 <!-- learn-agent:evidence:stage01-ch02-Q2-default-vs-include-raw-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q2-type-name-vs-model-dump-20261011:start -->
+## Q2：混淆实例类型和转换后的数据结构
+- 症状：知道product是Product实例，却以元素数量判断type(product).__name__会输出dict或list。
+- 纠正：type(product).__name__输出Product；type(product.model_dump()).__name__输出dict；元素数量不会自动改变对象类型。
+- 状态：open，等待Q2 attempt3复检。
+<!-- learn-agent:evidence:stage01-ch02-Q2-type-name-vs-model-dump-20261011:end -->
