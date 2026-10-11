@@ -205,3 +205,7 @@
 - 纠正：type(product).__name__输出Product；type(product.model_dump()).__name__输出dict；元素数量不会自动改变对象类型。
 - 状态：open，等待Q2 attempt3复检。
 <!-- learn-agent:evidence:stage01-ch02-Q2-type-name-vs-model-dump-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q2-model-dump-error-retest-20261011:start -->
+- Q2 attempt3复检持续混淆：能判断product的类是Product，但把product.model_dump()的dict答成AIMessage。教师区分模型实例、转化字典、原始模型消息三个数据对象。状态：open，下一步通过对dict使用下标读取字段验证实际理解。
+<!-- learn-agent:evidence:stage01-ch02-Q2-model-dump-error-retest-20261011:end -->
