@@ -169,3 +169,11 @@
 <!-- learn-agent:evidence:bug-stage01-ch02-validationerror-errors-list-resolved:start -->
 - 复检证据：EX1 Step2 attempt3用户正确答出列表、字典，表示已理解Pydantic错误列表与内部字典的区别。
 <!-- learn-agent:evidence:bug-stage01-ch02-validationerror-errors-list-resolved:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q1-overclaim-schema-guarantee-20261011:start -->
+## 自然语言不稳定的因果解释不全与Schema保证范围误区
+- 症状：Q1知道Pydantic校验输出结构和可能缺失/错误信息，但未点出普通自然语言的格式不固定，且把Schema说成“确保”数据结构正确。
+- 事实：LLM可能输出不同句式、标注格式、解释语句、额外字段或格式错误，固定字符串抽取不稳定；Schema可验证类型/范围/字段等形式约束，但不保证每次成功，也不保证语义真实性。
+- 改进：通过多种表示相同价格的自然语言输出，说明固定split解析的失败条件，再回答Q1因果问题。
+- 状态：open，待Q1/attempt2复检。
+<!-- learn-agent:evidence:stage01-ch02-Q1-overclaim-schema-guarantee-20261011:end -->
