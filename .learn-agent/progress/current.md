@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-11：Q1 attempt2将格式解析风险回答为语义价格不准确；已解释split缺少分隔符触发IndexError，安排最小代码复检。
-last_section: Chapter 02 Q1 自然语言格式变化与split解析失败
+last_note_update: 2026-10-11：Chapter02 Q1 attempt3/4：识别split分隔符不匹配导致单元素列表及IndexError，Q1经引导复检通过；进入关键Q2。
+last_section: Chapter 02 Q2 原理—框架映射
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -32,43 +32,17 @@ session_mode: learning
 session_status: active
 current_activity: learning
 return_to:
-  activity: required_exercise
-  topic: Q1 / attempt 3
-  next_action: 判断无精确分隔符时split返回列表长度，以及为什么文本格式变化导致固定解析不可靠。
+  activity: knowledge_check
+  topic: Q2 / attempt 1
+  next_action: 独立比较手工json.loads+Pydantic与LangChain Structured Output的输入、输出和关键数据流。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 130
-last_checkpoint_at: '2026-10-11T08:08:09.228Z'
-last_checkpoint_reason: needs_review
-pending_writeback:
-  transaction_id: stage01-ch02-Q1-attempts3-4-20261011
-  reason: section_boundary
-  phase: prepared
-  started_at: '2026-10-11T08:15:27.502Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/02-structured-output.md
-    evidence_id: stage01-ch02-Q1-attempt4-pass-20261011
-    operation: upsert
-    expected_change: Record Q1 attempts 3 and 4, with targeted split failure code demonstration and Q1 pass.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch02-Q1-attempt4-pass-20261011-ledger
-    operation: upsert
-    expected_change: Record Q1 guided retests and pass; move to Q2 required critical question.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: stage01-ch02-Q1-format-parse-retest-20261011
-    operation: upsert
-    expected_change: Update earlier format-parsing error status after Q1 code-level retest.
-    verified: false
-    error: null
+checkpoint_version: 132
+last_checkpoint_at: '2026-10-11T08:15:27.502Z'
+last_checkpoint_reason: section_boundary
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
@@ -82,8 +56,8 @@ project_selection_prompted: true
 completed:
 - 01-llm-message-prompt-langchain
 weak_points:
-- Q1：需区分自由文本的格式变化导致固定split失败与LLM语义价格取错两类风险；Q2/Q3尚待验收。
-next_action: Q1 attempt3：预测len("售价：199元".split("价格："))结果并说明分隔符缺失的原因。
+- Q1经指导式代码复检通过，仍应巩固精确异常名称IndexError及Schema的非真实性保证；Q2/Q3尚待验收。
+next_action: Chapter02 Q2关键题：独立解释手工JSON解析和Pydantic验证与LangChain with_structured_output的对应关系、输入、输出、失败处理。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
