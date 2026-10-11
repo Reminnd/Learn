@@ -209,3 +209,7 @@
 <!-- learn-agent:evidence:stage01-ch02-Q2-model-dump-error-retest-20261011:start -->
 - Q2 attempt3复检持续混淆：能判断product的类是Product，但把product.model_dump()的dict答成AIMessage。教师区分模型实例、转化字典、原始模型消息三个数据对象。状态：open，下一步通过对dict使用下标读取字段验证实际理解。
 <!-- learn-agent:evidence:stage01-ch02-Q2-model-dump-error-retest-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q2-validate-does-not-call-LLM:start -->
+- Q2：学员误认为Pydantic的Product.model_validate(data)本地校验会调用LLM。实际仅对本地数据校验，真实调用发生在模型的invoke或其他客户端API。状态open，待attempt6复检。
+<!-- learn-agent:evidence:stage01-ch02-Q2-validate-does-not-call-LLM:end -->
