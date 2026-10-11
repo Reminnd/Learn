@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 144
 last_checkpoint_at: '2026-10-11T14:12:41.831Z'
 last_checkpoint_reason: chapter_boundary
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch03-checks-20261011
+  reason: needs_review
+  phase: prepared
+  started_at: '2026-10-11T14:33:07.992Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-checks1-2-batch-20261011
+    operation: upsert
+    expected_change: Record Tool Call execution and handler argument unpacking checks.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-checks1-2-qa-batch-20261011
+    operation: upsert
+    expected_change: Record L3 checks 1 and 2 outcomes.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch03-handler-keyword-unpacking-20261011
+    operation: upsert
+    expected_change: Record handler(args) versus handler(**args) mistake and retest.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
