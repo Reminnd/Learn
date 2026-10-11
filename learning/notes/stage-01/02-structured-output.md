@@ -501,3 +501,39 @@ passed: true
 ```
 下一步：Q3考查Schema校验失败时的定位顺序、重试或拒绝的适用边界和方案Trade-off。Q1与EX1的正式完整掌握证据尚待统一核验，mastery状态不提前修改。
 <!-- learn-agent:evidence:stage01-ch02-Q2-attempt6-passed-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q3-attempt1-20261011:start -->
+## Chapter 02 Q3 / attempt 1
+状态：needs_review（部分正确）。
+问题：商品原文“这款键盘售价199元人民币”，LLM返回{"price":"abc","currency":"CNY"}，Schema声明price:int=Field(gt=0)，Pydantic ValidationError类型int_parsing。要求给出Schema失败的排查顺序，并权衡有限重试与直接返回错误。
+实际回答：“让LLM有限重试，3次重试后返回错误。排查错误时按返回的json格式->输入内容->代码”。
+
+正向证据：提出让LLM有限重试且设上限，未选择无限循环；有检查模型输出、原始输入、代码的大致排查方向。欠缺点：未优先使用e.errors()定位int_parsing和price字段；本例JSON语法有效，错误在Schema类型解析；尚未明确“3次重试”是总3次调用还是初次+3次；未独立说明重试的API成本/延迟/成功机会，以及原始商品没有价格时为何不可不断重试或猜测。
+
+建议工程链：先记录ValidationError.errors()的loc/type/input，再检查raw模型输出、原始商品证据、Schema及调用/解析代码。原文有明确199元时，模型偶发输出abc可在预算内重新调用LLM（可加错误反馈），失败达到上限后显式报错；同一无效data上反复model_validate不产生新信息。原始输入缺价格或确定性业务约束错误时，不应寄望于有限模型重试；权衡API费用、延迟、修复概率。对模型输出的数据不能仅凭Schema通过判定真实性。
+
+下一题Q3 / attempt2：对比“原文含明确199但模型输出abc”和“原文没有价格”，回答哪个值得有限重试、哪个应直接失败并说明成本延迟权衡。Q3和整章mastery尚未通过。
+
+```yaml
+kind: question_attempt
+evidence_id: stage01-ch02-Q3-attempt1-20261011
+contract_chapter_id: stage-01-02-structured-output
+question_id: Q3
+attempt: 1
+answer_ref: learning/notes/stage-01/02-structured-output.md#chapter-02-q3-attempt-1
+acceptance_snapshot:
+  - 给出可执行的排查顺序
+  - 说明至少一个方案 Trade-off
+acceptance_results:
+  - criterion: 给出可执行的排查顺序
+    satisfied: false
+    evidence: 回答仅按返回JSON格式、输入内容、代码排序，没有利用已有int_parsing错误定位price字段，也没有提出逐层核对Schema的可执行步骤。
+  - criterion: 说明至少一个方案 Trade-off
+    satisfied: false
+    evidence: 回答提出LLM重试3次后返回错误，但没有说明额外费用、延迟或何时值得重试及何时不应重试。
+core_model_conflict:
+  detected: false
+  evidence: 该答复未直接声称JSON合法等于Schema合法，也未声称同一无效data本地校验会自动成功；仅缺少必要的定位和权衡论证。
+passed: false
+```
+<!-- learn-agent:evidence:stage01-ch02-Q3-attempt1-20261011:end -->
