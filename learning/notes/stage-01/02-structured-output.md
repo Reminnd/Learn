@@ -371,3 +371,22 @@ print(product.price)
 下一步EX1 Step 4：进行原理版的真实本地运行与失败用例验证，以及具备支持模型环境时的框架版运行。不能仅凭代码片段认定整个EX1 accepted/mastered。
 参考：https://reference.langchain.com/python/langchain-core/language_models/chat_models/BaseChatModel/with_structured_output
 <!-- learn-agent:evidence:stage01-ch02-EX1-step3-attempt1:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-EX1-step4-offline-principle-run-20261011:start -->
+## Chapter 02 EX1 Step 4：原理版实际运行
+状态：passed（原理版实际运行）。学习者提交了在其Python环境运行原理版代码的完整标准输出：
+```text
+Case 1: PASS
+{'price': 199, 'currency': 'CNY'}
+Case 2: FAIL
+list
+int_parsing
+```
+Case1证明输入JSON中的字符串"199"在Pydantic默认校验模式下可转为整数199，currency使用CNY默认值；Case2证明"abc"不满足int要求，捕获ValidationError后e.errors()返回list，错误type为int_parsing。Case2的FAIL是预期校验拒绝，而非代码执行失败。本次输出与前述测试代码吻合；输出由学习者提供，未远程执行学习者本机代码。
+
+## Chapter 02 EX1 Step 5：无API框架输出解析验证
+根据仓库environment/framework-baseline.md，Stage01依赖CPython3.11及langchain-core==1.6.2，没有Provider SDK或API Key。先通过LangChain PydanticOutputParser和RunnableLambda模拟模型生成的文本，验证Runnable组合与解析错误路径，不实际调用LLM。
+最小路径：RunnableLambda模拟返回JSON文本 → PydanticOutputParser(pydantic_object=Product) → 成功返回Product实例；错误输入如price="abc"会抛出OutputParserException。此测试是“框架解析层离线验证”，不能替代真实提供商模型with_structured_output(Product)的调用测试。
+参考LangChain官方参考：https://reference.langchain.com/python/langchain-core/output_parsers/pydantic/PydanticOutputParser 及 https://reference.langchain.com/python/langchain-core/runnables/base/RunnableLambda
+下一步：学习者在其环境中运行EX1 Step 5离线Parser链，并提交完整stdout；随后对照with_structured_output的模型能力与实现路径，做EX1验收准备。
+<!-- learn-agent:evidence:stage01-ch02-EX1-step4-offline-principle-run-20261011:end -->
