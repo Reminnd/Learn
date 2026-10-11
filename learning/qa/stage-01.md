@@ -241,3 +241,7 @@
 <!-- learn-agent:evidence:stage01-ch02-EX1-step2-attempt2-ledger:start -->
 - EX1 Step 2 / attempt 2: needs_review（部分正确）— 正确判断price="abc"触发校验失败分支，但将`e.errors()`整体错误地说成dict，需理解其为list且元素为dict，安排同概念复检。
 <!-- learn-agent:evidence:stage01-ch02-EX1-step2-attempt2-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-EX1-step2-attempt3-ledger:start -->
+- EX1 Step 2 / attempt 3: passed（局部检查）— 正确回答e.errors()的容器为list，首个错误对象为dict。随后进入EX1 Step 3 LangChain with_structured_output框架实现；完整EX1需实际运行与框架映射验证。
+<!-- learn-agent:evidence:stage01-ch02-EX1-step2-attempt3-ledger:end -->
