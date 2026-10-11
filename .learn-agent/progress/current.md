@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 128
 last_checkpoint_at: '2026-10-11T07:59:32.201Z'
 last_checkpoint_reason: exercise_complete
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch02-Q1-attempt1-20261011
+  reason: needs_review
+  phase: prepared
+  started_at: '2026-10-11T08:04:11.040Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage01-ch02-Q1-attempt1-20261011
+    operation: upsert
+    expected_change: Record Q1 partial answer and missing causal explanation; next targeted check.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch02-Q1-attempt1-20261011-ledger
+    operation: upsert
+    expected_change: Record Q1 attempt1 needs_review and next probe on variable free-form text.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch02-Q1-overclaim-schema-guarantee-20261011
+    operation: upsert
+    expected_change: Record overbroad belief in guaranteed correct schema and semantic validity.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
