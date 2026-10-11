@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-11：从已掌握Chapter02按canonical课程索引切入Chapter03 Tool基础；开始3.1 Python工具函数、name/description/parameters/handler与执行边界。
-last_section: 3.1 工具调用最小原理与执行边界
+last_note_update: 2026-10-11：L3-CHECK-1已理解工具指令不等于执行；L3-CHECK-2复检通过**args关键字参数解包。
+last_section: 3.3 LangChain @tool工具声明
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,42 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: knowledge_check
-  topic: L3-CHECK-1 / attempt 1
-  next_action: 解释LLM仅提出tool call而运行时没有执行handler为何不能得到业务真实库存。
+  topic: L3-CHECK-3 / attempt 1
+  next_action: 识别@tool的name、description、parameters和handler并运行本地工具。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 144
-last_checkpoint_at: '2026-10-11T14:12:41.831Z'
-last_checkpoint_reason: chapter_boundary
-pending_writeback:
-  transaction_id: stage01-ch03-checks-20261011
-  reason: needs_review
-  phase: prepared
-  started_at: '2026-10-11T14:33:07.992Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/03-tool-basics.md
-    evidence_id: stage01-ch03-checks1-2-batch-20261011
-    operation: upsert
-    expected_change: Record Tool Call execution and handler argument unpacking checks.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch03-checks1-2-qa-batch-20261011
-    operation: upsert
-    expected_change: Record L3 checks 1 and 2 outcomes.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: stage01-ch03-handler-keyword-unpacking-20261011
-    operation: upsert
-    expected_change: Record handler(args) versus handler(**args) mistake and retest.
-    verified: false
-    error: null
+checkpoint_version: 147
+last_checkpoint_at: '2026-10-11T14:33:07.992Z'
+last_checkpoint_reason: needs_review
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
@@ -83,8 +57,8 @@ completed:
 - 01-llm-message-prompt-langchain
 - 02-structured-output
 weak_points:
-- Chapter03尚未掌握：需要建立tool name/description/parameters/handler及模型选择与Python执行的边界；保留Chapter02 raw/parsed类型区分作为轻量复习。
-next_action: L3-CHECK-1 attempt1：模型只提出get_stock的工具调用但程序未执行，是否能获得真实库存、为什么。
+- Tool字典解包已复检；下步掌握@tool四部分，注意关键字传参方式与sku:str类型不同。
+next_action: L3-CHECK-3：识别装饰器工具四部分与invoke调用时机；之后动手运行。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
