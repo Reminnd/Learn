@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 132
 last_checkpoint_at: '2026-10-11T08:15:27.502Z'
 last_checkpoint_reason: section_boundary
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch02-Q2-attempt1-20261011
+  reason: needs_review
+  phase: prepared
+  started_at: '2026-10-11T12:40:37.626Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage01-ch02-Q2-attempt1-20261011
+    operation: upsert
+    expected_change: Q2 partial: manually parsed Product correct; framework return mistakenly identified as AIMessage.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch02-Q2-attempt1-20261011-ledger
+    operation: upsert
+    expected_change: Q2 needs_review, test default parsed return versus include_raw result.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch02-Q2-default-vs-include-raw-20261011
+    operation: upsert
+    expected_change: Record mix-up between ChatModel raw AIMessage and LangChain parsed Product.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
