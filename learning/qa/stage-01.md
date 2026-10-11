@@ -249,3 +249,7 @@
 <!-- learn-agent:evidence:stage01-ch02-EX1-step3-attempt1-ledger:start -->
 - EX1 Step 3 / attempt 1: passed — 正确独立写出with_structured_output(Product)与structured_model.invoke(...)，理解返回Product实例；仍需实际运行及错误用例验证，不代表整章mastered。
 <!-- learn-agent:evidence:stage01-ch02-EX1-step3-attempt1-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-EX1-step4-offline-principle-run-20261011-ledger:start -->
+- EX1 Step 4: passed（已观察学习者提交的运行stdout）— Case1 PASS并生成整数199及currency CNY；Case2按预期校验拒绝，e.errors()是list且错误type=int_parsing。下一步无API LangChain PydanticOutputParser/RunnableLambda框架验证，完整EX1尚未正式通过。
+<!-- learn-agent:evidence:stage01-ch02-EX1-step4-offline-principle-run-20261011-ledger:end -->
