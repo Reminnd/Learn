@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-11：EX1 Step3 LangChain结构化输出代码通过，下一步进行实际运行验证。
-last_section: Chapter 02 EX1 Step 4 运行验证
+last_note_update: 2026-10-11：EX1 Step4原理版真实运行输出核对通过（有效价格199成功、非法价格abc被Pydantic拒绝，错误list/int_parsing）；开始Step5离线LangChain输出解析链验证。
+last_section: Chapter 02 EX1 Step 5 LangChain离线解析器验证
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,35 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: required_exercise
-  topic: EX1 / Step 4
-  next_action: 运行JSON/Pydantic成功失败测试，并验证配置模型的LangChain调用。
+  topic: EX1 / Step 5
+  next_action: 使用langchain-core的RunnableLambda与PydanticOutputParser建立无需模型调用的框架解析链，运行正常与异常用例并提交stdout。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 125
-last_checkpoint_at: '2026-10-11T15:11:00+08:00'
+checkpoint_version: 126
+last_checkpoint_at: '2026-10-11T07:45:49.782Z'
 last_checkpoint_reason: exercise_complete
-pending_writeback:
-  transaction_id: stage01-ch02-EX1-step4-stdout-20261011
-  reason: exercise_complete
-  phase: prepared
-  started_at: '2026-10-11T07:45:49.782Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/02-structured-output.md
-    evidence_id: stage01-ch02-EX1-step4-offline-principle-run-20261011
-    operation: upsert
-    expected_change: Record observed successful EX1 Step4 two-case Python stdout; proceed to offline LangChain parser validation.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch02-EX1-step4-offline-principle-run-20261011-ledger
-    operation: upsert
-    expected_change: Record EX1 Step4 local runtime execution as passed, full EX1 still pending framework integration.
-    verified: false
-    error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
@@ -76,7 +57,7 @@ completed:
 - 01-llm-message-prompt-langchain
 weak_points:
 - EX1尚需框架版代码和实际运行验证；运行时留意ValidationError大小写；并发幂等数据库实现另需实践。
-next_action: EX1 Step4：独立运行原理版和框架版，提交真实输出并验证异常路径。
+next_action: EX1 Step5：在本地运行LangChain PydanticOutputParser+RunnableLambda离线框架测试，随后完成原理—框架映射的正式EX1验收。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
