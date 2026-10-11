@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-11：EX1 Step4原理版真实运行输出核对通过（有效价格199成功、非法价格abc被Pydantic拒绝，错误list/int_parsing）；开始Step5离线LangChain输出解析链验证。
-last_section: Chapter 02 EX1 Step 5 LangChain离线解析器验证
+last_note_update: 2026-10-11：用户说明已申请DeepSeek API，EX1 Step5更改为实际ChatDeepSeek API调用；密钥留在本地，尚未运行验证。
+last_section: Chapter 02 EX1 Step 5 DeepSeek真实API验证
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,28 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: required_exercise
-  topic: EX1 / Step 5
-  next_action: 使用langchain-core的RunnableLambda与PydanticOutputParser建立无需模型调用的框架解析链，运行正常与异常用例并提交stdout。
+  topic: EX1 / Step 5 / DeepSeek API
+  next_action: 本机用langchain-deepseek调用deepseek-flash，通过with_structured_output(Product)返回结构化商品结果，提交去敏运行输出。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 126
-last_checkpoint_at: '2026-10-11T07:45:49.782Z'
-last_checkpoint_reason: exercise_complete
-pending_writeback:
-  transaction_id: stage01-ch02-deepseek-api-route-20261011
-  reason: knowledge_event
-  phase: prepared
-  started_at: '2026-10-11T07:48:53.540Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/02-structured-output.md
-    evidence_id: stage01-ch02-EX1-step5-deepseek-api-route
-    operation: upsert
-    expected_change: Record user-approved live DeepSeek API route for EX1 Step5 without any credentials.
-    verified: false
-    error: null
+checkpoint_version: 127
+last_checkpoint_at: '2026-10-11T07:48:53.540Z'
+last_checkpoint_reason: knowledge_event
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
@@ -69,7 +57,7 @@ completed:
 - 01-llm-message-prompt-langchain
 weak_points:
 - EX1尚需框架版代码和实际运行验证；运行时留意ValidationError大小写；并发幂等数据库实现另需实践。
-next_action: EX1 Step5：在本地运行LangChain PydanticOutputParser+RunnableLambda离线框架测试，随后完成原理—框架映射的正式EX1验收。
+next_action: EX1 Step5：配置本机DEEPSEEK_API_KEY，运行真实DeepSeek Flash结构化输出，并验证返回Product与错误处理。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
