@@ -306,3 +306,7 @@ Q2 attempt5：A、B输入与Product返回答对，B模型调用位置答对。A�
 - Q3 attempt2: 部分正确。A有商品价格可尝试有限重试，B无价格应返回缺失错误；未论证费用与延迟。
 - Q3 attempt3: Trade-off通过。说明A有修复可能且重试次数受限控制成本，B无源价格证据故重试徒增API费用和延迟。Q3整体仍缺独立排查错误的顺序，继续attempt4。
 <!-- learn-agent:evidence:stage01-ch02-Q3-attempts2-3-ledger-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-final-mastered-qa-20261011:start -->
+Chapter 02 Q3 attempt4: passed (price字段、abc非整数、按模型输出/Schema/原文排查)。Q3 attempt3已说明有限重试成本与延迟。EX1可执行原理版与真实DeepSeek API结果齐备。Q1、Q2指导式复检通过。依据章节契约五维评分19+16+18+17+12=82/100，达到80分与各项硬门槛，综合验收通过。
+<!-- learn-agent:evidence:stage01-ch02-final-mastered-qa-20261011:end -->
