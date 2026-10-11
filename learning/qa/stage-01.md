@@ -293,3 +293,7 @@ Q2 attempt4: 选择了正确的字典读取方式。Q2仍未完成整体验收�
 <!-- learn-agent:evidence:stage01-ch02-Q2-attempt5-local-validation-20261011-ledger:start -->
 Q2 attempt5：A、B输入与Product返回答对，B模型调用位置答对。A的Pydantic本地校验不是LLM调用。复检继续。
 <!-- learn-agent:evidence:stage01-ch02-Q2-attempt5-local-validation-20261011-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt6-passed-20261011-ledger:start -->
+- Q2 attempt6: passed（指导复检）— 用户正确指出model.invoke向DeepSeek发送请求，json.loads解析JSON，Product.model_validate本地Schema校验。结合attempt5对A/B输入输出和B调用位置的回答，原理—框架映射关键题通过；进入Q3，整章mastered尚未判定。
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt6-passed-20261011-ledger:end -->
