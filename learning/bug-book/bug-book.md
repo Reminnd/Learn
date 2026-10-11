@@ -270,3 +270,10 @@ Tool description误区：用户最初把get_stock描述为“查询商品详情�
 <!-- learn-agent:evidence:stage01-ch03-tool-invoke-result-retest-20261011:start -->
 - L3-CHECK-9 attempt3复检：学员正确识别Tool.invoke接收参数字典并返回int 12。剩余需独立构造ToolMessage，区分工具执行结果与模型消息。
 <!-- learn-agent:evidence:stage01-ch03-tool-invoke-result-retest-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-toolmsg-a1-bug:start -->
+## ToolMessage call ID must match original request
+- Symptom: L3-CHECK-10 attempt1 used fixed 001 as ToolMessage.tool_call_id.
+- Correct behavior: Reuse call["id"] from the AIMessage tool_calls entry, never invent a new ID or use SKU.
+- State: improving; requires exact key lookup retest.
+<!-- learn-agent:evidence:stage01-ch03-toolmsg-a1-bug:end -->
