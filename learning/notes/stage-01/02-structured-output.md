@@ -347,3 +347,13 @@ if not exists:
 状态：needs_review（部分正确）。本轮在明确已将异常处理器类型修正为ValidationError的前提下，用户正确预测price="abc"不能通过Pydantic的int校验，将输出“校验失败”。但用户回答`print(e.errors())`返回字典；真实Pydantic v2中`ValidationError.errors()`返回`list[dict]`（列表，每项错误信息是字典），即使只有一条错误，也仍在列表中。校验失败时其典型元素包含type="int_parsing"、loc=("price",)、msg和input="abc"。需复检容器类型后再进入LangChain框架版，EX1目前尚未完整验收通过。
 下一题EX1 Step 2 / attempt 3：预测`type(e.errors()).__name__`与`type(e.errors()[0]).__name__`的输出，确认列表与内部字典的区别。
 <!-- learn-agent:evidence:stage01-ch02-EX1-step2-attempt2:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-EX1-step2-attempt3:start -->
+## Chapter 02 EX1 Step 2 / attempt 3
+状态：passed（局部理解复检）。用户按顺序回答“列表，字典”，正确理解`type(e.errors()).__name__`输出`list`、`type(e.errors()[0]).__name__`输出`dict`；Pydantic ValidationError.errors()整体为list[dict]。说明解析错误信息结构的先前误区已解决。此前Step2的ValidationError大小写曾有拼写错误，整体验收之前仍应运行完整的异常处理代码；单个知识检查不等于EX1已完成。
+
+## Chapter 02 EX1 Step 3：LangChain Structured Output框架实现
+原理版流程：LLM文本 → JSON语法解析 → Pydantic校验 → Product实例。
+框架版：先使用支持结构化输出的ChatModel执行`model.with_structured_output(Product)`得到Runnable，再执行`structured_model.invoke(prompt)`；成功且include_raw=False时返回经过Schema解析验证的Product实例。框架封装输出结构约束及解析校验过程，不应认为必然直接调用`json.loads()`，具体机制依赖模型服务的原生Schema能力或Tool Calling。若provider/模型不支持特定结构化输出方法，需要调整配置或换兼容模型。
+本节练习：独立编写with_structured_output与invoke两行，再对比原理版输入、输出与失败处理。参考LangChain当前官方BaseChatModel.with_structured_output文档。
+<!-- learn-agent:evidence:stage01-ch02-EX1-step2-attempt3:end -->
