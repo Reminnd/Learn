@@ -466,3 +466,9 @@ parsing_error: None
 <!-- learn-agent:evidence:stage01-ch02-Q2-attempt4-20261011:start -->
 Q2 attempt 4：passed（局部）。答对data["price"]。待完成原理版与框架版数据流解释。
 <!-- learn-agent:evidence:stage01-ch02-Q2-attempt4-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt5-local-validation-20261011:start -->
+## Q2 attempt 5
+状态：needs_review（部分正确）。学员回答A接收raw_text并返回Product实例、B接收自然语言提示词并返回Product实例；正确指出B使用structured_model.invoke调用LLM。但误认为A的product_a=Product.model_validate(data)本身调用LLM。
+纠正：A所示两行json.loads与Product.model_validate都只执行本地JSON解码与Pydantic数据校验，不发送模型请求。若raw_text本身由LLM生成，其调用发生在这两行之前并未显示。B的structured_model.invoke才发起真实模型API调用，然后进行结构化输出解析与校验。下一步针对性复检：A两行是否有任何LLM调用，以及如果raw_text由模型生成，模型调用发生于何处。Q2不得在此轮标记passed。
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt5-local-validation-20261011:end -->
