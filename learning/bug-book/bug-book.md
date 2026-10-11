@@ -217,3 +217,10 @@
 <!-- learn-agent:evidence:stage01-ch02-Q2-model-validation-boundary-resolved:start -->
 - Q2/attempt6复检证据：用户准确判断model.invoke("请输出商品价格的JSON").content发送请求，json.loads本地解析，Product.model_validate执行Pydantic本地校验。先前将model_validate误作LLM调用的误区已解决。
 <!-- learn-agent:evidence:stage01-ch02-Q2-model-validation-boundary-resolved:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q3-schema-retry-tradeoff:start -->
+## Q3 缺少异常定位及重试适用边界的说明
+- 症状：学员提出“让LLM有限重试，3次重试后返回错误”及“JSON格式→输入内容→代码”排查顺序，但没有解释int_parsing与JSON语法的区别、如何利用e.errors()字段定位，且未说明重试成本/延迟和成功概率。
+- 纠正：JSON语法合法也可能出现Schema字段解析失败。先看e.errors()中loc/type/input，再按模型raw输出→输入证据→Schema与本地代码追查；证据充分但模型失误时有限模型调用可能有效，原文没有价格时应拒绝猜测而不是重复消耗额度。
+- 状态：open，等待Q3 attempt2复检。
+<!-- learn-agent:evidence:stage01-ch02-Q3-schema-retry-tradeoff:end -->
