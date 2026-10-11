@@ -242,5 +242,9 @@ Chapter02正式验收：Q1/Q2/Q3和EX1已通过指导式复检与运行；raw/pa
 <!-- learn-agent:evidence:stage01-ch03-handler-keyword-unpacking-20261011:end -->
 
 <!-- learn-agent:evidence:stage01-ch03-stock-description-too-broad-20261011:start -->
-Tool description误区：用户把get_stock描述为“查询商品详情”，仍然会与价格、品牌等工具的职责重叠。应明确按SKU查询当前库存数量。状态open，待L3-CHECK-7 attempt2复检。
+Tool description误区：用户最初把get_stock描述为“查询商品详情”，仍会与价格、品牌等职责重叠。attempt2已改成“查询商品库存数量”，准确聚焦库存，不再与价格工具含义重叠。状态resolved（指导式复检）。
 <!-- learn-agent:evidence:stage01-ch03-stock-description-too-broad-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-stock-description-resolved:start -->
+- L3-CHECK-7 attempt2复检：学员自行改写get_stock的docstring为“查询商品库存数量”，消除与get_price的职责重叠。该误区关闭，仍需在真实模型工具选择实验中验证效果。
+<!-- learn-agent:evidence:stage01-ch03-stock-description-resolved:end -->
