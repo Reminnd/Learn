@@ -416,3 +416,10 @@ parsing_error: None
 
 原理版JSON解析+Pydantic正反例，以及框架版真实DeepSeek调用均有用户运行证据。接下来进入EX1解释与Chapter02正式Q&A：Q1自然语言解析为何不稳定及边界；Q2原理与LangChain的输入输出映射；Q3诊断Schema校验失败及方案Trade-off。待正式验收后方可判断Chapter02 mastered，当前仍learning。未记录任何真实API密钥。
 <!-- learn-agent:evidence:stage01-ch02-EX1-step5-deepseek-live-api-passed:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q1-attempt1-20261011:start -->
+## Chapter 02 Q1 / attempt 1：自然语言解析不稳定与Schema边界
+状态：needs_review，核心因果链尚不完整。学习者回答大意是“结构化输出与Pydantic Schema能确保price字段数据结构正确；但price字段可能缺失、与其他数据混淆或LLM取错数据包”。这正确指出了Schema对数据结构的验证作用，以及字段缺失和语义性提取错误的可能性。尚未独立说出LLM普通自然语言输出的格式与措辞不稳定，会使固定字符串规则或位置解析失效。应纠正绝对化说法：Schema校验只能判断模型所给数据是否满足指定类型/范围/必需字段等约束，不能强制每次生成有效结构，也不能验证商品信息真实性。例如真实价格199而模型误提取299，price:int gt=0仍可能通过校验。
+
+已给出以上解释。下一题Q1/attempt2仅检查普通自然语言文本格式变化导致固定解析方法不可靠的原因。答对后按Q1验收契约汇总评价，再进入Q2原理—框架映射。
+<!-- learn-agent:evidence:stage01-ch02-Q1-attempt1-20261011:end -->
