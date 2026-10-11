@@ -350,3 +350,9 @@ L3-CHECK-6通过：业务库存键不存在是KeyError，不是输入ValidationE
 <!-- learn-agent:evidence:stage01-ch03-toolmsg-a1-qa:start -->
 - L3-CHECK-10 attempt1: needs_review. User knows ToolMessage tool_call_id identifies a tool call, but supplied arbitrary 001; need to reuse the model's call["id"].
 <!-- learn-agent:evidence:stage01-ch03-toolmsg-a1-qa:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK10a2a3-11-ledger:start -->
+- L3-CHECK-10 attempt2: needs_review — call[id]缺少字符串引号。
+- L3-CHECK-10 attempt3: passed — 正确使用call["id"]读取原始模型工具调用ID。
+- L3-CHECK-11: passed — 用户真实DeepSeek运行输出工具结果12，最终自然语言答复KB-001库存12，闭环成功。当前仍仅支持一次Tool Call。
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK10a2a3-11-ledger:end -->
