@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 139
 last_checkpoint_at: '2026-10-11T13:45:49.937Z'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch02-Q3-a2-a3-20261011
+  reason: needs_review
+  phase: prepared
+  started_at: '2026-10-11T13:55:16.047Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage01-ch02-Q3-attempt3-tradeoff-20261011
+    operation: upsert
+    expected_change: Store two Q3 checks and exact contract assessment.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch02-Q3-attempts2-3-ledger-20261011
+    operation: upsert
+    expected_change: Store Q3 retry boundary and tradeoff outcomes.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch02-Q3-retry-tradeoff-improved-20261011
+    operation: upsert
+    expected_change: Track improved Q3 retry judgement; error diagnosis pending.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
