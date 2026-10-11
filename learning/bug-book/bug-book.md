@@ -248,3 +248,13 @@ Tool description误区：用户最初把get_stock描述为“查询商品详情�
 <!-- learn-agent:evidence:stage01-ch03-stock-description-resolved:start -->
 - L3-CHECK-7 attempt2复检：学员自行改写get_stock的docstring为“查询商品库存数量”，消除与get_price的职责重叠。该误区关闭，仍需在真实模型工具选择实验中验证效果。
 <!-- learn-agent:evidence:stage01-ch03-stock-description-resolved:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-tool-object-is-not-plain-handler-20261011:start -->
+## LangChain Tool对象与普通Python handler接口混淆
+- 症状：学员试图使用selected_tool(**call["args"])执行经过@tool装饰的工具对象。
+- 错误模型：LangChain StructuredTool与普通Python handler都可使用常规函数关键字参数调用。
+- 原因：将前面原理版的handler(**args)直接套用到LangChain工具对象。
+- 修复：对原生Python函数使用handler(**args)；对LangChain的BaseTool/StructuredTool对象使用selected_tool.invoke(args_dict)，其执行包含框架参数Schema处理。
+- 避免：调用前用type(selected_tool).__name__或查看接口说明确认它是Tool对象还是Python函数。
+- 状态：open，等待L3-CHECK-9 attempt2复检。
+<!-- learn-agent:evidence:stage01-ch03-tool-object-is-not-plain-handler-20261011:end -->
