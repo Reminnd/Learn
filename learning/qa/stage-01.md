@@ -253,3 +253,7 @@
 <!-- learn-agent:evidence:stage01-ch02-EX1-step4-offline-principle-run-20261011-ledger:start -->
 - EX1 Step 4: passed（已观察学习者提交的运行stdout）— Case1 PASS并生成整数199及currency CNY；Case2按预期校验拒绝，e.errors()是list且错误type=int_parsing。下一步无API LangChain PydanticOutputParser/RunnableLambda框架验证，完整EX1尚未正式通过。
 <!-- learn-agent:evidence:stage01-ch02-EX1-step4-offline-principle-run-20261011-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-EX1-step5-deepseek-live-api-passed-ledger:start -->
+- EX1 Step 5 / real DeepSeek API: passed — 用户提交真实stdout：raw_type AIMessage；parsed_type Product；product={'price': 199, 'currency': 'CNY'}；parsing_error None。之前401认证问题已排除。EX1实际实现与运行路径齐备，转入概念验收Q1/Q2/Q3；仍不得标记Chapter02 mastered。
+<!-- learn-agent:evidence:stage01-ch02-EX1-step5-deepseek-live-api-passed-ledger:end -->
