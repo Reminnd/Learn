@@ -232,3 +232,8 @@
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-5-ledger:start -->
 - L2-CHECK-13 / attempt 5: passed（局部复检）— 对exists=False; if not exists: exists=True; print(...)判断会输出，结合之前“直接继续执行”的正确回答，验证了if进入分支后不会因为变量变化自动重查。后续返回Structured Output Chapter 02的EX1正式练习。
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-5-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-EX1-steps1-2-qa-batch:start -->
+- EX1 Step 1 / attempt 1: passed — 独立使用`json.loads(raw_text)`和`Product.model_validate(data)`处理JSON文本。
+- EX1 Step 2 / attempt 1: needs_review — `Product.model_validate(data)`正确，但捕获异常的类名写成`Validationerror`而非`ValidationError`，大小写导致NameError；需针对性复检。
+<!-- learn-agent:evidence:stage01-ch02-EX1-steps1-2-qa-batch:end -->
