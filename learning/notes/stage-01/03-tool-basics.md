@@ -97,3 +97,10 @@ print(get_stock("KB-001"))  # 12
 真实API使用用户本机DEEPSEEK_API_KEY，不在GitHub或笔记中记录密钥。用户尚未提交此步骤的API实际输出；不得假定工具选择成功。
 参考：https://reference.langchain.com/python/langchain-deepseek/chat_models/ChatDeepSeek/bind_tools 及 https://api-docs.deepseek.com/guides/tool_calls/。
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK-7-attempt2-passed:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-8-live-deepseek-pass-20261011:start -->
+## L3-CHECK-8：真实DeepSeek Tool Calling
+状态：passed（API运行验证）。用户在之前配置的ChatDeepSeek上运行`model.bind_tools([get_stock,get_price],tool_choice="auto")`并调用`invoke()`，实际提交stdout：`response_type: AIMessage`；`response.tool_calls`包含且仅显示`get_stock`，参数`{"sku":"KB-001"}`，包含tool_call id和type=tool_call；`response.content`为空。这证实本次模型正确选择库存而非价格工具，且生成机器可读的工具调用指令。**程序尚未执行handler**，不能把tool_calls当作库存已经被查询。
+下一步3.7手写Runtime：建立受控白名单dict`{"get_stock":get_stock,"get_price":get_price}`；读取`response.tool_calls[0]["name"]`和`["args"]`，查到LangChain工具并用`tool.invoke(call["args"])`执行；拿到库存12。之后使用LangChain ToolMessage(content=str(result),tool_call_id=call["id"])回传同一对话，模型再生成最终答复。Tool Call若为空、多个、参数错误或未知工具名需要以后验证；不允许由LLM工具名直接执行任意Python代码。
+参考LangChain： https://reference.langchain.com/python/langchain-core/messages/tool/ToolMessage
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-8-live-deepseek-pass-20261011:end -->
