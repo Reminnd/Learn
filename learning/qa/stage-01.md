@@ -326,3 +326,7 @@ Chapter 02 Q3 attempt4: passed (price字段、abc非整数、按模型输出/Sch
 <!-- learn-agent:evidence:stage01-ch03-check6-check7-20261011-ledger:start -->
 L3-CHECK-6通过：业务库存键不存在是KeyError，不是输入ValidationError。L3-CHECK-7部分正确：get_price改为查询价格正确，get_stock用“查询商品详情”仍含糊。下次复检库存工具说明。
 <!-- learn-agent:evidence:stage01-ch03-check6-check7-20261011-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-7-attempt2-ledger:start -->
+- L3-CHECK-7 / attempt2: passed — 将get_stock description准确改为“查询商品库存数量”，区分价格与库存职责。进入3.6 DeepSeek bind_tools真实API观察，模型返回Tool Call不代表Python handler已执行。
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-7-attempt2-ledger:end -->
