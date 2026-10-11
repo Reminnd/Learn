@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 125
 last_checkpoint_at: '2026-10-11T15:11:00+08:00'
 last_checkpoint_reason: exercise_complete
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch02-EX1-step4-stdout-20261011
+  reason: exercise_complete
+  phase: prepared
+  started_at: '2026-10-11T07:45:49.782Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage01-ch02-EX1-step4-offline-principle-run-20261011
+    operation: upsert
+    expected_change: Record observed successful EX1 Step4 two-case Python stdout; proceed to offline LangChain parser validation.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch02-EX1-step4-offline-principle-run-20261011-ledger
+    operation: upsert
+    expected_change: Record EX1 Step4 local runtime execution as passed, full EX1 still pending framework integration.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
