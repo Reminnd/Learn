@@ -121,3 +121,10 @@ print(get_stock("KB-001"))  # 12
 下一题L3-CHECK-9 / attempt3：仅填补`selected_tool.invoke(???)`，给定args字典，要求写出正确输入表达式和返回类型与值。回答通过后再进入ToolMessage闭环，不一次考多项。
 官方文档：https://reference.langchain.com/python/langchain-core/tools/base/BaseTool 及 https://reference.langchain.com/python/langchain-core/messages/tool/ToolMessage
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt2-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt3-pass-20261011:start -->
+## L3-CHECK-9 / attempt 3：Tool.invoke(args)的返回值
+状态：passed（两项类型复检）。用户正确回答本地`result=get_stock.invoke({"sku":"KB-001"})`依次打印`int`和`12`，确认向经过@tool包装的LangChain工具传入args字典，能够得到handler的整数返回结果。用户主动追问为什么此前普通Python函数要用`handler(**args)`，此处却只需`invoke(args)`。解释：普通函数的签名形如get_stock(sku:str)，`**args`把{"sku":"KB-001"}展开成`sku="KB-001"`；LangChain工具的invoke(input)接收单个输入对象，故直接传入参数字典，再由框架进行Schema校验及调用handler。写`invoke(**args)`会把sku当作invoke关键字，无法提供应有的input参数。
+结果类型的边界：`get_stock.invoke({"sku":"KB-001"})`直接返回int 12；随后显式`ToolMessage(content="12",tool_call_id=call["id"])`产生给模型回填的工具消息。若使用完整ToolCall结构作为invoke输入，框架也支持创建关联的ToolMessage；本次仅练习参数字典路径。
+下一步3.8：工具调用结果与tool_call_id关联，手动生成ToolMessage并在消息列表中交给DeepSeek。
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt3-pass-20261011:end -->
