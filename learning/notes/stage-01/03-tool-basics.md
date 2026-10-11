@@ -83,3 +83,17 @@ print(get_stock("KB-001"))  # 12
 状态：needs_review（部分正确）。面对get_price(sku)和get_stock(sku)使用相同description“查询商品信息”，用户意识到LLM可能分辨不清或不必要重复调用，get_price改为“查询商品价格”正确；但将get_stock改为“查询商品详情”仍过于宽泛，无法让LLM区分库存数量与价格、品牌、规格信息。工具description应明确动作、目标及返回范围，例如按SKU查询当前库存数量；笼统description可能选错工具或额外调用，却不保证一定发生重复调用。
 下一题L3-CHECK-7 attempt2：仅改写get_stock的docstring，让模型明确只查询库存数量，与get_price的价格职责无歧义。之后再进入真实DeepSeek bind_tools调用。
 <!-- learn-agent:evidence:stage01-ch03-check6-check7-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-7-attempt2-passed:start -->
+## L3-CHECK-7 / attempt 2
+状态：passed。学员按要求将get_stock的docstring从“查询商品详情”修改为“查询商品库存数量”，清楚将库存查询与get_price的价格查询区别开来。注解sku:str已经表明参数；工程增强写法可明确“根据商品SKU查询当前库存数量，不查询价格”，但不是本次通过的必要条件。
+
+## 3.6 真实DeepSeek bind_tools 测试（待运行）
+依据DeepSeek官方Tool Calls文档及LangChain ChatDeepSeek.bind_tools参考：
+- @tool包装普通Python handler并发布name/description/args schema；
+- ChatDeepSeek(model="deepseek-flash", extra_body={"thinking":{"type":"disabled"}})可使用bind_tools([get_stock,get_price], tool_choice="auto")把工具说明提供给模型；
+- 仅执行model_with_tools.invoke(prompt)时，响应是AIMessage，可观察response.tool_calls的工具名和参数；tool_choice="auto"不保证一定提出工具调用；
+- 本步骤只观察模型工具选择，不调用get_stock.invoke或get_price.invoke，因此没有执行库存查询；下一步再编写手动运行时与ToolMessage回填闭环。
+真实API使用用户本机DEEPSEEK_API_KEY，不在GitHub或笔记中记录密钥。用户尚未提交此步骤的API实际输出；不得假定工具选择成功。
+参考：https://reference.langchain.com/python/langchain-deepseek/chat_models/ChatDeepSeek/bind_tools 及 https://api-docs.deepseek.com/guides/tool_calls/。
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-7-attempt2-passed:end -->
