@@ -400,3 +400,19 @@ Case1证明输入JSON中的字符串"199"在Pydantic默认校验模式下可转�
 下一步：学习者在本机PyCharm/uv中安装langchain-deepseek，使用getpass或进程环境变量设置DEEPSEEK_API_KEY；运行真实模型调用，提交去敏的实际stdout/报错。尚未观察到真实API运行输出，EX1和Chapter02均不能标记mastered。
 官方来源：https://api-docs.deepseek.com/quick_start/pricing/ 与 https://reference.langchain.com/python/langchain-deepseek/chat_models/ChatDeepSeek/with_structured_output。
 <!-- learn-agent:evidence:stage01-ch02-EX1-step5-deepseek-api-route:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-EX1-step5-deepseek-live-api-passed:start -->
+## EX1 Step 5 / DeepSeek API真实结构化输出成功
+状态：passed（真实模型调用及输出校验）。此前学习者执行ChatDeepSeek实际请求时遇到HTTP 401 invalid API key，定位为认证配置问题（可能误带引号或已有无效环境变量）。指导重新输入密钥并去除首尾无意引号后，本轮用户提交实际运行成功的stdout：
+
+```text
+raw_type: AIMessage
+parsed_type: Product
+product: {'price': 199, 'currency': 'CNY'}
+parsing_error: None
+```
+
+所用测试程序采用`ChatDeepSeek`、`with_structured_output(Product, method="function_calling", include_raw=True)`、`structured_model.invoke(...)`，Product的price为正整数、currency默认为CNY。结果展示模型响应`raw`是AIMessage、解析结果`parsed`为Product对象、`parsing_error=None`。据此确认真实API调用成功，结构化输出并通过Pydantic校验。此结果是单次成功，不代表模型未来不会输出错误；原理版的price="abc"校验失败已由EX1 Step4真实本地运行验证。不能把API认证401与Pydantic解析校验失败混为一谈。
+
+原理版JSON解析+Pydantic正反例，以及框架版真实DeepSeek调用均有用户运行证据。接下来进入EX1解释与Chapter02正式Q&A：Q1自然语言解析为何不稳定及边界；Q2原理与LangChain的输入输出映射；Q3诊断Schema校验失败及方案Trade-off。待正式验收后方可判断Chapter02 mastered，当前仍learning。未记录任何真实API密钥。
+<!-- learn-agent:evidence:stage01-ch02-EX1-step5-deepseek-live-api-passed:end -->
