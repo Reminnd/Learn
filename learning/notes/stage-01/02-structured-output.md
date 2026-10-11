@@ -357,3 +357,17 @@ if not exists:
 框架版：先使用支持结构化输出的ChatModel执行`model.with_structured_output(Product)`得到Runnable，再执行`structured_model.invoke(prompt)`；成功且include_raw=False时返回经过Schema解析验证的Product实例。框架封装输出结构约束及解析校验过程，不应认为必然直接调用`json.loads()`，具体机制依赖模型服务的原生Schema能力或Tool Calling。若provider/模型不支持特定结构化输出方法，需要调整配置或换兼容模型。
 本节练习：独立编写with_structured_output与invoke两行，再对比原理版输入、输出与失败处理。参考LangChain当前官方BaseChatModel.with_structured_output文档。
 <!-- learn-agent:evidence:stage01-ch02-EX1-step2-attempt3:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-EX1-step3-attempt1:start -->
+## EX1 Step 3 / attempt 1
+状态：passed（局部框架代码检查）。用户独立正确填写：
+```python
+structured_model = model.with_structured_output(Product)
+product = structured_model.invoke("这款键盘售价199元")
+print(product.price)
+```
+框架映射：`with_structured_output(Product)`声明结构化结果Schema并返回可调用Runnable；真正执行模型调用的是`invoke(...)`。支持Pydantic Schema的兼容聊天模型在调用成功、默认`include_raw=False`时返回经过校验的Product实例。这里仍是假设model已配置成功且provider支持结构化输出，不是实际执行结果。
+
+下一步EX1 Step 4：进行原理版的真实本地运行与失败用例验证，以及具备支持模型环境时的框架版运行。不能仅凭代码片段认定整个EX1 accepted/mastered。
+参考：https://reference.langchain.com/python/langchain-core/language_models/chat_models/BaseChatModel/with_structured_output
+<!-- learn-agent:evidence:stage01-ch02-EX1-step3-attempt1:end -->
