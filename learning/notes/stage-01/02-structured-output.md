@@ -430,3 +430,14 @@ parsing_error: None
 
 教学已明确区分“自由文本格式不稳定→固定解析策略脆弱”与“LLM价格语义提取错误→格式合法但数据不真实”；需要让学习者独立判断分隔符不匹配时`split`产生列表长度，才能判定关键Q1掌握。下一题Q1/attempt3仅对`len("售价：199元".split("价格："))`进行检查，并说出原因。不能标Q1 passed，也不能标Chapter 02 mastered。
 <!-- learn-agent:evidence:stage01-ch02-Q1-attempt2-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q1-attempt3-guided-20261011:start -->
+## Chapter 02 Q1 / attempt 3：split返回长度
+状态：partial（结果正确，原因需教师解释）。针对text="售价：199元"; parts=text.split("价格："); print(len(parts))，用户回答"1，为什么split不是分隔吗？"。用户能预测长度1，但尚不明确split必须精确匹配指定分隔符。教师解释原文含"售价："，没有"价格："，因此未发生分割，得到单元素列表；匹配分隔符时字符串开头会产生空字符串元素。
+<!-- learn-agent:evidence:stage01-ch02-Q1-attempt3-guided-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q1-attempt4-pass-20261011:start -->
+## Chapter 02 Q1 / attempt 4：越界错误复检
+状态：passed（结合attempt1—4的指导式验收）。针对text="售价：199元"; parts=text.split("价格："); print(parts[1])，用户独立回答"抛出异常，没有找到该元素的异常"，正确识别越界访问。教师补充准确异常为IndexError: list index out of range。联合先前独立指出的Schema限制、字段缺失以及语义提取错误，该题已在多轮具体代码复检中建立"自由语言表达不固定→固定分隔符可能不匹配→split只返回1项→硬编码索引引发IndexError"的因果链。本次Q1标记为passed（经过指导与复检），不是首轮独立完整作答。还应在今后注意：Pydantic保证符合约束的输出被验证，不保证模型输出真实或每次成功。
+后续Q2（关键题）：解释手工json.loads + Product.model_validate与LangChain with_structured_output(Product)的输入、输出和流程对应。Q3仍未验收；Chapter02仍learning。
+<!-- learn-agent:evidence:stage01-ch02-Q1-attempt4-pass-20261011:end -->
