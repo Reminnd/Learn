@@ -571,3 +571,103 @@ core_model_conflict:
 passed: false
 ```
 <!-- learn-agent:evidence:stage01-ch02-Q3-attempt3-tradeoff-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-final-mastered-evidence-20261011:start -->
+## Chapter 02正式最终验收（Q3 attempt4、EX1、Q1及mastery）
+Q3本轮用户回答：“price发生错误，输入abc是不符合类型的值；排查次序模型输出→Schema→商品原文。”它包含明确字段定位、原因判断和可执行检查顺序。与Q3 attempt3已证明的重试收益/费用/延迟取舍共同构成Q3通过。
+Q1在多轮指导式代码复检中建立格式不匹配导致提取失败的因果证据；Q2已有严格question_attempt记录和真实API结构化调用证据。EX1原理版及DeepSeek API框架版均有用户本地运行stdout，符合本章原理+框架+错误情景验收。
+综合评分依据：概念19/25（Q1需要多轮提示）、数据流16/20（Q2纠正模型调用边界）、框架应用18/20（原理版及真实DeepSeek成功）、错误诊断17/20（Q3字段错误及运行复现）、Trade-off12/15（有限重试成本边界正确，但延迟表述需修正），总分82/100。
+以下记录按当前验收契约criterion原样构建。教师Mode指导式复检通过，不等于无提示面试已通过。
+
+### Q1正式attempt
+```yaml
+kind: question_attempt
+evidence_id: stage01-ch02-Q1-formal-attempt4-20261011
+contract_chapter_id: stage-01-02-structured-output
+question_id: Q1
+attempt: 4
+answer_ref: "learning/notes/stage-01/02-structured-output.md#stage01-ch02-Q1-formal-attempt4-20261011"
+acceptance_snapshot:
+  - "给出核心因果关系，而不是只复述定义"
+  - "说明至少一个适用边界或失败条件"
+acceptance_results:
+  - criterion: "给出核心因果关系，而不是只复述定义"
+    satisfied: true
+    evidence: "Q1 attempt3用户预测text.split('价格：')对'售价：199元'返回单项列表，attempt4正确判断取[1]会越界；这是一条分隔符不匹配→提取流程失败的可观察因果关系。教师作过提示，非首轮完整独立论述。"
+  - criterion: "说明至少一个适用边界或失败条件"
+    satisfied: true
+    evidence: "Q1初始回答已经指出缺失price或语义误提取可能发生，即使结构合法也可能拿错价格；后续split测试给出固定字符串解析在LLM表述变化时的失败条件。"
+core_model_conflict:
+  detected: false
+  evidence: "Q1最初'确保结构'措辞过强，但同时明确承认字段缺失、提取错误；后续经过实例验证没有继续主张自由文本能由固定split稳定解析。"
+passed: true
+```
+
+### Q3正式attempt
+```yaml
+kind: question_attempt
+evidence_id: stage01-ch02-Q3-formal-attempt4-20261011
+contract_chapter_id: stage-01-02-structured-output
+question_id: Q3
+attempt: 4
+answer_ref: "learning/notes/stage-01/02-structured-output.md#stage01-ch02-Q3-formal-attempt4-20261011"
+acceptance_snapshot:
+  - "给出可执行的排查顺序"
+  - "说明至少一个方案 Trade-off"
+acceptance_results:
+  - criterion: "给出可执行的排查顺序"
+    satisfied: true
+    evidence: "用户本轮根据e.errors中的loc=('price',)定位price字段，指出input='abc'与整数类型不符并选择模型原始输出→Schema→商品原文的可执行排查顺序；已知优先查看e.errors。"
+  - criterion: "说明至少一个方案 Trade-off"
+    satisfied: true
+    evidence: "Q3 attempt2学员判断原文有199时值得有限重试、原文缺价时应报缺失；attempt3独立说明修复概率、API额外费用、增加的延迟与上限控制。"
+core_model_conflict:
+  detected: false
+  evidence: "本轮明确区分字段类型问题和原始商品价格，并未把格式合法等同于业务值真实；Q3 attempt3重试代价误称较低，教师补正后其核心为有限预算而非降低延迟。"
+passed: true
+```
+
+### EX1正式attempt
+```yaml
+kind: exercise_attempt
+evidence_id: stage01-ch02-EX1-formal-attempt1-20261011
+contract_chapter_id: stage-01-02-structured-output
+exercise_id: EX1
+attempt: 1
+artifact_ref: "ex1_structured_output.py and ex1_deepseek_api.py (user-run code and stdout in preceding EX1 Step4 / Step5 notes)"
+acceptance_snapshot:
+  - "产出可运行代码或可执行伪代码，展示：理解自然语言解析的不稳定性"
+  - "能复现或具体分析工程问题：Schema 校验失败"
+  - "能解释并验证框架映射：手工 json.loads → LangChain Structured Output"
+acceptance_results:
+  - criterion: "产出可运行代码或可执行伪代码，展示：理解自然语言解析的不稳定性"
+    satisfied: true
+    evidence: "用户独立写出json.loads(raw_text)和Product.model_validate(data)的可执行最小原理代码，并以Q1 split缺分隔符长度1与访问越界的代码例子确认不应依赖自由文本固定措辞；运行正反输入检验。"
+  - criterion: "能复现或具体分析工程问题：Schema 校验失败"
+    satisfied: true
+    evidence: "用户真实运行原理版得到Case1 PASS, {'price':199,'currency':'CNY'}；Case2 FAIL, list, int_parsing，验证Pydantic拒绝price='abc'且errors()为list。"
+  - criterion: "能解释并验证框架映射：手工 json.loads → LangChain Structured Output"
+    satisfied: true
+    evidence: "用户独立写出model.with_structured_output(Product)和structured_model.invoke(prompt)，之后真实调用DeepSeek API取得raw_type AIMessage、parsed_type Product、product价格199币种CNY、parsing_error None；与手动json.loads→model_validate路径进行了输入/输出和调用边界复检。"
+accepted: true
+```
+
+### 本章正式mastery assessment
+```yaml
+kind: mastery_assessment
+evidence_id: stage01-ch02-master-assessment-q1a4-q2a6-q3a4-20261011
+contract_chapter_id: stage-01-02-structured-output
+source_evidence_ids:
+  - stage01-ch02-Q1-formal-attempt4-20261011
+  - stage01-ch02-Q2-attempt6-passed-20261011
+  - stage01-ch02-Q3-formal-attempt4-20261011
+dimension_scores:
+  conceptual_understanding: 19
+  causal_and_dataflow: 16
+  application_and_framework_mapping: 18
+  debugging_and_troubleshooting: 17
+  migration_boundaries_and_tradeoffs: 12
+```
+
+全部hard gates：critical Q1/Q2均passed；EX1 accepted；总分82≥80；各维度达到60% floor；本章无完整已登记且仍未解决的critical misconception evidence；integrity=healthy；本事务完成final-state+clear后pending_writeback=null，故Chapter02 mastered=true。弱点保留复习提醒，后续章节在真实项目里继续练习。
+<!-- learn-agent:evidence:stage01-ch02-final-mastered-evidence-20261011:end -->
