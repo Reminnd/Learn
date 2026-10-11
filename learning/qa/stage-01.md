@@ -257,3 +257,7 @@
 <!-- learn-agent:evidence:stage01-ch02-EX1-step5-deepseek-live-api-passed-ledger:start -->
 - EX1 Step 5 / real DeepSeek API: passed — 用户提交真实stdout：raw_type AIMessage；parsed_type Product；product={'price': 199, 'currency': 'CNY'}；parsing_error None。之前401认证问题已排除。EX1实际实现与运行路径齐备，转入概念验收Q1/Q2/Q3；仍不得标记Chapter02 mastered。
 <!-- learn-agent:evidence:stage01-ch02-EX1-step5-deepseek-live-api-passed-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q1-attempt1-20261011-ledger:start -->
+- Chapter02 Q1 / attempt1: needs_review（方向正确，原因不全）— 用户认识到Schema校验与字段缺失、错误语义数据风险；尚未说明普通语言答案措辞/格式不固定令程序解析脆弱，且“确保”表述太绝对。目标复检自然语言格式变化为何使split或正则不可靠。
+<!-- learn-agent:evidence:stage01-ch02-Q1-attempt1-20261011-ledger:end -->
