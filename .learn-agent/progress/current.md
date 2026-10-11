@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 122
 last_checkpoint_at: '2026-10-11T07:02:18.880Z'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch02-ex1-step2-a2-20261011
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-10-11T15:11:00+08:00'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage01-ch02-EX1-step2-attempt2
+    operation: upsert
+    expected_change: Record Step 2 retest correctly predicts validation failure but mistakes errors() list for dict.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch02-EX1-step2-attempt2-ledger
+    operation: upsert
+    expected_change: Record targeted Step 2 retest as partially correct and next check.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: bug-stage01-ch02-validationerror-errors-list
+    operation: upsert
+    expected_change: Capture misconception about Pydantic ValidationError.errors() return type.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
