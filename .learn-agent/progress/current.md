@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 150
 last_checkpoint_at: '2026-10-11T14:57:15.793Z'
 last_checkpoint_reason: knowledge_event
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch03-description-review-20261011
+  reason: needs_review
+  phase: prepared
+  started_at: '2026-10-11T15:04:51.807Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-check6-check7-20261011
+    operation: upsert
+    expected_change: Record L3-CHECK-6 pass and L3-CHECK-7 partial tool-description answer.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-check6-check7-20261011-ledger
+    operation: upsert
+    expected_change: Record L3-CHECK-6 passed and L3-CHECK-7 needs_review.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch03-stock-description-too-broad-20261011
+    operation: upsert
+    expected_change: Record overly broad stock tool description.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
