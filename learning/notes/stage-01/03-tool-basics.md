@@ -74,3 +74,12 @@ print(get_stock("KB-001"))  # 12
 
 下一步L3-CHECK-6 / attempt1：为get_stock增加显式异常处理，捕获KeyError并返回有稳定字段的业务错误结果，而不是把Python traceback原样交给调用端。随后讨论LangChain ToolException、参数错误与可观测性，整章EX1和Q1/Q2/Q3尚未正式验收。
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECKS3-5-batch-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-check6-check7-20261011:start -->
+## L3-CHECK-6 / attempt1
+状态：passed。用户独立答出except KeyError，而非ValidationError，因为传入sku为合法字符串后已经通过参数Schema校验，库存字典索引不存在的键属于handler业务执行错误。返回稳定的ok/error字典可让调用方区分业务失败。
+
+## L3-CHECK-7 / attempt1
+状态：needs_review（部分正确）。面对get_price(sku)和get_stock(sku)使用相同description“查询商品信息”，用户意识到LLM可能分辨不清或不必要重复调用，get_price改为“查询商品价格”正确；但将get_stock改为“查询商品详情”仍过于宽泛，无法让LLM区分库存数量与价格、品牌、规格信息。工具description应明确动作、目标及返回范围，例如按SKU查询当前库存数量；笼统description可能选错工具或额外调用，却不保证一定发生重复调用。
+下一题L3-CHECK-7 attempt2：仅改写get_stock的docstring，让模型明确只查询库存数量，与get_price的价格职责无歧义。之后再进入真实DeepSeek bind_tools调用。
+<!-- learn-agent:evidence:stage01-ch03-check6-check7-20261011:end -->
