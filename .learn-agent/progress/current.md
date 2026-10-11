@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 120
 last_checkpoint_at: '2026-10-10T08:57:28.877Z'
 last_checkpoint_reason: qa_complete
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch02-EX1-steps1-2-20261011
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-10-11T07:02:18.880Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage01-ch02-EX1-steps1-2-batch
+    operation: upsert
+    expected_change: Record EX1 Step 1 passing code and Step 2 partial exception-handler typo.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch02-EX1-steps1-2-qa-batch
+    operation: upsert
+    expected_change: Record EX1 exercise progress and focused retest.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: bug-stage01-ch02-EX1-ValidationError-case
+    operation: upsert
+    expected_change: Record case-sensitive ValidationError handler typo and diagnostic explanation.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
