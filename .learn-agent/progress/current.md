@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-11：Q2 attempt1理解手写json.loads→Pydantic与框架调用的部分映射，但误把默认with_structured_output返回结果当作AIMessage；复检默认Product与include_raw字典。
-last_section: Chapter02 Q2 LangChain结构化输出返回类型
+last_note_update: 2026-10-11：Q2 attempt2知道product为Product实例，但误将type.__name__与列表/字典数量关联；已讲解model_dump，继续复检。
+last_section: Chapter02 Q2 Product实例与dict字典类型
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,42 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: knowledge_check
-  topic: Q2 / attempt 2
-  next_action: 复检with_structured_output(Product)默认invoke返回Product而不是AIMessage，并进一步说明数据流。
+  topic: Q2 / attempt 3
+  next_action: 区分type(product).__name__和type(product.model_dump()).__name__并回到完整数据流。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 133
-last_checkpoint_at: '2026-10-11T12:40:37.626Z'
+checkpoint_version: 134
+last_checkpoint_at: '2026-10-11T12:44:43.510Z'
 last_checkpoint_reason: needs_review
-pending_writeback:
-  transaction_id: stage01-ch02-Q2-attempt2-20261011
-  reason: needs_review
-  phase: prepared
-  started_at: '2026-10-11T12:44:43.510Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/02-structured-output.md
-    evidence_id: stage01-ch02-Q2-attempt2-20261011
-    operation: upsert
-    expected_change: Record Q2 retest: user identifies Product instance but confuses runtime type name with list/dict cardinality.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch02-Q2-attempt2-20261011-ledger
-    operation: upsert
-    expected_change: Record Q2 attempt2 partial and next isolated Product versus dict type question.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: stage01-ch02-Q2-type-name-vs-model-dump-20261011
-    operation: upsert
-    expected_change: Record confusion between Pydantic instance type, model_dump dictionary, and list length.
-    verified: false
-    error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
@@ -82,8 +56,8 @@ project_selection_prompted: true
 completed:
 - 01-llm-message-prompt-langchain
 weak_points:
-- Q2：区别默认结构化解析结果Product和include_raw=True返回字典里的raw AIMessage；Q3尚待验收。
-next_action: Q2 attempt2：预测无include_raw时type(product).__name__的结果，并结合原理版描述LangChain解析流程。
+- Q2：需区分Product对象本身、model_dump的dict和include_raw=True的原始AIMessage；Q3待验收。
+next_action: Q2 attempt3：预测type(product).__name__和type(product.model_dump()).__name__输出。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
