@@ -273,3 +273,7 @@
 <!-- learn-agent:evidence:stage01-ch02-Q1-attempt4-pass-20261011-ledger:start -->
 - Chapter02 Q1 / attempt4: passed（指导式复检）— 针对缺少分隔符的单元素列表访问[1]，学习者正确判定抛出"找不到元素"类异常；补充精确类型IndexError。结合早先Schema字段缺失/语义误提取风险答案，Q1综合判定通过，进Q2。不是对完整原理的独立首轮答案。
 <!-- learn-agent:evidence:stage01-ch02-Q1-attempt4-pass-20261011-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt1-20261011-ledger:start -->
+- Q2 attempt1: needs_review — A输入JSON文本、最终Product判断正确；B提示词输入正确，但把默认解析输出误说成AIMessage（实际默认Product，include_raw=True时raw才是AIMessage）；下一题针对性测试返回类型，再验收完整数据流。
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt1-20261011-ledger:end -->
