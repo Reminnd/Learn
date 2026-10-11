@@ -277,3 +277,7 @@
 <!-- learn-agent:evidence:stage01-ch02-Q2-attempt1-20261011-ledger:start -->
 - Q2 attempt1: needs_review — A输入JSON文本、最终Product判断正确；B提示词输入正确，但把默认解析输出误说成AIMessage（实际默认Product，include_raw=True时raw才是AIMessage）；下一题针对性测试返回类型，再验收完整数据流。
 <!-- learn-agent:evidence:stage01-ch02-Q2-attempt1-20261011-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt2-20261011-ledger:start -->
+- Q2 / attempt2: needs_review — 学习者认为调用结果是Product实例（对），却预测type(...).__name__按数量变成dict/list（错）；已讲解实例类型和model_dump字典区别，下一题对照两个类型名。
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt2-20261011-ledger:end -->
