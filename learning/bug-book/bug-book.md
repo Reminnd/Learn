@@ -153,7 +153,7 @@
 - 根因：标识符大小写不匹配，真正发生ValidationError时，except求值会触发NameError。
 - 修复：使用`except ValidationError as e:`，保留打印e.errors()。
 - 避免：核对导入名及捕获名一致，实际运行Schema错误用例验证处理分支。
-- 状态：open；等待EX1 Step 2 attempt 2复检。
+- 状态：resolved；EX1本机成功运行正确的ValidationError处理。
 <!-- learn-agent:evidence:bug-stage01-ch02-EX1-ValidationError-case:end -->
 
 <!-- learn-agent:evidence:bug-stage01-ch02-validationerror-errors-list:start -->
@@ -175,7 +175,7 @@
 - 症状：Q1知道Pydantic校验输出结构和可能缺失/错误信息，但未点出普通自然语言的格式不固定，且把Schema说成“确保”数据结构正确。
 - 事实：LLM可能输出不同句式、标注格式、解释语句、额外字段或格式错误，固定字符串抽取不稳定；Schema可验证类型/范围/字段等形式约束，但不保证每次成功，也不保证语义真实性。
 - 改进：通过多种表示相同价格的自然语言输出，说明固定split解析的失败条件，再回答Q1因果问题。
-- 状态：open，待Q1/attempt2复检。
+- 状态：resolved（指导式）；Q1 attempt3/4已验证split失败路径。
 <!-- learn-agent:evidence:stage01-ch02-Q1-overclaim-schema-guarantee-20261011:end -->
 
 <!-- learn-agent:evidence:stage01-ch02-Q1-parse-vs-semantic-attempt2:start -->
@@ -196,14 +196,14 @@
 - 正确：默认`include_raw=False`返回Product；`include_raw=True`返回含raw(AIMessage)、parsed(Product)、parsing_error字段的dict。
 - 可能原因：将此前真实DeepSeek API实验中`raw_type: AIMessage`误认为整个返回结果的类型。
 - 修复：分别查看`type(structured_model.invoke(...))`和`type(result["raw"])`、`type(result["parsed"])`。
-- 状态：open，待Q2 attempt2复检。
+- 状态：resolved（指导式）；Q2最终明确默认结构化结果为Product。
 <!-- learn-agent:evidence:stage01-ch02-Q2-default-vs-include-raw-20261011:end -->
 
 <!-- learn-agent:evidence:stage01-ch02-Q2-type-name-vs-model-dump-20261011:start -->
 ## Q2：混淆实例类型和转换后的数据结构
 - 症状：知道product是Product实例，却以元素数量判断type(product).__name__会输出dict或list。
 - 纠正：type(product).__name__输出Product；type(product.model_dump()).__name__输出dict；元素数量不会自动改变对象类型。
-- 状态：open，等待Q2 attempt3复检。
+- 状态：improving；Q2正确使用model_dump()后的字典键访问。
 <!-- learn-agent:evidence:stage01-ch02-Q2-type-name-vs-model-dump-20261011:end -->
 
 <!-- learn-agent:evidence:stage01-ch02-Q2-model-dump-error-retest-20261011:start -->
@@ -222,9 +222,13 @@
 ## Q3 缺少异常定位及重试适用边界的说明
 - 症状：学员提出“让LLM有限重试，3次重试后返回错误”及“JSON格式→输入内容→代码”排查顺序，但没有解释int_parsing与JSON语法的区别、如何利用e.errors()字段定位，且未说明重试成本/延迟和成功概率。
 - 纠正：JSON语法合法也可能出现Schema字段解析失败。先看e.errors()中loc/type/input，再按模型raw输出→输入证据→Schema与本地代码追查；证据充分但模型失误时有限模型调用可能有效，原文没有价格时应拒绝猜测而不是重复消耗额度。
-- 状态：open，等待Q3 attempt2复检。
+- 状态：resolved；Q3 attempt4识别price int_parsing且attempt3说明重试Trade-off。
 <!-- learn-agent:evidence:stage01-ch02-Q3-schema-retry-tradeoff:end -->
 
 <!-- learn-agent:evidence:stage01-ch02-Q3-retry-tradeoff-improved-20261011:start -->
 - Q3重试决策理解改善：attempt2区分信息缺失与模型提取失误，attempt3明确有上限重试的成功率、费用与延迟取舍。仍需让学习者独立针对e.errors()按错误类型、字段定位，故原Q3问题暂保留open。
 <!-- learn-agent:evidence:stage01-ch02-Q3-retry-tradeoff-improved-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-final-mastered-bug-status-20261011:start -->
+Chapter02正式验收：Q1/Q2/Q3和EX1已通过指导式复检与运行；raw/parsed和model_dump类型细节建议今后复习，并发幂等相关开放项保留待后续章节。
+<!-- learn-agent:evidence:stage01-ch02-final-mastered-bug-status-20261011:end -->
