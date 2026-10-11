@@ -177,3 +177,11 @@
 - 改进：通过多种表示相同价格的自然语言输出，说明固定split解析的失败条件，再回答Q1因果问题。
 - 状态：open，待Q1/attempt2复检。
 <!-- learn-agent:evidence:stage01-ch02-Q1-overclaim-schema-guarantee-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q1-parse-vs-semantic-attempt2:start -->
+## Q1：将字符串格式解析不稳定误答为语义价格不准确
+- 症状：面对`text.split("价格：")[1]`读取LLM自由文本格式变化的错误原因，学习者回答“可能没有采用实际价格”。
+- 区分：语义不准确可能返回错误价格，即便Schema验证通过；本题代码的失败直接源于文本中没有完全匹配的“价格：”标记，split结果不足两个元素会导致IndexError。
+- 修复：先检查字符串中是否存在固定分隔符，再考察split结果长度及访问边界；生产Agent优先Schema结构化结果而不是拆自然语言。
+- 状态：open，需通过Q1 attempt3确认。
+<!-- learn-agent:evidence:stage01-ch02-Q1-parse-vs-semantic-attempt2:end -->
