@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-11：Q2 attempt5输入输出及B的LLM调用位置正确，但把A的Pydantic校验误当成LLM调用，待复检。
-last_section: Chapter02 Q2 本地校验与模型调用的边界
+last_note_update: 2026-10-11：Q2 attempt6独立指出DeepSeek请求位于model.invoke，json.loads和Pydantic只做本地解析校验；Q2关键题通过，开始Q3。
+last_section: Chapter02 Q3 Schema校验失败与修复Trade-off
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,42 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: knowledge_check
-  topic: Q2 / attempt 6
-  next_action: 判断A中的json.loads和Product.model_validate是否会调用LLM，若raw_text由LLM生成何时调用。
+  topic: Q3 / attempt 1
+  next_action: 独立提出Schema校验失败的排查顺序，给出失败原因与有限重试/直接拒绝的Trade-off。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 137
-last_checkpoint_at: '2026-10-11T13:29:23.565Z'
-last_checkpoint_reason: needs_review
-pending_writeback:
-  transaction_id: stage01-ch02-Q2-a6-pass-20261011
-  reason: section_boundary
-  phase: prepared
-  started_at: '2026-10-11T13:40:39.380Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/02-structured-output.md
-    evidence_id: stage01-ch02-Q2-attempt6-passed-20261011
-    operation: upsert
-    expected_change: Record Q2 passed after identifying true model API call versus local JSON parse and Pydantic validate.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch02-Q2-attempt6-passed-20261011-ledger
-    operation: upsert
-    expected_change: Record Q2 step6 pass and move to Chapter 02 Q3.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: stage01-ch02-Q2-model-validation-boundary-resolved
-    operation: upsert
-    expected_change: Resolve misconception that local model_validate invokes an LLM.
-    verified: false
-    error: null
+checkpoint_version: 138
+last_checkpoint_at: '2026-10-11T13:40:39.380Z'
+last_checkpoint_reason: section_boundary
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
@@ -83,7 +57,7 @@ completed:
 - 01-llm-message-prompt-langchain
 weak_points:
 - Q2：误以为model_validate进行LLM调用，应区分本地数据验证和真实模型API调用；Q3未验收。
-next_action: Q2 attempt6：确认A代码没有LLM调用、B通过invoke调用模型；然后判断Q2是否通过。
+next_action: Q3 attempt1：面对模型提取的价格不合格，检查原始模型输出、Schema约束、错误字段，权衡有限重试与直接报错。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
