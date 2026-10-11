@@ -441,3 +441,11 @@ parsing_error: None
 状态：passed（结合attempt1—4的指导式验收）。针对text="售价：199元"; parts=text.split("价格："); print(parts[1])，用户独立回答"抛出异常，没有找到该元素的异常"，正确识别越界访问。教师补充准确异常为IndexError: list index out of range。联合先前独立指出的Schema限制、字段缺失以及语义提取错误，该题已在多轮具体代码复检中建立"自由语言表达不固定→固定分隔符可能不匹配→split只返回1项→硬编码索引引发IndexError"的因果链。本次Q1标记为passed（经过指导与复检），不是首轮独立完整作答。还应在今后注意：Pydantic保证符合约束的输出被验证，不保证模型输出真实或每次成功。
 后续Q2（关键题）：解释手工json.loads + Product.model_validate与LangChain with_structured_output(Product)的输入、输出和流程对应。Q3仍未验收；Chapter02仍learning。
 <!-- learn-agent:evidence:stage01-ch02-Q1-attempt4-pass-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt1-20261011:start -->
+## Chapter02 Q2 / attempt 1
+状态：needs_review（关键题，部分正确）。学习者回答：“A接收json格式输入，返回Product实例。B接收字符串输入，返回AIMessage。product = Product.model_validate(data)和字段提取。”
+正确证据：A接收符合JSON语法的字符串，经json.loads转成dict，再经Product.model_validate得到Product对象。B接收自然语言prompt；框架执行模型调用并封装结构化提取与Pydantic校验。
+关键错误：把B默认调用结果说成AIMessage。使用`model.with_structured_output(Product)`且默认`include_raw=False`时，成功返回经过验证的Product实例；此前学员实际使用`include_raw=True`，得到的`result`是含raw(AIMessage)、parsed(Product)、parsing_error(None)的字典，因此混淆了原始消息与解析结果。
+教师补充：A需要原先已有JSON字符串；B输入prompt并真正调用模型，不等于框架内部必定直接执行json.loads；依provider可采用Tool Calling/原生结构化能力。下一题Q2 attempt2先独立预测默认情况下`type(product).__name__`，随后要求解释完整输入输出映射才标Q2通过。
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt1-20261011:end -->
