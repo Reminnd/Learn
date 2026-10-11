@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 133
 last_checkpoint_at: '2026-10-11T12:40:37.626Z'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch02-Q2-attempt2-20261011
+  reason: needs_review
+  phase: prepared
+  started_at: '2026-10-11T12:44:43.510Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage01-ch02-Q2-attempt2-20261011
+    operation: upsert
+    expected_change: Record Q2 retest: user identifies Product instance but confuses runtime type name with list/dict cardinality.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch02-Q2-attempt2-20261011-ledger
+    operation: upsert
+    expected_change: Record Q2 attempt2 partial and next isolated Product versus dict type question.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch02-Q2-type-name-vs-model-dump-20261011
+    operation: upsert
+    expected_change: Record confusion between Pydantic instance type, model_dump dictionary, and list length.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
