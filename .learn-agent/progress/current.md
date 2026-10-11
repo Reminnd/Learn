@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-11：Q1 attempt1能识别Schema约束及字段缺失/语义误提取，但未独立解释自然语言格式不稳定且误用确保；安排针对性复检。
-last_section: Chapter 02 Q1 自然语言输出不稳定与校验边界
+last_note_update: 2026-10-11：Q1 attempt2将格式解析风险回答为语义价格不准确；已解释split缺少分隔符触发IndexError，安排最小代码复检。
+last_section: Chapter 02 Q1 自然语言格式变化与split解析失败
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,42 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: required_exercise
-  topic: Q1 / attempt 2
-  next_action: 以相同price的不同自然语言表述为例，解释固定字符串解析规则为何脆弱，随后进入Q2。
+  topic: Q1 / attempt 3
+  next_action: 判断无精确分隔符时split返回列表长度，以及为什么文本格式变化导致固定解析不可靠。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 129
-last_checkpoint_at: '2026-10-11T08:04:11.040Z'
+checkpoint_version: 130
+last_checkpoint_at: '2026-10-11T08:08:09.228Z'
 last_checkpoint_reason: needs_review
-pending_writeback:
-  transaction_id: stage01-ch02-Q1-attempt2-20261011
-  reason: needs_review
-  phase: prepared
-  started_at: '2026-10-11T08:08:09.228Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/02-structured-output.md
-    evidence_id: stage01-ch02-Q1-attempt2-20261011
-    operation: upsert
-    expected_change: Record Q1 attempt2 misunderstanding semantic versus format risk and targeted Python split review.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch02-Q1-attempt2-20261011-ledger
-    operation: upsert
-    expected_change: Record Q1 attempt2 as needs_review and the next brief split question.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: stage01-ch02-Q1-parse-vs-semantic-attempt2
-    operation: upsert
-    expected_change: Record confusion between LLM semantic price extraction and brittle free-form parsing.
-    verified: false
-    error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
@@ -82,8 +56,8 @@ project_selection_prompted: true
 completed:
 - 01-llm-message-prompt-langchain
 weak_points:
-- Chapter02 Q1：需明确普通自然语言格式变化造成固定解析不稳定，避免绝对化Schema保证；Q2/Q3尚待验收。
-next_action: Chapter02 Q1 attempt2：对比同一个价格的不同自然语言表达，说明固定分割提取不可靠的原因。
+- Q1：需区分自由文本的格式变化导致固定split失败与LLM语义价格取错两类风险；Q2/Q3尚待验收。
+next_action: Q1 attempt3：预测len("售价：199元".split("价格："))结果并说明分隔符缺失的原因。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
