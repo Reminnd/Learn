@@ -472,3 +472,32 @@ Q2 attempt 4：passed（局部）。答对data["price"]。待完成原理版与�
 状态：needs_review（部分正确）。学员回答A接收raw_text并返回Product实例、B接收自然语言提示词并返回Product实例；正确指出B使用structured_model.invoke调用LLM。但误认为A的product_a=Product.model_validate(data)本身调用LLM。
 纠正：A所示两行json.loads与Product.model_validate都只执行本地JSON解码与Pydantic数据校验，不发送模型请求。若raw_text本身由LLM生成，其调用发生在这两行之前并未显示。B的structured_model.invoke才发起真实模型API调用，然后进行结构化输出解析与校验。下一步针对性复检：A两行是否有任何LLM调用，以及如果raw_text由模型生成，模型调用发生于何处。Q2不得在此轮标记passed。
 <!-- learn-agent:evidence:stage01-ch02-Q2-attempt5-local-validation-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt6-passed-20261011:start -->
+## Chapter 02 Q2 / attempt 6：通过
+学员正确回答示例代码中 model.invoke(...).content 发起DeepSeek API请求，json.loads(raw_text)把JSON文本转换为字典，Product.model_validate(data)使用Pydantic在本地校验并生成实例。此前Q2 attempt5独立说明原理版接收raw_text且返回Product实例，框架版接收提示词并默认返回Product实例，structured_model.invoke实际调用模型。本轮结合此前证据，已经掌握原理—框架对应关系、输入输出与关键数据流。Q2按指导复检通过，但不代表整个章节通过；剩余Q3 Schema失败的排查顺序与Trade-off。
+
+```yaml
+kind: question_attempt
+evidence_id: stage01-ch02-Q2-attempt6-passed-20261011
+contract_chapter_id: stage-01-02-structured-output
+question_id: Q2
+attempt: 6
+answer_ref: learning/notes/stage-01/02-structured-output.md#chapter-02-q2-attempt-6通过
+acceptance_snapshot:
+  - 明确原理侧与框架侧的对应对象
+  - 说清输入、输出与关键数据流
+acceptance_results:
+  - criterion: 明确原理侧与框架侧的对应对象
+    satisfied: true
+    evidence: 先前独立写出原理版json.loads和Product.model_validate及框架版with_structured_output和invoke，本轮准确判断Pydantic校验不是模型调用。
+  - criterion: 说清输入、输出与关键数据流
+    satisfied: true
+    evidence: attempt5正确指出A接收raw_text得到Product、B接收提示词得到Product且invoke调用LLM；attempt6明确由model.invoke生成raw_text，再本地JSON解析与Pydantic校验。
+core_model_conflict:
+  detected: false
+  evidence: attempt5误将model_validate视作LLM调用，但最新attempt6已准确把远端调用定位在model.invoke而把model_validate归为Pydantic本地校验；与数据流模型不再冲突。
+passed: true
+```
+下一步：Q3考查Schema校验失败时的定位顺序、重试或拒绝的适用边界和方案Trade-off。Q1与EX1的正式完整掌握证据尚待统一核验，mastery状态不提前修改。
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt6-passed-20261011:end -->
