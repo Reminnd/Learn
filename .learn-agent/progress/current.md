@@ -42,7 +42,19 @@ resume_contract:
 checkpoint_version: 126
 last_checkpoint_at: '2026-10-11T07:45:49.782Z'
 last_checkpoint_reason: exercise_complete
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch02-deepseek-api-route-20261011
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-10-11T07:48:53.540Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage01-ch02-EX1-step5-deepseek-api-route
+    operation: upsert
+    expected_change: Record user-approved live DeepSeek API route for EX1 Step5 without any credentials.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
