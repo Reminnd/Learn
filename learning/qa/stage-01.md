@@ -245,3 +245,7 @@
 <!-- learn-agent:evidence:stage01-ch02-EX1-step2-attempt3-ledger:start -->
 - EX1 Step 2 / attempt 3: passed（局部检查）— 正确回答e.errors()的容器为list，首个错误对象为dict。随后进入EX1 Step 3 LangChain with_structured_output框架实现；完整EX1需实际运行与框架映射验证。
 <!-- learn-agent:evidence:stage01-ch02-EX1-step2-attempt3-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-EX1-step3-attempt1-ledger:start -->
+- EX1 Step 3 / attempt 1: passed — 正确独立写出with_structured_output(Product)与structured_model.invoke(...)，理解返回Product实例；仍需实际运行及错误用例验证，不代表整章mastered。
+<!-- learn-agent:evidence:stage01-ch02-EX1-step3-attempt1-ledger:end -->
