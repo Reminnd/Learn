@@ -258,3 +258,11 @@ Tool description误区：用户最初把get_stock描述为“查询商品详情�
 - 避免：调用前用type(selected_tool).__name__或查看接口说明确认它是Tool对象还是Python函数。
 - 状态：open，等待L3-CHECK-9 attempt2复检。
 <!-- learn-agent:evidence:stage01-ch03-tool-object-is-not-plain-handler-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-tool-invoke-kwargs-toolmessage-20261011:start -->
+## Tool.invoke参数解包和ToolMessage返回类型混淆
+- 症状：误用invoke(**call["args"])，并认为传args字典后直接返回ToolMessage。
+- 原因：混淆Python普通handler(**args)与LangChain BaseTool.invoke(input)输入接口，也未区分直接字典参数与完整ToolCall输入。
+- 修复：invoke(call["args"])获得handler原始结果int 12；需要给模型反馈时单独创建ToolMessage(content="12",tool_call_id=call["id"])，或者将完整ToolCall交给.invoke(call)由LangChain关联包装ToolMessage。
+- 状态：open，待L3-CHECK-9 attempt3复检。
+<!-- learn-agent:evidence:stage01-ch03-tool-invoke-kwargs-toolmessage-20261011:end -->
