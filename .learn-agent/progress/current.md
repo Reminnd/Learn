@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 124
 last_checkpoint_at: '2026-10-11T15:11:00+08:00'
 last_checkpoint_reason: exercise_complete
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch02-EX1-step3-pass-20261011
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-10-11T15:11:00+08:00'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage01-ch02-EX1-step3-attempt1
+    operation: upsert
+    expected_change: Record successful LangChain structured output code check and move to execution validation.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch02-EX1-step3-attempt1-ledger
+    operation: upsert
+    expected_change: Record EX1 Step3 passed and execution verification still pending.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
