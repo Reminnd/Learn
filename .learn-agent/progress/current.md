@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 152
 last_checkpoint_at: '2026-10-11T22:52:00+08:00'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch03-check7-description-pass-20261011
+  reason: section_boundary
+  phase: prepared
+  started_at: '2026-10-11T15:23:44.925Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-L3-CHECK-7-attempt2-passed
+    operation: upsert
+    expected_change: Pass stock-specific description; introduce real DeepSeek bind_tools test.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-L3-CHECK-7-attempt2-ledger
+    operation: upsert
+    expected_change: Record Tool description retest passed.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch03-stock-description-resolved
+    operation: upsert
+    expected_change: Resolve broad get_stock description misconception.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
