@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 130
 last_checkpoint_at: '2026-10-11T08:08:09.228Z'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch02-Q1-attempts3-4-20261011
+  reason: section_boundary
+  phase: prepared
+  started_at: '2026-10-11T08:15:27.502Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage01-ch02-Q1-attempt4-pass-20261011
+    operation: upsert
+    expected_change: Record Q1 attempts 3 and 4, with targeted split failure code demonstration and Q1 pass.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch02-Q1-attempt4-pass-20261011-ledger
+    operation: upsert
+    expected_change: Record Q1 guided retests and pass; move to Q2 required critical question.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch02-Q1-format-parse-retest-20261011
+    operation: upsert
+    expected_change: Update earlier format-parsing error status after Q1 code-level retest.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
