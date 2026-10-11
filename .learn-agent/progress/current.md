@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 153
 last_checkpoint_at: '2026-10-11T15:23:44.925Z'
 last_checkpoint_reason: section_boundary
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch03-L3-check8-20261011
+  reason: section_boundary
+  phase: prepared
+  started_at: '2026-10-11T15:33:35.636Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-L3-CHECK-8-live-deepseek-pass-20261011
+    operation: upsert
+    expected_change: Record real DeepSeek tool selection output and move to Python runtime execution.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-L3-CHECK-8-live-deepseek-pass-20261011-ledger
+    operation: upsert
+    expected_change: Record L3 check8 passing runtime output.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
