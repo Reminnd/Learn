@@ -331,3 +331,13 @@ if not exists:
 按照curriculum/stage-01/02-structured-output.md，必做EX1要求：最小原理版解析并验证LLM结构化输出；使用LangChain框架表达同一能力；能复现Schema验证失败并解释处理方案。此前小节练习虽已掌握若干概念，但还不是独立完成EX1。接下来使用商品价格案例，以Pydantic BaseModel构建Schema，逐步实现原理版与框架版，随后正式Q1/Q2/Q3。
 下一步：EX1第1步，定义Product Schema，并验证 raw={"price":"199"} 或 raw={"price":"abc"}。
 <!-- learn-agent:evidence:stage01-ch02-L2-CHECK-13-attempt-5:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-EX1-step1-attempt1:start -->
+## Chapter 02 EX1 Step 1 / attempt 1
+状态：passed（练习步骤，非完整EX1验收）。用户独立填写 `data = json.loads(raw_text)` 与 `product = Product.model_validate(data)`，正确映射JSON文本解析与Pydantic对象校验。示例输入为raw_text='{"price": "199"}'，Product定义price:int=Field(gt=0)与currency:str="CNY"。
+<!-- learn-agent:evidence:stage01-ch02-EX1-step1-attempt1:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-EX1-step2-attempt1:start -->
+## Chapter 02 EX1 Step 2 / attempt 1
+状态：needs_review（局部语法错误，未完成该步骤）。用户正确调用`Product.model_validate(data)`，并在try中打印成功提示，except中计划打印失败提示与`e.errors()`。但把导入的`ValidationError`误写成`Validationerror`（小写e）。Python区分大小写；当model_validate因为price="abc"抛出ValidationError时，except类型表达式的错误名字将产生NameError，因此未按预期进入处理器。修复是`except ValidationError as e:`，后续只需针对性复检程序控制流与错误输出，不重复已经通过的Step 1。完整EX1仍需框架版实现、失败分析与验收。
+<!-- learn-agent:evidence:stage01-ch02-EX1-step2-attempt1:end -->
