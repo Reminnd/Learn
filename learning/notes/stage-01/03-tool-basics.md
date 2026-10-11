@@ -104,3 +104,12 @@ print(get_stock("KB-001"))  # 12
 下一步3.7手写Runtime：建立受控白名单dict`{"get_stock":get_stock,"get_price":get_price}`；读取`response.tool_calls[0]["name"]`和`["args"]`，查到LangChain工具并用`tool.invoke(call["args"])`执行；拿到库存12。之后使用LangChain ToolMessage(content=str(result),tool_call_id=call["id"])回传同一对话，模型再生成最终答复。Tool Call若为空、多个、参数错误或未知工具名需要以后验证；不允许由LLM工具名直接执行任意Python代码。
 参考LangChain： https://reference.langchain.com/python/langchain-core/messages/tool/ToolMessage
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK-8-live-deepseek-pass-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt1-20261011:start -->
+## L3-CHECK-9 / attempt 1
+状态：needs_review。问题是在真实DeepSeek API返回tool_calls后，`selected_tool=tools_by_name[call["name"]]`是经过@tool装饰的LangChain工具对象；学员填写`result=selected_tool(**call["args"])`。
+正确理解：call["args"]得到可供执行的工具参数字典；但selected_tool不是普通Python函数而是LangChain StructuredTool，其公开执行接口是`selected_tool.invoke(call["args"])`，会先处理Schema再调用底层handler。把工具对象当成普通函数直接使用**kwargs在当前LangChain环境中通常触发TypeError。
+回顾：此前原生函数`handler(**args)`是正确的，因为handler是可调用Python函数；本章被@tool包装的get_stock应使用`get_stock.invoke({"sku":"KB-001"})`。这与是否实际调用DeepSeek无关，后续不需要再次调用远程模型即可本地复检。基于当前用户本机库存字典，正确执行后结果为整数12。
+下一题L3-CHECK-9 / attempt 2：在明确是@tool包装的LangChain工具时，问应把参数字典传入哪一个接口、实际返回什么；经复检通过再进ToolMessage工具结果关联。
+官方参考：https://reference.langchain.com/python/langchain-core/tools/structured/StructuredTool
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt1-20261011:end -->
