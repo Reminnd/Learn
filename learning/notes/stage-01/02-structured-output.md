@@ -423,3 +423,10 @@ parsing_error: None
 
 已给出以上解释。下一题Q1/attempt2仅检查普通自然语言文本格式变化导致固定解析方法不可靠的原因。答对后按Q1验收契约汇总评价，再进入Q2原理—框架映射。
 <!-- learn-agent:evidence:stage01-ch02-Q1-attempt1-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q1-attempt2-20261011:start -->
+## Chapter 02 Q1 / attempt 2
+状态：needs_review。针对自然语言示例A“这款键盘售价199元”、B“价格：199元”、C“当前优惠价为¥199”，固定规则`text.split("价格：")[1]`为何不可靠，学习者回答“因为可能没有采用实际价格”。这一回答正确识别LLM可能给出错误的实际价格（语义性错误），但没有解释本题核心：同样的price在不同自然语言措辞里字段标记不稳定，文本A和C都缺少子串“价格：”，调用split只得到1个元素，读取[1]产生IndexError；文本B可分割但提取结果仍是“199元”而不是int。
+
+教学已明确区分“自由文本格式不稳定→固定解析策略脆弱”与“LLM价格语义提取错误→格式合法但数据不真实”；需要让学习者独立判断分隔符不匹配时`split`产生列表长度，才能判定关键Q1掌握。下一题Q1/attempt3仅对`len("售价：199元".split("价格："))`进行检查，并说出原因。不能标Q1 passed，也不能标Chapter 02 mastered。
+<!-- learn-agent:evidence:stage01-ch02-Q1-attempt2-20261011:end -->
