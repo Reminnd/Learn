@@ -113,3 +113,11 @@ print(get_stock("KB-001"))  # 12
 下一题L3-CHECK-9 / attempt 2：在明确是@tool包装的LangChain工具时，问应把参数字典传入哪一个接口、实际返回什么；经复检通过再进ToolMessage工具结果关联。
 官方参考：https://reference.langchain.com/python/langchain-core/tools/structured/StructuredTool
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt1-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt2-20261011:start -->
+## L3-CHECK-9 / attempt 2
+状态：needs_review。教师已明确selected_tool为@tool包装的StructuredTool，`call["args"]`是{"sku":"KB-001"}，要求补全`result=selected_tool.invoke(???)`并预测输出。学习者又填入`result=selected_tool.invoke(**call["args"])`，同时预测输出是包含库存数量的ToolMessage。
+纠正：`BaseTool.invoke(input)`需要一个输入参数；`selected_tool.invoke(call["args"])`把args字典整体作为唯一input交给LangChain工具，执行本地handler成功时直接返回int 12。写`invoke(**call["args"])`相当于`invoke(sku="KB-001")`，不会自动为input参数提供字典。ToolMessage是工具结果与某条tool_call_id关联后用于模型上下文的消息；如`ToolMessage(content=str(result),tool_call_id=call["id"])`可以显式构造。额外边界：LangChain工具若收到完整的ToolCall字典（含name、args、id、type="tool_call"），`selected_tool.invoke(call)`可自动包装返回ToolMessage；这与`invoke(call["args"])`直接返回int是两种不同输入模式。
+下一题L3-CHECK-9 / attempt3：仅填补`selected_tool.invoke(???)`，给定args字典，要求写出正确输入表达式和返回类型与值。回答通过后再进入ToolMessage闭环，不一次考多项。
+官方文档：https://reference.langchain.com/python/langchain-core/tools/base/BaseTool 及 https://reference.langchain.com/python/langchain-core/messages/tool/ToolMessage
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt2-20261011:end -->
