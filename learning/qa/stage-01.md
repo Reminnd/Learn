@@ -297,3 +297,7 @@ Q2 attempt5：A、B输入与Product返回答对，B模型调用位置答对。A�
 <!-- learn-agent:evidence:stage01-ch02-Q2-attempt6-passed-20261011-ledger:start -->
 - Q2 attempt6: passed（指导复检）— 用户正确指出model.invoke向DeepSeek发送请求，json.loads解析JSON，Product.model_validate本地Schema校验。结合attempt5对A/B输入输出和B调用位置的回答，原理—框架映射关键题通过；进入Q3，整章mastered尚未判定。
 <!-- learn-agent:evidence:stage01-ch02-Q2-attempt6-passed-20261011-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q3-attempt1-20261011-ledger:start -->
+- Q3 attempt1: needs_review — 提出有限调用LLM重试、达到3次上限后报错，排查方向为JSON格式→输入内容→代码。未先查Pydantic int_parsing的字段/原始值，也未给API成本、延迟、修复可能性的Trade-off；本例JSON合法而Schema失败，待针对性复检。
+<!-- learn-agent:evidence:stage01-ch02-Q3-attempt1-20261011-ledger:end -->
