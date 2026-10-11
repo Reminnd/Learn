@@ -237,3 +237,7 @@
 - EX1 Step 1 / attempt 1: passed — 独立使用`json.loads(raw_text)`和`Product.model_validate(data)`处理JSON文本。
 - EX1 Step 2 / attempt 1: needs_review — `Product.model_validate(data)`正确，但捕获异常的类名写成`Validationerror`而非`ValidationError`，大小写导致NameError；需针对性复检。
 <!-- learn-agent:evidence:stage01-ch02-EX1-steps1-2-qa-batch:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-EX1-step2-attempt2-ledger:start -->
+- EX1 Step 2 / attempt 2: needs_review（部分正确）— 正确判断price="abc"触发校验失败分支，但将`e.errors()`整体错误地说成dict，需理解其为list且元素为dict，安排同概念复检。
+<!-- learn-agent:evidence:stage01-ch02-EX1-step2-attempt2-ledger:end -->
