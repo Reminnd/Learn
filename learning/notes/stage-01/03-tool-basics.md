@@ -128,3 +128,7 @@ print(get_stock("KB-001"))  # 12
 结果类型的边界：`get_stock.invoke({"sku":"KB-001"})`直接返回int 12；随后显式`ToolMessage(content="12",tool_call_id=call["id"])`产生给模型回填的工具消息。若使用完整ToolCall结构作为invoke输入，框架也支持创建关联的ToolMessage；本次仅练习参数字典路径。
 下一步3.8：工具调用结果与tool_call_id关联，手动生成ToolMessage并在消息列表中交给DeepSeek。
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt3-pass-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-toolmsg-a1-notes:start -->
+L3-CHECK-10 attempt1: partial. Learned that ToolMessage must reuse call["id"], not a chosen number. Next: ID matching retest.
+<!-- learn-agent:evidence:stage01-ch03-toolmsg-a1-notes:end -->
