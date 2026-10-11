@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 141
 last_checkpoint_at: '2026-10-11T21:43:00+08:00'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch02-completion-20261011-Q3a4
+  reason: completion
+  phase: prepared
+  started_at: '2026-10-11T14:06:31.840Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage01-ch02-final-mastered-evidence-20261011
+    operation: upsert
+    expected_change: Formalize Q1, Q3, EX1 and mastery assessment based on earlier user-tested evidence.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch02-final-mastered-qa-20261011
+    operation: upsert
+    expected_change: Record Chapter02 Q3 pass, EX1 acceptance and mastery score82.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch02-final-mastered-bug-status-20261011
+    operation: upsert
+    expected_change: Close confirmed Structured Output misconceptions and retain actionable review flags.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
