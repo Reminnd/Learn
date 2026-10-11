@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 155
 last_checkpoint_at: '2026-10-11T15:39:47.307Z'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch03-l3-check9-a2-20261011
+  reason: needs_review
+  phase: prepared
+  started_at: '2026-10-11T15:44:27.290Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-L3-CHECK-9-attempt2-20261011
+    operation: upsert
+    expected_change: Record L3-CHECK-9 attempt2 needs_review: wrong invoke keyword unpacking and expected ToolMessage instead of int.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-L3-CHECK-9-attempt2-qa-20261011
+    operation: upsert
+    expected_change: Track incorrect Tool.invoke arguments and result type; repeat targeted check.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch03-tool-invoke-kwargs-toolmessage-20261011
+    operation: upsert
+    expected_change: Document difference between invoke(args_dict) and invoke(complete_tool_call).
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
