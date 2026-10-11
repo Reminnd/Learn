@@ -462,3 +462,7 @@ parsing_error: None
 补教：`with_structured_output(Product)`默认解析后的对象是Pydantic Product实例；`model_dump()`将已有Product实例序列化为普通Python dict，例如{'price':199,'currency':'CNY'}，不会再次调用LLM，也不会产生AIMessage；`include_raw=True`返回字典中的`result['raw']`才是AIMessage，`result['parsed']`为Product。
 为避免反复只考相同类型名，下一题Q2 attempt4使用字典访问形式迁移理解：`data=product.model_dump()`，比较`data['price']`与`data.price`哪一种适用、为什么。正确后回归独立完整Q2数据流映射；不能仅凭类型选择将关键Q2判定passed。
 <!-- learn-agent:evidence:stage01-ch02-Q2-attempt3-model-dump-confusion-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt4-20261011:start -->
+Q2 attempt 4：passed（局部）。答对data["price"]。待完成原理版与框架版数据流解释。
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt4-20261011:end -->
