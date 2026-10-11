@@ -232,3 +232,11 @@
 <!-- learn-agent:evidence:stage01-ch02-final-mastered-bug-status-20261011:start -->
 Chapter02正式验收：Q1/Q2/Q3和EX1已通过指导式复检与运行；raw/parsed和model_dump类型细节建议今后复习，并发幂等相关开放项保留待后续章节。
 <!-- learn-agent:evidence:stage01-ch02-final-mastered-bug-status-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-handler-keyword-unpacking-20261011:start -->
+## handler(args)与handler(**args)混淆
+- 误写：handler(args)，导致传入sku的是dict，不能作为inventory键。
+- 修正：handler(**args)把{"sku":"KB-001"}展开为关键字参数，相当于get_stock(sku="KB-001")。
+- 复检：学员能明确回答“关键字参数，'KB-001'”；数据类型str由教师补充。
+- 状态：resolved（指导式概念复检），后续@tool练习进一步巩固。
+<!-- learn-agent:evidence:stage01-ch03-handler-keyword-unpacking-20261011:end -->
