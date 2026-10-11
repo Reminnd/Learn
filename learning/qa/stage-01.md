@@ -310,3 +310,9 @@ Q2 attempt5：A、B输入与Product返回答对，B模型调用位置答对。A�
 <!-- learn-agent:evidence:stage01-ch02-final-mastered-qa-20261011:start -->
 Chapter 02 Q3 attempt4: passed (price字段、abc非整数、按模型输出/Schema/原文排查)。Q3 attempt3已说明有限重试成本与延迟。EX1可执行原理版与真实DeepSeek API结果齐备。Q1、Q2指导式复检通过。依据章节契约五维评分19+16+18+17+12=82/100，达到80分与各项硬门槛，综合验收通过。
 <!-- learn-agent:evidence:stage01-ch02-final-mastered-qa-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-checks1-2-qa-batch-20261011:start -->
+- L3-CHECK-1 attempt1: passed — Tool Call指令不是实际执行handler。
+- L3-CHECK-2 attempt1: needs_review — handler(args)将字典作为一个位置参数传入，而非展开sku关键字。
+- L3-CHECK-2 attempt2: passed（指导）— 正确指出**args形成关键字实参sku="KB-001"；教师补充sku类型str。转入@tool。
+<!-- learn-agent:evidence:stage01-ch03-checks1-2-qa-batch-20261011:end -->
