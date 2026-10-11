@@ -240,3 +240,7 @@ Chapter02正式验收：Q1/Q2/Q3和EX1已通过指导式复检与运行；raw/pa
 - 复检：学员能明确回答“关键字参数，'KB-001'”；数据类型str由教师补充。
 - 状态：resolved（指导式概念复检），后续@tool练习进一步巩固。
 <!-- learn-agent:evidence:stage01-ch03-handler-keyword-unpacking-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-stock-description-too-broad-20261011:start -->
+Tool description误区：用户把get_stock描述为“查询商品详情”，仍然会与价格、品牌等工具的职责重叠。应明确按SKU查询当前库存数量。状态open，待L3-CHECK-7 attempt2复检。
+<!-- learn-agent:evidence:stage01-ch03-stock-description-too-broad-20261011:end -->
