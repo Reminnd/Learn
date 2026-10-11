@@ -449,3 +449,9 @@ parsing_error: None
 关键错误：把B默认调用结果说成AIMessage。使用`model.with_structured_output(Product)`且默认`include_raw=False`时，成功返回经过验证的Product实例；此前学员实际使用`include_raw=True`，得到的`result`是含raw(AIMessage)、parsed(Product)、parsing_error(None)的字典，因此混淆了原始消息与解析结果。
 教师补充：A需要原先已有JSON字符串；B输入prompt并真正调用模型，不等于框架内部必定直接执行json.loads；依provider可采用Tool Calling/原生结构化能力。下一题Q2 attempt2先独立预测默认情况下`type(product).__name__`，随后要求解释完整输入输出映射才标Q2通过。
 <!-- learn-agent:evidence:stage01-ch02-Q2-attempt1-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt2-20261011:start -->
+## Q2 / attempt 2
+状态：needs_review（部分正确）。学员知道调用返回的product是Product实例，但预测print(type(product).__name__)时，又将返回类型与元素个数混同，认为一个元素时为字典、多个元素时为列表。正确打印为“Product”，与产品数量无关。
+本轮补教区分：structured_model是可调用Runnable；product是invoke成功后的Product对象；model_dump()才返回dict；默认include_raw=False不返回AIMessage。下一次进行Q2 attempt3复检：比较type(product).__name__和type(product.model_dump()).__name__。
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt2-20261011:end -->
