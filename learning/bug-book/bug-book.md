@@ -183,5 +183,9 @@
 - 症状：面对`text.split("价格：")[1]`读取LLM自由文本格式变化的错误原因，学习者回答“可能没有采用实际价格”。
 - 区分：语义不准确可能返回错误价格，即便Schema验证通过；本题代码的失败直接源于文本中没有完全匹配的“价格：”标记，split结果不足两个元素会导致IndexError。
 - 修复：先检查字符串中是否存在固定分隔符，再考察split结果长度及访问边界；生产Agent优先Schema结构化结果而不是拆自然语言。
-- 状态：open，需通过Q1 attempt3确认。
+- 状态：resolved（指导后复检）；attempt3正确回答split未匹配时列表长度1，attempt4正确判断访问[1]会抛异常。
 <!-- learn-agent:evidence:stage01-ch02-Q1-parse-vs-semantic-attempt2:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q1-format-parse-retest-20261011:start -->
+- Q1格式不稳定与语义风险区分复检：学习者最初回答了语义错误，之后在具体代码中正确预测split的单元素结果和下标访问异常，教师补充精确异常IndexError。Q1在多轮引导下通过；"Schema只验证约束而不保证真实"仍应在后续Q3关注。
+<!-- learn-agent:evidence:stage01-ch02-Q1-format-parse-retest-20261011:end -->
