@@ -342,3 +342,7 @@ L3-CHECK-6通过：业务库存键不存在是KeyError，不是输入ValidationE
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt2-qa-20261011:start -->
 - L3-CHECK-9 attempt2: needs_review — 重复使用selected_tool.invoke(**call["args"])并认为其输出为ToolMessage；应使用invoke(call["args"])得到整数12，完整ToolCall输入可触发框架生成ToolMessage。安排attempt3。
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt2-qa-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt3-pass-20261011-ledger:start -->
+- L3-CHECK-9 attempt3: passed — 正确指出get_stock.invoke(args)返回int和12；主动询问handler(**args)与Tool.invoke(args)的区别，已按函数签名及invoke(input)解释。下一步ToolMessage关联与回传。
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt3-pass-20261011-ledger:end -->
