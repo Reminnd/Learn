@@ -334,3 +334,7 @@ L3-CHECK-6通过：业务库存键不存在是KeyError，不是输入ValidationE
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK-8-live-deepseek-pass-20261011-ledger:start -->
 - L3-CHECK-8: passed — 用户真实调用DeepSeek，获得AIMessage，其tool_calls正确包含get_stock、args sku=KB-001，content为空。尚未运行Python工具；进入3.7手写Runtime。
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK-8-live-deepseek-pass-20261011-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt1-20261011-ledger:start -->
+- L3-CHECK-9 / attempt1: needs_review — 识别call["args"]字典正确，但对@tool包装的LangChain StructuredTool直接使用selected_tool(**call["args"])；应采用selected_tool.invoke(call["args"])。下一题复检工具对象与普通函数调用区别。
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt1-20261011-ledger:end -->
