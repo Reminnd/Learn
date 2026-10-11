@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 136
 last_checkpoint_at: '2026-10-11T13:14:08.741Z'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch02-Q2-a5-20261011
+  reason: needs_review
+  phase: prepared
+  started_at: '2026-10-11T13:29:23.565Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage01-ch02-Q2-attempt5-local-validation-20261011
+    operation: upsert
+    expected_change: Record Q2 answer and misconception: model_validate is not an LLM API call.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch02-Q2-attempt5-local-validation-20261011-ledger
+    operation: upsert
+    expected_change: Record Q2 attempt5 partial, targeted recheck on local validation versus model invocation.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch02-Q2-validate-does-not-call-LLM
+    operation: upsert
+    expected_change: Track misconception that Pydantic model_validate itself calls the LLM.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
