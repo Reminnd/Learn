@@ -390,3 +390,13 @@ Case1证明输入JSON中的字符串"199"在Pydantic默认校验模式下可转�
 参考LangChain官方参考：https://reference.langchain.com/python/langchain-core/output_parsers/pydantic/PydanticOutputParser 及 https://reference.langchain.com/python/langchain-core/runnables/base/RunnableLambda
 下一步：学习者在其环境中运行EX1 Step 5离线Parser链，并提交完整stdout；随后对照with_structured_output的模型能力与实现路径，做EX1验收准备。
 <!-- learn-agent:evidence:stage01-ch02-EX1-step4-offline-principle-run-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-EX1-step5-deepseek-api-route:start -->
+## EX1 Step 5：DeepSeek实际API测试路线
+用户明确表示已经申请DeepSeek API，允许使用真实API进行本章结构化输出测试，因此本次Step5不再要求先做离线RunnableLambda模拟。安全边界：API密钥只输入用户自己的Python进程或环境变量，不在聊天或仓库中存储；申请密钥并不证明账户已充值、调用已成功。
+
+依据2026-10-11查询的DeepSeek官方文档，DeepSeek当前Chat Completions模型ID为deepseek-flash及deepseek-v4-pro。本次低成本练习采用deepseek-flash，明确禁用Thinking模式，并以LangChain ChatDeepSeek的with_structured_output(Product,method="function_calling",include_raw=True)检查raw、parsed、parsing_error。Python依赖langchain-deepseek；根据当前仓库environment/framework-baseline.md，原Stage01环境不含Provider SDK，因此本次属于可选真实API集成，不修改既有环境基线文件。
+
+下一步：学习者在本机PyCharm/uv中安装langchain-deepseek，使用getpass或进程环境变量设置DEEPSEEK_API_KEY；运行真实模型调用，提交去敏的实际stdout/报错。尚未观察到真实API运行输出，EX1和Chapter02均不能标记mastered。
+官方来源：https://api-docs.deepseek.com/quick_start/pricing/ 与 https://reference.langchain.com/python/langchain-deepseek/chat_models/ChatDeepSeek/with_structured_output。
+<!-- learn-agent:evidence:stage01-ch02-EX1-step5-deepseek-api-route:end -->
