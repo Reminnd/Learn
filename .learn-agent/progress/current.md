@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-11：真实DeepSeek bind_tools实验成功，响应AIMessage/tool_calls选择get_stock sku=KB-001；开始手写Python Runtime执行工具并回传ToolMessage。
-last_section: 3.7 Tool Calling与Python Runtime执行
+last_note_update: 2026-10-11：L3-CHECK-9 attempt1获取Tool Call参数字典正确，但把LangChain StructuredTool当普通Python函数传递**kwargs；已说明调用需使用invoke。
+last_section: 3.7 Tool对象invoke与普通handler区别
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,42 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: knowledge_check
-  topic: L3-CHECK-9 / attempt 1
-  next_action: 从AIMessage.tool_calls取出模型选中的工具，使用白名单映射查找LangChain @tool对象并调用invoke执行。
+  topic: L3-CHECK-9 / attempt 2
+  next_action: 复检LangChain工具对象的invoke接口与原生Python函数handler(**args)的差别；之后运行工具并返回ToolMessage。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 154
-last_checkpoint_at: '2026-10-11T15:33:35.636Z'
-last_checkpoint_reason: section_boundary
-pending_writeback:
-  transaction_id: stage01-ch03-check9-a1-20261011
-  reason: needs_review
-  phase: prepared
-  started_at: '2026-10-11T15:39:47.307Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/03-tool-basics.md
-    evidence_id: stage01-ch03-L3-CHECK-9-attempt1-20261011
-    operation: upsert
-    expected_change: Record confusion: StructuredTool is not directly called using Python kwargs; invoke accepts an args dictionary.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch03-L3-CHECK-9-attempt1-20261011-ledger
-    operation: upsert
-    expected_change: Record L3-CHECK-9 partial answer, next direct invocation retest.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: stage01-ch03-tool-object-is-not-plain-handler-20261011
-    operation: upsert
-    expected_change: Record LangChain @tool object vs Python function execution interface misconception.
-    verified: false
-    error: null
+checkpoint_version: 155
+last_checkpoint_at: '2026-10-11T15:39:47.307Z'
+last_checkpoint_reason: needs_review
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
@@ -83,8 +57,8 @@ completed:
 - 01-llm-message-prompt-langchain
 - 02-structured-output
 weak_points:
-- 已掌握库存和价格工具description分工；接下来验证模型生成Tool Call与程序执行handler的边界。
-next_action: L3-CHECK-9 attempt1：补全selected_tool.invoke(call['args'])，然后验证库存12；下一步ToolMessage回传模型。
+- 需要独立区分LangChain StructuredTool.invoke(args_dict)与原生Python handler(**args)；再学习ToolMessage的tool_call_id关联。
+next_action: L3-CHECK-9 attempt2：使用selected_tool.invoke(call['args'])执行LangChain工具，复检返回库存12。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
