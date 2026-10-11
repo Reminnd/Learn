@@ -330,3 +330,7 @@ L3-CHECK-6通过：业务库存键不存在是KeyError，不是输入ValidationE
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK-7-attempt2-ledger:start -->
 - L3-CHECK-7 / attempt2: passed — 将get_stock description准确改为“查询商品库存数量”，区分价格与库存职责。进入3.6 DeepSeek bind_tools真实API观察，模型返回Tool Call不代表Python handler已执行。
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK-7-attempt2-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-8-live-deepseek-pass-20261011-ledger:start -->
+- L3-CHECK-8: passed — 用户真实调用DeepSeek，获得AIMessage，其tool_calls正确包含get_stock、args sku=KB-001，content为空。尚未运行Python工具；进入3.7手写Runtime。
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-8-live-deepseek-pass-20261011-ledger:end -->
