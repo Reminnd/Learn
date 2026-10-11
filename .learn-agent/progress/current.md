@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-10：L2-CHECK-13 attempt 5 正确预测if进入分支后仍执行，开始Structured Output必做EX1。
-last_section: Chapter 02 EX1 最小原理与框架映射
+last_note_update: 2026-10-11：Chapter 02 EX1 Step1已正确实现json.loads与model_validate；Step2处理器ValidationError大小写误写，已解释NameError原因并安排局部复检。
+last_section: Chapter 02 EX1 Step 2 ValidationError 异常处理
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,42 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: required_exercise
-  topic: EX1 / Step 1
-  next_action: 以Pydantic Product BaseModel和model_validate完成最小原理校验，然后映射LangChain Structured Output。
+  topic: EX1 / Step 2 / attempt 2
+  next_action: 修正ValidationError大小写，说明price=abc时的异常分支与输出；通过后实现LangChain框架版。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 120
-last_checkpoint_at: '2026-10-10T08:57:28.877Z'
-last_checkpoint_reason: qa_complete
-pending_writeback:
-  transaction_id: stage01-ch02-EX1-steps1-2-20261011
-  reason: knowledge_event
-  phase: prepared
-  started_at: '2026-10-11T07:02:18.880Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/02-structured-output.md
-    evidence_id: stage01-ch02-EX1-steps1-2-batch
-    operation: upsert
-    expected_change: Record EX1 Step 1 passing code and Step 2 partial exception-handler typo.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch02-EX1-steps1-2-qa-batch
-    operation: upsert
-    expected_change: Record EX1 exercise progress and focused retest.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: bug-stage01-ch02-EX1-ValidationError-case
-    operation: upsert
-    expected_change: Record case-sensitive ValidationError handler typo and diagnostic explanation.
-    verified: false
-    error: null
+checkpoint_version: 122
+last_checkpoint_at: '2026-10-11T07:02:18.880Z'
+last_checkpoint_reason: knowledge_event
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
@@ -82,8 +56,8 @@ project_selection_prompted: true
 completed:
 - 01-llm-message-prompt-langchain
 weak_points:
-- 并发幂等数据库生产实现尚需实践；if控制流基础复检已通过。
-next_action: Chapter 02 EX1 Step1：定义Pydantic商品模型，使用model_validate进行校验。
+- EX1 Step2 的异常类名大小写需复检；并发幂等数据库实现另有后续实践。
+next_action: EX1 Step 2 attempt 2：核对except ValidationError拼写和校验失败时e.errors()调用，之后映射LangChain。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
