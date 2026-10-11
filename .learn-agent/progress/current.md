@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 147
 last_checkpoint_at: '2026-10-11T14:33:07.992Z'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch03-tool-checks-3to5-20261011
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-10-11T14:57:15.793Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-L3-CHECKS3-5-batch-20261011
+    operation: upsert
+    expected_change: Record Check3 decorator execution boundary; Check4 missing sku validation; Check5 handler KeyError.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-L3-CHECKS3-5-batch-20261011-ledger
+    operation: upsert
+    expected_change: Record three accepted checks and next handler error-treatment exercise.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
