@@ -316,3 +316,9 @@ Chapter 02 Q3 attempt4: passed (price字段、abc非整数、按模型输出/Sch
 - L3-CHECK-2 attempt1: needs_review — handler(args)将字典作为一个位置参数传入，而非展开sku关键字。
 - L3-CHECK-2 attempt2: passed（指导）— 正确指出**args形成关键字实参sku="KB-001"；教师补充sku类型str。转入@tool。
 <!-- learn-agent:evidence:stage01-ch03-checks1-2-qa-batch-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECKS3-5-batch-20261011-ledger:start -->
+- L3-CHECK-3 / attempt1: passed — @tool定义不调用handler，get_stock.invoke触发库存查询。
+- L3-CHECK-4 / attempt1: passed — invoke({})缺sku，参数Schema在执行handler之前报ValidationError。
+- L3-CHECK-5 / attempt1: passed（教师补充精确错误名）— 有效str类型的不存在SKU可通过Schema并进入handler，inventory[sku]因缺少键抛KeyError。进入业务错误处理小练习。
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECKS3-5-batch-20261011-ledger:end -->
