@@ -42,3 +42,17 @@ print(get_stock("KB-001"))  # 12
 本章当前进度：新章开始；正式EX1及Q1/Q2/Q3均未验收。
 下一题L3-CHECK-1 / attempt 1：LLM返回一条get_stock的tool call，但应用没有执行handler，能否获得真实库存？为什么？
 <!-- learn-agent:evidence:stage01-ch03-chapter-start-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-checks1-2-batch-20261011:start -->
+## L3-CHECK-1 / attempt 1
+状态：passed。学员回答“没有，因为只是生成了请求但还未调用函数”，正确区分LLM提出Tool Call与运行时实际执行handler。
+
+## L3-CHECK-2 / attempt 1
+状态：needs_review。学员写result=handler(args)，直接将整份args字典当作一个位置参数传给sku；对应get_stock中inventory[sku]因字典不可哈希而抛TypeError。应使用handler(**args)，相当于get_stock(sku="KB-001")。
+
+## L3-CHECK-2 / attempt 2
+状态：passed（概念复检，类型术语已补充）。学员回答“关键字参数，'KB-001'”，正确识别使用**args后的关键字传参方式和实参值；但对“Python数据类型”未明确说str，教师补充sku实际类型为str。这个操作相当于get_stock(sku="KB-001")，输出库存12。
+
+## 3.3 下一节：LangChain @tool
+通过@tool将原生函数转换为可供模型注册的LangChain工具；docstring用作description，函数名作为name，签名注解可推断参数Schema；真正执行仍需要运行时调用tool.invoke({"sku":"KB-001"})，仅声明或bind_tools不执行。下一步L3-CHECK-3识别装饰器工具的name、description、parameters和handler。
+<!-- learn-agent:evidence:stage01-ch03-checks1-2-batch-20261011:end -->
