@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-11：EX1 Step2 attempt2正确判断ValidationError导致校验失败，但将e.errors()返回的list[dict]误说成dict；待针对性复检。
-last_section: Chapter 02 EX1 Step 2 ValidationError 异常处理
+last_note_update: 2026-10-11：EX1 Step2 attempt3成功识别e.errors()为list[dict]，进入Step3 LangChain with_structured_output框架版；完整EX1仍需代码验证。
+last_section: Chapter 02 EX1 Step 3 LangChain Structured Output
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,42 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: required_exercise
-  topic: EX1 / Step 2 / attempt 3
-  next_action: 复检e.errors()整体为list，内部错误项为dict；通过后进行LangChain框架版。
+  topic: EX1 / Step 3 / attempt 1
+  next_action: 实现model.with_structured_output(Product)与structured_model.invoke(prompt)，比较原理版和框架版的输出对象。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 123
+checkpoint_version: 124
 last_checkpoint_at: '2026-10-11T15:11:00+08:00'
-last_checkpoint_reason: knowledge_event
-pending_writeback:
-  transaction_id: stage01-ch02-EX1-step2-pass-20261011
-  reason: exercise_complete
-  phase: prepared
-  started_at: '2026-10-11T15:11:00+08:00'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/02-structured-output.md
-    evidence_id: stage01-ch02-EX1-step2-attempt3
-    operation: upsert
-    expected_change: Record EX1 Step 2 errors list type passed; begin LangChain Structured Output framework mapping.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch02-EX1-step2-attempt3-ledger
-    operation: upsert
-    expected_change: Record corrected list and dict type check passed, pending EX1 framework version.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: bug-stage01-ch02-validationerror-errors-list-resolved
-    operation: upsert
-    expected_change: Resolve Pydantic ValidationError.errors return-type misconception.
-    verified: false
-    error: null
+last_checkpoint_reason: exercise_complete
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
@@ -82,8 +56,8 @@ project_selection_prompted: true
 completed:
 - 01-llm-message-prompt-langchain
 weak_points:
-- EX1 Step2：需区分ValidationError.errors()返回list与列表中的dict；另外需在练习中保持ValidationError大小写一致。
-next_action: EX1 Step 2 attempt3：预测type(e.errors()).__name__和type(e.errors()[0]).__name__，完成错误数据结构复检。
+- EX1尚需框架版代码和实际运行验证；运行时留意ValidationError大小写；并发幂等数据库实现另需实践。
+next_action: EX1 Step3：完成LangChain的with_structured_output与invoke代码，实现Pydantic Product结构化返回。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
