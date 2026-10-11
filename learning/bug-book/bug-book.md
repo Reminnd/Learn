@@ -224,3 +224,7 @@
 - 纠正：JSON语法合法也可能出现Schema字段解析失败。先看e.errors()中loc/type/input，再按模型raw输出→输入证据→Schema与本地代码追查；证据充分但模型失误时有限模型调用可能有效，原文没有价格时应拒绝猜测而不是重复消耗额度。
 - 状态：open，等待Q3 attempt2复检。
 <!-- learn-agent:evidence:stage01-ch02-Q3-schema-retry-tradeoff:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q3-retry-tradeoff-improved-20261011:start -->
+- Q3重试决策理解改善：attempt2区分信息缺失与模型提取失误，attempt3明确有上限重试的成功率、费用与延迟取舍。仍需让学习者独立针对e.errors()按错误类型、字段定位，故原Q3问题暂保留open。
+<!-- learn-agent:evidence:stage01-ch02-Q3-retry-tradeoff-improved-20261011:end -->
