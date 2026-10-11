@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-11：Chapter02 Q1 attempt3/4：识别split分隔符不匹配导致单元素列表及IndexError，Q1经引导复检通过；进入关键Q2。
-last_section: Chapter 02 Q2 原理—框架映射
+last_note_update: 2026-10-11：Q2 attempt1理解手写json.loads→Pydantic与框架调用的部分映射，但误把默认with_structured_output返回结果当作AIMessage；复检默认Product与include_raw字典。
+last_section: Chapter02 Q2 LangChain结构化输出返回类型
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,42 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: knowledge_check
-  topic: Q2 / attempt 1
-  next_action: 独立比较手工json.loads+Pydantic与LangChain Structured Output的输入、输出和关键数据流。
+  topic: Q2 / attempt 2
+  next_action: 复检with_structured_output(Product)默认invoke返回Product而不是AIMessage，并进一步说明数据流。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 132
-last_checkpoint_at: '2026-10-11T08:15:27.502Z'
-last_checkpoint_reason: section_boundary
-pending_writeback:
-  transaction_id: stage01-ch02-Q2-attempt1-20261011
-  reason: needs_review
-  phase: prepared
-  started_at: '2026-10-11T12:40:37.626Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/02-structured-output.md
-    evidence_id: stage01-ch02-Q2-attempt1-20261011
-    operation: upsert
-    expected_change: Q2 partial: manually parsed Product correct; framework return mistakenly identified as AIMessage.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch02-Q2-attempt1-20261011-ledger
-    operation: upsert
-    expected_change: Q2 needs_review, test default parsed return versus include_raw result.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: stage01-ch02-Q2-default-vs-include-raw-20261011
-    operation: upsert
-    expected_change: Record mix-up between ChatModel raw AIMessage and LangChain parsed Product.
-    verified: false
-    error: null
+checkpoint_version: 133
+last_checkpoint_at: '2026-10-11T12:40:37.626Z'
+last_checkpoint_reason: needs_review
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
@@ -82,8 +56,8 @@ project_selection_prompted: true
 completed:
 - 01-llm-message-prompt-langchain
 weak_points:
-- Q1经指导式代码复检通过，仍应巩固精确异常名称IndexError及Schema的非真实性保证；Q2/Q3尚待验收。
-next_action: Chapter02 Q2关键题：独立解释手工JSON解析和Pydantic验证与LangChain with_structured_output的对应关系、输入、输出、失败处理。
+- Q2：区别默认结构化解析结果Product和include_raw=True返回字典里的raw AIMessage；Q3尚待验收。
+next_action: Q2 attempt2：预测无include_raw时type(product).__name__的结果，并结合原理版描述LangChain解析流程。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
