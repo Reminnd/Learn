@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 137
 last_checkpoint_at: '2026-10-11T13:29:23.565Z'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch02-Q2-a6-pass-20261011
+  reason: section_boundary
+  phase: prepared
+  started_at: '2026-10-11T13:40:39.380Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/02-structured-output.md
+    evidence_id: stage01-ch02-Q2-attempt6-passed-20261011
+    operation: upsert
+    expected_change: Record Q2 passed after identifying true model API call versus local JSON parse and Pydantic validate.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch02-Q2-attempt6-passed-20261011-ledger
+    operation: upsert
+    expected_change: Record Q2 step6 pass and move to Chapter 02 Q3.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch02-Q2-model-validation-boundary-resolved
+    operation: upsert
+    expected_change: Resolve misconception that local model_validate invokes an LLM.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-02
 deepseek_route_prompted_for:
