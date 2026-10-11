@@ -211,5 +211,9 @@
 <!-- learn-agent:evidence:stage01-ch02-Q2-model-dump-error-retest-20261011:end -->
 
 <!-- learn-agent:evidence:stage01-ch02-Q2-validate-does-not-call-LLM:start -->
-- Q2：学员误认为Pydantic的Product.model_validate(data)本地校验会调用LLM。实际仅对本地数据校验，真实调用发生在模型的invoke或其他客户端API。状态open，待attempt6复检。
+- Q2：学员曾误认为Pydantic的Product.model_validate(data)本地校验会调用LLM。实际仅对本地数据校验，真实调用发生在模型的invoke或其他客户端API。状态resolved（attempt6明确独立区分模型API调用、JSON解析和Pydantic校验）。
 <!-- learn-agent:evidence:stage01-ch02-Q2-validate-does-not-call-LLM:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q2-model-validation-boundary-resolved:start -->
+- Q2/attempt6复检证据：用户准确判断model.invoke("请输出商品价格的JSON").content发送请求，json.loads本地解析，Product.model_validate执行Pydantic本地校验。先前将model_validate误作LLM调用的误区已解决。
+<!-- learn-agent:evidence:stage01-ch02-Q2-model-validation-boundary-resolved:end -->
