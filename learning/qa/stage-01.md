@@ -265,3 +265,11 @@
 <!-- learn-agent:evidence:stage01-ch02-Q1-attempt2-20261011-ledger:start -->
 - Chapter02 Q1 / attempt2: needs_review — 用户回答“可能没有采用实际价格”属于语义准确性风险，但未命中固定split解析自由文本为什么会失败的格式原因。已给A/C无分隔符导致IndexError、B残留“元”的反例；下轮以分隔符不匹配的列表长度复检。
 <!-- learn-agent:evidence:stage01-ch02-Q1-attempt2-20261011-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q1-attempt3-guided-20261011-ledger:start -->
+- Chapter02 Q1 / attempt3: partial — 正确判断未找到分隔符时split返回单元素列表、长度为1，但仍询问split的分隔原理；已讲解精确匹配规则。
+<!-- learn-agent:evidence:stage01-ch02-Q1-attempt3-guided-20261011-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q1-attempt4-pass-20261011-ledger:start -->
+- Chapter02 Q1 / attempt4: passed（指导式复检）— 针对缺少分隔符的单元素列表访问[1]，学习者正确判定抛出"找不到元素"类异常；补充精确类型IndexError。结合早先Schema字段缺失/语义误提取风险答案，Q1综合判定通过，进Q2。不是对完整原理的独立首轮答案。
+<!-- learn-agent:evidence:stage01-ch02-Q1-attempt4-pass-20261011-ledger:end -->
