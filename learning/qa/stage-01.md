@@ -338,3 +338,7 @@ L3-CHECK-6通过：业务库存键不存在是KeyError，不是输入ValidationE
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt1-20261011-ledger:start -->
 - L3-CHECK-9 / attempt1: needs_review — 识别call["args"]字典正确，但对@tool包装的LangChain StructuredTool直接使用selected_tool(**call["args"])；应采用selected_tool.invoke(call["args"])。下一题复检工具对象与普通函数调用区别。
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt1-20261011-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt2-qa-20261011:start -->
+- L3-CHECK-9 attempt2: needs_review — 重复使用selected_tool.invoke(**call["args"])并认为其输出为ToolMessage；应使用invoke(call["args"])得到整数12，完整ToolCall输入可触发框架生成ToolMessage。安排attempt3。
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-9-attempt2-qa-20261011:end -->
