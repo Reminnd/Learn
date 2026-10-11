@@ -455,3 +455,10 @@ parsing_error: None
 状态：needs_review（部分正确）。学员知道调用返回的product是Product实例，但预测print(type(product).__name__)时，又将返回类型与元素个数混同，认为一个元素时为字典、多个元素时为列表。正确打印为“Product”，与产品数量无关。
 本轮补教区分：structured_model是可调用Runnable；product是invoke成功后的Product对象；model_dump()才返回dict；默认include_raw=False不返回AIMessage。下一次进行Q2 attempt3复检：比较type(product).__name__和type(product.model_dump()).__name__。
 <!-- learn-agent:evidence:stage01-ch02-Q2-attempt2-20261011:end -->
+
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt3-model-dump-confusion-20261011:start -->
+## Q2 / attempt 3：Product与model_dump类型
+状态：needs_review（部分正确）。题目为结构化模型调用成功后，先打印`type(product).__name__`，再打印`type(product.model_dump()).__name__`。学习者回答“Product，AIMessage，不知道”。第一项正确；第二项错误，正确类型是dict。
+补教：`with_structured_output(Product)`默认解析后的对象是Pydantic Product实例；`model_dump()`将已有Product实例序列化为普通Python dict，例如{'price':199,'currency':'CNY'}，不会再次调用LLM，也不会产生AIMessage；`include_raw=True`返回字典中的`result['raw']`才是AIMessage，`result['parsed']`为Product。
+为避免反复只考相同类型名，下一题Q2 attempt4使用字典访问形式迁移理解：`data=product.model_dump()`，比较`data['price']`与`data.price`哪一种适用、为什么。正确后回归独立完整Q2数据流映射；不能仅凭类型选择将关键Q2判定passed。
+<!-- learn-agent:evidence:stage01-ch02-Q2-attempt3-model-dump-confusion-20261011:end -->
