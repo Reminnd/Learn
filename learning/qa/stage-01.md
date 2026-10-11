@@ -322,3 +322,7 @@ Chapter 02 Q3 attempt4: passed (price字段、abc非整数、按模型输出/Sch
 - L3-CHECK-4 / attempt1: passed — invoke({})缺sku，参数Schema在执行handler之前报ValidationError。
 - L3-CHECK-5 / attempt1: passed（教师补充精确错误名）— 有效str类型的不存在SKU可通过Schema并进入handler，inventory[sku]因缺少键抛KeyError。进入业务错误处理小练习。
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECKS3-5-batch-20261011-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-check6-check7-20261011-ledger:start -->
+L3-CHECK-6通过：业务库存键不存在是KeyError，不是输入ValidationError。L3-CHECK-7部分正确：get_price改为查询价格正确，get_stock用“查询商品详情”仍含糊。下次复检库存工具说明。
+<!-- learn-agent:evidence:stage01-ch03-check6-check7-20261011-ledger:end -->
