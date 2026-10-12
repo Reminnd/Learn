@@ -280,3 +280,11 @@ This passes the declaration portion of EX1 only; the exercise overall still requ
 <!-- learn-agent:evidence:ch03-ex1-required-membership-a1-20261012:start -->
 EX1 Part2 attempt1: needs_review. Student used args['sku'] as missing-key condition; with args={} this raises KeyError before intended ValueError. Correct predicate is field not in args, independently of value truthiness. Next retest with an existing key.
 <!-- learn-agent:evidence:ch03-ex1-required-membership-a1-20261012:end -->
+
+<!-- learn-agent:evidence:ch03-ex1-required-pass-type-check-a1-20261012:start -->
+## EX1 Part2 attempt2: passed
+Student correctly predicted PASS for args={"sku":"KB-001"} because required=True and field not in args evaluates to False. This demonstrates distinguishing key membership from reading value, correcting the previous misunderstanding.
+
+## EX1 Part3 attempt1: needs_review
+Given args={"sku":123}, rule["type"]=str, learner wrote isinstance(args[field],rule["type"]) as the condition inside if ...: raise TypeError. The isinstance call itself is correct, but its boolean needs inversion: for invalid integer 123 it returns False and would not raise, while a valid string would return True and be wrongly rejected. Correct condition is not isinstance(args[field],rule["type"]). Next: small retest on valid string input, then proceed to handler dispatch and LangChain tool comparison. Exercise EX1 not yet complete.
+<!-- learn-agent:evidence:ch03-ex1-required-pass-type-check-a1-20261012:end -->
