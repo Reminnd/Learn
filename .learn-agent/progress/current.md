@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 174
 last_checkpoint_at: '2026-10-12T03:38:21.211Z'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch03-check22-a2-20261012
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-10-12T03:40:48.325Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-check22-a2-rare-angle-20261012
+    operation: upsert
+    expected_change: Record partial compression tradeoff answer.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-check22-a2-rare-angle-20261012-qa
+    operation: upsert
+    expected_change: Record tradeoff recheck due to missing concrete example.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
