@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 191
 last_checkpoint_at: '2026-10-12T19:03:00+08:00'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: ch03-ex1-required-pass-type-a1-20261012
+  reason: needs_review
+  phase: prepared
+  started_at: '2026-10-12T11:46:41.291Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: ch03-ex1-required-pass-type-check-a1-20261012
+    operation: upsert
+    expected_change: Save EX1 requiredness pass and type-check correction.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: ch03-ex1-required-pass-type-check-qa-20261012
+    operation: upsert
+    expected_change: Save EX1 requiredness pass and type-check correction.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: ch03-ex1-isinstance-inverted-condition-20261012
+    operation: upsert
+    expected_change: Save EX1 requiredness pass and type-check correction.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
