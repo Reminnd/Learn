@@ -192,3 +192,10 @@ L3-CHECK-22 attempt1: needs_review. Student correctly identifies context bloat a
 <!-- learn-agent:evidence:stage01-ch03-check22-a2-rare-angle-20261012:start -->
 L3-CHECK-22 attempt2: needs_review. Learner noted that review aggregation can lose fresh minority perspectives, but did not provide a concrete example. Recheck requests one specific low-frequency concern affecting purchasing decisions.
 <!-- learn-agent:evidence:stage01-ch03-check22-a2-rare-angle-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK22-attempt3-pass-20261012:start -->
+## L3-CHECK-22 / attempt3：passed
+学员举出“续航”作为5000条无线键盘评价归纳时可能被高频主题掩盖的低频但重要缺点。正确实例化了信息压缩Trade-off：更低Token、延迟和上下文成本，代价是丢失罕见而购买决策关键的差评（例如实际电池续航短、需频繁充电）。可以在主题频次汇总之外额外保留严重/新颖低频评价及来源。此前attempt1已掌握上下文占用问题，attempt2提出“丢失新角度的信息”，现在补充了具体例子；本检查正式通过。
+
+下一步：进入Chapter03本章验收题Q1→Q2→Q3，结合已通过的真实DeepSeek单工具与双工具运行证据再审查EX1契约；不得仅凭L3-CHECK通过就宣布全章mastered。
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK22-attempt3-pass-20261012:end -->
