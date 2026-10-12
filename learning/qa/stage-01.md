@@ -434,3 +434,7 @@ Q3 attempt3: partial. Schema passes but handler cannot find SKU 001.
 <!-- learn-agent:evidence:stage01-ch03-Q3-a4-ledger-20261012:start -->
 Chapter03 Q3 passed. Correct call args sku=KB-001, price 199. Combined diagnostic and retry tradeoff evidence. EX1 next.
 <!-- learn-agent:evidence:stage01-ch03-Q3-a4-ledger-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-EX1-p1-a1-qa-20261012:start -->
+- Chapter03 EX1 Part1 attempt1: needs_review — correct tool name and description, but parameters=sku: str is not valid nested dict data and handler="raw_get_price" stores a string rather than a Python callable. Next: repair these two fields.
+<!-- learn-agent:evidence:stage01-ch03-EX1-p1-a1-qa-20261012:end -->
