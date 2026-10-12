@@ -386,3 +386,7 @@ Symptom: uses args['sku'] to detect missing required input. Cause: confuses inde
 <!-- learn-agent:evidence:stage01-ch03-EX1-type-not-condition-resolved-20261012:start -->
 - EX1 Part3 attempt2 passed: correct interpretation of the negative isinstance condition. Prior inverted type-check error resolved.
 <!-- learn-agent:evidence:stage01-ch03-EX1-type-not-condition-resolved-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-ex1-integrated-attempt1-hardcoded-20261012-bug:start -->
+Bug: original Runtime executed handler but returned hardcoded 199, concealing changes in real price data. Fix: propagate return from handler. State: pending learner retest.
+<!-- learn-agent:evidence:stage01-ch03-ex1-integrated-attempt1-hardcoded-20261012-bug:end -->
