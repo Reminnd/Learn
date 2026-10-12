@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 164
 last_checkpoint_at: '2026-10-12T02:53:09.713Z'
 last_checkpoint_reason: section_boundary
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch03-check15-double-tools-20261012
+  reason: section_boundary
+  phase: prepared
+  started_at: '2026-10-12T02:58:46.744Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-L3-CHECK-15-real-two-tools-20261012
+    operation: upsert
+    expected_change: Record double tool execution success.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-L3-CHECK-15-qa-20261012
+    operation: upsert
+    expected_change: Record L3-CHECK-15 passing result.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
