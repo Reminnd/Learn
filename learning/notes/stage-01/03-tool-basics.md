@@ -301,3 +301,138 @@ Learner independently wrote handler(**args) with tool_spec["handler"]=raw_get_pr
 <!-- learn-agent:evidence:stage01-ch03-ex1-integrated-attempt1-hardcoded-20261012:start -->
 EX1 integrated attempt1: needs_review. Learner assembled required-field check, type validation and handler dispatch correctly. First code returned spec['handler'](**args), but revised version instead called the handler without returning its value, then returned literal 199. That discards dynamic business output; for a changed price 299 it still reports 199. Fix by returning the handler result. EX1 incomplete.
 <!-- learn-agent:evidence:stage01-ch03-ex1-integrated-attempt1-hardcoded-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-formal-Q1Q2Q3-EX1-20261012:start -->
+## Chapter 03 正式验收证据（合同ID：stage-01-03-tool-basics）
+以下记录依据用户此前Q1-Q3的独立答题、针对性复检，以及本轮EX1真实本地测试输出。正式题目按本课程契约最新对应逻辑尝试编号归档。
+
+### Q1 最新有效尝试
+```yaml
+kind: question_attempt
+evidence_id: stage01-ch03-Q1-formal-attempt3-20261012
+contract_chapter_id: stage-01-03-tool-basics
+question_id: Q1
+attempt: 3
+answer_ref: "learning/notes/stage-01/03-tool-basics.md; Chapter03 Q1 earlier attempt evidence plus latest retest"
+acceptance_snapshot:
+  - "给出核心因果关系，而不是只复述定义"
+  - "说明至少一个适用边界或失败条件"
+acceptance_results:
+  - criterion: "给出核心因果关系，而不是只复述定义"
+    satisfied: true
+    evidence: "Q1初答说明：name供工具标识与运行时路由，description供LLM选择，parameters指定sku输入约束，handler实际查询；模型发Tool Call与Python执行相分离。"
+  - criterion: "说明至少一个适用边界或失败条件"
+    satisfied: true
+    evidence: "Q1第3次例举get_price.invoke(12)不符输入Schema；此前L3-CHECK-20说明缺sku在Pydantic校验阶段抛ValidationError，handler尚未执行。"
+core_model_conflict:
+  detected: false
+  evidence: "早期曾把parameters误认为返回值类型检查；Q1复检与EX1自写sku必填、字符串Schema及参数校验后已区分输入验证与业务返回。"
+passed: true
+```
+
+### Q2 最新有效尝试
+```yaml
+kind: question_attempt
+evidence_id: stage01-ch03-Q2-formal-attempt4-20261012
+contract_chapter_id: stage-01-03-tool-basics
+question_id: Q2
+attempt: 4
+answer_ref: "learning/notes/stage-01/03-tool-basics.md; Chapter03 Q2 earlier attempt evidence plus latest retest"
+acceptance_snapshot:
+  - "明确原理侧与框架侧的对应对象"
+  - "说清输入、输出与关键数据流"
+acceptance_results:
+  - criterion: "明确原理侧与框架侧的对应对象"
+    satisfied: true
+    evidence: "学员明确写出raw_get_price(**args)对应普通函数调用，get_price.invoke(args)对应LangChain工具调用；真实对照测试两者199，改价后均299。"
+  - criterion: "说清输入、输出与关键数据流"
+    satisfied: true
+    evidence: "Q2第4次独立串联description→LLM Tool Call→按name查找→invoke/args_schema→handler→ToolMessage；本机DeepSeek单工具和双工具回填测试成功。"
+core_model_conflict:
+  detected: false
+  evidence: "Q2第3次已明确args_schema验证Tool输入、with_structured_output处理模型结构化输出；此前误把name路由视为自动行为，已通过手写tools_by_name查找实践澄清。"
+passed: true
+```
+
+### Q3 最新有效尝试
+```yaml
+kind: question_attempt
+evidence_id: stage01-ch03-Q3-formal-attempt4-20261012
+contract_chapter_id: stage-01-03-tool-basics
+question_id: Q3
+attempt: 4
+answer_ref: "learning/notes/stage-01/03-tool-basics.md; Chapter03 Q3 earlier attempt evidence plus latest retest"
+acceptance_snapshot:
+  - "给出可执行的排查顺序"
+  - "说明至少一个方案 Trade-off"
+acceptance_results:
+  - criterion: "给出可执行的排查顺序"
+    satisfied: true
+    evidence: "学员提出先查看错误日志字段→Tool Call参数→用户Query的排查顺序，并在指导下对照args_schema识别product_id与必填sku字段不匹配；Q3第4次写出{'sku':'KB-001'}，返回199。"
+  - criterion: "说明至少一个方案 Trade-off"
+    satisfied: true
+    evidence: "学员指出有限模型重试增加Token成本、可能仍失败；对字段名固定不匹配的确定性错误，重复相同调用不能消除根因。"
+core_model_conflict:
+  detected: false
+  evidence: "Q3曾混淆字段名、字段类型和业务SKU存在性，最终能修正sku字段和值KB-001；EX1实际错误测试区分缺参ValidationError/ValueError及合法动态结果。"
+passed: true
+```
+
+### EX1 最新有效尝试
+```yaml
+kind: exercise_attempt
+evidence_id: stage01-ch03-EX1-formal-attempt2-20261012
+contract_chapter_id: stage-01-03-tool-basics
+exercise_id: EX1
+attempt: 2
+artifact_ref: "User-authored Python raw Tool spec + invoke_raw_tool implementation and ex3_bind_tools.py plus final six-line user-run stdout; consolidated in this note"
+acceptance_snapshot:
+  - "产出可运行代码或可执行伪代码，展示：理解 Tool 的 name、description、parameters、handler"
+  - "能复现或具体分析工程问题：参数错误"
+  - "能解释并验证框架映射：普通 Python 函数 → @tool"
+acceptance_results:
+  - criterion: "产出可运行代码或可执行伪代码，展示：理解 Tool 的 name、description、parameters、handler"
+    satisfied: true
+    evidence: "用户独立完成Tool声明：name=raw_get_price、description=查询商品价格、parameters={'sku':{'type':str,'required':True}}、handler=raw_get_price，并写出for循环必填和类型检查以及return spec['handler'](**args)。"
+  - criterion: "能复现或具体分析工程问题：参数错误"
+    satisfied: true
+    evidence: "原理版args={}实测ValueError；LangChain get_price.invoke({})实测ValidationError；类型检查if not isinstance(args[field],rule['type'])可对错误类型抛TypeError（源码可验）。"
+  - criterion: "能解释并验证框架映射：普通 Python 函数 → @tool"
+    satisfied: true
+    evidence: "原理版invoke_raw_tool(spec,args)和@tool包装get_price.invoke(args)本机实测均返回199；prices['KB-001']修改为299后两者均返回299，证明无硬编码并完成映射验证。"
+accepted: true
+```
+
+### 用户最终提交的手写代码（关键运行部分）
+```python
+prices = {"KB-001": 199}
+def raw_get_price(sku: str) -> int:
+    return prices[sku]
+tool_spec = {
+    "name": "raw_get_price",
+    "description": "查询商品价格",
+    "parameters": {"sku": {"type": str, "required": True}},
+    "handler": raw_get_price,
+}
+def invoke_raw_tool(spec, args):
+    for field, rule in spec["parameters"].items():
+        if isinstance(field, str) and rule.get("required", False) and field not in args:
+            raise ValueError(f"Missing required field: {field}")
+        if field in args:
+            if rule.get("type") and not isinstance(args[field], rule.get("type")):
+                raise TypeError(f"Field '{field}' should be of type {rule.get('type').__name__}, but got {type(args[field]).__name__}")
+    return spec["handler"](**args)
+```
+
+### 用户真实终端输出
+```
+raw_valid: 199
+langchain_valid: 199
+raw_missing: ValueError
+langchain_missing: ValidationError
+raw_changed: 299
+langchain_changed: 299
+```
+
+五项验收证据判断：Q1、Q2、Q3均满足各自两项acceptance且最新检查未见未解决核心模型冲突；EX1的三项acceptance均由用户代码和输出支持。尚未在本条记录中进行mastery assessment，待这些formal attempt证据完整进入committed state后依据shared/mastery-rubric.md生成唯一正式assessment，再决定mastered。
+<!-- learn-agent:evidence:stage01-ch03-formal-Q1Q2Q3-EX1-20261012:end -->
