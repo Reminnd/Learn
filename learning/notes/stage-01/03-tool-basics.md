@@ -276,3 +276,7 @@ Chapter03 EX1 Part1 attempt2: needs_review (near passing). User corrected Tool s
 The learner responded required=True when asked to fill the boolean literal in the custom Tool schema. The intended requiredness value is correctly True; Teacher clarified that in a Python dict the actual syntax is "required": True (rather than a keyword-argument assignment). Taken together with previous attempts, their tool_spec now has name="raw_get_price", description="查询商品价格", parameters={"sku":{"type":str,"required":True}}, and handler=raw_get_price as a callable function reference.
 This passes the declaration portion of EX1 only; the exercise overall still requires a hand-written Python Runtime that validates parameters, routes the call to the handler, and compares with LangChain @tool including error cases. Next practice step: using field_name="sku", rule=tool_spec["parameters"][field_name], and args={}, fill the condition for detecting a missing required field before invoking handler. Avoid supplying its answer before the learner attempts.
 <!-- learn-agent:evidence:stage01-ch03-EX1-part1-a3-pass-20261012:end -->
+
+<!-- learn-agent:evidence:ch03-ex1-required-membership-a1-20261012:start -->
+EX1 Part2 attempt1: needs_review. Student used args['sku'] as missing-key condition; with args={} this raises KeyError before intended ValueError. Correct predicate is field not in args, independently of value truthiness. Next retest with an existing key.
+<!-- learn-agent:evidence:ch03-ex1-required-membership-a1-20261012:end -->
