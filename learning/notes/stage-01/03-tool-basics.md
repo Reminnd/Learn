@@ -226,3 +226,10 @@ L3-CHECK-22 attempt2: needs_review. Learner noted that review aggregation can lo
 ## Chapter03 Q2 / attempt1
 状态：needs_review（部分正确）。学员回答“普通Python函数需要**args，@tool直接传入args即可”，已抓住同一args字典传入普通Python函数时需要关键字参数展开（raw_get_price(**args)），而LangChain工具对象通过get_price.invoke(args)将字典作为一个input。教师补充两者结果均为199。尚未说明@tool除handler外增加的name、description、args_schema/输入验证、模型bind_tools工具声明与Runtime执行接口等映射，以及如何用测试验证。下一题只问新增能力为什么支持LLM工具调用；随后补充调用路径和验证。
 <!-- learn-agent:evidence:stage01-ch03-Q2-attempt1-invoke-only-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q2-attempt2-20261012:start -->
+## Chapter03 Q2 / attempt2：needs_review
+用户回答“args_schema配置了with_structed_moel可进行pydantic校验；.invoke()可直接传入字符串且不用进行关键字参数转化”。核查当前LangChain文档确认，单参数get_price(sku:str)的@tool对象既可invoke({"sku":"KB-001"})也支持invoke("KB-001")，字符串映射到第一个参数Schema字段；多参数工具应统一使用字典输入。args_schema由@tool默认推断自函数签名，或显式配置Pydantic输入模型，调用时执行输入校验；model.with_structured_output(SomePydanticModel)则用于解析/验证LLM自身的结构化输出，两者是不同环节，不需要组合使用。学员理解invoke无需展开关键字参数，但混淆两类Schema机制，也未解释name/description供LLM选择工具、handler由Runtime实际调用和验证两种版本结果一致的完整链路。
+下一题Chapter03 Q2 attempt3：直接对比args_schema和with_structured_output分别验证什么，采用get_price(sku:str)的参数示例回答。
+参考：https://reference.langchain.com/python/langchain-core/tools/base/BaseTool 和 https://reference.langchain.com/python/langchain-core/language_models/chat_models/BaseChatModel/with_structured_output
+<!-- learn-agent:evidence:stage01-ch03-Q2-attempt2-20261012:end -->
