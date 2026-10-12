@@ -297,3 +297,7 @@ Chapter03 EX1 Part3 attempt2: passed. Learner correctly predicts PASS for args={
 ## Chapter03 EX1 Part4 / attempt1 — passed
 Learner independently wrote handler(**args) with tool_spec["handler"]=raw_get_price and args={"sku":"KB-001"}. This correctly expands the dict to raw_get_price(sku="KB-001"), producing 199. Together with previously validated required-field checks and not isinstance type checks, they have learned each component of original Python Tool runtime, but have not yet independently assembled a single executable invoke_raw_tool(spec,args) that composes validation and handler dispatch. Next EX1 final integration: implement one minimal Python runtime function with three operations—required field check, type check, and handler(**args)—then compare behavior with LangChain @tool.invoke(args), including an invalid input case. Chapter03 mastery not granted yet.
 <!-- learn-agent:evidence:stage01-ch03-ex1-handler-a1-passed-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-ex1-integrated-attempt1-hardcoded-20261012:start -->
+EX1 integrated attempt1: needs_review. Learner assembled required-field check, type validation and handler dispatch correctly. First code returned spec['handler'](**args), but revised version instead called the handler without returning its value, then returned literal 199. That discards dynamic business output; for a changed price 299 it still reports 199. Fix by returning the handler result. EX1 incomplete.
+<!-- learn-agent:evidence:stage01-ch03-ex1-integrated-attempt1-hardcoded-20261012:end -->
