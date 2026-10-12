@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 187
 last_checkpoint_at: '2026-10-12T15:00:00+08:00'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: ch03-ex1-p1-a1-20261012
+  reason: needs_review
+  phase: prepared
+  started_at: '2026-10-12T08:04:59.947Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-EX1-p1-a1-needs-review-20261012
+    operation: upsert
+    expected_change: Record EX1 first attempt and focus retest on schema dictionary and callable handler.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-EX1-p1-a1-qa-20261012
+    operation: upsert
+    expected_change: Record EX1 part1 needs_review and retest.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch03-EX1-schema-dict-handler-reference-20261012
+    operation: upsert
+    expected_change: Record Python dict value syntax and string handler versus function reference confusion.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
