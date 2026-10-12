@@ -422,3 +422,7 @@ L3-CHECK-22 attempt2: partial. Provide specific example next.
 <!-- learn-agent:evidence:stage01-ch03-Q3-a1-review-20261012-qa:start -->
 - Q3 attempt1 needs_review: 有错误日志→call→query排查思路，了解有限重试的Token成本和无效风险；未对照Tool args_schema，也未修复product_id/sku键名不匹配。复检直接原因与修复。
 <!-- learn-agent:evidence:stage01-ch03-Q3-a1-review-20261012-qa:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q3-attempt2-qa-20261012:start -->
+- Chapter03 Q3 attempt2: needs_review — 识别args不匹配，但把product_id字段名错误说成str类型不符，并提出严格校验；实际"KB-001"是字符串，缺失必填sku导致ValidationError。下次复检正确args字典。
+<!-- learn-agent:evidence:stage01-ch03-Q3-attempt2-qa-20261012:end -->
