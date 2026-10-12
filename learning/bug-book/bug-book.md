@@ -374,3 +374,11 @@ Resolved in Q3 attempt4. Learner supplied required sku with real product ID KB-0
 <!-- learn-agent:evidence:ch03-ex1-dict-index-vs-membership-20261012:start -->
 Symptom: uses args['sku'] to detect missing required input. Cause: confuses indexing with membership check. Fix: use field not in args before reading value. Status: open pending retest.
 <!-- learn-agent:evidence:ch03-ex1-dict-index-vs-membership-20261012:end -->
+
+<!-- learn-agent:evidence:ch03-ex1-isinstance-inverted-condition-20261012:start -->
+## Runtime type-check condition inverted
+- Symptom: used if isinstance(args[field],rule["type"]): raise TypeError.
+- Cause: checked type compliance instead of noncompliance.
+- Fix: if not isinstance(args[field],rule["type"]): raise TypeError. Existing keys and actual values must be checked in separate steps.
+- Status: pending EX1 Part3 attempt2.
+<!-- learn-agent:evidence:ch03-ex1-isinstance-inverted-condition-20261012:end -->
