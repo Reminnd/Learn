@@ -208,3 +208,9 @@ L3-CHECK-22 attempt2: needs_review. Learner noted that review aggregation can lo
 缺失：用户尚未举出任一要素设计不当导致的具体失败案例，Q1契约要求明确适用边界/失败条件。下题只复检一个具体失败例子；回答完整后才可判Q1 passed。
 本轮另讨论企业评论分析：保留全量带ID原文，去重脱敏，主题/情感/严重度分析，分层抽样与低频严重风险单独保留，按来源ID回溯；仅将聚合主题、频次、少数风险和证据引用发至ToolMessage，关注低频问题召回率、事实准确、Token成本；向量检索适合聚焦问题，不替代全量主题计数。
 <!-- learn-agent:evidence:stage01-ch03-Q1-a1-partial-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q1-a2-input-vs-output-20261012:start -->
+## Chapter03 Q1 / attempt2：needs_review
+学员选择get_price工具举例，认为parameters没有要求返回int，因此handler可以返回字符串，通过校验但ToolMessage出错。此例提出了输出数据类型与后续处理的真实风险，但错误地把Tool的输入parameters/args_schema与handler返回值校验合并。Tool的parameters描述输入字段、必填/类型/约束，如get_price(sku:str)要求sku字符串；它不负责要求返回int。Python返回注解->int通常不会由运行时自动强制校验。显式ToolMessage(content=str(result))会把整数价格转成字符串，这是正常行为，不会因为字符串形式本身自动报错。真正需要输出格式保证时可对工具result使用Pydantic单独验证。Q1仍缺精确归因的失败案例，下一次attempt3请给出get_price.invoke(...)输入不符合Schema的具体例子，并说明哪个阶段失败。
+官方参考：https://reference.langchain.com/python/langchain-core/tools/structured/StructuredTool 和 https://reference.langchain.com/python/langchain-core/tools/convert/tool
+<!-- learn-agent:evidence:stage01-ch03-Q1-a2-input-vs-output-20261012:end -->
