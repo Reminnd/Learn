@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 161
 last_checkpoint_at: '2026-10-11T16:09:26.129Z'
 last_checkpoint_reason: section_boundary
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch03-check12-14-batch-20261012
+  reason: section_boundary
+  phase: prepared
+  started_at: '2026-10-12T02:53:09.713Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-L3-CHECK12-14-batch-20261012
+    operation: upsert
+    expected_change: Record three successful checks on multiple tool-call handling and independent ToolMessages.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-L3-CHECK12-14-ledger-20261012
+    operation: upsert
+    expected_change: Record L3-CHECK-12, L3-CHECK-13 and L3-CHECK-14 as passed.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
