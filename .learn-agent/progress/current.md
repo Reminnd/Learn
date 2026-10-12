@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-12：Q2 attempt1知道普通函数**args与@tool.invoke(args)差别，但未说明框架封装能力与验证方式；复检。
-last_section: Chapter03 Q2：普通函数与LangChain @tool映射
+last_note_update: 2026-10-12：Q2 attempt2正确认识单参数Tool.invoke支持字符串，但混淆args_schema与model.with_structured_output的校验对象，需复检。
+last_section: Chapter03 Q2 — Tool输入Schema与LLM结构化输出
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,42 +33,16 @@ session_status: active
 current_activity: qa
 return_to:
   activity: knowledge_check
-  topic: Chapter03-Q2 / attempt 2
-  next_action: 让学员解释@tool在函数基础上增加的name、description、args_schema及执行能力及对LLM的作用。
+  topic: Chapter03-Q2 / attempt 3
+  next_action: 对比args_schema与model.with_structured_output分别约束什么，不要混淆输入与输出。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 180
-last_checkpoint_at: '2026-10-12T07:02:12.883Z'
+checkpoint_version: 181
+last_checkpoint_at: '2026-10-12T07:17:01.483Z'
 last_checkpoint_reason: needs_review
-pending_writeback:
-  transaction_id: ch03-Q2-a2-20261012
-  reason: needs_review
-  phase: prepared
-  started_at: '2026-10-12T07:17:01.483Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/03-tool-basics.md
-    evidence_id: stage01-ch03-Q2-attempt2-20261012
-    operation: upsert
-    expected_change: Record Q2 input schema clarification.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch03-Q2-attempt2-20261012-qa
-    operation: upsert
-    expected_change: Record Q2 input schema clarification.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: stage01-ch03-Q2-schema-mechanisms-20261012
-    operation: upsert
-    expected_change: Record Q2 input schema clarification.
-    verified: false
-    error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
@@ -83,8 +57,8 @@ completed:
 - 01-llm-message-prompt-langchain
 - 02-structured-output
 weak_points:
-- Q2尚缺@tool元信息、输入Schema及整体数据流/验证说明；Q3和EX1未验收。
-next_action: Chapter03 Q2 attempt2：解释@tool封装增加的能力，以及如何帮助模型选择和Runtime校验工具。
+- Q2要区别Tool输入Schema(args_schema)与模型输出Schema(with_structured_output)，并补全Tool元信息到Runtime调用的映射。
+next_action: Chapter03 Q2 attempt3：解释args_schema与with_structured_output各自校验什么，随后继续完整映射验证。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
