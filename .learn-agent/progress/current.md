@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 193
 last_checkpoint_at: '2026-10-12T11:46:41.291Z'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: ch03-ex1-typecheck-a2-pass-20261012
+  reason: section_boundary
+  phase: prepared
+  started_at: '2026-10-12T11:52:57.453Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-EX1-type-check-a2-passed-20261012
+    operation: upsert
+    expected_change: Record passing type-check retest and next handler task.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-EX1-type-check-a2-qa-20261012
+    operation: upsert
+    expected_change: Record passing type-check retest and next handler task.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch03-EX1-type-not-condition-resolved-20261012
+    operation: upsert
+    expected_change: Record passing type-check retest and next handler task.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
