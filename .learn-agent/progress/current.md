@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 194
 last_checkpoint_at: '2026-10-12T11:52:57.453Z'
 last_checkpoint_reason: section_boundary
-pending_writeback: null
+pending_writeback:
+  transaction_id: ch03-ex1-handler-passed-20261012
+  reason: section_boundary
+  phase: prepared
+  started_at: '2026-10-12T12:03:29.644Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-ex1-handler-a1-passed-20261012
+    operation: upsert
+    expected_change: Record executable handler call and proceed to integrated EX1 verification.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-ex1-handler-a1-passed-qa-20261012
+    operation: upsert
+    expected_change: Record executable handler call and proceed to integrated EX1 verification.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
