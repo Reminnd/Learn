@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-12：EX1 Part2必填字段校验复检通过；Part3初次类型校验未使用not导致条件反向，待针对性复检。
-last_section: Chapter03 EX1 Part3：类型校验失败条件
+last_note_update: 2026-10-12：EX1 Part3类型校验复检通过，正确理解not isinstance，准备调用原理版handler。
+last_section: Chapter03 EX1 Part4：原理版Runtime执行handler
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,42 +33,16 @@ session_status: active
 current_activity: practice
 return_to:
   activity: knowledge_check
-  topic: Chapter03-EX1 / part 3 attempt 2
-  next_action: 判断正确的not isinstance(...)条件在sku为合法字符串时是否会抛TypeError。
+  topic: Chapter03-EX1 / part 4 attempt 1
+  next_action: 从tool_spec读取handler函数对象，对已校验args使用Python关键字参数展开，执行得到199。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 193
-last_checkpoint_at: '2026-10-12T11:46:41.291Z'
-last_checkpoint_reason: needs_review
-pending_writeback:
-  transaction_id: ch03-ex1-typecheck-a2-pass-20261012
-  reason: section_boundary
-  phase: prepared
-  started_at: '2026-10-12T11:52:57.453Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/03-tool-basics.md
-    evidence_id: stage01-ch03-EX1-type-check-a2-passed-20261012
-    operation: upsert
-    expected_change: Record passing type-check retest and next handler task.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch03-EX1-type-check-a2-qa-20261012
-    operation: upsert
-    expected_change: Record passing type-check retest and next handler task.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: stage01-ch03-EX1-type-not-condition-resolved-20261012
-    operation: upsert
-    expected_change: Record passing type-check retest and next handler task.
-    verified: false
-    error: null
+checkpoint_version: 194
+last_checkpoint_at: '2026-10-12T11:52:57.453Z'
+last_checkpoint_reason: section_boundary
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
@@ -83,8 +57,8 @@ completed:
 - 01-llm-message-prompt-langchain
 - 02-structured-output
 weak_points:
-- EX1 Part2必填字段检查已通过，需掌握if not isinstance(...)按类型不符合要求时抛异常，再完成handler分派与@tool框架映射。
-next_action: EX1 Part3 attempt2：预测not isinstance对正确SKU类型的判断结果，之后实现原理版Runtime handler并验证。
+- EX1已完成必填检查与类型检查；仍需handler分派及与LangChain @tool的对照验证，暂不能mastered。
+next_action: EX1 Part4 attempt1：根据已保存handler函数对象与args参数字典完成原理版调用，并预测结果199。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
