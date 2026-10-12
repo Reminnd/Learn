@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 186
 last_checkpoint_at: '2026-10-12T15:00:00+08:00'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: ch03-q3-final-ex1-20261012
+  reason: section_boundary
+  phase: prepared
+  started_at: '2026-10-12T07:55:30.189Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-Q3-attempt4-passed-20261012
+    operation: upsert
+    expected_change: Record Q3 passing and EX1 next step.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-Q3-a4-ledger-20261012
+    operation: upsert
+    expected_change: Record Q3 passing and EX1 next step.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch03-Q3-key-vs-type-resolved-20261012
+    operation: upsert
+    expected_change: Record Q3 passing and EX1 next step.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
