@@ -413,3 +413,8 @@ L3-CHECK-22 attempt2: partial. Provide specific example next.
 <!-- learn-agent:evidence:stage01-ch03-Q2-attempt2-20261012-qa:start -->
 - Chapter03 Q2 attempt2: needs_review — 认识单参数Tool.invoke可传字符串（当前LangChain支持），但把args_schema与model.with_structured_output混同；需复检输入校验与模型输出校验的区别，并补全@tool生成元信息与运行时调用。
 <!-- learn-agent:evidence:stage01-ch03-Q2-attempt2-20261012-qa:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q2-3and4-ledger-20261012:start -->
+- Chapter03 Q2 attempt3: passed — args_schema管Tool输入，with_structured_output管LLM结构化输出。
+- Chapter03 Q2 attempt4: passed（critical）— 学员串联description→Tool Call→按name路由→invoke/args_schema→handler返回199→ToolMessage回传；教师补充查表由手写Runtime而非bind_tools自动执行。结合此前raw_get_price(**args)、get_price.invoke(args)及真实DeepSeek实测，Q2正式通过。下题Q3参数错误排查与Trade-off。
+<!-- learn-agent:evidence:stage01-ch03-Q2-3and4-ledger-20261012:end -->
