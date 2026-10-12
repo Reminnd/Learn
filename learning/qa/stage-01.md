@@ -409,3 +409,7 @@ L3-CHECK-22 attempt2: partial. Provide specific example next.
 <!-- learn-agent:evidence:stage01-ch03-Q2-attempt1-qa-20261012:start -->
 - Chapter03 Q2 attempt1: needs_review — 正确区分普通函数**args与@tool.invoke(args)，但尚未说明@tool元信息、输入Schema、模型工具选择与运行验证；Q2 attempt2复检新增能力。
 <!-- learn-agent:evidence:stage01-ch03-Q2-attempt1-qa-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q2-attempt2-20261012-qa:start -->
+- Chapter03 Q2 attempt2: needs_review — 认识单参数Tool.invoke可传字符串（当前LangChain支持），但把args_schema与model.with_structured_output混同；需复检输入校验与模型输出校验的区别，并补全@tool生成元信息与运行时调用。
+<!-- learn-agent:evidence:stage01-ch03-Q2-attempt2-20261012-qa:end -->
