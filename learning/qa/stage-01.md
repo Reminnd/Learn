@@ -430,3 +430,7 @@ L3-CHECK-22 attempt2: partial. Provide specific example next.
 <!-- learn-agent:evidence:stage01-ch03-Q3-a3-sku-value-qa-20261012:start -->
 Q3 attempt3: partial. Schema passes but handler cannot find SKU 001.
 <!-- learn-agent:evidence:stage01-ch03-Q3-a3-sku-value-qa-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q3-a4-ledger-20261012:start -->
+Chapter03 Q3 passed. Correct call args sku=KB-001, price 199. Combined diagnostic and retry tradeoff evidence. EX1 next.
+<!-- learn-agent:evidence:stage01-ch03-Q3-a4-ledger-20261012:end -->
