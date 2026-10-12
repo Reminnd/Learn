@@ -418,3 +418,7 @@ L3-CHECK-22 attempt2: partial. Provide specific example next.
 - Chapter03 Q2 attempt3: passed — args_schema管Tool输入，with_structured_output管LLM结构化输出。
 - Chapter03 Q2 attempt4: passed（critical）— 学员串联description→Tool Call→按name路由→invoke/args_schema→handler返回199→ToolMessage回传；教师补充查表由手写Runtime而非bind_tools自动执行。结合此前raw_get_price(**args)、get_price.invoke(args)及真实DeepSeek实测，Q2正式通过。下题Q3参数错误排查与Trade-off。
 <!-- learn-agent:evidence:stage01-ch03-Q2-3and4-ledger-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q3-a1-review-20261012-qa:start -->
+- Q3 attempt1 needs_review: 有错误日志→call→query排查思路，了解有限重试的Token成本和无效风险；未对照Tool args_schema，也未修复product_id/sku键名不匹配。复检直接原因与修复。
+<!-- learn-agent:evidence:stage01-ch03-Q3-a1-review-20261012-qa:end -->
