@@ -467,3 +467,10 @@ EX1 Part2 attempt1 needs_review: reading args['sku'] is not a key-existence test
 <!-- learn-agent:evidence:stage01-ch03-ex1-integrated-attempt1-hardcoded-20261012-qa:start -->
 EX1 integrated attempt1 needs_review: required/type checks and dispatch correct, but latest version hardcodes return 199 after ignoring the handler's result. Retest dynamic return.
 <!-- learn-agent:evidence:stage01-ch03-ex1-integrated-attempt1-hardcoded-20261012-qa:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-formal-exercise-ledger-20261012:start -->
+- Chapter03 Q1 formal attempt3 passed — Tool四要素职责、LLM请求/handler执行边界与Schema校验失败情况均有答题证据。
+- Chapter03 Q2 formal attempt4 passed — raw handler(**args) ↔ @tool.invoke(args)输入/输出与ToolMessage流已解释并运行验证。
+- Chapter03 Q3 formal attempt4 passed — 异常日志→Tool Call→Schema/Query排查及有限重试成本、失败风险；修正sku字段成功。
+- Chapter03 EX1 formal attempt2 accepted — user-authored raw runtime与LangChain工具测试：199/199、ValueError/ValidationError、299/299。尚须提交唯一mastery assessment后才能确定章节mastered。
+<!-- learn-agent:evidence:stage01-ch03-formal-exercise-ledger-20261012:end -->
