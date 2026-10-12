@@ -214,3 +214,10 @@ L3-CHECK-22 attempt2: needs_review. Learner noted that review aggregation can lo
 学员选择get_price工具举例，认为parameters没有要求返回int，因此handler可以返回字符串，通过校验但ToolMessage出错。此例提出了输出数据类型与后续处理的真实风险，但错误地把Tool的输入parameters/args_schema与handler返回值校验合并。Tool的parameters描述输入字段、必填/类型/约束，如get_price(sku:str)要求sku字符串；它不负责要求返回int。Python返回注解->int通常不会由运行时自动强制校验。显式ToolMessage(content=str(result))会把整数价格转成字符串，这是正常行为，不会因为字符串形式本身自动报错。真正需要输出格式保证时可对工具result使用Pydantic单独验证。Q1仍缺精确归因的失败案例，下一次attempt3请给出get_price.invoke(...)输入不符合Schema的具体例子，并说明哪个阶段失败。
 官方参考：https://reference.langchain.com/python/langchain-core/tools/structured/StructuredTool 和 https://reference.langchain.com/python/langchain-core/tools/convert/tool
 <!-- learn-agent:evidence:stage01-ch03-Q1-a2-input-vs-output-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q1-attempt3-passed-20261012:start -->
+## Chapter03 Q1 / attempt3：passed（critical）
+学员提供有效输入校验失败示例：`get_price.invoke(12)`，直接传入整数而不是需要的工具输入Schema字典（如`{"sku":"KB-001"}`）。LangChain @tool对象使用BaseTool.invoke(input)接收str/dict/ToolCall，错误类型/结构在进入get_price handler前的工具输入解析/Pydantic模型校验中失败，通常产生ValidationError。结合先前L3-CHECK-20已经正确解释缺少sku时ValidationError发生在Schema阶段、handler未执行，以及Q1 attempt1准确解释name/description/handler与请求执行分离，此例已经满足Q1关键题：四要素的原因、可执行边界与失败情况。Q1正式判passed，不重复索要此前已经答过的因果解释。
+更正细节：get_price.invoke(12)输入本身类型/结构不合规范，与handler返回价格的int类型检查无关；需要输出校验时应独立实施Pydantic校验。ToolMessage(content=str(result))接受文本形式是正常行为。
+下一题正式章节Q2（critical）：对照普通Python函数及@tool包装的Tool对象，明确name、description、args_schema、handler映射，输入/输出与调用的完整路径，并描述可以验证的一项测试。
+<!-- learn-agent:evidence:stage01-ch03-Q1-attempt3-passed-20261012:end -->
