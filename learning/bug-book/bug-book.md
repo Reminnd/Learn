@@ -289,5 +289,13 @@ Tool description误区：用户最初把get_stock描述为“查询商品详情�
 - Cause: confusion between dict[key] raising KeyError and dict.get(key) returning None, plus forgetting lookup occurs before try.
 - Fix: use tools_by_name.get(call["name"]) with an explicit None branch, or include the lookup in error handling; preserve whitelist tool routing.
 - Avoid: identify each potentially failing line and the try/except scope before handling tool failures.
-- Status: open; L3-CHECK-18 attempt2 to verify.
+- Status: resolved by L3-CHECK-18 attempt2 (dict.get returns None on missing key).
 <!-- learn-agent:evidence:stage01-ch03-L3-check18-keyerror-before-try-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-unknown-tool-continue-unpaired-20261012:start -->
+## Skipping Tool Call without matching ToolMessage
+- Symptom: user predicted model automatically retries indefinitely if unknown tool is skipped with continue.
+- Correct behavior: missing tool result may cause request validation error or incomplete tool-result linkage; automatic retry is not guaranteed.
+- Fix: do not execute unknown tools; append ToolMessage(content="UNKNOWN_TOOL",tool_call_id=call["id"],status="error") and then continue to next call.
+- State: open; L3-CHECK-19 attempt2 retest pending.
+<!-- learn-agent:evidence:stage01-ch03-unknown-tool-continue-unpaired-20261012:end -->
