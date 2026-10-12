@@ -221,3 +221,8 @@ L3-CHECK-22 attempt2: needs_review. Learner noted that review aggregation can lo
 更正细节：get_price.invoke(12)输入本身类型/结构不合规范，与handler返回价格的int类型检查无关；需要输出校验时应独立实施Pydantic校验。ToolMessage(content=str(result))接受文本形式是正常行为。
 下一题正式章节Q2（critical）：对照普通Python函数及@tool包装的Tool对象，明确name、description、args_schema、handler映射，输入/输出与调用的完整路径，并描述可以验证的一项测试。
 <!-- learn-agent:evidence:stage01-ch03-Q1-attempt3-passed-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q2-attempt1-invoke-only-20261012:start -->
+## Chapter03 Q2 / attempt1
+状态：needs_review（部分正确）。学员回答“普通Python函数需要**args，@tool直接传入args即可”，已抓住同一args字典传入普通Python函数时需要关键字参数展开（raw_get_price(**args)），而LangChain工具对象通过get_price.invoke(args)将字典作为一个input。教师补充两者结果均为199。尚未说明@tool除handler外增加的name、description、args_schema/输入验证、模型bind_tools工具声明与Runtime执行接口等映射，以及如何用测试验证。下一题只问新增能力为什么支持LLM工具调用；随后补充调用路径和验证。
+<!-- learn-agent:evidence:stage01-ch03-Q2-attempt1-invoke-only-20261012:end -->
