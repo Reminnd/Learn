@@ -345,3 +345,7 @@ Chapter03 Q2 attempt3复检中学员正确对照Tool args_schema与model.with_st
 - 修复：核对args_schema的required字段和数据类型，修正生成或传递的参数名后再调用；严格类型校验无法补齐缺失字段。
 - 状态：open，待Q3 attempt3复检。
 <!-- learn-agent:evidence:stage01-ch03-Q3-input-key-vs-type-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-schema-valid-sku-not-found-20261012:start -->
+A well-typed input SKU can still fail the business data lookup. Example: sku=001 matches str but is absent from prices; KeyError occurs in handler.
+<!-- learn-agent:evidence:stage01-ch03-schema-valid-sku-not-found-20261012:end -->
