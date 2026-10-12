@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 170
 last_checkpoint_at: '2026-10-12T03:16:56.908Z'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch03-L3-check19a2-21-20261012
+  reason: section_boundary
+  phase: prepared
+  started_at: '2026-10-12T03:28:05.921Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-L3-CHECK19a2-20-21-batch-20261012
+    operation: upsert
+    expected_change: Checks 19, 20, 21 passing notes and ToolMessage size transition.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-L3-CHECK19a2-20-21-ledger-20261012
+    operation: upsert
+    expected_change: Ledger results for checks 19, 20, 21.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch03-unpaired-call-retest-resolved-20261012
+    operation: upsert
+    expected_change: Close skipped ToolMessage bug on successful retest.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
