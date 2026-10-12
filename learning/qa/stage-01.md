@@ -389,3 +389,7 @@ L3-CHECK-22 attempt1: needs_review. Correct risk: oversized review ToolMessage u
 <!-- learn-agent:evidence:stage01-ch03-check22-a2-rare-angle-20261012-qa:start -->
 L3-CHECK-22 attempt2: partial. Provide specific example next.
 <!-- learn-agent:evidence:stage01-ch03-check22-a2-rare-angle-20261012-qa:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK22-attempt3-ledger-20261012:start -->
+- L3-CHECK-22 attempt3: passed — 举出无线键盘“续航”这一可能低频但影响购买决策的评价维度，充分说明压缩高频主题会遗漏关键信息的Trade-off；转入Chapter03 Q1正式验收。
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK22-attempt3-ledger-20261012:end -->
