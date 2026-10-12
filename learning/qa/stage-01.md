@@ -450,3 +450,8 @@ Chapter03 Q3 passed. Correct call args sku=KB-001, price 199. Combined diagnosti
 <!-- learn-agent:evidence:ch03-ex1-required-membership-a1-qa-20261012:start -->
 EX1 Part2 attempt1 needs_review: reading args['sku'] is not a key-existence test. Use field not in args.
 <!-- learn-agent:evidence:ch03-ex1-required-membership-a1-qa-20261012:end -->
+
+<!-- learn-agent:evidence:ch03-ex1-required-pass-type-check-qa-20261012:start -->
+- EX1 Part2 attempt2: passed — existing sku key means field not in args is False and code prints PASS.
+- EX1 Part3 attempt1: needs_review — student used isinstance(...) without not in if condition for raising TypeError, reversing valid and invalid cases. Retest next.
+<!-- learn-agent:evidence:ch03-ex1-required-pass-type-check-qa-20261012:end -->
