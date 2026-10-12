@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-12：L3-CHECK-10正确使用原始call ID，L3-CHECK-11真实DeepSeek双次调用验证工具结果12和最终库存回答12；进入多工具调用。
-last_section: 3.10 多工具调用的执行边界
+last_note_update: 2026-10-12：L3-CHECK-12至14全部通过，已理解多Tool Call遍历和extend独立回填；下一步真实查询库存与价格双工具。
+last_section: 3.12 双工具调用闭环实测
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,35 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: knowledge_check
-  topic: L3-CHECK-12 / attempt 1
-  next_action: 模型若生成两条Tool Call，分析单次调用假设的代码将发生什么，是否会执行handler。
+  topic: L3-CHECK-15 / attempt 1
+  next_action: 在本机将库存价格同时查询，通过for循环构造ToolMessage列表，并运行第二次DeepSeek API。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 161
-last_checkpoint_at: '2026-10-11T16:09:26.129Z'
+checkpoint_version: 164
+last_checkpoint_at: '2026-10-12T02:53:09.713Z'
 last_checkpoint_reason: section_boundary
-pending_writeback:
-  transaction_id: stage01-ch03-check12-14-batch-20261012
-  reason: section_boundary
-  phase: prepared
-  started_at: '2026-10-12T02:53:09.713Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/03-tool-basics.md
-    evidence_id: stage01-ch03-L3-CHECK12-14-batch-20261012
-    operation: upsert
-    expected_change: Record three successful checks on multiple tool-call handling and independent ToolMessages.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch03-L3-CHECK12-14-ledger-20261012
-    operation: upsert
-    expected_change: Record L3-CHECK-12, L3-CHECK-13 and L3-CHECK-14 as passed.
-    verified: false
-    error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
@@ -76,8 +57,8 @@ completed:
 - 01-llm-message-prompt-langchain
 - 02-structured-output
 weak_points:
-- 已跑通单工具闭环；后续重点是同时处理多个Tool Call和工具异常，不要假设每次恰好一个工具调用。
-next_action: L3-CHECK-12：解释两个tool_calls时当前检查会抛RuntimeError，如何设计遍历和ToolMessage结果列表。
+- 已掌握for循环逐条处理Tool Call并extend回填；需实测多个工具调用以及缺失或错误工具返回时的边界。
+next_action: L3-CHECK-15：用DeepSeek真实测试同时查询KB-001库存和价格；观察多条tool_calls或顺序工具调用，提交工具列表与最终答案。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
