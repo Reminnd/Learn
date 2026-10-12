@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 178
 last_checkpoint_at: '2026-10-12T03:55:53.031Z'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch03-Q1a3-to-Q2-20261012
+  reason: section_boundary
+  phase: prepared
+  started_at: '2026-10-12T03:59:37.621Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-Q1-attempt3-passed-20261012
+    operation: upsert
+    expected_change: Record successful Q1 critical evidence and next Q2 on Python handler to @tool mapping.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-Q1-attempt3-ledger-20261012
+    operation: upsert
+    expected_change: Record Chapter03 Q1 passed by cumulative evidence.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch03-tool-input-output-retested-20261012
+    operation: upsert
+    expected_change: Close misconception on tool parameters as output schema after targeted input error example.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
