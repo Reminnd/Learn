@@ -243,3 +243,8 @@ L3-CHECK-22 attempt2: needs_review. Learner noted that review aggregation can lo
 细节订正：model.bind_tools只向LLM呈现工具声明，不会自动完成name→Python工具对象路由；在本次手写Runtime中是tools_by_name[call["name"]]负责白名单查找。ToolMessage须用原始call["id"]关联模型发出的调用；本细节已在L3-CHECK-10和19通过。
 两次复检合并达到正式Q2验收：映射原理侧raw_get_price(**args)至LangChain @tool包装对象get_price.invoke(args)，掌握输入/输出及关键数据流；实际运行结果get_price为199，API回填成功。正式Q2判passed，Q1已passed；Q3及EX1待按章节契约评估。
 <!-- learn-agent:evidence:stage01-ch03-Q2-attempt3and4-passed-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q3-a1-review-20261012:start -->
+## Chapter03 Q3 / attempt1: needs_review
+学员排查顺序为“查看error输出锁定错误字段→查看call→查看query”，有分阶段检查的意识，但漏掉对照get_price.args_schema核对输入字段。提出“有限重试”的恢复策略，准确说明额外Token成本及可能仍然失败的风险；尚未指出product_id与必填sku不匹配，也未给出字段修正或向模型返回参数错误的具体根因修复。仅重试不改变参数可能反复收到同一ValidationError。下一题聚焦错误参数名与直接修复方案。Q1、Q2 critical已通过；Q3未验收。
+<!-- learn-agent:evidence:stage01-ch03-Q3-a1-review-20261012:end -->
