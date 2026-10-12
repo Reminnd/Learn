@@ -297,5 +297,9 @@ Tool description误区：用户最初把get_stock描述为“查询商品详情�
 - Symptom: user predicted model automatically retries indefinitely if unknown tool is skipped with continue.
 - Correct behavior: missing tool result may cause request validation error or incomplete tool-result linkage; automatic retry is not guaranteed.
 - Fix: do not execute unknown tools; append ToolMessage(content="UNKNOWN_TOOL",tool_call_id=call["id"],status="error") and then continue to next call.
-- State: open; L3-CHECK-19 attempt2 retest pending.
+- State: resolved following L3-CHECK-19 attempt2.
 <!-- learn-agent:evidence:stage01-ch03-unknown-tool-continue-unpaired-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-unpaired-call-retest-resolved-20261012:start -->
+L3-CHECK-19 attempt2: resolved. Unknown tool calls still require a matching error ToolMessage with the original call ID.
+<!-- learn-agent:evidence:stage01-ch03-unpaired-call-retest-resolved-20261012:end -->
