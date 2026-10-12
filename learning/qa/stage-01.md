@@ -405,3 +405,7 @@ L3-CHECK-22 attempt2: partial. Provide specific example next.
 <!-- learn-agent:evidence:stage01-ch03-Q1-attempt3-ledger-20261012:start -->
 - Chapter03 Q1 attempt3: passed（critical）— 用户给出get_price.invoke(12)作为错误输入例子，结合先前L3-CHECK-20清楚区分Pydantic输入校验失败与handler未执行的证据，及Q1 attempt1对name、description和handler作用的解释，达到Q1全部验收要求。下一题Q2原理与@tool映射。
 <!-- learn-agent:evidence:stage01-ch03-Q1-attempt3-ledger-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q2-attempt1-qa-20261012:start -->
+- Chapter03 Q2 attempt1: needs_review — 正确区分普通函数**args与@tool.invoke(args)，但尚未说明@tool元信息、输入Schema、模型工具选择与运行验证；Q2 attempt2复检新增能力。
+<!-- learn-agent:evidence:stage01-ch03-Q2-attempt1-qa-20261012:end -->
