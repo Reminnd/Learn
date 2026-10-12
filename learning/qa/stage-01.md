@@ -455,3 +455,7 @@ EX1 Part2 attempt1 needs_review: reading args['sku'] is not a key-existence test
 - EX1 Part2 attempt2: passed — existing sku key means field not in args is False and code prints PASS.
 - EX1 Part3 attempt1: needs_review — student used isinstance(...) without not in if condition for raising TypeError, reversing valid and invalid cases. Retest next.
 <!-- learn-agent:evidence:ch03-ex1-required-pass-type-check-qa-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-EX1-type-check-a2-qa-20261012:start -->
+- EX1 Part3 attempt2: passed — correctly predicts PASS from not isinstance(valid_sku, str) == False. Proceeds to original runtime handler execution.
+<!-- learn-agent:evidence:stage01-ch03-EX1-type-check-a2-qa-20261012:end -->
