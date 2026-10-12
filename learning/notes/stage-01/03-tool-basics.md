@@ -172,3 +172,11 @@ L3-CHECK-15: passed. DeepSeek chose get_stock and get_price in one response. Too
 - L3-CHECK-17 passed: user correctly identified except KeyError as a way to catch the handler's missing SKU.
 - L3-CHECK-18 attempt1 needs_review: user believed unknown tool name produces no KeyError because no corresponding tool exists. Correction: tools_by_name[call["name"]] immediately raises KeyError on a missing key; because this lookup is before try, the inner except KeyError cannot catch it. tools_by_name.get(...) instead returns None. Next: recheck missing-key handling and try boundaries.
 <!-- learn-agent:evidence:stage01-ch03-L3-check16-18-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-check18a2-19a1-notes-20261012:start -->
+## L3-CHECK-18 / attempt2：通过
+用户正确回答tools_by_name.get("delete_product")返回None；随后if selected_tool is None打印UNKNOWN_TOOL。确认其已能区分dict.get与索引运算抛KeyError的差异。此前工具名不存在时是否抛异常的误区已复检。
+
+## L3-CHECK-19 / attempt1：部分正确
+给定多个tool_calls，若遇未知工具直接continue，不生成ToolMessage，用户正确指出delete_product没有对应结果；但错误预测DeepSeek“会不断发起重试”。需要指出：提交缺少结果消息的历史可能被API拒绝（例如400 tool_call_id未匹配），不是模型必然重新发起调用，更不会自动无限重试。规范做法是为每条Tool Call产出对应tool_call_id的ToolMessage，未知工具反馈简短错误消息（如content="UNKNOWN_TOOL",status="error"），继续其他工具。下一题让学员补全未知工具分支，复检ToolMessage关联ID和continue位置。
+<!-- learn-agent:evidence:stage01-ch03-check18a2-19a1-notes-20261012:end -->
