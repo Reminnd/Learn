@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-12：正式Q1 attempt1基本理解Tool四要素与请求/执行分离，但parameters误称元数据，缺失具体失败案例；安排复检。
-last_section: Chapter03 Q1 formal assessment — inputs and failure boundary
+last_note_update: 2026-10-12：Q1 attempt2混淆Tool parameters的输入Schema与handler返回类型，误以为字符串ToolMessage必然出错；重新聚焦具体输入校验失败。
+last_section: Chapter03 Q1：parameters输入校验与handler输出分离
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,42 +33,16 @@ session_status: active
 current_activity: qa
 return_to:
   activity: knowledge_check
-  topic: Chapter03-Q1 / attempt 2
-  next_action: 让学习者选择四要素之一举出设计错误导致的具体工具失败例子，补全parameters是输入Schema的认识。
+  topic: Chapter03-Q1 / attempt 3
+  next_action: 给出get_price.invoke(...)中输入参数错误的具体例子，并判断输入Schema还是handler阶段失败。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 177
-last_checkpoint_at: '2026-10-12T03:52:09.637Z'
+checkpoint_version: 178
+last_checkpoint_at: '2026-10-12T03:55:53.031Z'
 last_checkpoint_reason: needs_review
-pending_writeback:
-  transaction_id: stage01-ch03-Q1-a2-20261012
-  reason: knowledge_event
-  phase: prepared
-  started_at: '2026-10-12T03:55:53.031Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/03-tool-basics.md
-    evidence_id: stage01-ch03-Q1-a2-input-vs-output-20261012
-    operation: upsert
-    expected_change: Record Q1 attempt2 mixing input parameters and output type, and retest input validation.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch03-Q1-a2-input-vs-output-qa-20261012
-    operation: upsert
-    expected_change: Record Q1 partial answer and narrow retest on get_price missing sku.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: stage01-ch03-tool-input-schema-vs-output-20261012
-    operation: upsert
-    expected_change: Record confusion between Tool args_schema and return-value validation.
-    verified: false
-    error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
@@ -83,8 +57,8 @@ completed:
 - 01-llm-message-prompt-langchain
 - 02-structured-output
 weak_points:
-- Chapter03 Q1需要澄清parameters是输入Schema，并举出一个明确的Tool设计失败情境；Q2/Q3和EX1尚未正式验收。
-next_action: Chapter03 Q1 attempt2：举一个name/description/parameters/handler定义不清或错误导致的具体失败例子。
+- Q1关键题：明确Tool parameters仅是输入Schema，独立输出校验需单独实现；提供输入不合规的调用例子后复检。
+next_action: Chapter03 Q1 attempt3：让用户举出get_price.invoke的输入Schema校验失败调用并说明错误阶段。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
