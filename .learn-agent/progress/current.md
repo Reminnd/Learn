@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-12：L3-CHECK-12至14全部通过，已理解多Tool Call遍历和extend独立回填；下一步真实查询库存与价格双工具。
-last_section: 3.12 双工具调用闭环实测
+last_note_update: 2026-10-12：L3-CHECK-15实际运行双工具成功：get_stock=12，get_price=199，DeepSeek最终回答正确。
+last_section: 3.13 多工具异常隔离
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,35 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: knowledge_check
-  topic: L3-CHECK-15 / attempt 1
-  next_action: 在本机将库存价格同时查询，通过for循环构造ToolMessage列表，并运行第二次DeepSeek API。
+  topic: L3-CHECK-16 / attempt 1
+  next_action: 分析循环首个库存工具抛KeyError之后，价格工具与最终模型回答是否继续执行。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 164
-last_checkpoint_at: '2026-10-12T02:53:09.713Z'
+checkpoint_version: 165
+last_checkpoint_at: '2026-10-12T10:46:00+08:00'
 last_checkpoint_reason: section_boundary
-pending_writeback:
-  transaction_id: stage01-ch03-check15-double-tools-20261012
-  reason: section_boundary
-  phase: prepared
-  started_at: '2026-10-12T02:58:46.744Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/03-tool-basics.md
-    evidence_id: stage01-ch03-L3-CHECK-15-real-two-tools-20261012
-    operation: upsert
-    expected_change: Record double tool execution success.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch03-L3-CHECK-15-qa-20261012
-    operation: upsert
-    expected_change: Record L3-CHECK-15 passing result.
-    verified: false
-    error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
@@ -76,8 +57,8 @@ completed:
 - 01-llm-message-prompt-langchain
 - 02-structured-output
 weak_points:
-- 已掌握for循环逐条处理Tool Call并extend回填；需实测多个工具调用以及缺失或错误工具返回时的边界。
-next_action: L3-CHECK-15：用DeepSeek真实测试同时查询KB-001库存和价格；观察多条tool_calls或顺序工具调用，提交工具列表与最终答案。
+- 已实测成功的双工具调用；待学习单工具异常时的错误隔离和回填。
+next_action: L3-CHECK-16：分析多Tool Call中第一条执行失败引发异常时，后续工具和模型调用的执行行为。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
