@@ -356,3 +356,9 @@ L3-CHECK-6通过：业务库存键不存在是KeyError，不是输入ValidationE
 - L3-CHECK-10 attempt3: passed — 正确使用call["id"]读取原始模型工具调用ID。
 - L3-CHECK-11: passed — 用户真实DeepSeek运行输出工具结果12，最终自然语言答复KB-001库存12，闭环成功。当前仍仅支持一次Tool Call。
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK10a2a3-11-ledger:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK12-14-ledger-20261012:start -->
+- L3-CHECK-12: passed — len(tool_calls)==2导致!=1为真，抛RuntimeError，工具均未执行。
+- L3-CHECK-13: passed（语法提醒）— 应使用for call in response.tool_calls: 遍历所有调用；[0]只获取第一条。
+- L3-CHECK-14: passed — messages.extend(tool_messages)使多个ToolMessage作为独立消息元素，而非append所产生的列表嵌套。
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK12-14-ledger-20261012:end -->
