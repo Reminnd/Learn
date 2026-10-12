@@ -165,3 +165,10 @@ L3-CHECK-10 attempt1: partial. Learned that ToolMessage must reuse call["id"], n
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK-15-real-two-tools-20261012:start -->
 L3-CHECK-15: passed. DeepSeek chose get_stock and get_price in one response. Tool results 12 and 199 were returned; model answered KB-001 stock 12 and price CNY199. Next: tool error isolation.
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK-15-real-two-tools-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-check16-18-20261012:start -->
+## L3-CHECK-16 to 18
+- L3-CHECK-16 passed: when get_stock invokes unknown inventory SKU KB-999, handler raises KeyError; without exception handling, get_price never runs.
+- L3-CHECK-17 passed: user correctly identified except KeyError as a way to catch the handler's missing SKU.
+- L3-CHECK-18 attempt1 needs_review: user believed unknown tool name produces no KeyError because no corresponding tool exists. Correction: tools_by_name[call["name"]] immediately raises KeyError on a missing key; because this lookup is before try, the inner except KeyError cannot catch it. tools_by_name.get(...) instead returns None. Next: recheck missing-key handling and try boundaries.
+<!-- learn-agent:evidence:stage01-ch03-L3-check16-18-20261012:end -->
