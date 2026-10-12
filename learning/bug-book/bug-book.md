@@ -370,3 +370,7 @@ Resolved in Q3 attempt4. Learner supplied required sku with real product ID KB-0
 <!-- learn-agent:evidence:stage01-ch03-EX1-tool-spec-fixed-20261012:start -->
 - EX1 Part1 attempt3: custom schema requiredness True recognized, handler is a Python function reference. Teacher clarified literal dict value syntax. Original Tool declaration accepted; next validate and dispatch at runtime.
 <!-- learn-agent:evidence:stage01-ch03-EX1-tool-spec-fixed-20261012:end -->
+
+<!-- learn-agent:evidence:ch03-ex1-dict-index-vs-membership-20261012:start -->
+Symptom: uses args['sku'] to detect missing required input. Cause: confuses indexing with membership check. Fix: use field not in args before reading value. Status: open pending retest.
+<!-- learn-agent:evidence:ch03-ex1-dict-index-vs-membership-20261012:end -->
