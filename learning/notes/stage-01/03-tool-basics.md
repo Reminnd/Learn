@@ -180,3 +180,7 @@ L3-CHECK-15: passed. DeepSeek chose get_stock and get_price in one response. Too
 ## L3-CHECK-19 / attempt1：部分正确
 给定多个tool_calls，若遇未知工具直接continue，不生成ToolMessage，用户正确指出delete_product没有对应结果；但错误预测DeepSeek“会不断发起重试”。需要指出：提交缺少结果消息的历史可能被API拒绝（例如400 tool_call_id未匹配），不是模型必然重新发起调用，更不会自动无限重试。规范做法是为每条Tool Call产出对应tool_call_id的ToolMessage，未知工具反馈简短错误消息（如content="UNKNOWN_TOOL",status="error"），继续其他工具。下一题让学员补全未知工具分支，复检ToolMessage关联ID和continue位置。
 <!-- learn-agent:evidence:stage01-ch03-check18a2-19a1-notes-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK19a2-20-21-batch-20261012:start -->
+L3-CHECK 19, 20, 21 passed. Correct ID mapping, ValidationError, and broad exception logging risks. Next: large ToolMessage.
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK19a2-20-21-batch-20261012:end -->
