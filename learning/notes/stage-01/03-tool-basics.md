@@ -184,3 +184,7 @@ L3-CHECK-15: passed. DeepSeek chose get_stock and get_price in one response. Too
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK19a2-20-21-batch-20261012:start -->
 L3-CHECK 19, 20, 21 passed. Correct ID mapping, ValidationError, and broad exception logging risks. Next: large ToolMessage.
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK19a2-20-21-batch-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK22-attempt1-20261012:start -->
+L3-CHECK-22 attempt1: needs_review. Student correctly identifies context bloat and attention dilution from 5000 raw reviews; tentatively suggests batching or vector similarity. Batching alone does not lower total input size; top-k vector search fits focused questions but risks biased coverage for broad pros/cons. Recommend aggregating positive/negative themes, counts and supporting examples before returning a compact ToolMessage. Next: identify tradeoff of lost minority details from compression.
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK22-attempt1-20261012:end -->
