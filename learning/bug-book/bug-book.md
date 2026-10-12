@@ -380,5 +380,9 @@ Symptom: uses args['sku'] to detect missing required input. Cause: confuses inde
 - Symptom: used if isinstance(args[field],rule["type"]): raise TypeError.
 - Cause: checked type compliance instead of noncompliance.
 - Fix: if not isinstance(args[field],rule["type"]): raise TypeError. Existing keys and actual values must be checked in separate steps.
-- Status: pending EX1 Part3 attempt2.
+- Status: resolved by EX1 Part3 attempt2. Learner correctly judged negated isinstance for valid sku.
 <!-- learn-agent:evidence:ch03-ex1-isinstance-inverted-condition-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-EX1-type-not-condition-resolved-20261012:start -->
+- EX1 Part3 attempt2 passed: correct interpretation of the negative isinstance condition. Prior inverted type-check error resolved.
+<!-- learn-agent:evidence:stage01-ch03-EX1-type-not-condition-resolved-20261012:end -->
