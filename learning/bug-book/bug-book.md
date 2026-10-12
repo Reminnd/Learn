@@ -349,3 +349,7 @@ Chapter03 Q2 attempt3复检中学员正确对照Tool args_schema与model.with_st
 <!-- learn-agent:evidence:stage01-ch03-schema-valid-sku-not-found-20261012:start -->
 A well-typed input SKU can still fail the business data lookup. Example: sku=001 matches str but is absent from prices; KeyError occurs in handler.
 <!-- learn-agent:evidence:stage01-ch03-schema-valid-sku-not-found-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q3-key-vs-type-resolved-20261012:start -->
+Resolved in Q3 attempt4. Learner supplied required sku with real product ID KB-001; input validated and handler returned 199.
+<!-- learn-agent:evidence:stage01-ch03-Q3-key-vs-type-resolved-20261012:end -->
