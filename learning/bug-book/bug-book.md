@@ -319,5 +319,9 @@ L3-CHECK-19 attempt2: resolved. Unknown tool calls still require a matching erro
 - 根因：把Tool输入字段Schema、Python的->int返回注解和ToolMessage.content的字符串表示混为一谈。
 - 修复：Tool args_schema由函数入参（例如sku:str）产生，用于输入校验；返回注解不是默认严格运行时输出校验。需要返回类型保证时对result单独做Pydantic验证；ToolMessage(content=str(result))将int转换为str属于正常处理。
 - 避免：定位错误时逐阶段检查模型Tool Call args、Pydantic输入校验、handler执行/业务校验、返回结果Schema及消息序列化。
-- 状态：open，等待Chapter03 Q1 attempt3。
+- 状态：resolved（Q1 attempt3给出非法工具输入，结合此前Schema阶段判定，正确区分parameters输入与handler输出）。
 <!-- learn-agent:evidence:stage01-ch03-tool-input-schema-vs-output-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-tool-input-output-retested-20261012:start -->
+Q1 attempt3以get_price.invoke(12)作为不合规输入例子，配合此前L3-CHECK-20的ValidationError/handler执行边界判断，纠正把Tool输入参数Schema与价格返回类型混淆的误区。正式Q1通过。
+<!-- learn-agent:evidence:stage01-ch03-tool-input-output-retested-20261012:end -->
