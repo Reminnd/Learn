@@ -199,3 +199,12 @@ L3-CHECK-22 attempt2: needs_review. Learner noted that review aggregation can lo
 
 下一步：进入Chapter03本章验收题Q1→Q2→Q3，结合已通过的真实DeepSeek单工具与双工具运行证据再审查EX1契约；不得仅凭L3-CHECK通过就宣布全章mastered。
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK22-attempt3-pass-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q1-a1-partial-20261012:start -->
+## Chapter03 Q1 / attempt1：部分通过，待复检
+正式验收Q1要求解释Tool name、description、parameters、handler四要素存在的因果关系，并指出一个具体边界或失败条件。用户回答：“name明确调用tool工具的函数名或者api名，description供LLM区分与请求调用tool，parameters该tool需要的元数据，handler真正的调用tool，将请求与调用隔离开，方便检验”。
+正确：name用于对外标识和Runtime查找Tool；description帮助LLM在库存/价格工具中挑选；handler承载由Runtime执行的业务代码；模型工具请求与实际执行区分开，可在执行前进行校验。
+待澄清：name是向模型公开并可由Runtime路由的工具标识符，不一定等于底层Python函数名或外部API地址；parameters是可执行输入Schema（sku:str、必需性、类型、约束等），不是一般元数据；handler是执行业务逻辑或调用外部API的实现，由Runtime触发，不由模型直接执行。
+缺失：用户尚未举出任一要素设计不当导致的具体失败案例，Q1契约要求明确适用边界/失败条件。下题只复检一个具体失败例子；回答完整后才可判Q1 passed。
+本轮另讨论企业评论分析：保留全量带ID原文，去重脱敏，主题/情感/严重度分析，分层抽样与低频严重风险单独保留，按来源ID回溯；仅将聚合主题、频次、少数风险和证据引用发至ToolMessage，关注低频问题召回率、事实准确、Token成本；向量检索适合聚焦问题，不替代全量主题计数。
+<!-- learn-agent:evidence:stage01-ch03-Q1-a1-partial-20261012:end -->
