@@ -147,3 +147,17 @@ L3-CHECK-10 attempt1: partial. Learned that ToolMessage must reuse call["id"], n
 ## 3.10 下一练习：多个工具调用
 模型若同时选择get_stock和get_price产生2条tool_calls，当前硬编码单次调用示例会先触发len != 1的RuntimeError，没有执行任何handler。生产Runtime应安全遍历全部调用、按允许列表匹配工具名、验证参数并逐条生成与原ID匹配的ToolMessage，最后整体回传模型。
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK10a2a3-11-live-success:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK12-14-batch-20261012:start -->
+## L3-CHECK-12 / attempt 1：多工具调用边界
+状态：passed。模型若返回两条Tool Call，则len(response.tool_calls)!=1为True，代码会主动raise RuntimeError。若没有捕获该异常，之后的工具执行逻辑不会运行，因此两条工具调用都没有被执行。学员准确识别了程序异常与模型选择工具是不同阶段。
+
+## L3-CHECK-13 / attempt 1：遍历所有Tool Call
+状态：passed（书写细节已提示）。学员写for call in response.tool_calls并解释response.tool_calls[0]仅取第一个元素，不能遍历全部调用。教师提醒for语句需要末尾冒号。正确实现for call in response.tool_calls: 逐次按name选出白名单工具、用invoke(args)执行并按各自call["id"]创建ToolMessage。
+
+## L3-CHECK-14 / attempt 1：独立ToolMessage回填
+状态：passed。学员在append和extend之间正确选择extend。对messages=[HumanMessage(...),AIMessage(tool_calls)]使用messages.extend(tool_messages)可将每个ToolMessage对象依次加入平面消息序列，避免append(tool_messages)形成嵌套列表而无法直接当作LangChain消息序列处理。
+
+## 3.12 下一工程练习：多工具查询的实际验证
+在已经跑通的单Tool Call闭环上，将question扩展为同时查询KB-001的库存与价格。删除恰好一个调用的硬限制，按response.tool_calls逐条执行，并将对应的ToolMessage全部回传。应观察DeepSeek是否同一次返回两个Tool Call；如只返回一个，不能假定模型一定并行调用，应进一步学习多轮Agent Loop与安全退出控制。未知工具名应通过白名单检查，参数和业务异常后续独立处理。
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK12-14-batch-20261012:end -->
