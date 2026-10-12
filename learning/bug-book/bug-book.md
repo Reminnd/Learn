@@ -281,3 +281,13 @@ Tool description误区：用户最初把get_stock描述为“查询商品详情�
 <!-- learn-agent:evidence:stage01-ch03-tool-call-id-retest-closed:start -->
 - Tool call identifier misconception resolved by L3-CHECK-10 attempt3 and successful DeepSeek tool response loop. Future work: multiple calls and handling tool failures.
 <!-- learn-agent:evidence:stage01-ch03-tool-call-id-retest-closed:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-check18-keyerror-before-try-20261012:start -->
+## Unknown tool lookup and exception scope
+- Symptom: learner expected no KeyError when a requested tool name was absent.
+- Wrong model: a missing dictionary entry silently fails during dict[key] lookup.
+- Cause: confusion between dict[key] raising KeyError and dict.get(key) returning None, plus forgetting lookup occurs before try.
+- Fix: use tools_by_name.get(call["name"]) with an explicit None branch, or include the lookup in error handling; preserve whitelist tool routing.
+- Avoid: identify each potentially failing line and the try/except scope before handling tool failures.
+- Status: open; L3-CHECK-18 attempt2 to verify.
+<!-- learn-agent:evidence:stage01-ch03-L3-check18-keyerror-before-try-20261012:end -->
