@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 173
 last_checkpoint_at: '2026-10-12T03:31:10.922Z'
 last_checkpoint_reason: section_boundary
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch03-check22-a1-20261012
+  reason: needs_review
+  phase: prepared
+  started_at: '2026-10-12T10:46:00+08:00'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-L3-CHECK22-attempt1-20261012
+    operation: upsert
+    expected_change: Save ToolMessage size exercise.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-L3-CHECK22-attempt1-qa-20261012
+    operation: upsert
+    expected_change: Save ToolMessage size exercise.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
