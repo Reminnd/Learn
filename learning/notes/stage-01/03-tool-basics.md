@@ -188,3 +188,7 @@ L3-CHECK 19, 20, 21 passed. Correct ID mapping, ValidationError, and broad excep
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK22-attempt1-20261012:start -->
 L3-CHECK-22 attempt1: needs_review. Student correctly identifies context bloat and attention dilution from 5000 raw reviews; tentatively suggests batching or vector similarity. Batching alone does not lower total input size; top-k vector search fits focused questions but risks biased coverage for broad pros/cons. Recommend aggregating positive/negative themes, counts and supporting examples before returning a compact ToolMessage. Next: identify tradeoff of lost minority details from compression.
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK22-attempt1-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-check22-a2-rare-angle-20261012:start -->
+L3-CHECK-22 attempt2: needs_review. Learner noted that review aggregation can lose fresh minority perspectives, but did not provide a concrete example. Recheck requests one specific low-frequency concern affecting purchasing decisions.
+<!-- learn-agent:evidence:stage01-ch03-check22-a2-rare-angle-20261012:end -->
