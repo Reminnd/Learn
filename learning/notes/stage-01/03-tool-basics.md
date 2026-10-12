@@ -161,3 +161,7 @@ L3-CHECK-10 attempt1: partial. Learned that ToolMessage must reuse call["id"], n
 ## 3.12 下一工程练习：多工具查询的实际验证
 在已经跑通的单Tool Call闭环上，将question扩展为同时查询KB-001的库存与价格。删除恰好一个调用的硬限制，按response.tool_calls逐条执行，并将对应的ToolMessage全部回传。应观察DeepSeek是否同一次返回两个Tool Call；如只返回一个，不能假定模型一定并行调用，应进一步学习多轮Agent Loop与安全退出控制。未知工具名应通过白名单检查，参数和业务异常后续独立处理。
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK12-14-batch-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-15-real-two-tools-20261012:start -->
+L3-CHECK-15: passed. DeepSeek chose get_stock and get_price in one response. Tool results 12 and 199 were returned; model answered KB-001 stock 12 and price CNY199. Next: tool error isolation.
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-15-real-two-tools-20261012:end -->
