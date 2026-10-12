@@ -401,3 +401,7 @@ L3-CHECK-22 attempt2: partial. Provide specific example next.
 <!-- learn-agent:evidence:stage01-ch03-Q1-a2-input-vs-output-qa-20261012:start -->
 - Chapter03 Q1 attempt2: needs_review — 举例把parameters输入Schema当作返回值int类型验证，并误以为ToolMessage接收str就必然报错。正确区分输入sku约束、handler输出以及ToolMessage序列化；下一次Q1 attempt3只举一个会被get_price输入Schema拒绝的调用及错误阶段。
 <!-- learn-agent:evidence:stage01-ch03-Q1-a2-input-vs-output-qa-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q1-attempt3-ledger-20261012:start -->
+- Chapter03 Q1 attempt3: passed（critical）— 用户给出get_price.invoke(12)作为错误输入例子，结合先前L3-CHECK-20清楚区分Pydantic输入校验失败与handler未执行的证据，及Q1 attempt1对name、description和handler作用的解释，达到Q1全部验收要求。下一题Q2原理与@tool映射。
+<!-- learn-agent:evidence:stage01-ch03-Q1-attempt3-ledger-20261012:end -->
