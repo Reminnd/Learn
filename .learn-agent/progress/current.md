@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 198
 last_checkpoint_at: '2026-10-12T13:25:49.964Z'
 last_checkpoint_reason: completion
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch04-start-after-ch03-mastery-20261012
+  reason: completion
+  phase: prepared
+  started_at: '2026-10-12T13:28:18.742Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/04-tool-registry-engineering.md
+    evidence_id: stage01-ch04-start-20261012
+    operation: upsert
+    expected_change: Create Chapter04 initial teaching note and L4-CHECK-1 continuation.
+    verified: false
+    error: null
+  - asset_key: notes.index
+    relative_pointer: null
+    evidence_id: stage01-ch03-mastered-ch04-start-index-20261012
+    operation: upsert
+    expected_change: Mark Chapter03 mastered and index Chapter04.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
