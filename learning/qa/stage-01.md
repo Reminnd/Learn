@@ -438,3 +438,7 @@ Chapter03 Q3 passed. Correct call args sku=KB-001, price 199. Combined diagnosti
 <!-- learn-agent:evidence:stage01-ch03-EX1-p1-a1-qa-20261012:start -->
 - Chapter03 EX1 Part1 attempt1: needs_review — correct tool name and description, but parameters=sku: str is not valid nested dict data and handler="raw_get_price" stores a string rather than a Python callable. Next: repair these two fields.
 <!-- learn-agent:evidence:stage01-ch03-EX1-p1-a1-qa-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-EX1-p1-a2-qa-20261012:start -->
+- Chapter03 EX1 Part1 attempt2: needs_review — valid {"sku": str} type map and correct raw_get_price function reference. Missing explicit requiredness in custom Tool parameters; next attempt3 needs both str type and required flag.
+<!-- learn-agent:evidence:stage01-ch03-EX1-p1-a2-qa-20261012:end -->
