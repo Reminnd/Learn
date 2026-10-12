@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-12：Chapter03 Q3 attempt1能按日志、Tool Call、用户请求排查，有限重试权衡正确，但缺少Schema对照及具体修复。
-last_section: Chapter03 Q3 — product_id和sku字段不匹配
+last_note_update: 2026-10-12：Chapter03 Q3 attempt2认为product_id与str不匹配；纠正是缺少必填sku字段，值本身是字符串。复检具体修复。
+last_section: Chapter03 Q3 — Schema字段名与输入类型区分
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,42 +33,16 @@ session_status: active
 current_activity: qa
 return_to:
   activity: knowledge_check
-  topic: Chapter03-Q3 / attempt 2
-  next_action: 找出call.args的product_id与get_price必填sku字段不一致，提出直接修复方案。
+  topic: Chapter03-Q3 / attempt 3
+  next_action: 让用户写出合法call['args']以修复缺少必填sku的字段名错误。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 184
-last_checkpoint_at: '2026-10-12T07:31:14.219Z'
+checkpoint_version: 185
+last_checkpoint_at: '2026-10-12T07:33:24.898Z'
 last_checkpoint_reason: needs_review
-pending_writeback:
-  transaction_id: stage01-ch03-Q3-attempt2-20261012
-  reason: needs_review
-  phase: prepared
-  started_at: '2026-10-12T07:33:24.898Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/03-tool-basics.md
-    evidence_id: stage01-ch03-Q3-attempt2-field-vs-type-20261012
-    operation: upsert
-    expected_change: Record Q3 key mismatch diagnosis and targeted retest.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch03-Q3-attempt2-qa-20261012
-    operation: upsert
-    expected_change: Record Q3 key mismatch diagnosis and targeted retest.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: stage01-ch03-Q3-input-key-vs-type-20261012
-    operation: upsert
-    expected_change: Record Q3 key mismatch diagnosis and targeted retest.
-    verified: false
-    error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
@@ -83,8 +57,8 @@ completed:
 - 01-llm-message-prompt-langchain
 - 02-structured-output
 weak_points:
-- Q3需根据Schema准确定位Tool Call参数名不一致并直接修复；仅有限重试不能修复固定格式错误。EX1仍待验收。
-next_action: Chapter03 Q3 attempt2：比较get_price(sku)与call.args(product_id)，说明字段不匹配和具体修复，再继续EX1验收。
+- Q3需正确区分输入Schema字段名与字段值类型，直接修复product_id→sku；EX1尚待验收。
+next_action: Chapter03 Q3 attempt3：写出正确的call['args']字典以通过get_price(sku: str)输入Schema；之后完成验收。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
