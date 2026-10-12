@@ -362,3 +362,7 @@ L3-CHECK-6通过：业务库存键不存在是KeyError，不是输入ValidationE
 - L3-CHECK-13: passed（语法提醒）— 应使用for call in response.tool_calls: 遍历所有调用；[0]只获取第一条。
 - L3-CHECK-14: passed — messages.extend(tool_messages)使多个ToolMessage作为独立消息元素，而非append所产生的列表嵌套。
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK12-14-ledger-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-15-qa-20261012:start -->
+L3-CHECK-15: passed. User ran DeepSeek multi-tool test with get_stock=12 and get_price=199; model gave correct final answer. Next: tool exceptions.
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK-15-qa-20261012:end -->
