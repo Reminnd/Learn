@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 175
 last_checkpoint_at: '2026-10-12T03:40:48.325Z'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch03-check22-a3-20261012
+  reason: section_boundary
+  phase: prepared
+  started_at: '2026-10-12T03:45:09.845Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-L3-CHECK22-attempt3-pass-20261012
+    operation: upsert
+    expected_change: Record low-frequency keyboard battery life example and begin Chapter 03 formal questions.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-L3-CHECK22-attempt3-ledger-20261012
+    operation: upsert
+    expected_change: Record check 22 passed and next Q1 about Tool design requirements.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
