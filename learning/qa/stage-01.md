@@ -393,3 +393,7 @@ L3-CHECK-22 attempt2: partial. Provide specific example next.
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK22-attempt3-ledger-20261012:start -->
 - L3-CHECK-22 attempt3: passed — 举出无线键盘“续航”这一可能低频但影响购买决策的评价维度，充分说明压缩高频主题会遗漏关键信息的Trade-off；转入Chapter03 Q1正式验收。
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK22-attempt3-ledger-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q1-a1-qa-20261012:start -->
+- Chapter03 Q1 / attempt1: needs_review. 学员能解释name、description、handler的主要用途以及请求与执行分离；但将parameters泛称为元数据，未明确它是输入Schema，也尚未举出定义错误如何导致失败的具体案例。下一题Q1 attempt2：补充一个实际故障示例。
+<!-- learn-agent:evidence:stage01-ch03-Q1-a1-qa-20261012:end -->
