@@ -261,3 +261,8 @@ Q3 attempt3: needs_review. The input sku is a valid string, but the product key 
 <!-- learn-agent:evidence:stage01-ch03-Q3-attempt4-passed-20261012:start -->
 Q3 passed: corrected args to sku=KB-001 and obtained 199. EX1 next.
 <!-- learn-agent:evidence:stage01-ch03-Q3-attempt4-passed-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-EX1-p1-a1-needs-review-20261012:start -->
+## Chapter03 EX1 Part1 / attempt1: needs_review
+Learner independently filled raw Python Tool spec as name="raw_get_price", description="查询商品价格", parameters=sku: str, handler="raw_get_price". The first two fields are acceptable. The parameters expression is invalid Python syntax inside a dictionary literal; this principle-level Tool requires a nested dict input specification recording that the field sku has string type and is required. It is a declaration, not automatic runtime validation. The handler field must reference the callable raw_get_price itself, rather than the string "raw_get_price", because a runtime needs to invoke the saved function. Teacher mode follow-up: fill only parameters and handler placeholders without giving solution immediately. EX1 still incomplete; official Q1-Q3 previously passed.
+<!-- learn-agent:evidence:stage01-ch03-EX1-p1-a1-needs-review-20261012:end -->
