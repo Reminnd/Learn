@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-12：EX1 Part4正确使用handler(**args)返回199，开始将输入检查与handler组合成可执行Runtime并对照@tool。
-last_section: Chapter03 EX1综合实践：手写Runtime与@tool映射
+last_note_update: 2026-10-12：EX1综合代码中参数校验和handler执行正确，但曾硬编码return 199，需要改为返回handler真实结果。
+last_section: Chapter03 EX1 integrated Runtime return handling
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,42 +33,16 @@ session_status: active
 current_activity: practice
 return_to:
   activity: knowledge_check
-  topic: Chapter03-EX1 / integrated runtime attempt 1
-  next_action: 独立组合必填字段检查、类型检查与handler调用成可执行的invoke_raw_tool函数，随后对照LangChain @tool。
+  topic: Chapter03-EX1 / integrated runtime attempt 2
+  next_action: 修复Runtime返回值硬编码，改成返回handler执行的实际结果。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 195
-last_checkpoint_at: '2026-10-12T12:03:29.644Z'
-last_checkpoint_reason: section_boundary
-pending_writeback:
-  transaction_id: ch03-ex1-integrated-a1-20261012
-  reason: needs_review
-  phase: prepared
-  started_at: '2026-10-12T12:35:22.453Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/03-tool-basics.md
-    evidence_id: stage01-ch03-ex1-integrated-attempt1-hardcoded-20261012
-    operation: upsert
-    expected_change: Record integrated runtime output handling check.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch03-ex1-integrated-attempt1-hardcoded-20261012-qa
-    operation: upsert
-    expected_change: Record integrated runtime output handling check.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: stage01-ch03-ex1-integrated-attempt1-hardcoded-20261012-bug
-    operation: upsert
-    expected_change: Record integrated runtime output handling check.
-    verified: false
-    error: null
+checkpoint_version: 196
+last_checkpoint_at: '2026-10-12T12:35:22.453Z'
+last_checkpoint_reason: needs_review
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
@@ -83,8 +57,8 @@ completed:
 - 01-llm-message-prompt-langchain
 - 02-structured-output
 weak_points:
-- EX1原理版组件已分步掌握，尚需独立组合Runtime、验证正常和参数错误，以及与LangChain @tool的对照。
-next_action: EX1 integrated runtime：编写invoke_raw_tool(spec,args)进行required/type校验后handler(**args)，对照@tool.invoke验证。
+- EX1综合Runtime初版曾写return 199硬编码，需返回handler真实业务结果并验证输出随数据变化。
+next_action: EX1 integrated runtime attempt2：修复handler真实返回值后，继续与LangChain @tool对照验证。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
