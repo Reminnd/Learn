@@ -390,3 +390,7 @@ Symptom: uses args['sku'] to detect missing required input. Cause: confuses inde
 <!-- learn-agent:evidence:stage01-ch03-ex1-integrated-attempt1-hardcoded-20261012-bug:start -->
 Bug: original Runtime executed handler but returned hardcoded 199, concealing changes in real price data. Fix: propagate return from handler. State: pending learner retest.
 <!-- learn-agent:evidence:stage01-ch03-ex1-integrated-attempt1-hardcoded-20261012-bug:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-misconceptions-ex1-resolved-20261012:start -->
+EX1 final retest passed: the user restored return spec["handler"](**args); raw and LangChain tools returned 199 and, after data changed, 299. Missing inputs raised ValueError and ValidationError. This resolves the earlier hardcoded output and faulty runtime-check misconceptions. Q1-Q3 also passed by latest checked attempts. No registered chapter-critical misconception remains unresolved.
+<!-- learn-agent:evidence:stage01-ch03-misconceptions-ex1-resolved-20261012:end -->
