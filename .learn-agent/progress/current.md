@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-12：L3-CHECK-22 attempt3以无线键盘续航为实例说明低频重要评论遗漏风险，ToolMessage大小与Trade-off通过；进入章节Q&A。
-last_section: Chapter03章节验收 Q1：Tool四要素的因果关系
+last_note_update: 2026-10-12：正式Q1 attempt1基本理解Tool四要素与请求/执行分离，但parameters误称元数据，缺失具体失败案例；安排复检。
+last_section: Chapter03 Q1 formal assessment — inputs and failure boundary
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,42 +33,16 @@ session_status: active
 current_activity: qa
 return_to:
   activity: knowledge_check
-  topic: Chapter03-Q1 / attempt 1
-  next_action: 让学员解释Tool name、description、parameters、handler为何必须清晰分工，并举一个边界或失败条件。
+  topic: Chapter03-Q1 / attempt 2
+  next_action: 让学习者选择四要素之一举出设计错误导致的具体工具失败例子，补全parameters是输入Schema的认识。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 176
-last_checkpoint_at: '2026-10-12T03:45:09.845Z'
-last_checkpoint_reason: section_boundary
-pending_writeback:
-  transaction_id: stage01-ch03-Q1-a1-20261012
-  reason: needs_review
-  phase: prepared
-  started_at: '2026-10-12T03:52:09.637Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/03-tool-basics.md
-    evidence_id: stage01-ch03-Q1-a1-partial-20261012
-    operation: upsert
-    expected_change: Record Q1 partially correct: tool name/description and runtime mapping, needs schema specificity and concrete failure.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch03-Q1-a1-qa-20261012
-    operation: upsert
-    expected_change: Record Q1 attempt1 needs_review, follow up with failure example.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: stage01-ch03-parameters-as-metadata-20261012
-    operation: upsert
-    expected_change: Record tool parameters are input schema, not generic metadata.
-    verified: false
-    error: null
+checkpoint_version: 177
+last_checkpoint_at: '2026-10-12T03:52:09.637Z'
+last_checkpoint_reason: needs_review
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
@@ -83,8 +57,8 @@ completed:
 - 01-llm-message-prompt-langchain
 - 02-structured-output
 weak_points:
-- ToolMessage压缩取舍已通过复检；正式章验收Q1/Q2/Q3与EX1契约仍待独立核验。
-next_action: Chapter03 Q1（critical）— 解释为什么Tool需要name、description、parameters、handler，以及缺失/模糊导致的工程失败。
+- Chapter03 Q1需要澄清parameters是输入Schema，并举出一个明确的Tool设计失败情境；Q2/Q3和EX1尚未正式验收。
+next_action: Chapter03 Q1 attempt2：举一个name/description/parameters/handler定义不清或错误导致的具体失败例子。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
