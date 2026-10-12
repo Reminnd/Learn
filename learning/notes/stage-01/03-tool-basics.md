@@ -233,3 +233,13 @@ L3-CHECK-22 attempt2: needs_review. Learner noted that review aggregation can lo
 下一题Chapter03 Q2 attempt3：直接对比args_schema和with_structured_output分别验证什么，采用get_price(sku:str)的参数示例回答。
 参考：https://reference.langchain.com/python/langchain-core/tools/base/BaseTool 和 https://reference.langchain.com/python/langchain-core/language_models/chat_models/BaseChatModel/with_structured_output
 <!-- learn-agent:evidence:stage01-ch03-Q2-attempt2-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q2-attempt3and4-passed-20261012:start -->
+## Chapter03 Q2 / attempt3：passed
+学员正确区分场景A使用Tool的args_schema校验SKU输入，场景B使用model.with_structured_output()解析/验证LLM生成的Pydantic Product对象；已纠正混淆两类Schema机制的误解。
+
+## Chapter03 Q2 / attempt4：passed（critical题总体通过）
+学员独立串联用户查询KB-001价格、DeepSeek参考已注册工具description挑选工具并生成Tool Call、Runtime根据name获取目标工具、通过.invoke(...)触发args_schema输入校验后调用handler返回199、构造ToolMessage并回传模型。这与之前已运行验证的真实DeepSeek单工具和双工具实验构成完整的数据流证据。
+细节订正：model.bind_tools只向LLM呈现工具声明，不会自动完成name→Python工具对象路由；在本次手写Runtime中是tools_by_name[call["name"]]负责白名单查找。ToolMessage须用原始call["id"]关联模型发出的调用；本细节已在L3-CHECK-10和19通过。
+两次复检合并达到正式Q2验收：映射原理侧raw_get_price(**args)至LangChain @tool包装对象get_price.invoke(args)，掌握输入/输出及关键数据流；实际运行结果get_price为199，API回填成功。正式Q2判passed，Q1已passed；Q3及EX1待按章节契约评估。
+<!-- learn-agent:evidence:stage01-ch03-Q2-attempt3and4-passed-20261012:end -->
