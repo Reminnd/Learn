@@ -18,9 +18,9 @@ integrity:
   reason: null
 mastery:
   score: null
-  critical_questions_passed: false
+  critical_questions_passed: true
   dimension_floors_passed: false
-  required_exercises_passed: false
+  required_exercises_passed: true
   unresolved_critical_misconceptions: 0
   mastered: false
 last_note_update: 2026-10-12：EX1综合代码中参数校验和handler执行正确，但曾硬编码return 199，需要改为返回handler真实结果。
@@ -33,42 +33,16 @@ session_status: active
 current_activity: practice
 return_to:
   activity: knowledge_check
-  topic: Chapter03-EX1 / integrated runtime attempt 2
+  topic: Chapter03 mastery assessment / evidence validation
   next_action: 修复Runtime返回值硬编码，改成返回handler执行的实际结果。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 196
+checkpoint_version: 197
 last_checkpoint_at: '2026-10-12T12:35:22.453Z'
 last_checkpoint_reason: needs_review
-pending_writeback:
-  transaction_id: ch03-ex1-formal-attempts-20261012
-  reason: exercise_complete
-  phase: prepared
-  started_at: '2026-10-12T12:59:33.364Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/03-tool-basics.md
-    evidence_id: stage01-ch03-formal-Q1Q2Q3-EX1-20261012
-    operation: upsert
-    expected_change: Persist Q1 Q2 Q3 formal attempts and EX1 accepted code test.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch03-formal-exercise-ledger-20261012
-    operation: upsert
-    expected_change: Persist chapter question and exercise acceptance ledger.
-    verified: false
-    error: null
-  - asset_key: bugs.book
-    relative_pointer: null
-    evidence_id: stage01-ch03-misconceptions-ex1-resolved-20261012
-    operation: upsert
-    expected_change: Resolve documented tool execution misconceptions after successful retest.
-    verified: false
-    error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
@@ -84,7 +58,7 @@ completed:
 - 02-structured-output
 weak_points:
 - EX1综合Runtime初版曾写return 199硬编码，需返回handler真实业务结果并验证输出随数据变化。
-next_action: EX1 integrated runtime attempt2：修复handler真实返回值后，继续与LangChain @tool对照验证。
+next_action: Chapter03 mastery assessment pending.
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
