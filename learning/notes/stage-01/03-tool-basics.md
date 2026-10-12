@@ -6,7 +6,7 @@ schema_version: 2
 stage_id: stage-01
 chapter_id: 03-tool-basics
 lifecycle_status: active
-learning_status: learning
+learning_status: mastered
 last_updated: 2026-10-11
 ```
 
@@ -436,3 +436,27 @@ langchain_changed: 299
 
 五项验收证据判断：Q1、Q2、Q3均满足各自两项acceptance且最新检查未见未解决核心模型冲突；EX1的三项acceptance均由用户代码和输出支持。尚未在本条记录中进行mastery assessment，待这些formal attempt证据完整进入committed state后依据shared/mastery-rubric.md生成唯一正式assessment，再决定mastered。
 <!-- learn-agent:evidence:stage01-ch03-formal-Q1Q2Q3-EX1-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-mastery-assessment-Q1a3-Q2a4-Q3a4-20261012:start -->
+## Chapter03 正式Mastery Assessment（2026-10-12）
+
+```yaml
+kind: mastery_assessment
+evidence_id: stage01-ch03-mastery-assessment-Q1a3-Q2a4-Q3a4-20261012
+contract_chapter_id: stage-01-03-tool-basics
+source_evidence_ids:
+  - stage01-ch03-Q1-formal-attempt3-20261012
+  - stage01-ch03-Q2-formal-attempt4-20261012
+  - stage01-ch03-Q3-formal-attempt4-20261012
+dimension_scores:
+  conceptual_understanding: 22
+  causal_and_dataflow: 18
+  application_and_framework_mapping: 18
+  debugging_and_troubleshooting: 16
+  migration_boundaries_and_tradeoffs: 10
+```
+
+总分84/100；每个维度均满足当前0.60底线，Q1和Q2均为critical且通过，Q3通过，必做EX1已验收，章节critical misconception未解决数为0；证据完整性为healthy。
+评分证据：Q1解释Tool四要素、Tool Call与handler执行边界；Q2描述手写handler(**args)和LangChain @tool.invoke(args)的输入校验、实际执行与ToolMessage数据流；Q3给出日志/Tool Call/Schema检查路径及有限重试成本；EX1本地实测raw和框架结果199→299均随真实数据变化、缺参异常区分。调试与Trade-off分数反映此前经多次复检修正的过程，不按满分给分。
+当前契约门槛80/100、所有维度60%，本assessment达标，章节掌握结论以同一transaction的final-state+clear成功为准。
+<!-- learn-agent:evidence:stage01-ch03-mastery-assessment-Q1a3-Q2a4-Q3a4-20261012:end -->
