@@ -446,3 +446,7 @@ Chapter03 Q3 passed. Correct call args sku=KB-001, price 199. Combined diagnosti
 <!-- learn-agent:evidence:stage01-ch03-EX1-part1-a3-ledger-20261012:start -->
 - Chapter03 EX1 Part1 attempt3: passed — correctly identified True for requiredness. Teacher clarified Python dict syntax "required": True (not required=True). Original Tool declaration now complete; EX1 runtime validation, dispatch, and @tool mapping remain.
 <!-- learn-agent:evidence:stage01-ch03-EX1-part1-a3-ledger-20261012:end -->
+
+<!-- learn-agent:evidence:ch03-ex1-required-membership-a1-qa-20261012:start -->
+EX1 Part2 attempt1 needs_review: reading args['sku'] is not a key-existence test. Use field not in args.
+<!-- learn-agent:evidence:ch03-ex1-required-membership-a1-qa-20261012:end -->
