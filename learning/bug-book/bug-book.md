@@ -337,3 +337,11 @@ Q1 attempt3以get_price.invoke(12)作为不合规输入例子，配合此前L3-C
 <!-- learn-agent:evidence:stage01-ch03-Q2-schema-corrected-20261012:start -->
 Chapter03 Q2 attempt3复检中学员正确对照Tool args_schema与model.with_structured_output的校验对象；attempt4再用完整Tool Calling数据流说明校验位置。此前混淆已纠正。
 <!-- learn-agent:evidence:stage01-ch03-Q2-schema-corrected-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q3-input-key-vs-type-20261012:start -->
+## Tool Call参数字段名错误与类型错误混淆
+- 症状：认为{"product_id":"KB-001"}错误是与str不匹配，建议严格类型校验。
+- 根因：把输入Schema字段名称与字段值类型混淆；get_price要求名为sku的字段，当前值是有效字符串但字段名不对。
+- 修复：核对args_schema的required字段和数据类型，修正生成或传递的参数名后再调用；严格类型校验无法补齐缺失字段。
+- 状态：open，待Q3 attempt3复检。
+<!-- learn-agent:evidence:stage01-ch03-Q3-input-key-vs-type-20261012:end -->
