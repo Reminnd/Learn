@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 183
 last_checkpoint_at: '2026-10-12T07:25:46.738Z'
 last_checkpoint_reason: section_boundary
-pending_writeback: null
+pending_writeback:
+  transaction_id: ch03-q3-attempt1-20261012
+  reason: needs_review
+  phase: prepared
+  started_at: '2026-10-12T07:31:14.219Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-Q3-a1-review-20261012
+    operation: upsert
+    expected_change: Record Q3 repair gap.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-Q3-a1-review-20261012-qa
+    operation: upsert
+    expected_change: Record follow-up.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
