@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 185
 last_checkpoint_at: '2026-10-12T07:33:24.898Z'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch03-q3-a3-20261012
+  reason: needs_review
+  phase: prepared
+  started_at: '2026-10-12T07:48:27.926Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-Q3-a3-sku-value-20261012
+    operation: upsert
+    expected_change: Save Tool argument diagnosis and retest.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-Q3-a3-sku-value-qa-20261012
+    operation: upsert
+    expected_change: Save Tool argument diagnosis and retest.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch03-schema-valid-sku-not-found-20261012
+    operation: upsert
+    expected_change: Save Tool argument diagnosis and retest.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
