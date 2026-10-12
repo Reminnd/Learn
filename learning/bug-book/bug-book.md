@@ -303,3 +303,12 @@ Tool description误区：用户最初把get_stock描述为“查询商品详情�
 <!-- learn-agent:evidence:stage01-ch03-unpaired-call-retest-resolved-20261012:start -->
 L3-CHECK-19 attempt2: resolved. Unknown tool calls still require a matching error ToolMessage with the original call ID.
 <!-- learn-agent:evidence:stage01-ch03-unpaired-call-retest-resolved-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-parameters-as-metadata-20261012:start -->
+## Tool parameters不是一般元数据
+- 症状：解释name、description、parameters、handler时把parameters笼统称为“该tool需要的元数据”。
+- 正确模型：parameters是工具调用的输入Schema，定义字段名、类型、是否必填与约束；用于模型生成实参和Runtime/Schema验证。
+- 根因：把工具描述性元信息与可执行函数签名/输入约束混淆。
+- 修复：例如get_stock(sku: str)对应sku必填且类型为字符串；缺sku会在校验时抛ValidationError，而不是执行handler。
+- 状态：open，Chapter03 Q1 attempt2复检实际失败边界。
+<!-- learn-agent:evidence:stage01-ch03-parameters-as-metadata-20261012:end -->
