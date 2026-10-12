@@ -312,3 +312,12 @@ L3-CHECK-19 attempt2: resolved. Unknown tool calls still require a matching erro
 - 修复：例如get_stock(sku: str)对应sku必填且类型为字符串；缺sku会在校验时抛ValidationError，而不是执行handler。
 - 状态：open，Chapter03 Q1 attempt2复检实际失败边界。
 <!-- learn-agent:evidence:stage01-ch03-parameters-as-metadata-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-tool-input-schema-vs-output-20261012:start -->
+## Tool输入Schema与handler输出结果类型混淆
+- 症状：将get_price的parameters理解为要求handler返回int，认为返回str通过校验会导致ToolMessage错误。
+- 根因：把Tool输入字段Schema、Python的->int返回注解和ToolMessage.content的字符串表示混为一谈。
+- 修复：Tool args_schema由函数入参（例如sku:str）产生，用于输入校验；返回注解不是默认严格运行时输出校验。需要返回类型保证时对result单独做Pydantic验证；ToolMessage(content=str(result))将int转换为str属于正常处理。
+- 避免：定位错误时逐阶段检查模型Tool Call args、Pydantic输入校验、handler执行/业务校验、返回结果Schema及消息序列化。
+- 状态：open，等待Chapter03 Q1 attempt3。
+<!-- learn-agent:evidence:stage01-ch03-tool-input-schema-vs-output-20261012:end -->
