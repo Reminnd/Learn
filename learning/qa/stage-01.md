@@ -426,3 +426,7 @@ L3-CHECK-22 attempt2: partial. Provide specific example next.
 <!-- learn-agent:evidence:stage01-ch03-Q3-attempt2-qa-20261012:start -->
 - Chapter03 Q3 attempt2: needs_review — 识别args不匹配，但把product_id字段名错误说成str类型不符，并提出严格校验；实际"KB-001"是字符串，缺失必填sku导致ValidationError。下次复检正确args字典。
 <!-- learn-agent:evidence:stage01-ch03-Q3-attempt2-qa-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q3-a3-sku-value-qa-20261012:start -->
+Q3 attempt3: partial. Schema passes but handler cannot find SKU 001.
+<!-- learn-agent:evidence:stage01-ch03-Q3-a3-sku-value-qa-20261012:end -->
