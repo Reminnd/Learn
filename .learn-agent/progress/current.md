@@ -11,50 +11,38 @@ chapter_file: curriculum/stage-01/03-tool-basics.md
 note_pointer: stage-01/03-tool-basics.md
 qa_pointer: stage-01.md
 lifecycle_status: active
-learning_status: practice
+learning_status: mastered
 integrity:
   status: healthy
   missing: []
   reason: null
 mastery:
-  score: null
+  score: 84
   critical_questions_passed: true
-  dimension_floors_passed: false
+  dimension_floors_passed: true
   required_exercises_passed: true
   unresolved_critical_misconceptions: 0
-  mastered: false
-last_note_update: 2026-10-12：EX1综合代码中参数校验和handler执行正确，但曾硬编码return 199，需要改为返回handler真实结果。
-last_section: Chapter03 EX1 integrated Runtime return handling
+  mastered: true
+last_note_update: 2026-10-12：第3章Q1–Q3及EX1均有已提交的正式通过证据，Mastery Assessment为84/100，全部硬性条件达标。
+last_section: Chapter03 formal mastery assessment complete
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
 session_mode: learning
 session_status: active
-current_activity: practice
+current_activity: learning
 return_to:
   activity: knowledge_check
-  topic: Chapter03 mastery assessment / evidence validation
-  next_action: 修复Runtime返回值硬编码，改成返回handler执行的实际结果。
+  topic: Stage01 Chapter04 entry
+  next_action: 按curriculum/index.md进入第4章Tool Registry与工具工程化。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 197
-last_checkpoint_at: '2026-10-12T12:35:22.453Z'
-last_checkpoint_reason: needs_review
-pending_writeback:
-  transaction_id: stage01-ch03-mastery-Q1a3-Q2a4-Q3a4-20261012
-  reason: completion
-  phase: prepared
-  started_at: '2026-10-12T13:25:49.964Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/03-tool-basics.md
-    evidence_id: stage01-ch03-mastery-assessment-Q1a3-Q2a4-Q3a4-20261012
-    operation: upsert
-    expected_change: Record Chapter03 unique formal mastery assessment and close chapter notes.
-    verified: false
-    error: null
+checkpoint_version: 198
+last_checkpoint_at: '2026-10-12T13:25:49.964Z'
+last_checkpoint_reason: completion
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
@@ -68,9 +56,9 @@ project_selection_prompted: true
 completed:
 - 01-llm-message-prompt-langchain
 - 02-structured-output
-weak_points:
-- EX1综合Runtime初版曾写return 199硬编码，需返回handler真实业务结果并验证输出随数据变化。
-next_action: Chapter03 mastery assessment pending.
+- 03-tool-basics
+weak_points: []
+next_action: Chapter03 mastered; resolve canonical successor Chapter04 and resume learning.
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
