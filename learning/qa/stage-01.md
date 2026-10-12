@@ -459,3 +459,7 @@ EX1 Part2 attempt1 needs_review: reading args['sku'] is not a key-existence test
 <!-- learn-agent:evidence:stage01-ch03-EX1-type-check-a2-qa-20261012:start -->
 - EX1 Part3 attempt2: passed — correctly predicts PASS from not isinstance(valid_sku, str) == False. Proceeds to original runtime handler execution.
 <!-- learn-agent:evidence:stage01-ch03-EX1-type-check-a2-qa-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-ex1-handler-a1-passed-qa-20261012:start -->
+- EX1 Part4 attempt1: passed — using handler(**args) to call original Python function gets 199. Next integrated EX1 exercise to combine requiredness/type validation and handler, then verify mapping to LangChain @tool.
+<!-- learn-agent:evidence:stage01-ch03-ex1-handler-a1-passed-qa-20261012:end -->
