@@ -288,3 +288,7 @@ Student correctly predicted PASS for args={"sku":"KB-001"} because required=True
 ## EX1 Part3 attempt1: needs_review
 Given args={"sku":123}, rule["type"]=str, learner wrote isinstance(args[field],rule["type"]) as the condition inside if ...: raise TypeError. The isinstance call itself is correct, but its boolean needs inversion: for invalid integer 123 it returns False and would not raise, while a valid string would return True and be wrongly rejected. Correct condition is not isinstance(args[field],rule["type"]). Next: small retest on valid string input, then proceed to handler dispatch and LangChain tool comparison. Exercise EX1 not yet complete.
 <!-- learn-agent:evidence:ch03-ex1-required-pass-type-check-a1-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-EX1-type-check-a2-passed-20261012:start -->
+Chapter03 EX1 Part3 attempt2: passed. Learner correctly predicts PASS for args={"sku":"KB-001"}, rule["type"]=str, because isinstance(...) is True and its negation is False. This corrects the earlier inverse condition mistake. Learner now understands checking requiredness with field not in args and type errors using not isinstance(args[field],rule["type"]). Next step is to execute the callable handler from tool_spec["handler"] using a validated argument dictionary, and compare to LangChain @tool. EX1 as a whole is not yet passed.
+<!-- learn-agent:evidence:stage01-ch03-EX1-type-check-a2-passed-20261012:end -->
