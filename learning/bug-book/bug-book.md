@@ -325,3 +325,11 @@ L3-CHECK-19 attempt2: resolved. Unknown tool calls still require a matching erro
 <!-- learn-agent:evidence:stage01-ch03-tool-input-output-retested-20261012:start -->
 Q1 attempt3以get_price.invoke(12)作为不合规输入例子，配合此前L3-CHECK-20的ValidationError/handler执行边界判断，纠正把Tool输入参数Schema与价格返回类型混淆的误区。正式Q1通过。
 <!-- learn-agent:evidence:stage01-ch03-tool-input-output-retested-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q2-schema-mechanisms-20261012:start -->
+## args_schema与with_structured_output混同
+- 症状：误以为args_schema需要配置with_structured_output才能完成Pydantic校验。
+- 根因：把Tool参数输入校验与聊天模型生成结构化回答的输出校验混在一起。
+- 修复：@tool按函数签名推断args_schema，可用自定义Pydantic模型覆盖；model.with_structured_output(schema)用于限制/解析模型输出，而不是handler的入参。
+- 状态：open，等待Q2 attempt3复检。
+<!-- learn-agent:evidence:stage01-ch03-Q2-schema-mechanisms-20261012:end -->
