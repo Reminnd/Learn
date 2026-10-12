@@ -11,7 +11,7 @@ chapter_file: curriculum/stage-01/03-tool-basics.md
 note_pointer: stage-01/03-tool-basics.md
 qa_pointer: stage-01.md
 lifecycle_status: active
-learning_status: learning
+learning_status: qa
 integrity:
   status: healthy
   missing: []
@@ -23,45 +23,26 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-12：L3-CHECK-22 attempt2指出压缩可能损失新角度，但仍需一个具体的低频重要例子。
-last_section: 3.18 ToolMessage压缩信息丢失权衡
+last_note_update: 2026-10-12：L3-CHECK-22 attempt3以无线键盘续航为实例说明低频重要评论遗漏风险，ToolMessage大小与Trade-off通过；进入章节Q&A。
+last_section: Chapter03章节验收 Q1：Tool四要素的因果关系
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
 session_mode: learning
 session_status: active
-current_activity: learning
+current_activity: qa
 return_to:
   activity: knowledge_check
-  topic: L3-CHECK-22 / attempt 3
-  next_action: 举例说明评价压缩遗漏的低频但影响购买决策的键盘问题。
+  topic: Chapter03-Q1 / attempt 1
+  next_action: 让学员解释Tool name、description、parameters、handler为何必须清晰分工，并举一个边界或失败条件。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 175
-last_checkpoint_at: '2026-10-12T03:40:48.325Z'
-last_checkpoint_reason: needs_review
-pending_writeback:
-  transaction_id: stage01-ch03-check22-a3-20261012
-  reason: section_boundary
-  phase: prepared
-  started_at: '2026-10-12T03:45:09.845Z'
-  targets:
-  - asset_key: notes.root
-    relative_pointer: stage-01/03-tool-basics.md
-    evidence_id: stage01-ch03-L3-CHECK22-attempt3-pass-20261012
-    operation: upsert
-    expected_change: Record low-frequency keyboard battery life example and begin Chapter 03 formal questions.
-    verified: false
-    error: null
-  - asset_key: qa.stage
-    relative_pointer: null
-    evidence_id: stage01-ch03-L3-CHECK22-attempt3-ledger-20261012
-    operation: upsert
-    expected_change: Record check 22 passed and next Q1 about Tool design requirements.
-    verified: false
-    error: null
+checkpoint_version: 176
+last_checkpoint_at: '2026-10-12T03:45:09.845Z'
+last_checkpoint_reason: section_boundary
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
@@ -76,8 +57,8 @@ completed:
 - 01-llm-message-prompt-langchain
 - 02-structured-output
 weak_points:
-- 已认识大ToolMessage的上下文风险，仍需理解分批汇总的覆盖偏差、信息损失及Trade-off。
-next_action: L3-CHECK-22 attempt3：请学员举一个少数评价透露的关键问题，完成ToolMessage压缩Trade-off说明。
+- ToolMessage压缩取舍已通过复检；正式章验收Q1/Q2/Q3与EX1契约仍待独立核验。
+next_action: Chapter03 Q1（critical）— 解释为什么Tool需要name、description、parameters、handler，以及缺失/模糊导致的工程失败。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
