@@ -381,3 +381,7 @@ L3-CHECK-15: passed. User ran DeepSeek multi-tool test with get_stock=12 and get
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK19a2-20-21-ledger-20261012:start -->
 Checks 19, 20, 21 passed. ToolMessage ID, ValidationError, and diagnostic logging.
 <!-- learn-agent:evidence:stage01-ch03-L3-CHECK19a2-20-21-ledger-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK22-attempt1-qa-20261012:start -->
+L3-CHECK-22 attempt1: needs_review. Correct risk: oversized review ToolMessage uses context and dilutes key points. Suggested batching/vector similarity need a strategy for overall theme coverage and a tradeoff discussion. Next: risks of only returning frequent pros/cons themes.
+<!-- learn-agent:evidence:stage01-ch03-L3-CHECK22-attempt1-qa-20261012:end -->
