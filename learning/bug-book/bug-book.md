@@ -353,3 +353,12 @@ A well-typed input SKU can still fail the business data lookup. Example: sku=001
 <!-- learn-agent:evidence:stage01-ch03-Q3-key-vs-type-resolved-20261012:start -->
 Resolved in Q3 attempt4. Learner supplied required sku with real product ID KB-001; input validated and handler returned 199.
 <!-- learn-agent:evidence:stage01-ch03-Q3-key-vs-type-resolved-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-EX1-schema-dict-handler-reference-20261012:start -->
+## EX1 Tool spec data declarations versus Python syntax and function references
+- Symptom: parameters=sku: str inside dict literal, handler="raw_get_price" as a string.
+- Cause: mixed Python parameter annotation syntax into a dict value; confused symbol string with callable function object.
+- Fix: parameters must be a dict describing input fields, types and requiredness; handler must hold the raw_get_price function reference without quotes.
+- Prevent: check type(tool_spec["handler"]) and callable(...), and inspect parameters as data before runtime validation.
+- Status: open, awaiting EX1 Part1 attempt2.
+<!-- learn-agent:evidence:stage01-ch03-EX1-schema-dict-handler-reference-20261012:end -->
