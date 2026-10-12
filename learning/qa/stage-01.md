@@ -397,3 +397,7 @@ L3-CHECK-22 attempt2: partial. Provide specific example next.
 <!-- learn-agent:evidence:stage01-ch03-Q1-a1-qa-20261012:start -->
 - Chapter03 Q1 / attempt1: needs_review. 学员能解释name、description、handler的主要用途以及请求与执行分离；但将parameters泛称为元数据，未明确它是输入Schema，也尚未举出定义错误如何导致失败的具体案例。下一题Q1 attempt2：补充一个实际故障示例。
 <!-- learn-agent:evidence:stage01-ch03-Q1-a1-qa-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q1-a2-input-vs-output-qa-20261012:start -->
+- Chapter03 Q1 attempt2: needs_review — 举例把parameters输入Schema当作返回值int类型验证，并误以为ToolMessage接收str就必然报错。正确区分输入sku约束、handler输出以及ToolMessage序列化；下一次Q1 attempt3只举一个会被get_price输入Schema拒绝的调用及错误阶段。
+<!-- learn-agent:evidence:stage01-ch03-Q1-a2-input-vs-output-qa-20261012:end -->
