@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 176
 last_checkpoint_at: '2026-10-12T03:45:09.845Z'
 last_checkpoint_reason: section_boundary
-pending_writeback: null
+pending_writeback:
+  transaction_id: stage01-ch03-Q1-a1-20261012
+  reason: needs_review
+  phase: prepared
+  started_at: '2026-10-12T03:52:09.637Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-Q1-a1-partial-20261012
+    operation: upsert
+    expected_change: Record Q1 partially correct: tool name/description and runtime mapping, needs schema specificity and concrete failure.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-Q1-a1-qa-20261012
+    operation: upsert
+    expected_change: Record Q1 attempt1 needs_review, follow up with failure example.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch03-parameters-as-metadata-20261012
+    operation: upsert
+    expected_change: Record tool parameters are input schema, not generic metadata.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
