@@ -360,5 +360,9 @@ Resolved in Q3 attempt4. Learner supplied required sku with real product ID KB-0
 - Cause: mixed Python parameter annotation syntax into a dict value; confused symbol string with callable function object.
 - Fix: parameters must be a dict describing input fields, types and requiredness; handler must hold the raw_get_price function reference without quotes.
 - Prevent: check type(tool_spec["handler"]) and callable(...), and inspect parameters as data before runtime validation.
-- Status: open, awaiting EX1 Part1 attempt2.
+- Status: improving; handler now a callable and parameters type map valid, but explicit requiredness absent; EX1 Part1 attempt3 pending.
 <!-- learn-agent:evidence:stage01-ch03-EX1-schema-dict-handler-reference-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-EX1-params-required-followup-20261012:start -->
+- EX1 Part1 attempt2: corrected handler reference and dict syntax. Still must explicitly declare sku requiredness, or clearly state that the hand-coded runtime treats every declared key as required.
+<!-- learn-agent:evidence:stage01-ch03-EX1-params-required-followup-20261012:end -->
