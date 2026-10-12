@@ -253,3 +253,7 @@ L3-CHECK-22 attempt2: needs_review. Learner noted that review aggregation can lo
 ## Chapter03 Q3 / attempt2 — needs_review
 学生认为get_price的Tool Call {"product_id":"KB-001"}“与str不匹配，严格校验”。这里传入的值"KB-001"本身是str，真正错误是参数名字不符合get_price(sku:str)要求，缺少必填字段sku（若额外字段不允许，还可能报多余字段）。类型严格校验无法解决键名错误；在Pydantic输入Schema阶段会因sku缺失而抛ValidationError，handler并未执行。下一题Q3 attempt3请学员自行写正确的call["args"]字典，使get_price按SKU正常运行，再完成Q3总结与EX1验收。
 <!-- learn-agent:evidence:stage01-ch03-Q3-attempt2-field-vs-type-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q3-a3-sku-value-20261012:start -->
+Q3 attempt3: needs_review. The input sku is a valid string, but the product key 001 is not in the prices dictionary. Handler raises KeyError after Schema validation.
+<!-- learn-agent:evidence:stage01-ch03-Q3-a3-sku-value-20261012:end -->
