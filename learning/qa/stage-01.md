@@ -372,3 +372,8 @@ L3-CHECK-15: passed. User ran DeepSeek multi-tool test with get_stock=12 and get
 - L3-CHECK-17 passed: use except KeyError to isolate missing SKU.
 - L3-CHECK-18 attempt1 needs_review: unknown tool name in tools_by_name[name] raises KeyError outside try. Contrast dict.get returning None. Retest next.
 <!-- learn-agent:evidence:stage01-ch03-L3-check16-18-qa-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-check18a2-19a1-qa-20261012:start -->
+- L3-CHECK-18 attempt2: passed — 工具名未知时dict.get(...)返回None，打印UNKNOWN_TOOL。
+- L3-CHECK-19 attempt1: needs_review — 正确判定continue使未知工具无ToolMessage；误以为DeepSeek会不断重试。缺失关联工具结果可能导致请求校验失败；应给该call["id"]返回失败ToolMessage后继续。
+<!-- learn-agent:evidence:stage01-ch03-check18a2-19a1-qa-20261012:end -->
