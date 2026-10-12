@@ -257,3 +257,7 @@ L3-CHECK-22 attempt2: needs_review. Learner noted that review aggregation can lo
 <!-- learn-agent:evidence:stage01-ch03-Q3-a3-sku-value-20261012:start -->
 Q3 attempt3: needs_review. The input sku is a valid string, but the product key 001 is not in the prices dictionary. Handler raises KeyError after Schema validation.
 <!-- learn-agent:evidence:stage01-ch03-Q3-a3-sku-value-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch03-Q3-attempt4-passed-20261012:start -->
+Q3 passed: corrected args to sku=KB-001 and obtained 199. EX1 next.
+<!-- learn-agent:evidence:stage01-ch03-Q3-attempt4-passed-20261012:end -->
