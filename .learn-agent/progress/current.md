@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 195
 last_checkpoint_at: '2026-10-12T12:03:29.644Z'
 last_checkpoint_reason: section_boundary
-pending_writeback: null
+pending_writeback:
+  transaction_id: ch03-ex1-integrated-a1-20261012
+  reason: needs_review
+  phase: prepared
+  started_at: '2026-10-12T12:35:22.453Z'
+  targets:
+  - asset_key: notes.root
+    relative_pointer: stage-01/03-tool-basics.md
+    evidence_id: stage01-ch03-ex1-integrated-attempt1-hardcoded-20261012
+    operation: upsert
+    expected_change: Record integrated runtime output handling check.
+    verified: false
+    error: null
+  - asset_key: qa.stage
+    relative_pointer: null
+    evidence_id: stage01-ch03-ex1-integrated-attempt1-hardcoded-20261012-qa
+    operation: upsert
+    expected_change: Record integrated runtime output handling check.
+    verified: false
+    error: null
+  - asset_key: bugs.book
+    relative_pointer: null
+    evidence_id: stage01-ch03-ex1-integrated-attempt1-hardcoded-20261012-bug
+    operation: upsert
+    expected_change: Record integrated runtime output handling check.
+    verified: false
+    error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-03
 deepseek_route_prompted_for:
