@@ -42,7 +42,19 @@ resume_contract:
 checkpoint_version: 200
 last_checkpoint_at: '2026-10-13T06:27:01.939Z'
 last_checkpoint_reason: manual
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20261013-stage01-retro-review-linkfix-v1
+  reason: manual
+  phase: prepared
+  started_at: '2026-10-13T06:30:09.940Z'
+  targets:
+    - asset_key: notes.root
+      relative_pointer: stage-01/retroactive-review-20261013.md
+      evidence_id: stage01-supplemental-20261013-linkfix-v1
+      operation: upsert
+      expected_change: 更正定向补课记录中的课程链接相对路径
+      verified: false
+      error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-04
 deepseek_route_prompted_for:
