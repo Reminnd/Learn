@@ -57,6 +57,8 @@ Advanced Track 覆盖 Stage 10–14。完成 Core Path 后，由学习者明确�
 
 配套的 [Agent范式与40章映射](curriculum/agent-paradigm-map.md) 覆盖ReAct、Plan-and-Execute、Routing、Reflection、Supervisor等；[真实项目源码映射学习法](shared/project-source-learning.md) 用于从学习者提供的Vibe Coding项目中追踪函数、调用链和工程设计，而不把AI产出的项目误记为本人手写。
 
+已登记首批六个参考项目：[Coding Agent开源源码学习案例库](curriculum/project-source-casebook.md)，包含Pi、Codex、DeepSeek Harness、Kimi CLI（历史Python版）、Kimi Code（新版TypeScript）以及非官方Claude Code恢复版的具体源码入口与学习优先级。
+
 此路线是补充计划，不改变 Stage 01–14 的 canonical route、章节验收、学习者现有进度，也不自动启动长期项目。
 
 ## Runtime initialization
