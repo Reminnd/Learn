@@ -56,6 +56,20 @@
 
 注意：TypeScript类型检查在运行时会消失，`interface`不是请求数据校验；Pydantic和Zod都可以用于**运行时校验**。不要因为要学习一个设计模式就强行把简单代码抽象成多层工厂。
 
+## 项目源码锚点（已核对的6个开源案例）
+
+[源码案例库](project-source-casebook.md)记录了6个仓库的版本SHA、真实代码入口、课程映射与风险说明。以下只是**教学选择建议**，不是这些项目已通过完整端到端审核的声明。
+
+| 当前范式/工程模式 | 建议源码对照 | 要解释的具体问题 |
+|---|---|---|
+| Tool Registry、Schema、Adapter（Stage 01/03–04） | Python Kimi CLI `KimiToolset.add/find` ↔ TypeScript Kimi Code `IAgentToolRegistryService`、AJV参数校验 | 如何把未知名称/非法参数拦在执行前？ |
+| ReAct式Agent Loop（Stage 01/05） | Pi `agentLoop/runToolCall` ↔ Kimi CLI `KimiSoul._agent_loop`；进阶阅读DeepSeek `ReactLoopAgent` | 工具结果怎样返回模型，何时停止/取消？ |
+| Parallelization（Stage 07） | DeepSeek `executeToolCalls` ↔ Kimi Code `ToolScheduler` | 并行许可、互斥/访问冲突和错误恢复如何处理？ |
+| Harness、Plugin与安全（Stage 09/12） | DeepSeek Harness插件层和PTC Node进程边界 ↔ Pi简约Agent Core/扩展机制 | 哪些由Agent做，哪些属于Host/Sandbox？ |
+| SDK、事件与跨语言边界（Stage 10/13） | Codex TypeScript SDK `Thread.runStreamed` ↔ Kimi Code MCP连接管理 | 事件流如何传递、失败/取消由谁负责？ |
+
+注意：Codex核心是Rust，`claude-code-rev`是非官方源码恢复，旧Python Kimi CLI已归档，不能按“当前官方同等实现”直接比较。要引入多个项目时**仅选当前知识点最有帮助的1～2个文件**。
+
 ## 3. 推荐的“同一个知识点”学习证据
 
 1. **概念**：用自己的话解释问题、控制流、适用范围及不适用场景。
