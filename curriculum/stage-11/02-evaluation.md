@@ -59,6 +59,12 @@ Q&A
 - `shared/qa-rubric.md`（仅用于反馈）
 - `shared/chapter-contract.md` 与 `shared/mastery-rubric.md`（仅在练习、Q&A 或掌握判定时）
 
+## 补充范式与源码对照（不新增验收项）
+
+- **Evaluator-Optimizer / Reflection（P0跨章回访）**：区别“模型建议改进”与“独立的可重复测试”；在这里补充评测集、工具轨迹、调用成本、成功率和回归。
+- **真实项目阅读点**：找test/eval入口、fake worker、事件/轨迹记录、通过失败判据；检查评价器是否能被样本污染或因自身偏差而误判。
+- 可使用[Agent范式映射](../agent-paradigm-map.md)与[项目源码学习法](../../shared/project-source-learning.md)；现有章节mastery由原契约负责。
+
 ## Project Track 集成提示
 
 - 如果 `project_track_status != active`：本章只作为可复用能力学习，不绑定任何长期项目，不使用旧的默认项目。
