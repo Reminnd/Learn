@@ -61,6 +61,12 @@ Q&A
 - `shared/qa-rubric.md`（仅用于反馈）
 - `shared/chapter-contract.md` 与 `shared/mastery-rubric.md`（仅在练习、Q&A 或掌握判定时）
 
+## 新增Agent范式与源码对照（不新增验收项）
+
+- **Tool Calling ≠ ReAct（P0补充）**：`bind_tools`或模型输出`tool_calls`仅表示提出可执行工具请求；Runtime还需校验、查找、执行、回填Tool结果。只有行动/观察反复进入下一轮模型决策时才形成ReAct式Agent Loop。
+- **真实源码实例**：[Kimi CLI Python `KimiToolset.add/find`](https://github.com/MoonshotAI/kimi-cli/blob/9ab1286b8fe4e6bcd116949a27ce5e0ac3389c82/src/kimi_cli/soul/toolset.py)用于认识Tool定义/注册/查找边界。该仓库已归档，不作为现行依赖；完整`_agent_loop`留给第05章。
+- **已完成学习者**：按[Stage 01专项补课 R03](retroactive-review-20261013.md)只检验新加的范式边界和真实工程调用链，不要求重写此前已验收的`@tool`练习，也不更改mastery。
+
 ## Project Track 集成提示
 
 - 如果 `project_track_status != active`：本章只作为可复用能力学习，不绑定任何长期项目，不使用旧的默认项目。
