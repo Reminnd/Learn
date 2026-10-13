@@ -61,6 +61,12 @@ Q&A
 - `shared/qa-rubric.md`（仅用于反馈）
 - `shared/chapter-contract.md` 与 `shared/mastery-rubric.md`（仅在练习、Q&A 或掌握判定时）
 
+## 新增跨语言契约对照（不新增验收项）
+
+- **Python Pydantic ↔ TypeScript运行时Schema（P0补充）**：Python可用Pydantic校验实际输入；TS的`interface/type`是静态类型声明，无法单靠它阻止HTTP/模型返回的错误类型在运行时流入handler；需AJV/Zod等运行时校验。
+- **真实源码实例**：[Kimi Code TypeScript `validateToolArgs`](https://github.com/MoonshotAI/kimi-code/blob/afd95f64a5444b649a4cc33504513bf88e4c54ba/packages/agent-core-v2/src/tool/args-validator.ts)，按需阅读编译Schema与验证外部数据的函数边界，不假定学习者已经掌握TypeScript语法。
+- **已完成学习者**：按[Stage 01专项补课 R02](retroactive-review-20261013.md)完成新增对照；原本的Structured Output、Pydantic与真实API验证证据继续有效，不添加新的mastery门槛。
+
 ## Project Track 集成提示
 
 - 如果 `project_track_status != active`：本章只作为可复用能力学习，不绑定任何长期项目，不使用旧的默认项目。
