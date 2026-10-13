@@ -55,6 +55,8 @@ Advanced Track 覆盖 Stage 10–14。完成 Core Path 后，由学习者明确�
 
 详见 [AI全栈与Agent产品开发补充学习路线](curriculum/ai-fullstack-agent-roadmap.md)，其中还列出可供选择的 **TypeScript Gateway＋Python执行器（方案B）** 项目实践载体。
 
+配套的 [Agent范式与40章映射](curriculum/agent-paradigm-map.md) 覆盖ReAct、Plan-and-Execute、Routing、Reflection、Supervisor等；[真实项目源码映射学习法](shared/project-source-learning.md) 用于从学习者提供的Vibe Coding项目中追踪函数、调用链和工程设计，而不把AI产出的项目误记为本人手写。
+
 此路线是补充计划，不改变 Stage 01–14 的 canonical route、章节验收、学习者现有进度，也不自动启动长期项目。
 
 ## Runtime initialization
