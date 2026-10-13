@@ -63,6 +63,14 @@ Q&A
 - `shared/qa-rubric.md`（仅用于反馈）
 - `shared/chapter-contract.md` 与 `shared/mastery-rubric.md`（仅在练习、Q&A 或掌握判定时）
 
+## 补充范式与源码对照（不新增验收项）
+
+- **ReAct（P0）**：对应“模型选择动作/工具 → 执行 → Observation（工具返回）→ 更新上下文并再次决策”。分析可见的工具调用与执行事实，不要求暴露模型隐藏的内部思考文本。
+- **Tool-Calling Agent与ReAct的区别**：Tool Calling主要是模型/应用的接口能力，ReAct是循环式推理与行动策略；使用工具调用不一定等于完整ReAct实现。
+- **Workflow vs Agent**：固定`prompt → validate → output`链路可由代码编排；当下一步工具由模型动态决定时才需要Agent Loop。比较开销、终止条件和错误传播。
+- **真实项目阅读点**：寻找模型请求、`tool_calls`解析、Registry查找、handler、观察结果回传、`max_turns`/取消和退出条件；追踪一次真实链路，不按函数名称推断范式。
+- 案例和P0/P1分级按需参照[Agent范式映射](../agent-paradigm-map.md)与[项目源码学习法](../../shared/project-source-learning.md)；本章EX/Q&A/mastery契约保持不变。
+
 ## Project Track 集成提示
 
 - 如果 `project_track_status != active`：本章只作为可复用能力学习，不绑定任何长期项目，不使用旧的默认项目。
