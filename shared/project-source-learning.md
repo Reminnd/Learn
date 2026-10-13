@@ -72,7 +72,16 @@
 
 遇到动态代码执行时，**不能**用任意代码在宿主机的演示替代安全设计。未满足安全隔离与资源约束时，只使用假执行器、可信固定样例或静态阅读。
 
-## 5. 待用户提供的项目清单（先不预设项目）
+## 5. 已提供的开源源码案例与后续项目清单
+
+用户已提供首批6个公开源码参考仓库，核对的版本、真实源码路径及原课程对应位置记录在：[Coding Agent开源项目源码学习案例库](../curriculum/project-source-casebook.md)。
+
+按需匹配当前知识点，例如：**Tool Registry**优先比较Python Kimi CLI的`KimiToolset`与TypeScript Kimi Code的`IAgentToolRegistryService`；**Agent Loop**优先读Pi的`agentLoop`/ `runToolCall`；**Harness**优先读DeepSeek插件式实现；**SDK事件**先看Codex的TypeScript`Thread.runStreamed`。
+
+案例库包含第三方/官方开源项目，**不得推断用户拥有、亲自开发或Vibe Coding生成了这些上游仓库**。它们只作为阅读参考；日后用户还可以提供自己真实Vibe Coding的项目或Fork，单独记录本人修改部分和实际知识证据。
+
+### 其他项目后续录入规则
+
 
 用户之后可随时提供多个项目；不必一次填写完整表格。每个项目可以逐步登记以下信息：
 
