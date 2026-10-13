@@ -38,6 +38,16 @@
 
 具体源码学习卡和未来项目录入规则见[真实项目源码映射学习法](../shared/project-source-learning.md)。
 
+## 已选开源源码学习载体
+
+- 首批6个项目与经过核对的文件/函数入口见：[Coding Agent开源源码学习案例库](project-source-casebook.md)。
+- **Python阶段**：优先使用旧版Kimi CLI中`KimiToolset`、`KimiSoul._agent_loop`作为Python设计对照（**历史源码，不作为新产品依赖**）。
+- **TypeScript阶段**：优先使用Pi Agent Loop、Kimi Code Tool Registry与Schema校验；DeepSeek Harness用于进一步研究插件化、Agent Runtime与动态工具执行。
+- **产品集成阶段**：Codex TypeScript SDK的`Thread.runStreamed`可用于学习API与流式事件边界，Kimi Code MCP连接管理用于MCP联调概念；不能从CLI源码推断已经掌握FastAPI业务服务。
+- **安全/工程化阶段**：对照DeepSeek PTC Node进程隔离与Pi权限说明；首版Python Executor仍须独立设计可信的Python沙箱。
+- `claude-code-rev`是非官方恢复版，作为可选的TypeScript工具抽象案例；上游六仓库只作为**公开代码参考**，不推断由学习者亲自开发或Vibe Coding生成。
+- 所有教学仍按当前章节、一处真实源码入口、一个问题推进；无需重写这些大型开源项目，不自动激活它们为Project Track。
+
 ## 四阶段路线
 
 ### 阶段1：完成 Python Agent 基础与 FastAPI API
