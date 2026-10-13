@@ -2,14 +2,41 @@
 
 > **性质：职业发展与项目驱动补充路线（非课程的 canonical route）。**
 >
-> 本路线覆盖 Python Agent、FastAPI、TypeScript、React、Node.js 及工程化交付。它与 [课程索引](index.md) 中 Stage 01–14、40 章的唯一 canonical route 并行，不更改章节顺序、先修条件、mastery 判定或任何已提交的学习进度。只有学习者明确选择后才启动相应长期 Project Track；不能因本文件存在而自动绑定项目或跳章。
+> 本路线覆盖 Python Agent、FastAPI、TypeScript、React、Node.js 及工程化交付。通过[Agent范式与章节映射](agent-paradigm-map.md)和[真实项目源码学习法](../shared/project-source-learning.md)**融入** [课程索引](index.md) 中 Stage 01–14 的既有40章；它是配套实践路线而非新Track，不更改章节顺序、先修条件、mastery 判定或任何已提交的学习进度。只有学习者明确选择后才启动相应长期 Project Track；不能因本文件存在而自动绑定项目或跳章。
 
 ## 目标与学习策略
 
 - **求职优先级**：尽快获得 AI Agent 开发实习，同时积累可迁移的业务后端能力。
 - **目标能力**：能够解释 Agent Loop、Tool Calling、MCP 与流式事件，开发可用的服务端 API、TypeScript 前端，并完成数据库、鉴权、部署和自动化测试。
-- **学习方式**：一个持续演进的项目贯穿各阶段；Python Agent 和 FastAPI 先产出最小闭环，再逐步引入 TypeScript。Stage 04 为工程化深化，但校验、基础错误处理和单元测试应从 Stage 01 起执行。
+- **学习方式**：可以使用**一个或多个用户提供的Vibe Coding工程**作真实代码阅读与调用链映射，不预设项目必须由学习者手写；Python Agent 和 FastAPI 先理解最小闭环，再逐步引入 TypeScript。Stage 04 为工程化深化，但校验、基础错误处理和单元测试应从 Stage 01 起理解与实践。
 - **学习进度**：以已有已提交的课程状态为准。本文件不推测、迁移或覆盖当前正在学习的章节。
+
+## 与当前40章课程的融合方式
+
+不额外设40章之外的必修课，而是在原课程遇到相应知识点时插入“**原理/范式 → 框架/函数 → 用户提供的项目源码 → 调用链/失败路径 → 独立解释**”这一对照。
+
+| 四阶段AI全栈实践 | 原有课程对应位置 | 特别补充的Agent范式及工程模式 |
+|---|---|---|
+| **① Python Agent + FastAPI** | Stage 01 Tool Registry/Agent Loop；Stage 02 State/Node/Router；Stage 13的FastAPI仅作**提前体验**，不算解锁该章 | ReAct、Tool Calling、Prompt Chaining、Routing、Pydantic契约、循环终止、状态机 |
+| **② TypeScript + React + Node.js** | Stage 01结构化输出、Tool工程；Stage 09 Harness；TS/React作为并行应用实践 | JS异步/Promise、Zod与Pydantic对照、Strategy/Adapter、Registry/Factory、依赖注入 |
+| **③ 联通完整Agent产品** | Stage 02状态/持久化/HITL；Stage 07 Multi-Agent；Stage 09 Harness；Stage 10 MCP | Handoff、Supervisor、事件驱动、跨进程Gateway、SSE/取消、职责边界 |
+| **④ 业务后端与可靠性** | Stage 05 Planning/Verification；Stage 11 Eval；Stage 12 Security；Stage 13服务化 | Plan-and-Execute、Reflection/Evaluator-Optimizer、幂等、Repository/Transaction、鉴权、沙箱、测试与可观测性 |
+
+范式完整清单、P0/P1/P2优先级和论文/官方资料：[Agent范式与40章映射](agent-paradigm-map.md)。**ReWOO、Reflexion、ToT/LATS只是按需研究对照，不需要为它们新建必修阶段。**
+
+## 真实工程中的学习方法（Vibe Coding项目适用）
+
+项目由AI生成或主要通过Vibe Coding形成，**不影响其作为优秀源码案例**。你现在的学习目标不是重新手写整套项目，而是：
+
+1. 学一个新函数/范式（例如：`ToolRegistry.invoke`、ReAct式循环、`ExecutorAdapter`、SSE事件）。
+2. 在**你之后列举的项目**里找到实际存在的对应代码；若项目暂不存在该模式，就如实指出，不强行贴标签。
+3. 沿着`入口 → schema校验 → 路由/状态 → tool或executor → 结果/错误 → UI/API`追踪一条真实调用链。
+4. 把当前实现与最小Python原理版、LangChain/LangGraph版或TypeScript实现做对照，解释为什么需要该抽象，什么时候不用。
+5. 一次只检验一道能反映理解程度的问题；按需要选择阅读已有测试、预测异常行为或小范围验证，而**不是要求手敲整个项目**。
+
+教学时区分“看到源码/能解释/有实际验证/亲自编写”；不能把AI生成项目的已有成果直接记为学习者独立开发成果。项目先作为**可选案例集合**，不预先绑定为正式长期Project Track，课程掌握仍按原有章节契约判定。
+
+具体源码学习卡和未来项目录入规则见[真实项目源码映射学习法](../shared/project-source-learning.md)。
 
 ## 四阶段路线
 
