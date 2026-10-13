@@ -62,6 +62,13 @@ Q&A
 - `shared/qa-rubric.md`（仅用于反馈）
 - `shared/chapter-contract.md` 与 `shared/mastery-rubric.md`（仅在练习、Q&A 或掌握判定时）
 
+## 补充范式与源码对照（不新增验收项）
+
+- **Plan-and-Execute（P0）**：`Planner → 结构化计划/依赖 → Executor → 任务结果 → Replan/Finish`；与ReAct的逐工具回合决策比较延迟、token开销、执行偏离与计划更新。
+- **ReWOO（P2研究对照）**：规划与工具观察解耦以减少反复规划的开销；本章只要求辨别思路和边界，**不强制复刻论文的完整算法**。
+- **真实项目阅读点**：定位Plan/Task结构、Planner函数、Worker/Executor调度、子任务依赖与失败状态；看重实际`plan_id/task_id`和执行顺序，而不是类名。
+- 模式映射参见[Agent范式映射](../agent-paradigm-map.md)；不修改本章EX/Q&A/mastery。
+
 ## Project Track 集成提示
 
 - 如果 `project_track_status != active`：本章只作为可复用能力学习，不绑定任何长期项目，不使用旧的默认项目。
