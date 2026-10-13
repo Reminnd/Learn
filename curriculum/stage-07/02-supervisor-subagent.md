@@ -60,6 +60,13 @@ Q&A
 - `shared/qa-rubric.md`（仅用于反馈）
 - `shared/chapter-contract.md` 与 `shared/mastery-rubric.md`（仅在练习、Q&A 或掌握判定时）
 
+## 补充范式与源码对照（不新增验收项）
+
+- **Supervisor / Orchestrator-Workers（P1）**：中心Agent如何选择子任务、拆分上下文、分派Worker并合并结果；与固定工作流的静态分支、单Agent多工具作区分。
+- **Agent as Tool**：子Agent像工具一样返回结果给调用方；`Handoff`则可能转交控制权。先判定谁拥有下一步决策权，再给实际代码贴模式标签。
+- **真实项目阅读点**：定位scheduler/dispatcher、角色权限、worker adapter、任务结果合成、上下文隔离；不要因为存在多个模型就默认是多Agent架构。
+- 对照见[Agent范式映射](../agent-paradigm-map.md)，章节EX/Q&A/mastery不变。
+
 ## Project Track 集成提示
 
 - 如果 `project_track_status != active`：本章只作为可复用能力学习，不绑定任何长期项目，不使用旧的默认项目。
