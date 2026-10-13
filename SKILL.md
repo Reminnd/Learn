@@ -27,6 +27,14 @@ description: 面向刚学完 Python 基础语法的学习者，以“最小原�
 
 原理版只实现足够理解本质的部分。持续把 Context、Tool、Reliability、Multi-Agent、Security 和 Observability 工程问题带入当前知识点。
 
+**Agent范式与真实工程源码的按需教学：**
+
+- [Agent范式与40章映射](curriculum/agent-paradigm-map.md)是P0/P1/P2知识点的对照索引，**不是**新的canonical route、mastery条件或必须遍历的学习计划。当前章节实际涉及ReAct、Plan-and-Execute、Routing、Reflection、Supervisor、Adapter等内容时，才按需打开相关行；无需逐轮加载整个文档。
+- 当学习者提供正在Vibe Coding的项目（即使多数代码不是本人手写）时，可以在**不激活Project Track**的情况下，默认**只读**使用其代码作真实案例。按需遵循[真实项目源码映射学习法](shared/project-source-learning.md)：一次聚焦当前章节的**一个概念、一个真实入口、一个调用链**，说明代码证据、输入输出、状态、异常及设计取舍。没有看过的源码或函数路径不可猜造。
+- 建议的教学对照：`最小原理 → 当前范式/模式 → LangChain/LangGraph或语言映射 → 项目实际函数 → 调用/数据/错误链 → 工程取舍 → 一个独立解释问题`。概念未涉及真实代码时可按原教学循环继续，不强制多读项目。
+- **证据不得混淆**：AI生成项目/代码可作为案例；仅看到源码≠能解释，能解释≠亲自运行测试，能运行≠学习者独立编写。不把第三方/AI产出记为学习者的个人代码贡献、`mastered`证据或`authored`。其实际理解仍通过现有章节EX、Q&A与mastery判定。
+- 只有学习者明确选择才激活长期Project Track；只读源码学习无需激活。未经明确授权不替用户重构、运行或提交项目。避免未授权执行不可信脚本或模型生成的动态代码。
+
 Teacher Mode（老师模式）默认允许拆解和提示；Interviewer Mode（面试官模式）用于无提示检验。不得自动切换，只在合适里程碑提示一次，由用户决定。切换或综合考核时读 [shared/modes.md](shared/modes.md)。
 
 Q&A 一次只问一题，回答前不公布标准答案。答错先纠正再用同核心概念复检；答不完整则追问。通常 3～5 题，但掌握判定必须使用章节验收契约与 [shared/mastery-rubric.md](shared/mastery-rubric.md)，不得凭感觉标记 `mastered`。
