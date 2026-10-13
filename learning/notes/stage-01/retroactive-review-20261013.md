@@ -1,7 +1,7 @@
 <!-- learn-agent:evidence:stage01-supplemental-20261013-plan-v1:start -->
 # Stage 01｜新增知识专项补课记录（2026-10-13）
 
-> 该文件位于manifest的`notes.root`之下，维护**已完成章节新增知识**的补课计划与后续答题证据；不是新的正式章节，不替代旧章已经提交的mastery记录。当前状态只表示**补课已安排，尚无通过证据**。课程说明见[定向补课教材](../../curriculum/stage-01/retroactive-review-20261013.md)（从仓库根目录引用：`curriculum/stage-01/retroactive-review-20261013.md`）。
+> 该文件位于manifest的`notes.root`之下，维护**已完成章节新增知识**的补课计划与后续答题证据；不是新的正式章节，不替代旧章已经提交的mastery记录。当前状态只表示**补课已安排，尚无通过证据**。课程说明见[定向补课教材](../../../curriculum/stage-01/retroactive-review-20261013.md)（从仓库根目录引用：`curriculum/stage-01/retroactive-review-20261013.md`）。
 
 ## 补课队列（所有通过状态必须以后续用户回答的真实证据为准）
 
