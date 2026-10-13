@@ -59,6 +59,12 @@ Q&A
 - `shared/qa-rubric.md`（仅用于反馈）
 - `shared/chapter-contract.md` 与 `shared/mastery-rubric.md`（仅在练习、Q&A 或掌握判定时）
 
+## 补充范式与源码对照（不新增验收项）
+
+- **固定RAG与Agentic RAG（P1对照）**：先掌握`retrieve → context → model`固定链路，再观察模型何时选择检索、检索失败如何补检；Agentic RAG不一定优于简单RAG。
+- **真实项目阅读点**：找到数据读取、chunk生成、embedding、检索器、检索结果注入的位置；能指出检索调用是否由固定工作流还是Agent决定。
+- 本章以基础RAG为主，Agentic RAG作为对照，不强制提前实现；见[Agent范式映射](../agent-paradigm-map.md)。
+
 ## Project Track 集成提示
 
 - 如果 `project_track_status != active`：本章只作为可复用能力学习，不绑定任何长期项目，不使用旧的默认项目。
