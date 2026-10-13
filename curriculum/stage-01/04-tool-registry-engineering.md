@@ -63,6 +63,12 @@ Q&A
 - `shared/qa-rubric.md`（仅用于反馈）
 - `shared/chapter-contract.md` 与 `shared/mastery-rubric.md`（仅在练习、Q&A 或掌握判定时）
 
+## 新增真实工程源码练习（随本章学习，不做跨章补课）
+
+- **Python侧**：对照[Kimi CLI `KimiToolset.add/find`](https://github.com/MoonshotAI/kimi-cli/blob/9ab1286b8fe4e6bcd116949a27ce5e0ac3389c82/src/kimi_cli/soul/toolset.py)，比较自定义Python字典注册表与实际工程里的查找、封装和生命周期。
+- **TypeScript侧**：对照[Kimi Code `IAgentToolRegistryService.register/resolve`](https://github.com/MoonshotAI/kimi-code/blob/afd95f64a5444b649a4cc33504513bf88e4c54ba/packages/agent-core-v2/src/agent/toolRegistry/toolRegistry.ts)及[AJV参数校验函数](https://github.com/MoonshotAI/kimi-code/blob/afd95f64a5444b649a4cc33504513bf88e4c54ba/packages/agent-core-v2/src/tool/args-validator.ts)，初步认识Interface、Registry和运行时校验；先讲必要TS语法，不要求提前掌握整套Node项目。
+- **教学约束**：只读取真实存在的1～2个函数，追踪注册→解析→校验→执行→错误；当前第04章4.1同名覆盖问题仍是原正式位置。第01–03章专项补课完成后回到这里，不改变本章EX/Q&A/mastery。
+
 ## Project Track 集成提示
 
 - 如果 `project_track_status != active`：本章只作为可复用能力学习，不绑定任何长期项目，不使用旧的默认项目。
