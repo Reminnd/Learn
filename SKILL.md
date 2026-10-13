@@ -30,6 +30,7 @@ description: 面向刚学完 Python 基础语法的学习者，以“最小原�
 **Agent范式与真实工程源码的按需教学：**
 
 - [Agent范式与40章映射](curriculum/agent-paradigm-map.md)是P0/P1/P2知识点的对照索引，**不是**新的canonical route、mastery条件或必须遍历的学习计划。当前章节实际涉及ReAct、Plan-and-Execute、Routing、Reflection、Supervisor、Adapter等内容时，才按需打开相关行；无需逐轮加载整个文档。
+- **六个已登记的开源学习案例**见[Cod​​ing Agent源码案例库](curriculum/project-source-casebook.md)（官方/非官方差异、归档状态、commit SHA、已核对的入口文件）。只有讲当前知识点确实需要真实源码时才按需读取相关**一行/一个文件**，不要新会话启动时加载六个仓库，也不要让案例索引影响课程路由或触发GitHub persistence刷新。示例：Stage 01 Tool Registry优先Kimi Python `KimiToolset`与Kimi TypeScript `IAgentToolRegistryService`；Stage 01 Agent Loop优先Pi `agentLoop/runToolCall`。公开上游源码不自动代表学习者编写、Fork或Vibe Coding了这些项目。
 - 当学习者提供正在Vibe Coding的项目（即使多数代码不是本人手写）时，可以在**不激活Project Track**的情况下，默认**只读**使用其代码作真实案例。按需遵循[真实项目源码映射学习法](shared/project-source-learning.md)：一次聚焦当前章节的**一个概念、一个真实入口、一个调用链**，说明代码证据、输入输出、状态、异常及设计取舍。没有看过的源码或函数路径不可猜造。
 - 建议的教学对照：`最小原理 → 当前范式/模式 → LangChain/LangGraph或语言映射 → 项目实际函数 → 调用/数据/错误链 → 工程取舍 → 一个独立解释问题`。概念未涉及真实代码时可按原教学循环继续，不强制多读项目。
 - **证据不得混淆**：AI生成项目/代码可作为案例；仅看到源码≠能解释，能解释≠亲自运行测试，能运行≠学习者独立编写。不把第三方/AI产出记为学习者的个人代码贡献、`mastered`证据或`authored`。其实际理解仍通过现有章节EX、Q&A与mastery判定。
