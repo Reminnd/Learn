@@ -104,6 +104,7 @@ Stage 10–14，共 11 章。只有 Core Path 完成后，学习者明确选择 
 - [Agent范式、软件设计模式与40章课程映射](agent-paradigm-map.md)：将 **ReAct、Tool Calling、Prompt Chaining、Routing、Plan-and-Execute、Reflection / Evaluator-Optimizer、Parallelization、Supervisor/Handoff、RAG/Agentic RAG** 按P0/P1优先级嵌入现有章节；ReWOO、Reflexion、ToT/LATS为按需拓展。不新增编号章节。
 - [AI全栈与Agent产品开发补充学习路线](ai-fullstack-agent-roadmap.md)：**Python Agent＋FastAPI → TypeScript/React/Node.js → 产品集成 → 数据库、鉴权、SSE与部署测试**；与原课程并行实践，原40章仍是唯一canonical route。
 - [真实项目源码映射学习法](../shared/project-source-learning.md)：用学习者**提供的Vibe Coding项目**作为源码学习实例，查真实函数、调用链与工程范式。项目不需要由学习者手写；仅代码阅读不等于独立开发或掌握。
+- [首批6个Coding Agent开源源码案例库](project-source-casebook.md)：Pi、Kimi Python旧版与TypeScript新版、DeepSeek Harness、Codex、非官方Claude Code恢复版。仅作为经过路径核实的参考案例，按当前知识点选择1～2个对照。
 - 已有章节继续按原验收契约和committed state推进。补充范式和案例不能绕过原有EX/Q&A/mastery判定，也不自动激活长期Project Track。
 
 ## 完成边界
