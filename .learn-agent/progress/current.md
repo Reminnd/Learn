@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 199
 last_checkpoint_at: '2026-10-12T13:28:18.742Z'
 last_checkpoint_reason: chapter_boundary
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20261013-stage01-ch01-03-supplemental-review-v1
+  reason: manual
+  phase: prepared
+  started_at: '2026-10-13T06:27:01.939Z'
+  targets:
+    - asset_key: notes.root
+      relative_pointer: stage-01/retroactive-review-20261013.md
+      evidence_id: stage01-supplemental-20261013-plan-v1
+      operation: upsert
+      expected_change: 建立已有章节新知识补课状态与原第04章恢复快照
+      verified: false
+      error: null
+    - asset_key: notes.index
+      relative_pointer: null
+      evidence_id: stage01-supplemental-20261013-index-v1
+      operation: upsert
+      expected_change: 在学习笔记索引中登记R01至R03专项补课入口
+      verified: false
+      error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-04
 deepseek_route_prompted_for:
