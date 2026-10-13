@@ -61,6 +61,12 @@ Q&A
 - `shared/qa-rubric.md`（仅用于反馈）
 - `shared/chapter-contract.md` 与 `shared/mastery-rubric.md`（仅在练习、Q&A 或掌握判定时）
 
+## 新增范式与已掌握章节的定向补充（不新增验收项）
+
+- **Prompt Chaining / Workflow vs Agent（P0补充）**：本章已涉及`prompt | model`，它是固定顺序的Runnable组合；有LLM不必然形成Agent。观察下一步由应用固定指定还是由模型结合观察结果动态决定。
+- **原理对照**：先对比`用户输入 → Prompt → Model → 输出`与“根据工具反馈继续选择行动”的控制流，不在本章提前要求实现完整ReAct。
+- **已完成学习者**：按[Stage 01专项补课 R01](retroactive-review-20261013.md)只做新增范式/选型复检；不重做旧Message与Runnable EX1，也不重新判定原mastery。
+
 ## Project Track 集成提示
 
 - 如果 `project_track_status != active`：本章只作为可复用能力学习，不绑定任何长期项目，不使用旧的默认项目。
