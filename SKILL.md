@@ -213,6 +213,7 @@ Core / Advanced 的完成与 prerequisite 判定只能使用 runtime 中已经�
 其他学习意图保持以下规则：
 
 - `/checkpoint`、暂停或完成：若 candidate buffer 非空先 flush，再改变会话状态。
+- **已完成章节新增内容补课（明确请求时）**：如果已提交`state.current.return_to.activity=supplemental_review`，保留当前正式章节的`stage_id/chapter_id/chapter_file/note_pointer/last_section`以及原`completed/mastery`；优先按manifest的`notes.index`中的补课索引读取`notes.root`补课状态，并依据`return_to.topic`只推进当前一个补课任务。补课不代表重新走canonical章节route，也不构成旧章正式mastery重新评估。每次教学只补一个新增范式/函数映射、查看一处真实源码并问一题；如果没有独立回答证据则保持pending或重试。三项通过后依补课记录中保存的原始快照恢复正式章节待答问题；所有进度和领域证据写入仍服从manifest的checkpoint batching与S03 WAL。此机制可用于后来用户明确要求的旧章补充，但**不能因课程文件添加新内容就自动否定已掌握章节**。
 - “复习”：优先当前笔记的薄弱点、Q&A 与复习卡片；需要时按主题检索 Bug Book。
 - 用户贴代码报错：先解决问题；相关 Bug 与能力证据进入 candidate checkpoint，按 batching policy flush。
 - 用户要求项目但 Project Track 未激活：可做局部练习，不偷偷绑定长期项目。
