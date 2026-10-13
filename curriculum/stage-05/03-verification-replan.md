@@ -61,6 +61,13 @@ Q&A
 - `shared/qa-rubric.md`（仅用于反馈）
 - `shared/chapter-contract.md` 与 `shared/mastery-rubric.md`（仅在练习、Q&A 或掌握判定时）
 
+## 补充范式与源码对照（不新增验收项）
+
+- **Reflection / Evaluator-Optimizer（P0）**：`产出 → 独立评估或可验证测试 → 有界反馈/修正 → 停止`；明确标准、最大重试次数与真实环境证据，防止模型无限自评。
+- **Reflexion（P2研究对照）**：在多次尝试之间保留语言反馈并用于后续决策，不等同于普通的一次`review → rewrite`循环。
+- **真实项目阅读点**：定位`verify`/测试/判定函数、`replan`分支、失败归类、任务终态；比较确定性测试与LLM Judge的局限。
+- 使用[Agent范式映射](../agent-paradigm-map.md)查研究对照，不改变原有EX/Q&A/mastery。
+
 ## Project Track 集成提示
 
 - 如果 `project_track_status != active`：本章只作为可复用能力学习，不绑定任何长期项目，不使用旧的默认项目。
