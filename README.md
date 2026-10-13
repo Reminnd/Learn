@@ -49,6 +49,14 @@ Core Path 覆盖 Stage 01–09。完整且唯一的章节顺序见 [课程索引
 
 Advanced Track 覆盖 Stage 10–14。完成 Core Path 后，由学习者明确选择是否进入；边界与顺序以 [课程索引](curriculum/index.md) 为准。
 
+## 可选 AI 全栈学习路线
+
+面向 AI Agent 实习与 AI 全栈产品开发的四阶段路线：**Python Agent＋FastAPI → TypeScript＋React＋Node.js → 前后端Agent产品集成 → 数据库／鉴权／流式响应／部署／测试**。
+
+详见 [AI全栈与Agent产品开发补充学习路线](curriculum/ai-fullstack-agent-roadmap.md)，其中还列出可供选择的 **TypeScript Gateway＋Python执行器（方案B）** 项目实践载体。
+
+此路线是补充计划，不改变 Stage 01–14 的 canonical route、章节验收、学习者现有进度，也不自动启动长期项目。
+
 ## Runtime initialization
 
 首次使用“继续学习”前，在 checkout 外初始化 runtime：
