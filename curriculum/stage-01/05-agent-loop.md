@@ -8,6 +8,12 @@
 
 教学时只加载 manifest 的 `state.current`、本章当前小节与已解析的验收契约；不要加载其他章节全文。
 
+## 开始Agent Loop前的FastAPI教学桥接（已确认）
+
+**当开始本章新知识时，优先完成[第04→05章FastAPI最小后端桥接](fastapi-backend-bridge.md)**。以第04章`get_price`/Registry为例，先理解HTTP请求、Pydantic校验、路由到handler、错误响应与最小接口测试，然后再把本章ReAct式Agent Loop接入API。**这是教学安排，不是第05章新的prerequisite、EX、Q&A或mastery判定**；不修改正式路由，也不会因为桥接已预览就直接跳过第04章。
+
+桥接若跨聊天，用manifest既有`notes.root`、当前正式chapter note与`return_to`记录实际学习证据/下一个Bridge单元；没有证据不得当作已完成。若用户选择的真实FastAPI项目已经有合适路由和测试，优先做“读实际代码→追调用链→解释失败路径”，不要求重复手写独立大项目。
+
 ## 学习目标
 
 - 理解 model→tool→observation→model 循环
