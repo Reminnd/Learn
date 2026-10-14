@@ -23,52 +23,26 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-12：第4章开始，复用双工具手动Runtime升级为Tool Registry并检查同名工具风险。
+last_note_update: 2026-10-14：专项补课R01/R02/R03通过；TS-06源码阅读完成；恢复第04章4.1工具同名覆盖风险问答。
 last_section: 4.1 Tool Registry统一注册与同名工具冲突
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
 session_mode: learning
 session_status: active
-current_activity: supplemental_review
+current_activity: knowledge_check
 return_to:
-  activity: supplemental_review
-  topic: R01 / attempt 1
-  next_action: 通过manifest的notes.index找到Stage01补课记录；先讲R01固定Prompt Chaining与Agent动态决策差异，再只提出R01复检题；R01通过后依次推进R02/R03，全部通过后恢复第04章L4-CHECK-1。
+  activity: knowledge_check
+  topic: L4-CHECK-1 / attempt 1
+  next_action: 同名get_price最终为handler_v2已答；继续独立回答无意覆盖造成的具体工程风险。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 201
-last_checkpoint_at: '2026-10-13T06:30:09.940Z'
-last_checkpoint_reason: manual
-pending_writeback:
-  transaction_id: 20261014T1900+0800-stage01-r01-r03-supplement
-  reason: qa_complete
-  phase: prepared
-  started_at: '2026-10-14T19:00:00+08:00'
-  targets:
-    - asset_key: notes.root
-      relative_pointer: stage-01/retroactive-review-20261013.md
-      evidence_id: stage01-supplemental-r01-r03-passed-20261014
-      operation: upsert
-      expected_change: R01-R03实际作答与通过证据、补课完成记录
-      verified: false
-      error: null
-    - asset_key: notes.index
-      relative_pointer: .
-      evidence_id: stage01-supplemental-completed-index-20261014
-      operation: upsert
-      expected_change: 补课索引由pending改为completed并说明第4章续学位置
-      verified: false
-      error: null
-    - asset_key: notes.root
-      relative_pointer: stage-01/04-tool-registry-engineering.md
-      evidence_id: stage01-ch04-ts06-prelude-20261014
-      operation: upsert
-      expected_change: TS源码阅读所得知识与同名覆盖题已答、工程风险仍待答
-      verified: false
-      error: null
+checkpoint_version: 204
+last_checkpoint_at: '2026-10-14T19:00:00+08:00'
+last_checkpoint_reason: section_boundary
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-04
 deepseek_route_prompted_for:
@@ -84,7 +58,7 @@ completed:
 - 02-structured-output
 - 03-tool-basics
 weak_points: []
-next_action: 补课R01待讲与待答：Prompt Chaining vs Workflow/Agent；补课状态查manifest notes.index，按R01→R02→R03推进，结束后恢复原L4-CHECK-1。
+next_action: L4-CHECK-1：已答同名get_price覆盖为handler_v2；下一题只需说明为何无意覆盖有工程风险及一个具体失败场景。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
