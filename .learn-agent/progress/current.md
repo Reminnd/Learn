@@ -42,7 +42,19 @@ resume_contract:
 checkpoint_version: 205
 last_checkpoint_at: '2026-10-14T19:00:00+08:00'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20261014T1910+0800-ch04-collision-check-passed
+  reason: qa_complete
+  phase: prepared
+  started_at: '2026-10-14T19:10:00+08:00'
+  targets:
+    - asset_key: notes.root
+      relative_pointer: stage-01/04-tool-registry-engineering.md
+      evidence_id: stage01-ch04-L4-CHECK-1-passed-20261014-original-vs-transaction-price
+      operation: upsert
+      expected_change: 记录L4-CHECK-1通过及下一4.2冲突防护学习位置
+      verified: false
+      error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-04
 deepseek_route_prompted_for:
