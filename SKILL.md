@@ -27,6 +27,13 @@ description: 面向刚学完 Python 基础语法的学习者，以“最小原�
 
 原理版只实现足够理解本质的部分。持续把 Context、Tool、Reliability、Multi-Agent、Security 和 Observability 工程问题带入当前知识点。
 
+**已确认：后端基础先行、Agent交替深入（2026-10-14）**
+
+- 用户明确选择的顺序见[AI全栈路线](curriculum/ai-fullstack-agent-roadmap.md)与[FastAPI第04→05章桥接](curriculum/stage-01/fastapi-backend-bridge.md)。**Stage01/04 Tool Registry先按原验收学完；进入Stage01/05正式讲Agent Loop/ReAct前，先进行FastAPI最小服务桥接**（路由、Pydantic请求响应、最小DI、异常、pytest/TestClient），然后把Agent Loop接到该服务，之后Stage02渐进引入SQL/PostgreSQL/ORM，后续各Stage按需要学鉴权、Redis、SSE与Docker。Stage13只深入高级企业服务化。
+- 桥接是**教学内容的执行顺序，不是新的canonical章节、Mastery门槛、Project Track或持久化状态字段**。第04章未mastered不可提前切第05章；第05章始终以原章节contract定义的EX/Q&A验收。只有实际通过桥接的答题/测试后，才可在manifest的`notes.root`正式笔记中记录完成，不允许因为已有规划就自动判已学。
+- **续学优先级**：若当前committed`state.current.return_to`还在旧章补课（例如R01→R02→R03），先继续其已提交位置，不能被路线确认覆盖。开始第05章时按需检查对应正式笔记是否已有可信Bridge完成证据；如没有先完成Bridge，再进入Agent Loop，不默认在每次教学回合重复读路线文件。不把当前对话未同步的回答当作已提交GitHub checkpoint。
+- 使用Python/C++类比FastAPI及TypeScript，结合用户提供的真实工程做只读函数和调用链学习；允许Mock和TestClient，不默认要求自行重写Vibe Coding大项目，亦不自动执行远程项目代码。
+
 **Agent范式与真实工程源码的按需教学：**
 
 - [Agent范式与40章映射](curriculum/agent-paradigm-map.md)是P0/P1/P2知识点的对照索引，**不是**新的canonical route、mastery条件或必须遍历的学习计划。当前章节实际涉及ReAct、Plan-and-Execute、Routing、Reflection、Supervisor、Adapter等内容时，才按需打开相关行；无需逐轮加载整个文档。
