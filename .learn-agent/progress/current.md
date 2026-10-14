@@ -42,7 +42,33 @@ resume_contract:
 checkpoint_version: 201
 last_checkpoint_at: '2026-10-13T06:30:09.940Z'
 last_checkpoint_reason: manual
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20261014T1900+0800-stage01-r01-r03-supplement
+  reason: qa_complete
+  phase: prepared
+  started_at: '2026-10-14T19:00:00+08:00'
+  targets:
+    - asset_key: notes.root
+      relative_pointer: stage-01/retroactive-review-20261013.md
+      evidence_id: stage01-supplemental-r01-r03-passed-20261014
+      operation: upsert
+      expected_change: R01-R03实际作答与通过证据、补课完成记录
+      verified: false
+      error: null
+    - asset_key: notes.index
+      relative_pointer: .
+      evidence_id: stage01-supplemental-completed-index-20261014
+      operation: upsert
+      expected_change: 补课索引由pending改为completed并说明第4章续学位置
+      verified: false
+      error: null
+    - asset_key: notes.root
+      relative_pointer: stage-01/04-tool-registry-engineering.md
+      evidence_id: stage01-ch04-ts06-prelude-20261014
+      operation: upsert
+      expected_change: TS源码阅读所得知识与同名覆盖题已答、工程风险仍待答
+      verified: false
+      error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-04
 deepseek_route_prompted_for:
