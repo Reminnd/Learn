@@ -11,13 +11,30 @@
 - **学习方式**：可以使用**一个或多个用户提供的Vibe Coding工程**作真实代码阅读与调用链映射，不预设项目必须由学习者手写；Python Agent 和 FastAPI 先理解最小闭环，再逐步引入 TypeScript。Stage 04 为工程化深化，但校验、基础错误处理和单元测试应从 Stage 01 起理解与实践。
 - **学习进度**：以已有已提交的课程状态为准。本文件不推测、迁移或覆盖当前正在学习的章节。
 
+## 已确认的学习顺序（2026-10-14）：后端基础先行、Agent交替深入
+
+> 与早期“先完成全部Agent核心、再统一补FastAPI”的理解不同，**FastAPI基础正式提前到Stage01/04与Stage01/05之间**，由[FastAPI最小业务后端桥接单元](stage-01/fastapi-backend-bridge.md)负责。它是配套教学插曲，**不新增第41章、不改变40章canonical路线或原mastery要求**。Stage13只承担已掌握入门后更难的企业服务化工程问题。
+
+**实际教学顺序（不要求一次同时学习全部模块）：**
+
+1. 先完成已有TS-0必要源码阅读补习（按当时已提交进度校准）及Stage01/04 Tool Registry；已有旧章补课未完成时优先继续，不能因路线确认而改写其答题结果。
+2. **紧接第04章后学习FastAPI入门**：GET/POST、路由、Pydantic请求响应、业务错误、`Depends`基础、`pytest/TestClient`。只需要最小服务闭环，不等全部Web后端知识学完。
+3. Stage01/05学习Agent Loop/ReAct，让HTTP API调用可测试的Agent Runtime；不重复造一套新项目。
+4. Stage02 LangGraph逐步补**SQL、PostgreSQL/MySQL、SQLAlchemy/ORM、CRUD、事务入门**；应用场景是任务/会话/检查点存储，先分清三者状态含义。
+5. Stage03–06学Context、RAG、Planning、Memory，按真实需求穿插**异步HTTP、失败重试、SSE事件概念**。
+6. Stage07–09学Multi-Agent、Deep Agents、Harness时，结合具体产品需要补**JWT/权限、Redis、基础SSE流式输出、Docker本地部署、日志和测试/CI**；不要强迫项目马上用全套组件。
+7. Stage10–12继续Advanced MCP、评测与安全；**Stage13**保留并发/连接池/缓存一致性、多租户、Worker/Queue、分布式可靠性、容器编排等高级服务化。
+8. **TypeScript并行推进**：沿Pi、Kimi Code源码学习Promise、interface、Adapter，后续再深入Node.js/React/TS Gateway。不要因为FastAPI提前而取消TypeScript，也不必在FastAPI桥接前掌握NestJS。
+
+**学习证据区分**：可以在已经存在的Vibe Coding工程中定位真实API/Agent函数并追踪请求调用链；看到AI生成的源码不等于独立写出，听过某组件也不等于通过本桥接的验证。桥接中的学习记录须按原Learn持久化规则处理；确认路线本身**不推进当前chapter/mastery/checkpoint**。
+
 ## 与当前40章课程的融合方式
 
 不额外设40章之外的必修课，而是在原课程遇到相应知识点时插入“**原理/范式 → 框架/函数 → 用户提供的项目源码 → 调用链/失败路径 → 独立解释**”这一对照。
 
 | 四阶段AI全栈实践 | 原有课程对应位置 | 特别补充的Agent范式及工程模式 |
 |---|---|---|
-| **① Python Agent + FastAPI** | Stage 01 Tool Registry/Agent Loop；Stage 02 State/Node/Router；Stage 13的FastAPI仅作**提前体验**，不算解锁该章 | ReAct、Tool Calling、Prompt Chaining、Routing、Pydantic契约、循环终止、状态机 |
+| **① Python Agent + FastAPI** | Stage 01/04 Tool Registry → **第04→05章FastAPI桥接** → Stage01/05 Agent Loop；Stage02 SQL/DB入门；Stage13保留高级服务化且不得提前算作mastered | ReAct、Tool Calling、Prompt Chaining、Routing、Pydantic契约、循环终止、状态机 |
 | **② TypeScript + React + Node.js** | Stage 01结构化输出、Tool工程；Stage 09 Harness；TS/React作为并行应用实践 | JS异步/Promise、Zod与Pydantic对照、Strategy/Adapter、Registry/Factory、依赖注入 |
 | **③ 联通完整Agent产品** | Stage 02状态/持久化/HITL；Stage 07 Multi-Agent；Stage 09 Harness；Stage 10 MCP | Handoff、Supervisor、事件驱动、跨进程Gateway、SSE/取消、职责边界 |
 | **④ 业务后端与可靠性** | Stage 05 Planning/Verification；Stage 11 Eval；Stage 12 Security；Stage 13服务化 | Plan-and-Execute、Reflection/Evaluator-Optimizer、幂等、Repository/Transaction、鉴权、沙箱、测试与可观测性 |
@@ -55,9 +72,10 @@
 核心主题：Python、Pydantic、Tool Registry、Tool Calling、Agent Loop、FastAPI、基本异步与 HTTP。
 
 实践里程碑：
-1. 保留现有 Python Agent 基础课程，理解工具参数校验、调用链与失败处理，并能手写可测试的 Agent Loop。
-2. 使用 FastAPI 提供最小 API：健康检查、提交一次 Agent 请求、查询结果（可先用内存状态）。
-3. 用 Pydantic 定义输入/输出契约，建立 pytest 单元测试与 FastAPI 接口测试。
+1. 完成现有Tool Registry知识与验收，理解工具参数校验、查找、处理器和失败边界。
+2. 在[FastAPI桥接](stage-01/fastapi-backend-bridge.md)实现/阅读最小HTTP API：健康检查、固定白名单Tool查询、Pydantic输入输出和受控异常，先于完整Agent Loop。
+3. 通过pytest/TestClient或既有可信测试追踪正常、请求校验失败和业务失败三种路径；学习基本依赖注入。
+4. 然后在Stage01/05学习手写最小Agent Loop和框架映射，并把它接回同一FastAPI服务；数据库与复杂鉴权稍后引入。
 
 **验收标准**：能够启动并调用 API；请求验证、正常工具调用和典型错误路径有自动测试；能够说明 Python Agent 内部运行流程。
 
