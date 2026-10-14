@@ -27,6 +27,8 @@ description: 面向刚学完 Python 基础语法的学习者，以“最小原�
 
 原理版只实现足够理解本质的部分。持续把 Context、Tool、Reliability、Multi-Agent、Security 和 Observability 工程问题带入当前知识点。
 
+**教学速度快路径（不缩水）**：遵循[shared/teaching-fastpath.md](shared/teaching-fastpath.md)；**保留完整讲解、必要的三语言类比、真实源码引用与工程调用链，不能通过缩短回答或减少源码引用来提速**。当前聊天已有足够依据时直接回答，避免重复bootstrap、重复读取已核实的commit片段和无意义GitHub回查；版本/实现不确定时必须重新核实。独立必要文件可并发读取，但WAL与同路径写入仍严格串行。普通教学回合尊重既有checkpoint batching；快路径仅改变内部取数和事务安排，不更改教学验收。
+
 **已确认：后端基础先行、Agent交替深入（2026-10-14）**
 
 - 用户明确选择的顺序见[AI全栈路线](curriculum/ai-fullstack-agent-roadmap.md)与[FastAPI第04→05章桥接](curriculum/stage-01/fastapi-backend-bridge.md)。**Stage01/04 Tool Registry先按原验收学完；进入Stage01/05正式讲Agent Loop/ReAct前，先进行FastAPI最小服务桥接**（路由、Pydantic请求响应、最小DI、异常、pytest/TestClient），然后把Agent Loop接到该服务，之后Stage02渐进引入SQL/PostgreSQL/ORM，后续各Stage按需要学鉴权、Redis、SSE与Docker。Stage13只深入高级企业服务化。
@@ -123,42 +125,13 @@ manifest 中缺少所需 key、目标越出 backend root、或目标不可读写
 
 ### Flush / Immediate Transaction 的统一 WAL 路径
 
-真正开始 persistence transaction 时，领域目标是包含 `asset_key`、`relative_pointer`、`evidence_id`、`operation` 和预期变化的 `targets[]` 记录。目标集与稳定 `transaction_id` / `evidence_id` 必须在 prepared WAL 写入前冻结。
+**真正触发flush/即时事务时**，先按[shared/session-persistence.md](shared/session-persistence.md)执行完整WAL协议；非flush的普通教学回合**不得预先创建WAL**。
 
-对 `N >= 1` 个聚合后目标，正常成功路径严格为：
-
-```text
-聚合待提交增量（一个 turn 或一个 buffered batch）
-→ 冻结完整 targets[]
-→ 一次 transaction boundary validation
-→ 一次 prepared WAL 写入 state.current（完整 pending_writeback）
-→ N 次幂等领域 upsert
-→ 一次 final-state+clear 写入 state.current（推进最终 Learning State 且 pending_writeback=null）
-```
-
-transaction boundary validation 必须在完整 `targets[]` 冻结后、prepared WAL 写入前，对所有冻结目标一次完成：确认所需 manifest key 存在；确认 `relative_pointer` 在对应 logical root 内解析；确认规范化后的目标仍在 backend root 内；确认本事务所需的持久化读写能力满足。任一检查失败都不得写入 prepared WAL 或领域资产。
-
-同一 flush transaction 的后续 writing 与 final commit phase 必须直接复用本次 transaction context 中已验证的 resolved targets，不得因内部 phase 再次解析或校验相同目标。该 resolved-target context 只属于本次真正的 transaction，不是 cache layer，也不是第二 source of truth。
-
-**不要把普通 buffered teaching turn 当作 transaction context。** session-local working snapshot 可以跨当前 live chat 的多个 buffered turns 使用，直到 flush、conversation restart、recovery、显式失效或冲突。
-
-正常成功计数为 `transaction_count=1`、`state_writes=2`、`state_verification_reads=0`、`domain_writes=N`、`domain_reads=0`。prepared WAL 必须先于任何领域写入；正常成功不得持久化 `phase=writing`、`phase=verifying`、`phase=committing` 或每目标 `verified=true`，这些既有 schema 字段仅用于失败、恢复或迁移语义。
-
-primary backend 对 mutation 返回明确成功时，正常路径直接信任该 write acknowledgement；版本化后端可使用 commit/blob SHA，其他后端使用其原子写成功语义。不得仅为了验证刚刚成功的同一次写入，再额外回读 `state.current` 或领域内容。
-
-只有以下情况才执行必要的远端刷新或读取：
-
-- 写入结果不明确；
-- optimistic concurrency / SHA 冲突；
-- `pending_writeback != null`，进入 recovery；
-- integrity reconstruction；
-- mastery-sensitive action 需要此前未加载的 committed evidence；
-- flush 目标文件从未在当前 session 加载且 mutation 需要其当前内容；
-- 用户明确要求审计。
-
-新聊天启动时发现 `pending_writeback` 非空即为 recovery-only：只能恢复既有 `transaction_id`、目标和 `evidence_id`，即使恢复成功也不得在同一 recovery-only turn 创建新 persistence transaction。`evidence_id` 跨重试/恢复保持稳定；恢复目标已有证据时只验证，缺失时使用原操作作幂等 upsert，禁止盲目追加。详细 schema、幂等规则、恢复与迁移见 [shared/session-persistence.md](shared/session-persistence.md)。
-
-任一 prepared WAL、领域或 final-state+clear 写入失败时，不得声称已保存或已提交。领域写入失败时最终状态不得推进、WAL 保持非空且不得创建第二事务；final-state+clear 写入失败或任一 mutation 结果不明确时不得补偿或创建第二事务，下一轮读取实际 `state.current` 后进入恢复或确认语义。没有持久化写能力时，可以完成当前解释，但不得声称候选进度已经 committed。
+- 冻结完整`targets[]`（包含`asset_key`、`relative_pointer`、`evidence_id`、`operation`及预期变化），仅进行一次完整boundary validation；在prepared WAL前验证全部逻辑根、路径限制与写入能力。
+- **顺序不可更改**：`prepared WAL（state.current）→ N次幂等领域写入 → final-state+clear（state.current）`；领域文件可按目标聚合，但同一路径多次写入和依赖相连的阶段不可并发。后续阶段复用验证过的resolved targets。
+- 明确成功的写入以API返回的ack/commit SHA为准，不做例行readback；仅unknown outcome、SHA冲突、recovery、integrity reconstruction、mastery缺证据、此前未加载且写入必需的内容或用户审计时再远端读取。
+- `pending_writeback != null`的恢复必须是recovery-only，复用既有transaction/evidence ID；已成功写入的目标不可重复追加。任一阶段失败不谎称已保存，不得擅自补偿或开启第二事务。
+- 完整字段schema、phase限制、幂等语义、失败处理及batching状态推进细则均以[shared/session-persistence.md](shared/session-persistence.md)与[shared/checkpoint-batching.md](shared/checkpoint-batching.md)为准；**不得以提速为由跳过正确性验证和必须执行的flush**。
 
 ## 状态与一致性
 
