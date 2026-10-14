@@ -53,6 +53,8 @@ Advanced Track 覆盖 Stage 10–14。完成 Core Path 后，由学习者明确�
 
 面向 AI Agent 实习与 AI 全栈产品开发的四阶段路线：**Python Agent＋FastAPI → TypeScript＋React＋Node.js → 前后端Agent产品集成 → 数据库／鉴权／流式响应／部署／测试**。
 
+**已确认后端先行路线（2026-10-14）**：完成Stage01/04 Tool Registry后，先学[FastAPI最小业务后端桥接](curriculum/stage-01/fastapi-backend-bridge.md)再进入Stage01/05 Agent Loop；数据库基础与LangGraph并行，Stage13专攻高级企业服务化。TypeScript继续通过源码阅读并行学习。原有40章顺序与学习进度不因路线确认改变。
+
 详见 [AI全栈与Agent产品开发补充学习路线](curriculum/ai-fullstack-agent-roadmap.md)，其中还列出可供选择的 **TypeScript Gateway＋Python执行器（方案B）** 项目实践载体。
 
 配套的 [Agent范式与40章映射](curriculum/agent-paradigm-map.md) 覆盖ReAct、Plan-and-Execute、Routing、Reflection、Supervisor等；[真实项目源码映射学习法](shared/project-source-learning.md) 用于从学习者提供的Vibe Coding项目中追踪函数、调用链和工程设计，而不把AI产出的项目误记为本人手写。
