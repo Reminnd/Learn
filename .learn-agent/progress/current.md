@@ -42,7 +42,19 @@ resume_contract:
 checkpoint_version: 204
 last_checkpoint_at: '2026-10-14T19:00:00+08:00'
 last_checkpoint_reason: section_boundary
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20261014-L4-CHECK-1-risk-attempt2
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-10-14T19:00:00+08:00'
+  targets:
+    - asset_key: notes.root
+      relative_pointer: stage-01/04-tool-registry-engineering.md
+      evidence_id: stage01-ch04-L4-CHECK-1-risk-attempt2-20261014
+      operation: upsert
+      expected_change: L4-CHECK-1风险解释部分正确但具体业务示例待补
+      verified: false
+      error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-04
 deepseek_route_prompted_for:
