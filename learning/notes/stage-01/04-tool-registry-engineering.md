@@ -76,3 +76,13 @@ registry["get_price"] = get_price_v2
 - **判定：passed（仅本检查题，不是第04章mastered）**。正确识别同名工具不同语义导致业务价格失真；此前已经正确预测`get_price`对应新handler（后注册覆盖）且理解旧映射被替换。更准确的表述是注册表名称映射失去指向旧handler的能力，不等于原函数对象被销毁。
 - **下一教学单元：4.2同名工具冲突防护**。从Python最小`register`加入重复名称检测（拒绝覆盖）开始，再对照Kimi Code的Tool Registry可覆盖策略和DI Scoped Service重复注册保护；只提出一道设计权衡问题。此后继续第04章EX1、LangChain/LangGraph映射与正式Q&A，不自动跳到第05章。
 <!-- learn-agent:evidence:stage01-ch04-L4-CHECK-1-passed-20261014-original-vs-transaction-price:end -->
+
+
+<!-- learn-agent:evidence:stage01-ch04-L4-CHECK-2-policy-choice-passed-20261014:start -->
+## 第04章4.2冲突防护策略：独立设计判断已通过
+
+- **检查题**：Coding Agent第三方插件工具重名：A自动覆盖，B默认拒绝、仅明确授权后替换；需说明代价。
+- **学生独立回答**：“B，每次替换需要二次确认。”
+- **判定：passed（只是单题，不代表本章mastered）**：选择安全默认拒绝，识别了替换须显式授权与额外确认成本。教师补充：并非每次都必须人工弹窗确认；可通过授权策略/配置控制，敏感工具审批更加严格，操作需要审计。
+- **下一学习位置**：4.3工具执行失败、超时与重试。先区分读操作的安全重试与带副作用工具的风险（幂等性），只问一个具体场景题；之后继续超时限额、异常处理、LangChain/LangGraph映射和EX1/Q&A。
+<!-- learn-agent:evidence:stage01-ch04-L4-CHECK-2-policy-choice-passed-20261014:end -->
