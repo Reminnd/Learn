@@ -37,7 +37,7 @@ persistence:
     refresh_before_each_turn: false
 ```
 
-详细规则见 `SKILL.md`、`shared/checkpoint-batching.md` 与 `shared/session-persistence.md`。
+详细规则见 `SKILL.md`、`shared/checkpoint-batching.md` 与 `shared/session-persistence.md`。 教学响应慢时首先核对[内部快路径](shared/teaching-fastpath.md)，不能把减少讲解、减少源码引用作为优化手段。
 
 新聊天完成一次启动恢复后，建立 session-local working snapshot。后续普通 teaching turns：
 
@@ -107,6 +107,8 @@ GitHub persistence writes = 0
 6. 根据 `note_pointer` 读取当前正式笔记的必要区段。
 7. 读取 `chapter_file` 当前小节与验收契约的必要区段。
 8. 若 batching 开启，读取 `shared/checkpoint-batching.md`，建立 session-local working snapshot 与空 candidate buffer。
+
+已取得state中准确的`note_pointer`与`chapter_file`后，第6/7步需要读取的**不同文件**可同时请求，避免人为串行等待；如教学正进行Mastery/恢复，则必须按对应依赖顺序执行，不得跳过任何必要验证。
 9. 从 `return_to` / `next_action` 继续，一次只问一题。
 
 **完成第 9 步后，不得在普通 buffered teaching turn 再执行启动流程，也不得重新读取 committed state。**
@@ -139,27 +141,13 @@ buffered checkpoints
 - GitHub mutation 返回明确成功时直接信任 write acknowledgement，不做例行 readback；
 - flush 成功后用已知 replacement content 与 mutation 返回的新 SHA 更新 session-local snapshot，清空 candidate buffer，然后立即继续教学。
 
-## 7. 当前 committed 快照
+## 7. 当前进度：只能从GitHub最新committed状态恢复
 
-```yaml
-checkpoint_version: 75
-checkpoint_at: 2026-09-08T14:00:53+08:00
-stage_id: stage-01
-chapter_id: 01-llm-message-prompt-langchain
-learning_status: learning
-integrity_status: healthy
-last_section: 1.8 Message 历史增长
-current_activity: learning
-next_question: L1-CHECK-13 / attempt 2
-pending_writeback: null
-storage_backend: git_repository
-checkpoint_batching: 3
-session_access_mode: cache_until_flush
-```
+本Contract**不内嵌任何固定checkpoint、章节、历史题目或临时进度快照**。示例值一旦过期会导致新聊天错误复习、重复工具调用或跳章。
 
-当前需要继续的问题：
+每次新聊天严格从manifest解析的`state.current`读取一次**当时GitHub最新committed**的`checkpoint_version`、`chapter_file`、`note_pointer`、`return_to`、`next_action`与`pending_writeback`。结合对应当前笔记与章节片段恢复；若本聊天的session-local working snapshot仍有效，后续教学直接从它继续，不能为了重复核对每轮重新访问GitHub。
 
-初始 `history=[]`，每一轮追加 1 条 `HumanMessage` 与 1 条 `AIMessage`。询问学习者按顺序给出第 1、2、3 轮结束后的 `len(history)`。不要在学习者回答前公布标准答案。
+**不要用Contract写成时的日期代替真实学习状态**；如manifest或state实际变化，以当前读取结果为准。当前聊天未flush的candidate只属于临时working state，不得跨聊天冒充committed证据。
 
 ## 8. 教学约束
 
@@ -173,6 +161,7 @@ session_access_mode: cache_until_flush
 - 正常成功写入不做重复回读。
 - 一次只问一题。
 - 不要向用户暴露冗余 persistence 执行日志；只有失败、恢复、冲突或用户主动询问时才说明。
+- **不得为提速缩短常规教学讲解或减少真实源码引用**。保留原理、必要的Python/C++/TypeScript对照、真实函数与调用链、错误纠正、适用边界；源码依据需要时继续附路径和可复查链接。优化仅限内部读取/调度和提交I/O，参见[shared/teaching-fastpath.md](shared/teaching-fastpath.md)。
 
 ## 9. 本机与 GitHub 同步流程
 
