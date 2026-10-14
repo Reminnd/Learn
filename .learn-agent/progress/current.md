@@ -23,38 +23,26 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-14：L4-CHECK-1风险原因基本正确，待补具体业务失败场景（attempt 2）。
-last_section: 4.1 Tool Registry统一注册与同名工具冲突
+last_note_update: 2026-10-14：L4-CHECK-1已通过；同名get_price原价与成交价差异风险识别正确；开始4.2冲突防护。
+last_section: 4.2 同名工具冲突防护策略
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
 session_mode: learning
 session_status: active
-current_activity: knowledge_check
+current_activity: learning
 return_to:
-  activity: knowledge_check
-  topic: L4-CHECK-1 / attempt 2
-  next_action: L4-CHECK-1风险解释已有“同名实现不同、旧映射被覆盖”，请补一个具体业务失败场景。
+  activity: learning
+  topic: 4.2 同名工具冲突防护
+  next_action: 讲Python重复注册拒绝策略与安全替换的区别；只提一道设计问题。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 205
-last_checkpoint_at: '2026-10-14T19:00:00+08:00'
-last_checkpoint_reason: needs_review
-pending_writeback:
-  transaction_id: 20261014T1910+0800-ch04-collision-check-passed
-  reason: qa_complete
-  phase: prepared
-  started_at: '2026-10-14T19:10:00+08:00'
-  targets:
-    - asset_key: notes.root
-      relative_pointer: stage-01/04-tool-registry-engineering.md
-      evidence_id: stage01-ch04-L4-CHECK-1-passed-20261014-original-vs-transaction-price
-      operation: upsert
-      expected_change: 记录L4-CHECK-1通过及下一4.2冲突防护学习位置
-      verified: false
-      error: null
+checkpoint_version: 206
+last_checkpoint_at: '2026-10-14T19:10:00+08:00'
+last_checkpoint_reason: section_boundary
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-04
 deepseek_route_prompted_for:
@@ -70,7 +58,7 @@ completed:
 - 02-structured-output
 - 03-tool-basics
 weak_points: []
-next_action: L4-CHECK-1 attempt2：请举出同名工具被第三方覆盖造成的一个具体业务失败场景（无须重答handler_v2）。
+next_action: 4.2 Tool Registry同名冲突防护：比较拒绝重复注册与显式替换、设计权衡；后续完成本章EX1/Q&A。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
