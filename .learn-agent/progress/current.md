@@ -42,7 +42,19 @@ resume_contract:
 checkpoint_version: 207
 last_checkpoint_at: '2026-10-14T11:41:40.886Z'
 last_checkpoint_reason: section_boundary
-pending_writeback: null
+pending_writeback:
+  transaction_id: ch04-20261014-retry-batch
+  reason: qa_complete
+  phase: prepared
+  started_at: '2026-10-14T20:20:00+08:00'
+  targets:
+    - asset_key: notes.root
+      relative_pointer: stage-01/04-tool-registry-engineering.md
+      evidence_id: ch04-43-four-checks-20261014
+      operation: upsert
+      expected_change: 4.3 four concept checks passed
+      verified: false
+      error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-04
 deepseek_route_prompted_for:
