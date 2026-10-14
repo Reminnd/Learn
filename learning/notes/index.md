@@ -10,5 +10,9 @@
 <!-- learn-agent:evidence:stage-01-ch02-index-entry:end -->
 
 <!-- learn-agent:evidence:stage01-supplemental-20261013-index-v1:start -->
-- [Stage 01第01–03章新增知识专项补课记录](stage-01/retroactive-review-20261013.md) — **in_progress，R01等待教学与回答**；R01→R02→R03补完后恢复第04章4.1的`L4-CHECK-1 / attempt 1`。旧章mastery和正式章节指针不变；[非canonical补课说明](../../curriculum/stage-01/retroactive-review-20261013.md)。
+- [Stage 01第01–03章新增知识专项补课记录](stage-01/retroactive-review-20261013.md) — **completed，R01/R02/R03均已通过（2026-10-14）**；已恢复第04章4.1的`L4-CHECK-1`，覆盖后的handler结果已答，待说明同名工具覆盖的工程风险。旧章mastery和正式章节指针不变；[非canonical补课说明](../../curriculum/stage-01/retroactive-review-20261013.md)。
 <!-- learn-agent:evidence:stage01-supplemental-20261013-index-v1:end -->
+
+<!-- learn-agent:evidence:stage01-supplemental-completed-index-20261014:start -->
+- 2026-10-14补课状态同步：R01/R02/R03已完成，续学Stage01/04工程风险题；记录与原mastery分离。
+<!-- learn-agent:evidence:stage01-supplemental-completed-index-20261014:end -->
