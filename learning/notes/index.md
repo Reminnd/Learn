@@ -6,7 +6,7 @@
 - [Chapter 01：LLM、Message、Prompt 与 LangChain](stage-01/01-llm-message-prompt-langchain.md) — mastered，2026-09-08，82/100。
 - [Chapter 02：Structured Output](stage-01/02-structured-output.md) — mastered，2026-10-11，82/100。
 - [Chapter 03：Tool基础与LangChain @tool](stage-01/03-tool-basics.md) — mastered，2026-10-12，84/100。
-- [Chapter 04：Tool Registry与工具工程化](stage-01/04-tool-registry-engineering.md) — learning，当前4.1统一注册与工具名冲突。
+- [Chapter 04：Tool Registry与工具工程化](stage-01/04-tool-registry-engineering.md) — learning，4.1工具名冲突案例及4.2默认拒绝策略已答；当前4.3执行失败、超时与重试。
 <!-- learn-agent:evidence:stage-01-ch02-index-entry:end -->
 
 <!-- learn-agent:evidence:stage01-supplemental-20261013-index-v1:start -->
@@ -16,3 +16,7 @@
 <!-- learn-agent:evidence:stage01-supplemental-completed-index-20261014:start -->
 - 2026-10-14补课状态同步：R01/R02/R03已完成，续学Stage01/04工程风险题；记录与原mastery分离。
 <!-- learn-agent:evidence:stage01-supplemental-completed-index-20261014:end -->
+
+<!-- learn-agent:evidence:stage01-ch04-section43-index-20261014:start -->
+- 2026-10-14：Chapter04 4.2冲突防护选择通过；恢复4.3超时/重试/副作用教学。本章mastery仍未完成。
+<!-- learn-agent:evidence:stage01-ch04-section43-index-20261014:end -->
