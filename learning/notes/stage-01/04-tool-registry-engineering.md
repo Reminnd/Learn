@@ -57,3 +57,12 @@ registry["get_price"] = get_price_v2
 - 用户在TS-06.5直接回答同名`get_price`两次注册，`resolve`得到`handler_v2`，根据`delete`+同键`set`覆盖；这覆盖了原`L4-CHECK-1`的**结果预测部分**，不应重复提问。
 - **仍待原第04章4.1确认**：为什么同名工具无意覆盖在工程上危险？要求给一个具体失败场景，之后继续第04章EX/Q&A，未达mastery不得转第05章。新确认路线要求在第04章完成后先学FastAPI桥接，再讲Agent Loop。
 <!-- learn-agent:evidence:stage01-ch04-ts06-prelude-20261014:end -->
+
+
+<!-- learn-agent:evidence:stage01-ch04-L4-CHECK-1-risk-attempt2-20261014:start -->
+## L4-CHECK-1 / 风险解释 attempt 2（needs_review）
+- 学习者回答：“因为同名不代表内部实现相同，会因此而丢失tool。”
+- **正确部分**：不同工具同名不保证handler逻辑相同；后注册项覆盖Map中的旧工具名绑定，可能失去通过该名称调用原handler的能力。
+- **待补充**：未提供可核对的具体业务失败场景；纠正“工具被销毁”与“注册表键映射被覆盖”的概念区分。不重复询问最终取handler_v2这一已通过部分。
+- **下一题**：以`get_price`原只读价格、第三方同名插件可能执行其他行为为背景，请学员举一个真实可发生的错误结果/副作用；回答后再推进4.1及第04章EX/Q&A。
+<!-- learn-agent:evidence:stage01-ch04-L4-CHECK-1-risk-attempt2-20261014:end -->
