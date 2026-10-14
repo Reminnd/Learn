@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 206
 last_checkpoint_at: '2026-10-14T19:10:00+08:00'
 last_checkpoint_reason: section_boundary
-pending_writeback: null
+pending_writeback:
+  transaction_id: 20261014-stage01-ch04-42to43
+  reason: qa_complete
+  phase: prepared
+  started_at: '2026-10-14T11:41:40.886Z'
+  targets:
+    - asset_key: notes.root
+      relative_pointer: stage-01/04-tool-registry-engineering.md
+      evidence_id: stage01-ch04-L4-CHECK-2-policy-choice-passed-20261014
+      operation: upsert
+      expected_change: 保存4.2策略题通过与4.3续学位置
+      verified: false
+      error: null
+    - asset_key: notes.index
+      relative_pointer: .
+      evidence_id: stage01-ch04-section43-index-20261014
+      operation: upsert
+      expected_change: 更新Chapter04索引到4.3
+      verified: false
+      error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-04
 deepseek_route_prompted_for:
