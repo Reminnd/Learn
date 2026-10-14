@@ -66,3 +66,13 @@ registry["get_price"] = get_price_v2
 - **待补充**：未提供可核对的具体业务失败场景；纠正“工具被销毁”与“注册表键映射被覆盖”的概念区分。不重复询问最终取handler_v2这一已通过部分。
 - **下一题**：以`get_price`原只读价格、第三方同名插件可能执行其他行为为背景，请学员举一个真实可发生的错误结果/副作用；回答后再推进4.1及第04章EX/Q&A。
 <!-- learn-agent:evidence:stage01-ch04-L4-CHECK-1-risk-attempt2-20261014:end -->
+
+
+<!-- learn-agent:evidence:stage01-ch04-L4-CHECK-1-passed-20261014-original-vs-transaction-price:start -->
+## 2026-10-14：L4-CHECK-1 / 同名覆盖风险补答通过
+
+- 题目：同名`get_price`被第三方插件覆盖后，举一个具体业务失败场景。
+- 学员独立回答：“新工具：查询原价而不是实际价格，则返回的价格并不是实际价格、失真了。”
+- **判定：passed（仅本检查题，不是第04章mastered）**。正确识别同名工具不同语义导致业务价格失真；此前已经正确预测`get_price`对应新handler（后注册覆盖）且理解旧映射被替换。更准确的表述是注册表名称映射失去指向旧handler的能力，不等于原函数对象被销毁。
+- **下一教学单元：4.2同名工具冲突防护**。从Python最小`register`加入重复名称检测（拒绝覆盖）开始，再对照Kimi Code的Tool Registry可覆盖策略和DI Scoped Service重复注册保护；只提出一道设计权衡问题。此后继续第04章EX1、LangChain/LangGraph映射与正式Q&A，不自动跳到第05章。
+<!-- learn-agent:evidence:stage01-ch04-L4-CHECK-1-passed-20261014-original-vs-transaction-price:end -->
