@@ -69,6 +69,10 @@ Q&A
 - **TypeScript侧**：对照[Kimi Code `IAgentToolRegistryService.register/resolve`](https://github.com/MoonshotAI/kimi-code/blob/afd95f64a5444b649a4cc33504513bf88e4c54ba/packages/agent-core-v2/src/agent/toolRegistry/toolRegistry.ts)及[AJV参数校验函数](https://github.com/MoonshotAI/kimi-code/blob/afd95f64a5444b649a4cc33504513bf88e4c54ba/packages/agent-core-v2/src/tool/args-validator.ts)，初步认识Interface、Registry和运行时校验；先讲必要TS语法，不要求提前掌握整套Node项目。
 - **教学约束**：只读取真实存在的1～2个函数，追踪注册→解析→校验→执行→错误；当前第04章4.1同名覆盖问题仍是原正式位置。第01–03章专项补课完成后回到这里，不改变本章EX/Q&A/mastery。
 
+## 确认的下阶段后端桥接（本章完成后，非本章考核）
+
+学员选择了“后端基础先行、Agent与后端交替深入”。**本章先按原EX/Q&A/mastery完成**。进入Stage01/05时先用[FastAPI桥接单元](fastapi-backend-bridge.md)把本章`get_price`和Tool Registry白名单映射为受校验的HTTP API，学习`@app.post`、Pydantic、错误分层、pytest/TestClient。桥接不自动给本章增加验收门槛，也不允许因新计划跳过当前4.1工具名冲突和原有题目。
+
 ## Project Track 集成提示
 
 - 如果 `project_track_status != active`：本章只作为可复用能力学习，不绑定任何长期项目，不使用旧的默认项目。
