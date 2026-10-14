@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-14：4.2默认拒绝同名注册策略及确认成本判断通过；进入4.3工具执行失败、超时与重试。
-last_section: 4.3 工具执行失败、超时与重试
+last_note_update: 2026-10-14：4.3四项检查通过，进入4.3.4有限重试。
+last_section: 4.3.4 有限重试与退避
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,28 +33,16 @@ session_status: active
 current_activity: learning
 return_to:
   activity: learning
-  topic: 4.3 工具执行失败、超时与重试
-  next_action: 先解释幂等性与只读工具vs有副作用工具的重试风险；接着询问具体工具超时场景。
+  topic: 4.3.4 有限重试与退避
+  next_action: 解释max_retries与退避，进行一道单题检查。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 207
+checkpoint_version: 211
 last_checkpoint_at: '2026-10-14T11:41:40.886Z'
 last_checkpoint_reason: section_boundary
-pending_writeback:
-  transaction_id: ch04-20261014-retry-batch
-  reason: qa_complete
-  phase: prepared
-  started_at: '2026-10-14T20:20:00+08:00'
-  targets:
-    - asset_key: notes.root
-      relative_pointer: stage-01/04-tool-registry-engineering.md
-      evidence_id: ch04-43-four-checks-20261014
-      operation: upsert
-      expected_change: 4.3 four concept checks passed
-      verified: false
-      error: null
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-04
 deepseek_route_prompted_for:
@@ -70,7 +58,7 @@ completed:
 - 02-structured-output
 - 03-tool-basics
 weak_points: []
-next_action: 4.3 Tool执行失败与重试：对比get_price只读查询与charge_payment副作用操作，进行单题检查。
+next_action: 4.3.4有界重试与退避，之后进入本章框架映射及正式EX/Q&A。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
