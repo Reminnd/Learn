@@ -11,7 +11,7 @@ chapter_file: curriculum/stage-01/04-tool-registry-engineering.md
 note_pointer: stage-01/04-tool-registry-engineering.md
 qa_pointer: stage-01.md
 lifecycle_status: active
-learning_status: learning
+learning_status: needs_review
 integrity:
   status: healthy
   missing: []
@@ -23,38 +23,26 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-22：4.3.5总体时间预算复检通过，进入4.4 Tool Registry执行策略元数据。
+last_note_update: 4.4重试策略复检待答。
 last_section: 4.4 统一Tool Registry执行策略
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
 session_mode: learning
 session_status: active
-current_activity: learning
+current_activity: knowledge_check
 return_to:
-  activity: learning
-  topic: 4.4 统一Tool Registry执行策略
-  next_action: 学习ToolSpec中timeout/retry/risk及安全策略，询问一次具体Tool策略判断。
+  activity: knowledge_check
+  topic: 4.4 Tool重试策略复检
+  next_action: 复检工具risk声明是否可信及副作用重试安全性。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 215
+checkpoint_version: 216
 last_checkpoint_at: '2026-10-22T01:31:56.391Z'
-last_checkpoint_reason: section_boundary
-pending_writeback:
-  transaction_id: ch04-20261022-sideeffect-policy
-  reason: knowledge_event
-  phase: prepared
-  started_at: '2026-10-22T01:41:32.343Z'
-  targets:
-    - asset_key: notes.root
-      relative_pointer: stage-01/04-tool-registry-engineering.md
-      evidence_id: stage01-ch04-44-sideeffect-retry-risk-attempt1-20261022
-      operation: upsert
-      expected_change: side effect retry policy feedback and recheck
-      verified: false
-      error: null
+last_checkpoint_reason: needs_review
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-04
 deepseek_route_prompted_for:
@@ -70,7 +58,7 @@ completed:
 - 02-structured-output
 - 03-tool-basics
 weak_points: []
-next_action: 4.4 Tool Registry统一timeout/retry/risk策略，后续继续LangChain/LangGraph映射及第4章EX1/Q&A。
+next_action: 复检副作用、错误类型与可信策略的关系。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
