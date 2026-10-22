@@ -6,8 +6,8 @@ schema_version: 2
 stage_id: stage-01
 chapter_id: 04-tool-registry-engineering
 lifecycle_status: active
-learning_status: learning
-last_updated: 2026-10-12
+learning_status: needs_review
+last_updated: 2026-10-22
 ```
 
 ## 4.1 真实工程问题：多个Tool如何统一注册？
@@ -96,3 +96,10 @@ registry["get_price"] = get_price_v2
 - 下一位置：4.3.4有限重试实现（max_retries、退避和超时预算），随后再完成本章框架映射、EX1和正式Q&A。
 - 此处只记录概念题通过，第04章mastery尚未完成。
 <!-- learn-agent:evidence:ch04-43-four-checks-20261014:end -->
+
+<!-- learn-agent:evidence:stage01-ch04-await-exception-review-20261022:start -->
+## 4.3.4 await / try异常传播：独立检查未通过（2026-10-22）
+- 本轮用户预测输出 A B C D；实际是 A C D。已经理解await可能暂停当前协程，但没有识别到工具await后抛出ValueError将跳过try中的print("B")，转入except并继续print("D")。
+- 上一轮用户也误判await普通int合法；讲解已纠正：lambda只推迟调用，不产生并发；await要求Awaitable；异常会在原await点传播到外围try。
+- 判定 needs_review；保持Stage01/04与原mastery不变，下一题使用新的await+try示例检查正常继续与异常跳转的区别。通过后继续4.3.4总超时预算。
+<!-- learn-agent:evidence:stage01-ch04-await-exception-review-20261022:end -->
