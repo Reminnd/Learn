@@ -156,3 +156,10 @@ registry["get_price"] = get_price_v2
 - **EX1 Part3 attempt1 needs_review（参数校验与动态工具Spec）**：用户写出`PriceArgs.model_validate(args)`但未将校验结果赋给`validated`；随后使用未定义的`validated.model_dump()`与`handler(args,spec)`，且通用Registry不能把Schema写死为PriceArgs。要求改成从`spec["schema"]`取得模型类、保存`model_validate`返回值，从`spec["handler"]`取得可调用对象，使用`**validated.model_dump()`展开参数后返回结果。用户答复后再评估，不能提前判passed。
 - **继续位置：EX1 Part3 attempt2**。一次只要求补全`invoke()`里的两个TODO；先让用户独立给出完整修订，不提前透露完整最终函数。后续进行独立验证与LangChain/LangGraph映射，再完成Q&A和mastery。
 <!-- learn-agent:evidence:stage01-ch04-ex1-p1p2p3-20261022-notes:end -->
+
+<!-- learn-agent:evidence:stage01-ch04-ex1-p3-attempt2-20261022:start -->
+## EX1 Part3 attempt2 — needs_review
+- 学生正确使用动态spec中的schema与handler，并保存验证结果：`from langchain_core.utils.pydantic import model_validate`，`validated = model_validate(spec["schema"], args)`。LangChain Core的该辅助函数确实存在，签名接受模型类与对象，教师已核对文档并纠正最初误判；对于纯Pydantic v2可优先用`spec["schema"].model_validate(args)`以减少依赖。
+- 尚需修复：`validated.model_dump(validated)`错误地将模型实例作为参数传入；`spec["handler"](validated)`错误地把Pydantic模型实例当成位置参数，而非将验证后的字典展开为关键字参数。避免提前判定整合练习通过。
+- 下一步Part3 attempt3：只修改model_dump用法和Handler参数展开这两行；旧章正式mastery不变。
+<!-- learn-agent:evidence:stage01-ch04-ex1-p3-attempt2-20261022:end -->
