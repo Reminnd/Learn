@@ -42,7 +42,19 @@ resume_contract:
 checkpoint_version: 214
 last_checkpoint_at: '2026-10-22T01:29:28.242Z'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: ch04-20261022-435-pass-next-44
+  reason: qa_complete
+  phase: prepared
+  started_at: '2026-10-22T01:31:56.391Z'
+  targets:
+    - asset_key: notes.root
+      relative_pointer: stage-01/04-tool-registry-engineering.md
+      evidence_id: ch04-435-total-budget-retest-passed-20261022
+      operation: upsert
+      expected_change: 记录4.3.5复检通过并进入4.4执行策略
+      verified: false
+      error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-04
 deepseek_route_prompted_for:
