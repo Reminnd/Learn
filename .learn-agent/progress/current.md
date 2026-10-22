@@ -42,7 +42,19 @@ resume_contract:
 checkpoint_version: 215
 last_checkpoint_at: '2026-10-22T01:31:56.391Z'
 last_checkpoint_reason: section_boundary
-pending_writeback: null
+pending_writeback:
+  transaction_id: ch04-20261022-sideeffect-policy
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-10-22T01:41:32.343Z'
+  targets:
+    - asset_key: notes.root
+      relative_pointer: stage-01/04-tool-registry-engineering.md
+      evidence_id: stage01-ch04-44-sideeffect-retry-risk-attempt1-20261022
+      operation: upsert
+      expected_change: side effect retry policy feedback and recheck
+      verified: false
+      error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-04
 deepseek_route_prompted_for:
