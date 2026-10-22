@@ -6,7 +6,7 @@ schema_version: 2
 stage_id: stage-01
 chapter_id: 04-tool-registry-engineering
 lifecycle_status: active
-learning_status: learning
+learning_status: needs_review
 last_updated: 2026-10-22
 ```
 
@@ -124,3 +124,13 @@ registry["get_price"] = get_price_v2
 - 之前总体耗时问题遗漏第三次执行的错误经本题修正，当前小节完成概念检查。**第04章仍在learning，正式EX1、框架映射和Q&A未完成**。
 - 下一个教学位置：4.4 Tool Registry统一timeout/retry/risk执行策略：先教学Python最小ToolSpec与统一策略、对照真实Kimi Code对工具accesses与metadata的处理，再问一道单题。
 <!-- learn-agent:evidence:ch04-435-total-budget-retest-passed-20261022:end -->
+
+<!-- learn-agent:evidence:stage01-ch04-44-sideeffect-retry-risk-attempt1-20261022:start -->
+## 4.4 同名工具执行策略：Side-effect与自动重试 attempt 1（needs_review）
+- 学习者回答：“校验是否有side_effect，如无则Executor应该直接按照max_retries=2自动重试；若有则报错。”
+- 正确：有副作用工具超时不能仅靠max_retries盲目自动重试；应考虑后果。
+- 待纠正：无side_effect并不自动允许重试，还须检查错误是否暂时性、次数与预算；有side_effect不意味着首次执行前必然报错或一律永久拒绝重试，可校验状态和已验证幂等协议，并在状态不明时安全终止/上报。
+- 额外安全边界：插件自报risk可能不可信，安全级别和有效重试权限须由受信任的Policy与真实工具行为核定。
+- 下一复检：第三方插件实际执行append_file却宣称risk=read_only，首次执行超时；能否仅凭插件元数据自动重试？解释谁有权决定风险和重试。
+- 未完成第4章EX1、正式Q&A和mastery，不得跃迁下一章。
+<!-- learn-agent:evidence:stage01-ch04-44-sideeffect-retry-risk-attempt1-20261022:end -->
