@@ -148,3 +148,11 @@ registry["get_price"] = get_price_v2
 用户正确解释ToolNode根据LLM返回的tool_calls按工具名查找并真正执行handler，返回工具结果；bind_tools本身不执行工具。4.5知识检查通过。
 后续：第04章EX1 Part1，练习最小Python Registry的同名注册防护；本章mastery尚未完成。
 <!-- learn-agent:evidence:stage01-ch04-45-toolnode-qa-passed-ex1-start-20261022:end -->
+
+<!-- learn-agent:evidence:stage01-ch04-ex1-p1p2p3-20261022-notes:start -->
+## EX1 Part 1–3：第4章统一Tool Registry实践（2026-10-22）
+- **EX1 Part1 passed（代码阅读与编写，未运行）**：用户写出`if name in self._tools: raise ValueError(f"Tool {name} already registered")`后再`self._tools[name] = handler`，实现默认拒绝同名注册且保存原工具。
+- **EX1 Part2 passed（代码阅读与编写，未运行）**：用户在`invoke(name,args)`中写出`handler = self.resolve(name)`、未找到时报`ValueError`、`return handler(**args)`，正确实现白名单查找与字典参数展开执行。
+- **EX1 Part3 attempt1 needs_review（参数校验与动态工具Spec）**：用户写出`PriceArgs.model_validate(args)`但未将校验结果赋给`validated`；随后使用未定义的`validated.model_dump()`与`handler(args,spec)`，且通用Registry不能把Schema写死为PriceArgs。要求改成从`spec["schema"]`取得模型类、保存`model_validate`返回值，从`spec["handler"]`取得可调用对象，使用`**validated.model_dump()`展开参数后返回结果。用户答复后再评估，不能提前判passed。
+- **继续位置：EX1 Part3 attempt2**。一次只要求补全`invoke()`里的两个TODO；先让用户独立给出完整修订，不提前透露完整最终函数。后续进行独立验证与LangChain/LangGraph映射，再完成Q&A和mastery。
+<!-- learn-agent:evidence:stage01-ch04-ex1-p1p2p3-20261022-notes:end -->
