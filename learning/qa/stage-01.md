@@ -480,3 +480,7 @@ EX1 integrated attempt1 needs_review: required/type checks and dispatch correct,
 - Chapter04 EX1 Part2 attempt1: passed — user authored resolve/ValueError/handler(**args) dispatch; no runtime verification.
 - Chapter04 EX1 Part3 attempt1: needs_review — Pydantic validator return value unassigned, validated/handler undefined; invokes handler(args,spec) incorrectly instead of passing validated keyword arguments; hardcodes PriceArgs instead of spec schema. Next ask only Part3 correction.
 <!-- learn-agent:evidence:stage01-ch04-ex1-p1p2p3-20261022-qa:end -->
+
+<!-- learn-agent:evidence:stage01-ch04-ex1-p3-attempt2-20261022-qa:start -->
+- Chapter04 EX1 Part3 attempt2: needs_review — dynamic schema validation via imported LangChain Core `model_validate(spec["schema"], args)` is valid; corrected teacher's initial misjudgment. Misused `validated.model_dump(validated)`, passed validated Pydantic model as sole positional argument to handler. Retest only these two expressions.
+<!-- learn-agent:evidence:stage01-ch04-ex1-p3-attempt2-20261022-qa:end -->
