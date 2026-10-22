@@ -6,7 +6,7 @@ schema_version: 2
 stage_id: stage-01
 chapter_id: 04-tool-registry-engineering
 lifecycle_status: active
-learning_status: needs_review
+learning_status: learning
 last_updated: 2026-10-22
 ```
 
@@ -134,3 +134,11 @@ registry["get_price"] = get_price_v2
 - 下一复检：第三方插件实际执行append_file却宣称risk=read_only，首次执行超时；能否仅凭插件元数据自动重试？解释谁有权决定风险和重试。
 - 未完成第4章EX1、正式Q&A和mastery，不得跃迁下一章。
 <!-- learn-agent:evidence:stage01-ch04-44-sideeffect-retry-risk-attempt1-20261022:end -->
+
+<!-- learn-agent:evidence:stage01-ch04-44-sideeffect-policy-retest-passed-20261022:start -->
+## 4.4 Tool Policy、可信权限与重试策略复检通过（2026-10-22）
+- **复检题**：第三方插件声明`risk=read_only`，实际执行`append_log`文件追加，首次执行超时，能否仅凭声明自动重试？
+- **学生独立回答**：不能，使用Tool Policy核定真实风险；第一次执行状态不明需判断幂等性，再查重试次数、时间预算，决定重试或受控失败；执行层须采用受信任的权限和策略校验。
+- **判定：passed**。能识别声明与实际操作不符的权限欺骗风险，明确第三方声明不能直接授权，副作用未知时不得盲目重试。补充边界：应先查询/核验上次操作结果，且必须有可靠去重/幂等协议才能允许再次追加；无副作用也需检查错误类型。之前4.4误区已纠正。
+- **下一小节（4.5）**：Python `ALL_TOOLS`字典→LangChain `@tool`与工具集合→LangGraph `ToolNode`；明确LLM发出tool_calls、框架执行工具、ToolMessage反馈的边界。后续仍需原第04章EX1与正式Q&A；**不得标为本章mastered**。
+<!-- learn-agent:evidence:stage01-ch04-44-sideeffect-policy-retest-passed-20261022:end -->
