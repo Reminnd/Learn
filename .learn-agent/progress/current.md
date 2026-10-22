@@ -11,7 +11,7 @@ chapter_file: curriculum/stage-01/04-tool-registry-engineering.md
 note_pointer: stage-01/04-tool-registry-engineering.md
 qa_pointer: stage-01.md
 lifecycle_status: active
-learning_status: practice
+learning_status: needs_review
 integrity:
   status: healthy
   missing: []
@@ -23,8 +23,8 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 4.4 Tool Policy风险复检通过，进入4.5。
-last_section: EX1 Part1 工具重名防护
+last_note_update: 2026-10-22：Chapter04 EX1 P1注册冲突与P2分发通过；P3 Schema/Handler调用未正确完成，进入attempt2。
+last_section: EX1 Part3 Pydantic参数校验与动态Handler执行
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
@@ -33,35 +33,16 @@ session_status: active
 current_activity: exercise
 return_to:
   activity: exercise
-  topic: EX1 Part1
-  next_action: 补全ToolRegistry.register中的同名防护条件。
+  topic: EX1 Part3 / attempt 2
+  next_action: 用户重新补全invoke中的两个TODO：动态spec.schema校验，使用校验后字段展开调用spec.handler。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 218
-last_checkpoint_at: '2026-10-22T01:48:18.790Z'
-last_checkpoint_reason: section_boundary
-pending_writeback:
-  transaction_id: stage01-ch04-20261022-ex1-p1p2p3
-  reason: knowledge_event
-  phase: prepared
-  started_at: '2026-10-22T02:23:24.178Z'
-  targets:
-    - asset_key: notes.root
-      relative_pointer: stage-01/04-tool-registry-engineering.md
-      evidence_id: stage01-ch04-ex1-p1p2p3-20261022-notes
-      operation: upsert
-      expected_change: record EX1 P1 and P2 passed and P3 needs review
-      verified: false
-      error: null
-    - asset_key: qa.stage
-      relative_pointer: .
-      evidence_id: stage01-ch04-ex1-p1p2p3-20261022-qa
-      operation: upsert
-      expected_change: update chapter04 EX1 answer ledger
-      verified: false
-      error: null
+checkpoint_version: 221
+last_checkpoint_at: '2026-10-22T02:23:24.178Z'
+last_checkpoint_reason: needs_review
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-04
 deepseek_route_prompted_for:
@@ -77,7 +58,7 @@ completed:
 - 02-structured-output
 - 03-tool-basics
 weak_points: []
-next_action: EX1 Part1同名注册防护；后续正式EX1和Q&A。
+next_action: Chapter04 EX1 Part3 attempt2：根据spec的schema/model_validate保存validated，再调用spec的handler(**validated.model_dump())；后续EX1集成验证和正式Q&A。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
