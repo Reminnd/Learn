@@ -6,7 +6,7 @@ schema_version: 2
 stage_id: stage-01
 chapter_id: 04-tool-registry-engineering
 lifecycle_status: active
-learning_status: learning
+learning_status: practice
 last_updated: 2026-10-22
 ```
 
@@ -142,3 +142,9 @@ registry["get_price"] = get_price_v2
 - **判定：passed**。能识别声明与实际操作不符的权限欺骗风险，明确第三方声明不能直接授权，副作用未知时不得盲目重试。补充边界：应先查询/核验上次操作结果，且必须有可靠去重/幂等协议才能允许再次追加；无副作用也需检查错误类型。之前4.4误区已纠正。
 - **下一小节（4.5）**：Python `ALL_TOOLS`字典→LangChain `@tool`与工具集合→LangGraph `ToolNode`；明确LLM发出tool_calls、框架执行工具、ToolMessage反馈的边界。后续仍需原第04章EX1与正式Q&A；**不得标为本章mastered**。
 <!-- learn-agent:evidence:stage01-ch04-44-sideeffect-policy-retest-passed-20261022:end -->
+
+<!-- learn-agent:evidence:stage01-ch04-45-toolnode-qa-passed-ex1-start-20261022:start -->
+## 4.5 ToolNode职责检查通过（2026-10-22）
+用户正确解释ToolNode根据LLM返回的tool_calls按工具名查找并真正执行handler，返回工具结果；bind_tools本身不执行工具。4.5知识检查通过。
+后续：第04章EX1 Part1，练习最小Python Registry的同名注册防护；本章mastery尚未完成。
+<!-- learn-agent:evidence:stage01-ch04-45-toolnode-qa-passed-ex1-start-20261022:end -->
