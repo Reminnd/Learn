@@ -42,7 +42,26 @@ resume_contract:
 checkpoint_version: 221
 last_checkpoint_at: '2026-10-22T02:23:24.178Z'
 last_checkpoint_reason: needs_review
-pending_writeback: null
+pending_writeback:
+  transaction_id: ch04-20261022-ex1-p3-a2
+  reason: knowledge_event
+  phase: prepared
+  started_at: '2026-10-22T03:32:17.088Z'
+  targets:
+    - asset_key: notes.root
+      relative_pointer: stage-01/04-tool-registry-engineering.md
+      evidence_id: stage01-ch04-ex1-p3-attempt2-20261022
+      operation: upsert
+      expected_change: EX1 P3 attempt2 two remaining corrections
+      verified: false
+      error: null
+    - asset_key: qa.stage
+      relative_pointer: .
+      evidence_id: stage01-ch04-ex1-p3-attempt2-20261022-qa
+      operation: upsert
+      expected_change: record EX1 P3 attempt2 review in Q&A
+      verified: false
+      error: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-04
 deepseek_route_prompted_for:
