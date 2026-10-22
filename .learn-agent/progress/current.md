@@ -11,7 +11,7 @@ chapter_file: curriculum/stage-01/04-tool-registry-engineering.md
 note_pointer: stage-01/04-tool-registry-engineering.md
 qa_pointer: stage-01.md
 lifecycle_status: active
-learning_status: needs_review
+learning_status: learning
 integrity:
   status: healthy
   missing: []
@@ -23,38 +23,26 @@ mastery:
   required_exercises_passed: false
   unresolved_critical_misconceptions: 0
   mastered: false
-last_note_update: 2026-10-22：await/try异常流程复检通过；总预算计算遗漏第三次工具执行，待4.3.5复检。
-last_section: 4.3.5 总体超时预算与有限重试
+last_note_update: 2026-10-22：4.3.5总体时间预算复检通过，进入4.4 Tool Registry执行策略元数据。
+last_section: 4.4 统一Tool Registry执行策略
 teaching_mode: teacher
 mode_prompted_for: []
 learning_session_id: learn-agent-main
 session_mode: learning
 session_status: active
-current_activity: knowledge_check
+current_activity: learning
 return_to:
-  activity: knowledge_check
-  topic: 4.3.5 总预算中止点检查
-  next_action: 在单次2s、两次退避0.5s/1s、总预算5s条件下，判断第三次工具调用是否开始并说明时间线。
+  activity: learning
+  topic: 4.4 统一Tool Registry执行策略
+  next_action: 学习ToolSpec中timeout/retry/risk及安全策略，询问一次具体Tool策略判断。
 resume_contract:
   auto_resume: true
   continue_from_checkpoint: true
   require_user_confirmation: false
-checkpoint_version: 214
-last_checkpoint_at: '2026-10-22T01:29:28.242Z'
-last_checkpoint_reason: needs_review
-pending_writeback:
-  transaction_id: ch04-20261022-435-pass-next-44
-  reason: qa_complete
-  phase: prepared
-  started_at: '2026-10-22T01:31:56.391Z'
-  targets:
-    - asset_key: notes.root
-      relative_pointer: stage-01/04-tool-registry-engineering.md
-      evidence_id: ch04-435-total-budget-retest-passed-20261022
-      operation: upsert
-      expected_change: 记录4.3.5复检通过并进入4.4执行策略
-      verified: false
-      error: null
+checkpoint_version: 215
+last_checkpoint_at: '2026-10-22T01:31:56.391Z'
+last_checkpoint_reason: section_boundary
+pending_writeback: null
 chapter_model_profile: TEACH_DEFAULT
 chapter_model_profile_source: stage-01/chapter-04
 deepseek_route_prompted_for:
@@ -70,7 +58,7 @@ completed:
 - 02-structured-output
 - 03-tool-basics
 weak_points: []
-next_action: 4.3.5复检总体超时预算在第二次退避期间如何终止，随后Tool Registry执行策略和EX1/Q&A。
+next_action: 4.4 Tool Registry统一timeout/retry/risk策略，后续继续LangChain/LangGraph映射及第4章EX1/Q&A。
 next_chapter: null
 migration_evidence_id: migration-20260819T215842
 ```
