@@ -474,3 +474,9 @@ EX1 integrated attempt1 needs_review: required/type checks and dispatch correct,
 - Chapter03 Q3 formal attempt4 passed — 异常日志→Tool Call→Schema/Query排查及有限重试成本、失败风险；修正sku字段成功。
 - Chapter03 EX1 formal attempt2 accepted — user-authored raw runtime与LangChain工具测试：199/199、ValueError/ValidationError、299/299。尚须提交唯一mastery assessment后才能确定章节mastered。
 <!-- learn-agent:evidence:stage01-ch03-formal-exercise-ledger-20261012:end -->
+
+<!-- learn-agent:evidence:stage01-ch04-ex1-p1p2p3-20261022-qa:start -->
+- Chapter04 EX1 Part1 attempt1: passed — user authored ToolRegistry.register guard against duplicate tool names; rejects name collision before modifying mapping (reasoning/code evidence only, not independently executed).
+- Chapter04 EX1 Part2 attempt1: passed — user authored resolve/ValueError/handler(**args) dispatch; no runtime verification.
+- Chapter04 EX1 Part3 attempt1: needs_review — Pydantic validator return value unassigned, validated/handler undefined; invokes handler(args,spec) incorrectly instead of passing validated keyword arguments; hardcodes PriceArgs instead of spec schema. Next ask only Part3 correction.
+<!-- learn-agent:evidence:stage01-ch04-ex1-p1p2p3-20261022-qa:end -->
