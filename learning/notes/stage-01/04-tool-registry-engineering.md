@@ -6,7 +6,7 @@ schema_version: 2
 stage_id: stage-01
 chapter_id: 04-tool-registry-engineering
 lifecycle_status: active
-learning_status: needs_review
+learning_status: learning
 last_updated: 2026-10-22
 ```
 
@@ -116,3 +116,11 @@ registry["get_price"] = get_price_v2
 - 计算却漏算第三次执行，回答`2+0.5+2+1=5.5s`；真实简化总和为`3*2+0.5+1=7.5s`（取消/清理开销另计）。
 - 教师已纠正max_retries=2是首次+2次重试；待通过一个“总体预算5s在第几阶段结束”检查。只记录本题needs_review，不重复追问已经理解的预算目的。
 <!-- learn-agent:evidence:ch04-435-total-budget-attempt1-20261022:end -->
+
+<!-- learn-agent:evidence:ch04-435-total-budget-retest-passed-20261022:start -->
+## 4.3.5 总体超时预算复检通过（2026-10-22）
+- 独立答题：单次2s、第一次退避0.5s、第二次退避1s，总预算5s；学员判断“第二次退避中，不能，因为第二次退避后已经超过5秒预算”。
+- 判定 passed：理解从t=4.5s到t=5.5s的第二次退避在t=5s被总体预算取消，因此第三次调用不会开始。区分单次timeout与整个重试流程的时间预算；取消清理开销可能延长实际耗时。
+- 之前总体耗时问题遗漏第三次执行的错误经本题修正，当前小节完成概念检查。**第04章仍在learning，正式EX1、框架映射和Q&A未完成**。
+- 下一个教学位置：4.4 Tool Registry统一timeout/retry/risk执行策略：先教学Python最小ToolSpec与统一策略、对照真实Kimi Code对工具accesses与metadata的处理，再问一道单题。
+<!-- learn-agent:evidence:ch04-435-total-budget-retest-passed-20261022:end -->
