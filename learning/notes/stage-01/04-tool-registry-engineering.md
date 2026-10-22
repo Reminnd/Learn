@@ -103,3 +103,16 @@ registry["get_price"] = get_price_v2
 - 上一轮用户也误判await普通int合法；讲解已纠正：lambda只推迟调用，不产生并发；await要求Awaitable；异常会在原await点传播到外围try。
 - 判定 needs_review；保持Stage01/04与原mastery不变，下一题使用新的await+try示例检查正常继续与异常跳转的区别。通过后继续4.3.4总超时预算。
 <!-- learn-agent:evidence:stage01-ch04-await-exception-review-20261022:end -->
+
+<!-- learn-agent:evidence:ch04-434-await-exception-flow-passed-20261022:start -->
+## 4.3.4 await与try异常传播复检通过（2026-10-22）
+- 对`get_price()`中先print B、再await sleep、之后raise ValueError的例子，独立正确作答“A B D E”；识别异常传播到外层except并跳过try中`print("C",price)`。
+- 结论：之前的await异常流程误解已修正；仅为概念复检，不代表第4章mastered。
+<!-- learn-agent:evidence:ch04-434-await-exception-flow-passed-20261022:end -->
+
+<!-- learn-agent:evidence:ch04-435-total-budget-attempt1-20261022:start -->
+## 4.3.5 有限重试与总超时预算计算：部分正确，待复检
+- 用户正确指出没有总体时间预算时，单次timeout=2不保证整个流程只运行2秒；应增加Total Timeout Budget。
+- 计算却漏算第三次执行，回答`2+0.5+2+1=5.5s`；真实简化总和为`3*2+0.5+1=7.5s`（取消/清理开销另计）。
+- 教师已纠正max_retries=2是首次+2次重试；待通过一个“总体预算5s在第几阶段结束”检查。只记录本题needs_review，不重复追问已经理解的预算目的。
+<!-- learn-agent:evidence:ch04-435-total-budget-attempt1-20261022:end -->
